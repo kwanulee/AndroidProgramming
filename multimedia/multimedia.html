@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>multimedia</title>
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+kbd {
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">멀티미디어</h1>
+
+<h3 id="toc_1"><a href="#1">1. 오디오 재생하기</a></h3>
+
+<h3 id="toc_2"><a href="#2">2. 동영상 재생하기</a></h3>
+
+<h3 id="toc_3"><a href="#3">3. 오디오 녹음하기</a></h3>
+
+<h3 id="toc_4"><a href="#4">4. 카메라 앱으로 사진 및 동영상 저장하기</a></h3>
+
+<h3 id="toc_5"><a href="#5">5. Photo 앱으로 선택한 사진 저장하기</a></h3>
+
+<ul>
+<li><strong>멀티미디어 예제 프로젝트 다운로드</strong> <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kwanulee/Android/tree/master/examples/MultimediaTest">링크</a> </li>
+</ul>
+
+<hr>
+
+<p><a name="1"></a></p>
+
+<h1 id="toc_6">1. 오디오 재생하기</h1>
+
+<h2 id="toc_7">MediaPlayer</h2>
+
+<ul>
+<li>android.media 패키지에 있는 클래스</li>
+<li>오디오, 동영상 재생</li>
+<li>지원 미디어 포맷
+
+<ul>
+<li>오디오: mp3, wav, amr 등</li>
+<li>비디오: mp4</li>
+</ul></li>
+<li><p>데이터 소스 종류</p>
+
+<ul>
+<li>애플리케이션 로컬 리소스 파일 (raw 리소스)</li>
+<li><p>단말 내부 파일</p>
+
+<ul>
+<li><p>외부 저장소인 경우 접근 권한(<strong>android.permission.READ_EXTERNAL_STORAGE</strong>) 필요</p>
+
+<div><pre><code class="language-markup">&lt;manifest ... &gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+&lt;/manifest&gt;</code></pre></div></li>
+</ul></li>
+<li><p>웹 상의 URLs (인터넷 접근 권한(<strong>android.permission.INTERNET</strong>) 필요)</p>
+
+<div><pre><code class="language-markup">&lt;manifest ... &gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;/manifest&gt;</code></pre></div></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_8">데이터 소스에 따른 재생 방법</h2>
+
+<h3 id="toc_9">1. res/raw 폴더에 있는 오디오 리소스 재생</h3>
+
+<div><pre><code class="language-java">    MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1);
+    mediaPlayer.start();</code></pre></div>
+
+<h3 id="toc_10">2. 오디오 재생 중단</h3>
+
+<div><pre><code class="language-java">    mediaPlayer.stop();
+    mediaPlayer.release();</code></pre></div>
+
+<h3 id="toc_11">3. URL로부터 오디오 재생</h3>
+
+<div><pre><code class="language-java">    String url = &quot;http://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3&quot;;
+    MediaPlayer mediaPlayer = new MediaPlayer();
+    try {
+        mediaPlayer.setDataSource(url);
+        mediaPlayer.prepare();  // 버퍼링으로 인해 오래 걸릴 수 있음
+    } catch (IOException e) {}
+    mediaPlayer.start();</code></pre></div>
+
+<ul>
+<li><p>[<strong>주의</strong>] Android Platform API 28 이상의 디바이스에서는 <a href="https://whatis.techtarget.com/definition/cleartext">ClearText</a> 지원이 기본적으로 비활성화되어 있다.</p>
+
+<ul>
+<li>이를 활성화 시키기위해서, AndroidMenifest.xml 파일의 <strong>application</strong> 태그에 다음 속성값을 설정</li>
+</ul>
+
+<div><pre><code class="language-markup">&lt;application
+    android:usesCleartextTraffic=&quot;true&quot;
+      ... &gt;</code></pre></div>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-not-permitted">추가 참고자료 링크</a></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_12">4. URI 기반 재생 방법</h3>
+
+<ul>
+<li><p><strong>URI</strong>는 정보의 고유한 명칭으로 웹 주소를 나타내는 URL보다 더 상위의 개념</p>
+
+<ul>
+<li><p>File 타입: file://파일패스/파일이름</p>
+
+<div><pre><code class="language-none">file:///storage/emulated/0/Pictures/camera_image.jpg</code></pre></div></li>
+<li><p>안드로이드 리소스 타입: android.resource://패키지이름/리소스폴더/리소스이름</p>
+
+<div><pre><code class="language-none">android.resource://com.example.kwanwoo.multimediatest/raw/instrumental</code></pre></div></li>
+<li><p>URL 타입: http://호스트주소/패스</p>
+
+<div><pre><code class="language-none">http://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3</code></pre></div></li>
+<li><p>컨텐츠 타입: content://정보제공자/패스/아이디</p>
+
+<div><pre><code class="language-none">content://media/external/video/media/154</code></pre></div></li>
+</ul></li>
+<li><p><strong>패턴</strong></p>
+
+<div><pre><code class="language-java">Uri myUri = ....; // initialize Uri here
+MediaPlayer mediaPlayer = new MediaPlayer();
+try {
+    mediaPlayer.setDataSource(getApplicationContext(), myUri);
+    mediaPlayer.prepare();
+} catch (IOException e) { }
+mediaPlayer.start();</code></pre></div></li>
+<li><p><strong>Uri 클래스의 주요 메소드</strong></p>
+
+<ul>
+<li><p>static Uri parse(String uriString) - Uri문자열로부터 Uri 객체 생성</p>
+
+<div><pre><code class="language-java">    Uri image_Uri = Uri.parse(&quot;file:///storage/emulated/0/Pictures/camera_image.jpg&quot;);</code></pre></div></li>
+<li><p>static Uri.fromFile(File file) - file로부터 Uri 객체 생성</p>
+
+<div><pre><code class="language-java">Uri image_Uri = Uri.fromFile(
+                new File(Environment.getExternalStorageDirectory().getPath()+
+                        &quot;/Pictures/camera_imge.jpg&quot;)));</code></pre></div></li>
+</ul></li>
+<li><p><strong>예제</strong></p>
+
+<div><pre><code class="language-java">Uri myUri = Uri.parse(&quot;android.resource://com.example.kwanwoo.multimediatest/raw/instrumental&quot;);
+//Uri myUri = Uri.parse(&quot;http://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3&quot;);
+
+MediaPlayer mediaPlayer = new MediaPlayer();
+try {
+    mediaPlayer.setDataSource(getApplicationContext(), myUri);
+    mediaPlayer.prepare();
+} catch (IOException e) { }
+mediaPlayer.start();</code></pre></div></li>
+</ul>
+
+<hr>
+
+<p><a name="2"></a></p>
+
+<h1 id="toc_13">2. 동영상 재생하기</h1>
+
+<h2 id="toc_14">VideoView</h2>
+
+<ul>
+<li><p>MediaPlayer로도 비디오 재생이 가능하나, VideoView 위젯을 이용하면 매우 간단히 비디오 재생이 가능</p></li>
+<li><p>VideoView 활용 절차</p>
+
+<ul>
+<li>XML 레이아웃에 <VideoView> 태그 추가</li>
+<li><p>Java 코딩</p>
+
+<ol>
+<li>VideoView 객체 참조</li>
+<li><p>[선택사항] 미디어콘트롤러 설정 </p>
+
+<p><img src="images/mediacontroller.png" width=200></p></li>
+<li><p>재생할 동영상 URI 설정</p></li>
+<li><p>재생 시작</p></li>
+</ol></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_15">예제</h2>
+
+<p><img src="images/playvideo.png"></p>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/res/layout/activity_video.xml">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/res/layout/activity_video.xml</a></p>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java</a></p>
+
+<hr>
+
+<p><a name="3"></a></p>
+
+<h1 id="toc_16">3. 오디오 녹음 하기</h1>
+
+<h2 id="toc_17">MediaRecorder</h2>
+
+<ul>
+<li>android.media 패키지에 있는 클래스</li>
+<li>오디오 녹음, 동영상 녹화 기능</li>
+<li><p>필요한 권한</p>
+
+<div><pre><code class="language-markup">&lt;manifest ... &gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+&lt;/manifest&gt;</code></pre></div></li>
+<li><p>오디오 녹음 절차</p>
+
+<ol>
+<li>권한 검사 및 요청 (Android 6.0이상 부터)</li>
+<li>MediaRecorder 객체 생성</li>
+<li>오디오 입력 및 출력 형식 설정</li>
+<li>오디오 인코더와 출력 파일 설정</li>
+<li>녹음 시작</li>
+</ol></li>
+</ul>
+
+<p><strong>[주의]</strong> Android 6.0 이상부터는 앱 실행 중에 권한 검사 및 요청 필요</p>
+
+<h2 id="toc_18">권한 검사 및 요청</h2>
+
+<ul>
+<li><p>앱 시작시에 앱에서 필요한 권한 보유여부를 검사하고 없으면 요청한다.</p>
+
+<ul>
+<li><p>다음 checkDangerousPermissions() 메소드는 <strong>앱의 매인 액티비티의 onCreate() 함수에서 호출</strong>하여, 앱 시작시에 필요한 권한(외부저장소 파일 접근 및 오디오 기록)을 얻도록 하기 위한 코드를 정의하고 있다.</p>
+
+<div><pre><code class="language-java">    protected void onCreate(Bundle savedInstanceState) {
+        //...
+        checkDangerousPermissions();
+    }
+
+    // onCreate() 메소드에서 앱 시작시 호출
+    private void checkDangerousPermissions() {
+        String[] permissions = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+*               Manifest.permission.WRITE_EXTERNAL_STORAGE, // 외부 저장소에 파일을 저장할 때 필요
+*               Manifest.permission.RECORD_AUDIO
+        };
+
+        int permissionCheck = PackageManager.PERMISSION_GRANTED;
+        for (int i = 0; i &lt; permissions.length; i++) {
+*           permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                break;
+            }
+        }
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+*          ActivityCompat.requestPermissions(this, permissions, 1);
+        }
+    }</code></pre></div></li>
+</ul></li>
+</ul>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L95-L118">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L95-L118</a></p>
+
+<h2 id="toc_19">오디오 녹음 시작</h2>
+
+<div><pre><code class="language-java">    private void startAudioRec()  {
+*          mMediaRecorder = new MediaRecorder();
+*          mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+*          mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+*          mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+
+           recFileN = &quot;VOICE&quot; + currentDateFormat() + &quot;.mp4&quot;;
+           // currentDateFormat(): 현재 시각을 “yyyyMMdd_HH_mm_ss” 형태로 반환
+
+*          mMediaRecorder.setOutputFile(Environment.getExternalStorageDirectory().getPath() +
+                                        &quot;/Music/&quot; + recFileN);
+          // 출력 파일의 위치를 외부저장소의 /Music/ 위치로 설정
+
+           try {
+*              mMediaRecorder.prepare();
+               Toast.makeText(getApplicationContext(), &quot;녹음을 시작하세요.&quot;, Toast.LENGTH_SHORT).show();
+*              mMediaRecorder.start();
+           } catch (Exception ex) {
+               Log.e(&quot;SampleAudioRecorder&quot;, &quot;Exception : &quot;, ex);
+           }
+   }</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L267-L283">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L267-L283</a></p>
+
+<h2 id="toc_20">오디오 녹음 중단</h2>
+
+<div><pre><code class="language-java">    private void stopAudioRec()  {
+
+*         mMediaRecorder.stop();
+*         mMediaRecorder.release();
+          mMediaRecorder = null;
+
+          Uri uri = Uri.parse(&quot;file://&quot; + Environment.getExternalStorageDirectory().getPath() +
+                             &quot;/Music/&quot;+ recFileN);
+          // 리스트 뷰의 항목으로 녹음된 파일 이름과 URI를 추가
+          mAdapter.addItem(new MediaItem(MediaItem.SDCARD, recFileN,uri));
+
+          Toast.makeText(getApplicationContext(), &quot;녹음이 중지되었습니다.&quot;, Toast.LENGTH_SHORT).show();
+
+    }</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L285-L295">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L285-L295</a></p>
+
+<p><a name="4"></a></p>
+
+<h1 id="toc_21">4. 카메라 앱으로 사진 및 동영상 저장하기</h1>
+
+<h2 id="toc_22">4.1 카메라 앱 실행 요청</h2>
+
+<ul>
+<li><p>특별한 Permission이 필요 없음</p></li>
+<li><p>카메라 앱 요청</p>
+
+<div><pre><code class="language-java">private void dispatchTakePictureIntent() {
+*   Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+        // resolveActivity(): takePictureIntent를 처리할 수 있는 (사진찍기) 액티비티 반환
+        startActivity(takePictureIntent);
+    }
+}</code></pre></div></li>
+</ul>
+
+<h2 id="toc_23">4.2 카메라 앱으로 찍은 사진 저장하기</h2>
+
+<h3 id="toc_24">4.2.1 카메라 앱 실행 요청</h3>
+
+<ol>
+<li>카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성</li>
+<li>생성된 파일 객체에 대한 Uri 객체를 얻기</li>
+<li><p>Uri 객체를 Extras를 통해 카메라 앱으로 전달</p></li>
+</ol>
+
+<ul>
+<li><p><strong>[주의]</strong> Android 7.0 이상부터는 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html">FileProvider</a>의 <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile(android.content.Context,%20java.lang.String,%20java.io.File)">getUriForFile(Context, String, File)</a>를 통해 해당 파일 객체의 <em>content://URI</em>를 획득</p>
+
+<ul>
+<li>Android 7.0 이전에서는 특정한 앱과 관련된 파일 객체를 다른 앱(예, 카메라 앱)에서 사용하고자 때, 해당 파일 객체에 대한 Uri를 <em>file:///URI</em> 형식으로 사용할 수 있었으나, Android 7.0 이상에서는 <a href="https://developer.android.com/reference/android/os/FileUriExposedException.html">FileUriExposedException</a>을 발생 시킴</li>
+</ul></li>
+<li><p>[사전조건] 외부 저장소에 저장하기 위해서 Permission 획득 과정 필요</p>
+
+<div><pre><code class="language-java">*Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+If (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+    // 1. 카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성
+    mPhotoFileName = ＂IMG＂+currentDateFormat()+＂.jpg＂;
+    mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                                                  mPhotoFileName);
+    if (mPhotoFile !=null) {
+        // 2. 생성된 파일 객체에 대한 Uri 객체를 얻기
+        Uri imageUri = FileProvider.getUriForFile(this, 
+                                   &quot;com.example.kwanwoo.multimediatest&quot;, mPhotoFile);
+
+        // 3. Uri 객체를 Extras를 통해 카메라 앱으로 전달                           
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+*       startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    } else
+        Toast.makeText(getApplicationContext(), ＂file null＂, Toast.LENGTH_SHORT).show();
+}</code></pre></div></li>
+</ul>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L326-L344">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L326-L344</a></p>
+
+<hr>
+
+<h3 id="toc_25">FileProvider 설정</h3>
+
+<p>FileProvider는 ContentProvider의 특별한 서브 클래스로서 특정한 앱에서 생성한 파일을 다른 앱과 공유할 수 있도록 안전한 방법(<strong>file:///Uri</strong> 대신에 <strong>content://Uri</strong> 사용)을 제공해 준다.</p>
+
+<ol>
+<li><p>앱의 매니페스트 파일에 FileProvider 설정</p>
+
+<p><img src="images/fileprovider.png" ></p>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/AndroidManifest.xml#L27-L35">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/AndroidManifest.xml#L27-L35</a></p>
+
+<p><a href="https://developer.android.com/guide/topics/manifest/provider-element.html#exported"><provider> Syntax 참고자료</a></p></li>
+<li><p>FileProvider에서 Content Uri로 제공할 수 있는 파일의 위치를 설정</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;paths xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+&lt;external-files-path name=&quot;image_capture&quot; path=&quot;Pictures/&quot; /&gt;
+&lt;external-files-path name=&quot;video_capture&quot; path=&quot;Movies/&quot; /&gt;
+&lt;/paths&gt;</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/res/xml/file_paths.xml">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/res/xml/file_paths.xml</a></p>
+
+<ul>
+<li><p>앱 전용 외부 저장소 영역의 파일 위치를 설정하는 경우</p>
+
+<div><pre><code class="language-none">&lt;external-files-path name=&quot;name&quot; path=&quot;path&quot; /&gt;</code></pre></div></li>
+<li><p>공용 외부 저장소 영역의 파일 위치를 설정하는 경우</p>
+
+<div><pre><code class="language-none">&lt;external-path name=&quot;name&quot; path=&quot;path&quot; /&gt;</code></pre></div></li>
+</ul>
+
+<p>[추가 참고자료: <a href="https://developer.android.com/reference/android/support/v4/content/FileProvider.html">https://developer.android.com/reference/android/support/v4/content/FileProvider.html</a>]</p></li>
+</ol>
+
+<hr>
+
+<h3 id="toc_26">4.2.2 카메라 앱으로 찍은 사진 결과 처리</h3>
+
+<ul>
+<li>onActivityResult() 메소드에서 저장된 사진을 리스트 뷰의 항목으로 추가</li>
+</ul>
+
+<div><pre><code class="language-java">protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQUEST_IMAGE_CAPTURE &amp;&amp; resultCode == RESULT_OK) {
+        if (mPhotoFileName != null) {
+            mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+                  mPhotoFileName);
+
+            mAdapter.addItem(new MediaItem(
+                    MediaItem.SDCARD,       // 미디어 항목 위치 종류
+                    mPhotoFileName,         // 미디어 항목 표시 이름
+                    Uri.fromFile(mPhotoFile),   // 미디어 항목 Uri 객체
+                    MediaItem.IMAGE));      // 미디어 항목 타입
+        }
+    }
+}</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L382-L387">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L382-L387</a></p>
+
+<h2 id="toc_27">4.3 카메라 앱으로 촬영한 동영상 저장하기</h2>
+
+<h3 id="toc_28">4.3.1 카메라 앱으로 동영상 촬영하기</h3>
+
+<div><pre><code class="language-java">static final int REQUEST_VIDEO_CAPTURE = 2;
+    
+private void dispatchTakeVideoIntent() {
+*    Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+    
+     if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
+         //1. 카메라 앱으로 찍은 동영상을 저장할 파일 객체 생성
+         mVideoFileName = &quot;VIDEO&quot;+currentDateFormat()+&quot;.mp4&quot;;
+         File destination = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), 
+                                                        mVideoFileName);
+         if (destination != null) {
+               //2. 생성된 파일 객체에 대한 Uri 객체를 얻기
+               Uri videoUri = FileProvider.getUriForFile(this, 
+                                    &quot;com.example.kwanwoo.multimediatest&quot;, destination);
+                    
+                //3. Uri 객체를 Extras를 통해 카메라 앱으로 전달
+                takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+                startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
+          }
+}</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L348-L365">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L348-L365</a></p>
+
+<h3 id="toc_29">4.3.2 촬영결과를 외부저장소 파일로 저장하기</h3>
+
+<div><pre><code class="language-java">protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    ...생략...
+    if (requestCode == REQUEST_VIDEO_CAPTURE &amp;&amp; resultCode == RESULT_OK) {
+            if (mVideoFileName != null) {
+                File destination = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), 
+                                            mVideoFileName);
+                mAdapter.addItem(new MediaItem(
+                                        MediaItem.SDCARD, 
+                                        mVideoFileName, 
+                                        Uri.fromFile(destination),
+                                        MediaItem.VIDEO));
+            } else
+                Toast.makeText(getApplicationContext(), &quot;!!! null video.&quot;, Toast.LENGTH_LONG).show();
+        }
+    }</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L388-L394">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L388-L394</a></p>
+
+<p><a name="5"> </a></p>
+
+<h1 id="toc_30">5. Photo/Gallery 앱으로 선택한 사진 저장하기</h1>
+
+<h2 id="toc_31">5.1 Photo/Gallery 앱으로 사진 선택하기</h2>
+
+<ul>
+<li><p>특별한 Permission이 필요 없음</p></li>
+<li><p>Photo/Gallery 앱 요청</p>
+
+<div><pre><code class="language-java">private void dispatchPickPictureIntent() {
+    Intent pickPictureIntent = new Intent(Intent.ACTION_PICK);
+    pickPictureIntent.setType(&quot;image/*&quot;);
+
+    if (pickPictureIntent.resolveActivity(getPackageManager()) != null) {
+        startActivityForResult(pickPictureIntent,REQUEST_IMAGE_PICK);
+    }
+}
+</code></pre></div></li>
+</ul>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L322">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L322</a></p>
+
+<h3 id="toc_32">5.2 Photo/Gallery 앱으로 사진 선택한 결과 저장하기</h3>
+
+<ul>
+<li><p>onActivityResult() 메소드에서 선택된 사진 결과 얻기</p>
+
+<ul>
+<li>선택된 사진 결과는 Uri 객체 형식으로 인텐트 객체를 통해 전달됨</li>
+<li><p>MediaStore.Images.Media 클래스의 <a href="https://developer.android.com/reference/android/provider/MediaStore.Images.Media.html#getBitmap(android.content.ContentResolver,%20android.net.Uri)">getBitmap()</a>를 통해 Uri로부터 비트맵 얻기</p>
+
+<div><pre><code class="language-none">Bitmap getBitmap (ContentResolver cr, Uri url)</code></pre></div></li>
+<li><p>Example</p>
+
+<div><pre><code class="language-java">protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQUEST_IMAGE_PICK &amp;&amp; resultCode == RESULT_OK) {
+        Uri imgUri = data.getData();
+        try {
+            Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+            ...
+        } catch (IOException e) { ... }
+        ...
+
+}
+</code></pre></div></li>
+</ul></li>
+<li><p>Bitmap 데이터를 파일로 저장하기</p>
+
+<ul>
+<li><p>Bitmap 클래스의 <a href="https://developer.android.com/reference/android/graphics/Bitmap.html#compress(android.graphics.Bitmap.CompressFormat,%20int,%20java.io.OutputStream)">compress</a> 메소드를 이용하면 비트맵을 다양한 형식으로 저장할 수 있다.</p>
+
+<div><pre><code class="language-none">compress(Bitmap.CompressFormat format, int quality, OutputStream stream) </code></pre></div></li>
+<li><p>Example</p>
+
+<div><pre><code class="language-java">protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    if (requestCode == REQUEST_IMAGE_PICK &amp;&amp; resultCode == RESULT_OK) {
+        Uri imgUri = data.getData();
+        try {
+            Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+
+            mPhotoFileName = &quot;IMG&quot;+currentDateFormat()+&quot;.jpg&quot;;
+            mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+
+            imgBitmap.compress(Bitmap.CompressFormat.JPEG,100,
+                    new FileOutputStream(mPhotoFile));
+            ...
+        } catch (IOException e) {...}
+    }
+</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L368-L381">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L368-L381</a></p></li>
+</ul></li>
+</ul>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.java=Prism.languages.extend("clike",{keyword:/\b(abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while)\b/,number:/\b0b[01]+\b|\b0x[\da-f]*\.?[\da-fp\-]+\b|\b\d*\.?\d+(?:e[+-]?\d+)?[df]?\b/i,operator:{pattern:/(^|[^.])(?:\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\|[|=]?|\*=?|\/=?|%=?|\^=?|[?:~])/m,lookbehind:!0}}),Prism.languages.insertBefore("java","function",{annotation:{alias:"punctuation",pattern:/(^|[^.])@\w+/,lookbehind:!0}});
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>

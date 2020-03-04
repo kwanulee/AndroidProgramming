@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NotificationTest</string>
+    <string name="channel_name">채널 이름</string>
+    <string name="channel_description">채널 설명 ....</string>
+    <string name="notification_title">배터리 경고</string>
+    <string name="notification_text">배터리 수준이 매우 낮습니다 </string>
+</resources>

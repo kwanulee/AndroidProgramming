@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>actionbar</title>
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+kbd {
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style> 
+div.polaroid {
+    width: 200px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
+
+<h1 id="toc_0">앱바와 액션 추가 및 처리</h1>
+
+<h2 id="toc_1">1. 앱바 (App Bar)</h2>
+
+<ul>
+<li><p><strong>앱바</strong>는 애플리케이션 화면 상단의 UI 요소로서, <em>타이틀</em>, <em>액션 아이템</em>, <em>오버 플로 메뉴(옵션 메뉴)</em> 등으로 구성됨</p>
+
+<p><img src="figure/app_bar.png" width=300> </p>
+
+<ul>
+<li><em>액션 아이템</em> 중에서 자주 사용되는 것은 빠르게 실행시킬 수 있도록 아이콘으로 <strong>앱바</strong>에 배치시키고, 나머지는 <em>오버 플로어 메뉴(옵션 메뉴)</em>에 포함시킨다.</li>
+<li><em>액션 아이템</em>은 res/menu 폴더 내의 XML 메뉴 파일 안에 정의된다. (<a href="#2">2. XML로 액션 아이템 정의</a> 참조)<br></li>
+</ul></li>
+<li><p>Android 3.0(API 레벨 11)부터는, 기본 테마를 사용하는 모든 액티비티에는 <a href="https://developer.android.com/reference/android/app/ActionBar.html">ActionBar</a>가 <strong>앱바</strong>로 제공 </p></li>
+<li><p><strong>앱바</strong> 기능은 다양한 Android 릴리스를 거쳐 기본 ActionBar에 점차적으로 추가되어 왔습니다. 이 결과, 어떤 버전의 Android 시스템이 사용 중인지에 따라 기본 ActionBar가 다르게 동작합니다.</p></li>
+<li><p><a href="https://developer.android.com/reference/android/support/v7/widget/Toolbar.html">Toolbar</a> 가장 최신 앱바의 기능이 포함된 지원 라이브러리로서, <a href="https://developer.android.com/reference/android/support/v7/widget/Toolbar.html">Toolbar</a>를 <strong>앱바</strong>로 사용하면 어떤 버전의 Android 시스템이던지 상관없이 최신 <strong>앱바</strong>의 기능을 사용할 수 있습니다.</p>
+
+<ul>
+<li>보다 자세한 내용은 다음 <a href="https://developer.android.com/training/appbar/setting-up.html">링크</a>롤 통해서 학습하세요.</li>
+</ul></li>
+</ul>
+
+<p><a name="2"></a></p>
+
+<h2 id="toc_2">2. XML로 액션 아이템 정의</h2>
+
+<ol>
+<li>res 폴더 위에서 마우스 오른쪽 버튼을 눌러서 [<strong>New</strong>]-[<strong>Directory</strong>] 메뉴를 통해서 menu 폴더를 생성</li>
+<li>menu 폴더 위해서 마우스 오른쪽 버튼을 눌러서 [<strong>New</strong>]-[<strong>Menu resource file</strong>] 선택</li>
+<li>파일이름으로 <em>main_menu</em> 입력 후, <strong>OK</strong> 버튼 선택</li>
+<li><p>아래 XML 코드로 main_menu.xml 파일 내용을 업데이트</p>
+
+<div><pre><code class="language-markup">&lt;menu xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;
+    &lt;item
+        android:id=&quot;@+id/quick_action1&quot;
+        android:title=&quot;Quick1&quot;
+        android:icon=&quot;@drawable/ic_android_black_24dp&quot;
+        app:showAsAction=&quot;ifRoom|withText&quot;/&gt;
+    &lt;item
+        android:id=&quot;@+id/action_settings&quot;
+        android:title=&quot;@string/action_settings&quot;
+        android:icon=&quot;@drawable/ic_settings_black_24dp&quot;
+        app:showAsAction=&quot;ifRoom&quot;/&gt;
+    &lt;item
+        android:id=&quot;@+id/action_subactivity&quot;
+        android:title=&quot;Sub Activity&quot;/&gt;
+&lt;/menu&gt;</code></pre></div>
+
+<ul>
+<li><strong>app:showAsAction</strong>에 설정 가능한 값
+
+<ul>
+<li><em>ifRoom</em>: 앱바에 버튼을 표시할 공긴이 있다면 표시하고, 없다면, 옵션 메뉴로</li>
+<li><em>never</em>: 해당 액션은 항상 옵션 메뉴에 포함</li>
+<li><em>withText</em>: icon과 함께 title도 텍스트로 같이 표시해 주는데, ifRoom이나 always 속성과 함께 설정해 줍니다. 이것도 공간이 있으면 텍스트도 표시하지만 공간이 충분하지 않으면 아이콘만 표시하게 됨</li>
+<li><em>always</em>: 항상 앱바에 표시하고자 할 때 사용되지만, 공간이 없다면 표시되지 않을 수 있음 </li>
+</ul></li>
+<li><strong>android:icon</strong> 속성에 설정된 <em>@drawable/ic_android_black_24dp</em> 이미지 리소스는 아래 방법으로 추가
+
+<ol>
+<li>res/drawable 폴더 위에서 마우스 오른쪽 버튼을 눌러서 [<strong>New</strong>]-[<strong>Vector Asset</strong>] 메뉴를 선택</li>
+<li><strong>Next</strong> 버튼을 클릭하고, 다음 화면에서 <strong>Finish</strong>를 클릭하여 추가</li>
+</ol></li>
+<li><strong>android:icon</strong> 속성에 설정된 <em>@drawable/ic_settings_black_24dp</em> 이미지 리소스는 아래 방법으로 추가
+
+<ol>
+<li>res/drawable 폴더 위에서 마우스 오른쪽 버튼을 눌러서 [<strong>New</strong>]-[<strong>Vector Asset</strong>] 메뉴선택</li>
+<li><strong>Clip Art</strong> 옆의 아이콘 클릭</li>
+<li>검색창에 <em>settings</em> 입력하여 해당 이미지 리소스를 찾고 이를 선택한 후에 <strong>OK</strong> 버튼 클릭</li>
+<li> <strong>Next</strong> 버튼을 클릭하고, 다음 화면에서 <strong>Finish</strong>를 클릭하여 추가</li>
+</ol></li>
+<li><p><strong>android:title</strong> 속성에 설정된 <em>@string/action_settings</em>를 정의하기 위해서 res/values 폴더 내의 strings.xml 리소스를 열고 다음 항목을 추가</p>
+
+<div><pre><code class="language-markup">&lt;string name=&quot;action_settings&quot;&gt;설정&lt;/string&gt;</code></pre></div></li>
+</ul></li>
+</ol>
+
+<h2 id="toc_3">3. 옵션메뉴 생성</h2>
+
+<ul>
+<li><strong>옵션 메뉴(오버플로 메뉴)</strong>는 현재 액티비티와 관련된 여러 가지 동작이나 선택사항을 설정하는 메뉴이다.</li>
+<li>액티비티에서 옵션 메뉴를 지정하려면 <a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#onCreateOptionsMenu(android.view.Menu)">onCreateOptionMenu()</a> 메소드를 재정의한다.
+
+<ul>
+<li>이 메서드에서 메뉴 리소스(XML에 정의됨)를 콜백에서 제공된 <a href="https://developer.android.com/reference/android/view/Menu.html?hl=ko">Menu</a>로 팽창할 수 있습니다 </li>
+</ul></li>
+<li><p>예제</p>
+
+<ul>
+<li>  main_menu.xml에 의하여 정의된 메뉴 리소스가 <a href="https://developer.android.com/reference/android/view/Menu.html?hl=ko">Menu</a> 객체로 팽장된다.<br></li>
+</ul>
+
+<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+    // ... 생략
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+}</code></pre></div></li>
+</ul>
+
+<h2 id="toc_4">4. 액션 아이템 선택시 이벤트 처리</h2>
+
+<ul>
+<li><p>사용자가 옵션 메뉴에서 항목(앱 바의 작업 항목 포함)을 선택하면, 시스템이 액티비티의 <a href="https://developer.android.com/reference/android/app/Activity.html?hl=ko#onOptionsItemSelected(android.view.MenuItem)">onOptionsItemSelected()</a> 메서드를 호출합니다. </p>
+
+<ul>
+<li>이 메서드는 선택된 메뉴 항목(액션 아이템)에 대한 <a href="https://developer.android.com/reference/android/view/MenuItem.html?hl=ko">MenuItem</a> 객체를 전달합니다. </li>
+<li>항목을 식별하려면 <a href="https://developer.android.com/reference/android/view/MenuItem.html?hl=ko#getItemId()">getItemId()</a>를 호출하여 메뉴 항목에 대한 고유 ID를 얻을 수 있습니다.<br></li>
+</ul></li>
+<li><p>예제 </p>
+
+<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+    // ... 생략
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.quick_action1:
+                Toast.makeText(getApplicationContext(), &quot;action_quick&quot;, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_settings:
+                Toast.makeText(getApplicationContext(), &quot;action_settings&quot;, Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_subactivity:
+                Toast.makeText(getApplicationContext(), &quot;action_subactivity&quot;, Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}</code></pre></div></li>
+</ul>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.java=Prism.languages.extend("clike",{keyword:/\b(abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while)\b/,number:/\b0b[01]+\b|\b0x[\da-f]*\.?[\da-fp\-]+\b|\b\d*\.?\d+(?:e[+-]?\d+)?[df]?\b/i,operator:{pattern:/(^|[^.])(?:\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\|[|=]?|\*=?|\/=?|%=?|\^=?|[?:~])/m,lookbehind:!0}}),Prism.languages.insertBefore("java","function",{annotation:{alias:"punctuation",pattern:/(^|[^.])@\w+/,lookbehind:!0}});
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>

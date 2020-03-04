@@ -1,0 +1,1 @@
+res/raw 폴더내에 있는 description.txt 파일의 내용입니다

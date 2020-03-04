@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="첫번째 액티비티 입니다."
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="두번째 액티비티 시작하기"
+        android:id="@+id/buttonFirstActivity"
+        android:layout_marginTop="43dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다이얼 작업 시작하기"
+        android:id="@+id/buttonDialActivity"
+        android:onClick="doOnBtnClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="지도보기 작업 시작하기"
+        android:id="@+id/buttonMapActivity"
+        android:onClick="doOnBtnClick" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_data"
+            android:layout_weight="1"
+            android:hint="데이터 입력"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="세번째 액티비티에 데이터 전달"
+            android:id="@+id/buttonThirdActivity"
+            />
+    </LinearLayout>
+
+</LinearLayout>
