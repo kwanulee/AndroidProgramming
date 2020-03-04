@@ -263,28 +263,28 @@ div.polaroid {
 <h2 id="toc_1">1. MyAndroidApp  생성</h2>
 
 <ol>
-<li><p>다음 요구사항을 만족시키는 안드로이드 프로젝트를 생성하고, 이를  API 29  에뮬레이터(AVD)에서 실행하시오.</p>
+<li><p>다음 요구사항을 만족시키는 안드로이드 프로젝트를 생성하고, 이를  API 29  에뮬레이터(AVD)에서 실행해 보시오. </p>
 
 <ul>
 <li>Application 이름: <em>MyAndroidApp</em></li>
 <li>Package 이름: <em>com.hansung.android.myandroidapp</em></li>
 <li>Minimum SDK 버전: <em>API 14</em></li>
 </ul></li>
-<li><p>1번과 동일한 내용의 안드로이드 프로젝트를 생성하는 과정 중에, [<strong>Select a Project Template</strong>] 화면에서 <strong>Empty Activity</strong> 대신에 <strong>Basic Activity</strong>를 선택하여 프로젝트를 생성해보고 Java 소스와 XML layout 파일을 이전 단계의 프로젝트와 비교해 보시오.</p></li>
+<li><p>1번과 동일한 내용의 안드로이드 프로젝트를 생성하는 과정 중에, [<strong>Select a Project Template</strong>] 화면에서 <strong>Empty Activity</strong> 대신에 <strong>Basic Activity</strong>를 선택하여 프로젝트를 생성해보고 Java 소스와 XML layout 파일을 이전 단계의 프로젝트와 비교하여 차이점에 대해서 간단히 설명하시오.</p></li>
 </ol>
 
 <h2 id="toc_2">2. 리소스 파일 재정의</h2>
 
 <ol>
-<li><p><strong>res/values/strings.xml</strong> 파일을 다음과 같이 변경한 후, 앱을 실행해 보시오. 어떠한 차이가 발생하였나요?</p>
+<li><p><strong>res/values/strings.xml</strong> 파일을 다음과 같이 변경한 후, 앱을 실행해 보시오. 변경전과 비교하여 어떠한 차이가 발생하였나요?</p>
 
 <div><pre><code class="language-markup">&lt;resources&gt;
     &lt;string name=&quot;app_name&quot;&gt;My Android App&lt;/string&gt;
 &lt;/resources&gt;</code></pre></div></li>
-<li><p>앱 실행화면에서 화면 가운데 표시되는 <strong>Hello World!</strong> 문자열을 다른 문자열로 변경할 때, 다음 두가지 방식으로 변경해 보세요.</p>
+<li><p>앱 실행화면에서 화면 가운데 표시되는 <strong>Hello World!</strong> 문자열을 다른 문자열로 변경할 때, 다음 두가지 방식으로 변경해 보고, 두 가지 방법의 장단점에 대해서 간단히 논하시오.</p>
 
-<ol>
-<li><p><strong>res/layout/start_activity_view.xml</strong>에 기술된 <strong>TextView</strong> 위젯의 <strong>android:text</strong> 속성 값을 직접 변경</p>
+<ul>
+<li><p>[<strong>방법1</strong>]: <strong>res/layout/start_activity_view.xml</strong>에 기술된 <strong>TextView</strong> 위젯의 <strong>android:text</strong> 속성 값을 직접 변경</p>
 
 <div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;android.support.constraint.ConstraintLayout ...&gt;
@@ -293,7 +293,7 @@ div.polaroid {
         android:text=&quot;안드로이드 수강생 여러분 안녕하세요?&quot;
         ... /&gt;
 &lt;/android.support.constraint.ConstraintLayout&gt;</code></pre></div></li>
-<li><p><strong>res/values/strings.xml</strong> 파일에 새로운 문자열 리소스를 정의하고, 이 문자열 리소스를 <strong>res/layout/start_activity_view.xml</strong>에 기술된 <strong>TextView</strong> 위젯의 <strong>android:text</strong> 속성 값으로 지정</p>
+<li><p>[<strong>방법2</strong>]: <strong>res/values/strings.xml</strong> 파일에 새로운 문자열 리소스를 정의하고, 이 문자열 리소스를 <strong>res/layout/start_activity_view.xml</strong>에 기술된 <strong>TextView</strong> 위젯의 <strong>android:text</strong> 속성 값으로 지정</p>
 
 <ul>
 <li><p><strong>res/values/strings.xml</strong> 파일</p>
@@ -312,7 +312,7 @@ div.polaroid {
         ... /&gt;
 &lt;/android.support.constraint.ConstraintLayout&gt;</code></pre></div></li>
 </ul></li>
-</ol></li>
+</ul></li>
 </ol>
 
 <h2 id="toc_3">3. 프로젝트 재빌드</h2>
