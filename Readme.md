@@ -10,15 +10,15 @@
 
 ## 2. 안드로이드 앱 프로젝트
 - [안드로이드 앱 기본](http://kwanulee.github.io/AndroidProgramming/android-project/android_app_basic.html)
-- [안드로이드 앱 프로젝트 구조](http://kwanulee.github.io/AndroidProgramming/android-project/android_project_basic.html)
+- [안드로이드 앱 프로젝트 기본](http://kwanulee.github.io/AndroidProgramming/android-project/android_project_basic.html)
 - [프로젝트 빌드](http://kwanulee.github.io/AndroidProgramming/android-project/project-build.html)
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/android-project/안드로이드_프로젝트_실습.html) 
 
 ## 3. 안드로이드 UI
-- [안드로이드 UI 기본](http://kwanulee.github.io/AndroidProgramming/android-ui/android_ui.html)
-- [뷰: 위젯 (Widget)](http://kwanulee.github.io/AndroidProgramming/android-ui/android_ui_view.html)
-- [뷰그룹: 레이아웃 (Layout)](http://kwanulee.github.io/AndroidProgramming/android-ui/android_ui_viewgroup.html)
-- [Margin, Padding, Gravity](http://kwanulee.github.io/AndroidProgramming/android-ui/android_ui_mpg.html)
+- [안드로이드 UI 기본](http://kwanulee.github.io/AndroidProgramming/android-ui/ui-intro.html)
+- [뷰: 위젯 (Widget)](https://kwanulee.github.io/AndroidProgramming/android-ui/ui-widget.html)
+- [뷰그룹: 레이아웃 (Layout)](https://kwanulee.github.io/AndroidProgramming/android-ui/ui-layout.html)
+- [Margin, Padding, Gravity](https://kwanulee.github.io/AndroidProgramming/android-ui/ui-mpg.html)
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/android-ui/안드로이드_UI_실습.html)
  
 ## 4. 어댑터 뷰 
