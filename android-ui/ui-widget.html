@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>ui-widget</title>
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+kbd {
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style>
+div.polaroid {
+    width: 640px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
+
+<h1 id="toc_0">안드로이드 UI</h1>
+
+<p><a href="ui-intro.html"><strong>이전</strong>: 1. 안드로이드 UI 기본</a></p>
+
+<h2 id="toc_1">2. 위젯(Widget)</h2>
+
+<h3 id="toc_2">2.1 위젯 이란?</h3>
+
+<ul>
+<li><p><strong>위젯(Wdiget)</strong>은 <a href="https://developer.android.com/reference/android/view/View"><strong>View</strong></a>의 서브 클래스 중에서 화면에 보이는 것들을 말함</p>
+
+<ul>
+<li>대표적인 위젯은 <em>TextView</em>, <em>EditText</em>, <em>Button</em> 등이 있습니다.</li>
+</ul>
+
+<div class="polaroid">
+<img src="figure/widget_hierarchy.png">
+</div></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_3">2.2 <a href="https://developer.android.com/reference/android/view/View">View</a></h3>
+
+<p>View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View 클래스의 속성은 모든 UI 컴포넌트들에서 공통적으로 사용할 수 있다.</p>
+
+<ul>
+<li><p><strong>id</strong>: UI 컴포넌트를 고유하게 식별하는 식별자</p>
+
+<ul>
+<li><p>식별자 지정 형식</p>
+
+<div><pre><code class="language-none">android:id=&quot;@+id/my_button&quot;</code></pre></div>
+
+<ul>
+<li><a href="https://github.com/kwanulee/Android/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L21">예시</a> </li>
+</ul></li>
+<li><p>식별자 참조 형식</p>
+
+<div><pre><code class="language-none">android:id=&quot;@id/my_button&quot;</code></pre></div>
+
+<ul>
+<li><a href="https://github.com/kwanulee/Android/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L30">예시</a> </li>
+</ul></li>
+</ul></li>
+<li><p><strong>layout_width</strong>,  <strong>layout_height</strong>: UI 컴포넌트의 크기를 결정</p>
+
+<ul>
+<li><em>match_parent</em> (혹은 <em>fill_parent</em>) : 부모 UI 컴포넌트의 크기에 맞춤
+
+<ul>
+<li>SDK2.2(프로요)부터는 <em>match_parent</em>로 변경. 둘 다 사용 가능</li>
+</ul></li>
+<li><p><em>wrap_content</em>:  UI 컴포넌트의 내용물 크기에 맞춤</p>
+
+<div><pre><code class="language-none">&lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Start&quot;/&gt;</code></pre></div>
+
+<div class="polaroid">
+   <img src="figure/layout_width_height.png">
+  </div></li>
+<li><p>layout_width,  layout_height의 값을 특정한 단위로 지정할 수도 있음</p>
+
+<div><pre><code class="language-none">&lt;Button
+        android:layout_width=&quot;100px&quot;
+        android:layout_height=&quot;100px&quot;
+        android:text=&quot;Start&quot;/&gt;</code></pre></div>
+
+<ul>
+<li><p><em>px</em> (pixels), <em>in</em> (inches), <em>mm</em> (millimeters)</p>
+
+<ul>
+<li><p>Pixel 방식으로 view의 크기를 설정하면, 디스플레이의 해상도에 따라 view의 크기가 달라 보일 수 있습니다.</p>
+
+<ul>
+<li><p>가령, 가로세로 100 pixel 크기의 UI요소는 저해상도 디스플레이에서 보이는 것이  고해상도 디스플레이어에서 보이는 것보다 크게 보입니다.</p>
+
+<div class="polaroid">
+ <img src="figure/explicit_value.png">
+  </div></li>
+</ul></li>
+</ul></li>
+<li><p><em>dp</em> (density-independent pixels): 밀도에 독립적인 단위</p>
+
+<ul>
+<li><p>1 dp는 밀도가 160dpi의 화면 일때 1 픽셀을 나타냄</p>
+
+<div class="polaroid">
+<img src="figure/dip.png">
+</div></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p><strong>background</strong></p>
+
+<ul>
+<li>뷰의 배경을 지정하며, 색상 및 이미지 등의 여러 가지 객체로 지정 가능하다.</li>
+<li>색상 지정 시 네 가지 형식이 적용된다.</li>
+<li>#RGB</li>
+<li>#ARGB</li>
+<li>#RRGGBB</li>
+<li>#AARRGGBB</li>
+<li>ex) #ff0000 (#f00): 빨간색,  #0000ff : 파란색</li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_4"><a href="ui-widget-exercise1.html">[연습1] 뷰의 크기 조절</a></h3>
+
+<hr>
+
+<h3 id="toc_5">2.3 <a href="https://developer.android.com/reference/android/widget/TextView">TextView</a></h3>
+
+<ul>
+<li>화면에 text를 표시하는 용도</li>
+<li><strong>주요 속성</strong>
+
+<ul>
+<li>View 속성 상속: <strong>id</strong>, <strong>layout_width</strong>, <strong>layout_height</strong>, <strong>background</strong>, etc.</li>
+<li><strong>text</strong>: 출력할 문자열 지정</li>
+<li><strong>textSize</strong>: 폰트 크기</li>
+<li><strong>textStyle</strong>: 텍스트 스타일 (normal, bold, italic)</li>
+<li><strong>typeface</strong>: 텍스트 폰트(normal, sans, serif, monspace)</li>
+<li><strong>textColor</strong>:  문자열 색상</li>
+<li><strong>singleLine</strong>: 속성값이 <q>true</q>이면, 텍스트가 위젯의 폭보다 길 때 강제로 한 줄에 출력</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_6">2.4 <a href="https://developer.android.com/reference/android/widget/EditText">EditText</a></h3>
+
+<ul>
+<li>입력이 가능한 Text 창</li>
+<li><strong>주요 속성</strong>
+
+<ul>
+<li><strong>TextView</strong>의 모든 속성 상속 (EditText는 TextView의 서브클래스임)</li>
+<li><strong>inputType</strong>: 입력시 허용되는 키보드 타입 설정 및 키보드 행위를 설정
+
+<ul>
+<li>키보드 타입 설정 값
+
+<ul>
+<li><q>text</q>: 일반적인 텍스트 키보드</li>
+<li><q>phone</q>: 전화번호 입력 키보드</li>
+<li><q>textEmailAddress</q>: @ 문자를 가진 텍스트 키보드</li>
+</ul></li>
+<li>키보드 행위 설정 값
+
+<ul>
+<li><q>textCapWords</q>:  문장의 시작을 대문자로 변환</li>
+<li><q>textAutoCorrect</q>: 입력된 단어와 유사한 단어를 제시하고 제시된 단어 선택시, 입력된 단어를 대치</li>
+<li><q>textMultiLine</q>: 여러 줄을 입력 받을 수 있음</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_7"><a href="ui-widget-exercise2.html">[연습2] Textview/EditText 테스트</a></h3>
+
+<hr>
+
+<h3 id="toc_8">2.5 <a href="https://developer.android.com/reference/android/widget/Button?hl=en">Button</a></h3>
+
+<ul>
+<li><p>일반적으로 많이 사용되는 푸시 버튼으로 사용자가 버튼을 클릭하였을 때, 어떤 행동을 수행하고자 할 때 사용된다.</p>
+
+<p><img src="https://developer.android.com/images/ui/button-types.png" alt=""></p></li>
+<li><p><strong>Button</strong> 클래스는 <strong>TextView</strong>의  서브클래스이므로, <strong>TextView</strong>의 모든 속성을 사용할 수 있다.</p>
+
+<ul>
+<li><strong>singleLine</strong>: 텍스트가 위젯의 폭보다 길 때 강제로 한 줄에 출력 </li>
+</ul></li>
+<li><p>버튼 내에 텍스트, 아이콘을 표시할 수 있음</p>
+
+<ul>
+<li>버튼 전체를 이미지로 그리기 위해서는 <strong>ImageButton</strong> 사용</li>
+</ul></li>
+<li><p><strong>예제</strong> </p>
+
+<ul>
+<li><a href="ui-widget-exercise2.html">연습 2</a>의 text_views.xml 파일에 버튼 위젯 추가) </li>
+</ul>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout ...&gt;
+    ...
+    &lt;EditText ... /&gt;
+    &lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Submit&quot;
+        /&gt;
+&lt;/LinearLayout&gt;</code></pre></div></li>
+</ul>
+
+<h3 id="toc_9">2.6 버튼 클릭이벤트 처리</h3>
+
+<ul>
+<li>사용자가 버튼 위젯을 클릭할 때, 지정된 행동을 수행하기 위해서는 다음 두 가지 방법 중 하나를 사용할 수 있다.</li>
+</ul>
+
+<h4 id="toc_10">2.6.1 버튼 위젯의 onClick 속성 활용 방법</h4>
+
+<ol>
+<li><p>버튼 위젯을 정의한 화면을 <strong>contentView</strong>로 설정한 액티비티 클래스에 새로운 메소드(예, <em>doAction</em>())를 추가한다.</p>
+
+<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.text_views);
+    }
+
+    // 버튼 클릭이벤트를 처리하는 메소드 정의
+    public void doAction(View v) {
+        // Shows a Toast message in response to button
+        Toast.makeText(getApplicationContext(), &quot;Submitted Successfully&quot;,
+            Toast.LENGTH_SHORT).show();
+    }
+
+}</code></pre></div></li>
+<li><p>버튼 위젯을 정의한 xml 레이아웃 파일(예, <em>text_views.xml</em>)에서, 버튼 위젯의 <strong>onClick</strong> 속성에 앞 단계에서 추가한 메소드(예, <em>doAction</em>())를 설정한다.</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout ...&gt;
+    ...
+    &lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Submit&quot;
+        android:onClick=&quot;doAction&quot;/&gt;
+
+&lt;/LinearLayout&gt;</code></pre></div></li>
+</ol>
+
+<h4 id="toc_11">2.6.2 이벤트 처리 객체를 이용하는 방법</h4>
+
+<p>이 방법에서는 이벤트를 처리하는 객체를 생성하여 해당 이벤트를 발생시키는 위젯에 등록한다. 위젯에서 이벤트가 발생하면 등록된 이벤트 처리 객체가 정의된 일을 수행한다.</p>
+
+<ul>
+<li><p><strong>절차</strong>   </p>
+
+<ol>
+<li>버튼이 클릭되었을 때 발생되는 클릭 이벤트를 처리하기 위해서는 <a href="https://developer.android.com/reference/android/view/View.OnClickListener">View.OnClickListener</a> 인터페이스를 구현하는 클   래스 정의한다.</li>
+<li>구현한 클래스의 객체를 생성하여 클릭 이벤트를 발생시키는 버튼 위젯에 등록한다.</li>
+</ol></li>
+<li><p><strong>예제</strong></p>
+
+<ul>
+<li><p>버튼 위젯을 정의한 xml 레이아웃 파일(예, text_views.xml)에서, Button 객체를 Java 코드에서 참조하기 위해서 버튼 위젯에 id 속성 추가</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout ...&gt;
+    ...
+    &lt;Button
+        android:id=&quot;@+id/submit_button&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Submit&quot;
+        /&gt;
+
+&lt;/LinearLayout&gt;</code></pre></div></li>
+<li><p>이벤트 처리 클래스 정의 후, 이벤트 처리 객체 생성 및 등록</p>
+
+<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.text_views);
+
+         // text_views.xml에 정의된 View 객체 중에서 id가 submit_button인 것을 찾아 반환함 
+        Button btn = findViewById(R.id.submit_button);
+        //2. 구현한 클래스의 객체를 생성하여 클릭 이벤트를 발생시키는 버튼 위젯에 등록
+        btn.setOnClickListener(new ClickListener());
+    }
+
+    ...
+
+    //1. 버튼이 클릭되었을 때 발생되는 클릭 이벤트를 처리하기 위해서는 View.OnClickListener 인터페이스를 구현하는 클래스 정의
+    class ClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(getApplicationContext(), R.string.button_clicked_msg,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+</code></pre></div></li>
+</ul></li>
+<li><p>참고 (<strong>findViewByID</strong>() 함수)</p>
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/app/Activity">Activity</a> 클래스에 정의된 메소드로 <strong>Activity</strong> 하위 클래스(예, <a href="https://developer.android.com/reference/android/support/v7/app/AppCompatActivity">AppCompatActivity</a>)에서 사용 가능 </li>
+<li>해당 액티비티와 연결된 XML layout 리소스 요소(위젯) 중에서 id 속성을 바탕으로 해당 Java 객체를 가져옴 
+
+<ul>
+<li>[<strong>주의</strong>] <strong>onCreate</strong>() 메소드 내의 <strong>setContentView</strong>()를 통해서 연결된 XML 리소스 요소 중에서만 <strong>findViewByID</strong>() 메소드로 가져올 수 있음. </li>
+</ul></li>
+</ul></li>
+</ul>
+
+<hr>
+
+<p><a href="ui-layout.html"><strong>다음</strong>: 3. 레이아웃 (Layout)</a></p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0}],string:{pattern:/(["'])(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,lookbehind:!0,inside:{punctuation:/(\.|\\)/}},keyword:/\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,"boolean":/\b(true|false)\b/,"function":/[a-z0-9_]+(?=\()/i,number:/\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
+</script>
+
+<script type="text/javascript">
+Prism.languages.java=Prism.languages.extend("clike",{keyword:/\b(abstract|continue|for|new|switch|assert|default|goto|package|synchronized|boolean|do|if|private|this|break|double|implements|protected|throw|byte|else|import|public|throws|case|enum|instanceof|return|transient|catch|extends|int|short|try|char|final|interface|static|void|class|finally|long|strictfp|volatile|const|float|native|super|while)\b/,number:/\b0b[01]+\b|\b0x[\da-f]*\.?[\da-fp\-]+\b|\b\d*\.?\d+(?:e[+-]?\d+)?[df]?\b/i,operator:{pattern:/(^|[^.])(?:\+[+=]?|-[-=]?|!=?|<<?=?|>>?>?=?|==?|&[&=]?|\|[|=]?|\*=?|\/=?|%=?|\^=?|[?:~])/m,lookbehind:!0}}),Prism.languages.insertBefore("java","function",{annotation:{alias:"punctuation",pattern:/(^|[^.])@\w+/,lookbehind:!0}});
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>
