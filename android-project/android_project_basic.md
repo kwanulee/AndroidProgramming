@@ -7,11 +7,12 @@ div.polaroid {
 }
 </style>
 
+[**이전 학습**: 안드로이드 앱 기본](android_app_basic.html)
+
 # 안드로이드 앱 프로젝트 기본
 ## 학습목표
 - 안드로이드 앱에 대응하는 AndroidStudio 프로젝트 구조와 프로젝트 구성요소를 이해한다.
 
----
 <a name="1"></a>
 ## 1. AndroidStudio 프로젝트 구조
 - **HelloAndroid 프로젝트 구조 (Android 뷰)**
@@ -149,5 +150,8 @@ div.polaroid {
 	- setContentView(*R.layout.activity_main*)
 		- *R.layout.activity_main*이 가리키는 리소스를 이 액티비티의 콘텐츠뷰로 사용하겠다는 의미
 		- *R.layout.activity_main*은 res/layout 폴더에 있는 activity\_main.xml을 가리키는 정적상수 (**R** 클래스에서 정의됨)
+
+---
+[**다음 학습**: 프로젝트 빌드](project-build.html)
 
 

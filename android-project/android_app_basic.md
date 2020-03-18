@@ -56,3 +56,6 @@ div.polaroid {
 	- 일련의 대체 리소스를 제공함으로써 **다양한 기기 구성(예: 여러 가지 언어 및 화면 크기)에 맞게 앱을 최적화**할 수도 있습니다 .
 
 		![](https://developer.android.com/images/resources/resource_devices_diagram2.png)
+		
+---
+[**다음 학습**: 안드로이드 앱 프로젝트 기본](android_project_basic.html)
