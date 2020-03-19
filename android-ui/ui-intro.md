@@ -46,8 +46,19 @@ div.polaroid {
 
 ### 2.3 자바 코드로 직접 UI 설계
 - Java 코드를  이용하여 레이아웃과 뷰들을 생성하고, 뷰의 속성도 설정할 수 있다.
-- AndroidStduio에서 UIBasic2 프로젝트를 생성한 후, MainActivity.java 파일을 아래 MainActivity.java 파일의 내용으로 변경한다.
+- **AndroidStduio**에서 *UIBasic2* 프로젝트를 생성한 후, **MainActivity.java** 파일을 아래 MainActivity.java 파일의 내용으로 변경한다.
 	- [MainActivity.java](MainActivity.java.html)
+- **res/values** 폴더 하위에 **ids.xml** 파일을 생성하고 파일의 내용은 다음과 같이 변경한다.
+
+	```xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<resources>
+	    <item type="id" name="root"/>
+	        <item type="id" name="button1"/>
+	        <item type="id" name="button2"/>
+	        <item type="id" name="linearLayout"/>
+	</resources>
+	``` 
 
 ---
 
