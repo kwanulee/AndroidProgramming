@@ -32,14 +32,14 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 		android:id="@+id/my_button"
 		```
 		
-		- [예시](https://github.com/kwanulee/Android/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L21) 
+		- [예시](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L21) 
 	- 식별자 참조 형식
 	
 		```
 		android:id="@id/my_button"
 		```
 		
-		- [예시](https://github.com/kwanulee/Android/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L30) 
+		- [예시](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L30) 
 		   
 - **layout\_width**,  **layout\_height**: UI 컴포넌트의 크기를 결정
   - *match\_parent* (혹은 *fill\_parent*) : 부모 UI 컴포넌트의 크기에 맞춤
