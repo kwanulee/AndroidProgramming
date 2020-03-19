@@ -7,14 +7,13 @@ div.polaroid {
 }
 </style>
 
-# [안드로이드 UI](ui-intro.html)
+[**이전 학습**: 안드로이드 UI 기본](ui-intro.html)
+# 위젯(Widget)
 
-[**이전**: 1. 안드로이드 UI 기본](ui-intro.html)
+## 학습목표
+- 안드로이드 UI 기본 요소인 다양한 위젯 (Widget)의 설정 방법을 이해한다.
 
-## 2. 위젯(Widget)
-- 안드로이드 UI 기본 요소인 다양한 위젯 (Widget)의 설정 방법을 알아봅니다.
-
-### 2.1 위젯 이란?
+## 1. 위젯 이란?
 - **위젯(Wdiget)**은 [**View**](https://developer.android.com/reference/android/view/View)의 서브 클래스 중에서 화면에 보이는 것들을 말함
   - 대표적인 위젯은 *TextView*, *EditText*, *Button* 등이 있습니다.
 
@@ -23,7 +22,7 @@ div.polaroid {
 	</div>
 
 ---
-### 2.2 [View](https://developer.android.com/reference/android/view/View)
+## 2. [View](https://developer.android.com/reference/android/view/View)
 View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View 클래스의 속성은 모든 UI 컴포넌트들에서 공통적으로 사용할 수 있다.
 
 - **id**: UI 컴포넌트를 고유하게 식별하는 식별자
@@ -92,7 +91,7 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 ### [[연습1] 뷰의 크기 조절](ui-widget-exercise1.html)
 ---
 
-### 2.3 [TextView](https://developer.android.com/reference/android/widget/TextView)  
+## 3. [TextView](https://developer.android.com/reference/android/widget/TextView)  
 - 화면에 text를 표시하는 용도
 - **주요 속성**
   - View 속성 상속: **id**, **layout_width**, **layout_height**, **background**, etc.
@@ -103,7 +102,7 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
   - **textColor**:  문자열 색상
   - **singleLine**: 속성값이 "true"이면, 텍스트가 위젯의 폭보다 길 때 강제로 한 줄에 출력
 
-### 2.4 [EditText](https://developer.android.com/reference/android/widget/EditText)
+## 4. [EditText](https://developer.android.com/reference/android/widget/EditText)
 - 입력이 가능한 Text 창
 - **주요 속성**
   - **TextView**의 모든 속성 상속 (EditText는 TextView의 서브클래스임)
@@ -120,7 +119,7 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 ---
 ### [[연습2] Textview/EditText 테스트](ui-widget-exercise2.html)
 ---
-### 2.5 [Button](https://developer.android.com/reference/android/widget/Button?hl=en)
+## 5. [Button](https://developer.android.com/reference/android/widget/Button?hl=en)
 - 일반적으로 많이 사용되는 푸시 버튼으로 사용자가 버튼을 클릭하였을 때, 어떤 행동을 수행하고자 할 때 사용된다.
 
 	![](https://developer.android.com/images/ui/button-types.png)
@@ -145,10 +144,10 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 	</LinearLayout>
 
 
-### 2.6 버튼 클릭이벤트 처리
+### 5.1 버튼 클릭이벤트 처리
 - 사용자가 버튼 위젯을 클릭할 때, 지정된 행동을 수행하기 위해서는 다음 두 가지 방법 중 하나를 사용할 수 있다.
 
-#### 2.6.1 버튼 위젯의 onClick 속성 활용 방법
+#### 5.1.1 버튼 위젯의 onClick 속성 활용 방법
 1. 버튼 위젯을 정의한 화면을 **contentView**로 설정한 액티비티 클래스에 새로운 메소드(예, *doAction*())를 추가한다.
 
 	```java
@@ -185,7 +184,7 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 	</LinearLayout>
 	```
 
-#### 2.6.2 이벤트 처리 객체를 이용하는 방법
+#### 5.1.2 이벤트 처리 객체를 이용하는 방법
 이 방법에서는 이벤트를 처리하는 객체를 생성하여 해당 이벤트를 발생시키는 위젯에 등록한다. 위젯에서 이벤트가 발생하면 등록된 이벤트 처리 객체가 정의된 일을 수행한다.
 
 - **절차**   
@@ -246,4 +245,4 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 
 
 ---
-[**다음**: 3. 레이아웃 (Layout)](ui-layout.html)
+[**다음 학습**: 레이아웃 (Layout)](ui-layout.html)

@@ -6,15 +6,15 @@ div.polaroid {
 	margin-bottom: 0.5cm;
 }
 </style>
-# 안드로이드 UI
+
+[**이전 학습**: 위젯 (Widget)](ui-widget.html)
+# 레이아웃(Layout)
+
+## 학습목표
+- 안드로이드 UI 요소를 배치하는 레이아웃 (Layout)의 기능 및 설정 방법을 이해한다.
 
 
-[**이전**: 2. 위젯(Widget)](ui-widget.html)
-
-## 3. 레이아웃(Layout)
-- 안드로이드 UI 요소를 배치하는 레이아웃 (Layout)의 기능 및 설정 방법을 알아봅니다.
-
-### 3.1 레이아웃 이란?
+## 1. 레이아웃 이란?
 - [ViewGroup](https://developer.android.com/reference/android/view/ViewGroup)의 파생 클래스로서, 포함된 [View](https://developer.android.com/reference/android/view/View.html)를 정렬하는 기능
 - 종류
 	- [LinearLayout](https://developer.android.com/reference/android/widget/LinearLayout)
@@ -27,7 +27,7 @@ div.polaroid {
 		- 컨테이너에 포함된 뷰들을 전부 좌상단에 배치하는 레이아웃
 
 ---
-### 3.2 LinerLayout
+## 2. LinerLayout
 - 자식 뷰를 수평, 수직으로 일렬 배치하는 레이아웃으로, 가장 단순하고 직관적이며 사용빈도가 높다.
 - **주요 속성**
 	- **orientation**
@@ -46,7 +46,7 @@ div.polaroid {
 	<img src="figure/linearlayout_example_code.png"> | <img src="figure/linearlayout_example.png" width=200>
 ---
 
-### 3.3 RelativeLayout
+## 3. RelativeLayout
 - 위젯끼리의 관계를 지정하거나 위젯과 parent(container)와의 관계 지정하여 자식 뷰를 배치
 - **주요 속성**
 	- 위젯끼리의 관계를 지정하는 속성: anchor view의 id를 지정 
@@ -88,7 +88,7 @@ div.polaroid {
 
 
 ---
-### 3.4 TableLayout
+## 4. TableLayout
 - 표 형식으로 차일드를 배치하는 레이아웃
 
 - 표를 구성하는 행의 개수만큼 TableRow를 포함하고, TableRow는 각 행에 포함된 셀(View)을 포함한다.
@@ -109,7 +109,7 @@ div.polaroid {
 	<img src="figure/tablelayout_example_code.png"> | <img src="figure/tablelayout_example.png" width=200>
 
 
-### 3.5 FrameLayout 
+## 5. FrameLayout 
 - 모든 자식 View는 좌상단에 배치되며, 여러 개의 자식View를 포함하는 경우 나열된 순서대로 겹쳐져서 표시됨
 - 예제: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/UIBasic/app/src/main/res/layout/other_layout.xml#L58-L78
 
@@ -117,10 +117,10 @@ div.polaroid {
 	--- | ---	
 	<img src="figure/framelayout_example_code.png"> | <img src="figure/framelayout_example.png" width=200>
 
-### 3.6 ConstraintLayout
+## 6. ConstraintLayout
 - [ConstraintLayout](https://developer.android.com/reference/androidx/constraintlayout/widget/ConstraintLayout)은 [RelativeLayout](https://developer.android.com/reference/android/widget/RelativeLayout)과 유사하지만, RelativeLayout보다 유연하고 Android 스튜디오의 Layout Editor와 함께 사용하기가 더 쉽습니다.
 - **ConstraintLayout**은 화면에 배치할 View를 ViewGroup을 통한 계층 없이 평면적인 배치를 사용하므로, 크고 복잡한 레이아웃을 쉽게 작성할 수 있을 뿐만아니라, 화면에 표시되는 성능도 ViewGroup의 계층을 사용하는 디자인 보다 더 나은 특징이 있습니다.
 - **ConstraintLayout** 사용에 대한 자세한 정보는 다음 [링크](https://developer.android.com/training/constraint-layout)를 클릭하여 알아보세요.
 
 ---
-[**다음**: 4. Margin/Padding/Gravity](ui-mpg.html)
+[**다음 학습**: Margin/Padding/Gravity](ui-mpg.html)

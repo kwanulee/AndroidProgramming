@@ -258,13 +258,17 @@ div.polaroid {
 }
 </style>
 
-<h1 id="toc_0">안드로이드 UI</h1>
+<p><a href="ui-intro.html"><strong>이전 학습</strong>: 안드로이드 UI 기본</a></p>
 
-<p><a href="ui-intro.html"><strong>이전</strong>: 1. 안드로이드 UI 기본</a></p>
+<h1 id="toc_0">위젯(Widget)</h1>
 
-<h2 id="toc_1">2. 위젯(Widget)</h2>
+<h2 id="toc_1">학습목표</h2>
 
-<h3 id="toc_2">2.1 위젯 이란?</h3>
+<ul>
+<li>안드로이드 UI 기본 요소인 다양한 위젯 (Widget)의 설정 방법을 이해한다.</li>
+</ul>
+
+<h2 id="toc_2">1. 위젯 이란?</h2>
 
 <ul>
 <li><p><strong>위젯(Wdiget)</strong>은 <a href="https://developer.android.com/reference/android/view/View"><strong>View</strong></a>의 서브 클래스 중에서 화면에 보이는 것들을 말함</p>
@@ -280,7 +284,7 @@ div.polaroid {
 
 <hr>
 
-<h3 id="toc_3">2.2 <a href="https://developer.android.com/reference/android/view/View">View</a></h3>
+<h2 id="toc_3">2. <a href="https://developer.android.com/reference/android/view/View">View</a></h2>
 
 <p>View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View 클래스의 속성은 모든 UI 컴포넌트들에서 공통적으로 사용할 수 있다.</p>
 
@@ -372,7 +376,7 @@ div.polaroid {
 
 <hr>
 
-<h3 id="toc_5">2.3 <a href="https://developer.android.com/reference/android/widget/TextView">TextView</a></h3>
+<h2 id="toc_5">3. <a href="https://developer.android.com/reference/android/widget/TextView">TextView</a></h2>
 
 <ul>
 <li>화면에 text를 표시하는 용도</li>
@@ -389,7 +393,7 @@ div.polaroid {
 </ul></li>
 </ul>
 
-<h3 id="toc_6">2.4 <a href="https://developer.android.com/reference/android/widget/EditText">EditText</a></h3>
+<h2 id="toc_6">4. <a href="https://developer.android.com/reference/android/widget/EditText">EditText</a></h2>
 
 <ul>
 <li>입력이 가능한 Text 창</li>
@@ -424,7 +428,7 @@ div.polaroid {
 
 <hr>
 
-<h3 id="toc_8">2.5 <a href="https://developer.android.com/reference/android/widget/Button?hl=en">Button</a></h3>
+<h2 id="toc_8">5. <a href="https://developer.android.com/reference/android/widget/Button?hl=en">Button</a></h2>
 
 <ul>
 <li><p>일반적으로 많이 사용되는 푸시 버튼으로 사용자가 버튼을 클릭하였을 때, 어떤 행동을 수행하고자 할 때 사용된다.</p>
@@ -458,13 +462,13 @@ div.polaroid {
 &lt;/LinearLayout&gt;</code></pre></div></li>
 </ul>
 
-<h3 id="toc_9">2.6 버튼 클릭이벤트 처리</h3>
+<h3 id="toc_9">5.1 버튼 클릭이벤트 처리</h3>
 
 <ul>
 <li>사용자가 버튼 위젯을 클릭할 때, 지정된 행동을 수행하기 위해서는 다음 두 가지 방법 중 하나를 사용할 수 있다.</li>
 </ul>
 
-<h4 id="toc_10">2.6.1 버튼 위젯의 onClick 속성 활용 방법</h4>
+<h4 id="toc_10">5.1.1 버튼 위젯의 onClick 속성 활용 방법</h4>
 
 <ol>
 <li><p>버튼 위젯을 정의한 화면을 <strong>contentView</strong>로 설정한 액티비티 클래스에 새로운 메소드(예, <em>doAction</em>())를 추가한다.</p>
@@ -499,7 +503,7 @@ div.polaroid {
 &lt;/LinearLayout&gt;</code></pre></div></li>
 </ol>
 
-<h4 id="toc_11">2.6.2 이벤트 처리 객체를 이용하는 방법</h4>
+<h4 id="toc_11">5.1.2 이벤트 처리 객체를 이용하는 방법</h4>
 
 <p>이 방법에서는 이벤트를 처리하는 객체를 생성하여 해당 이벤트를 발생시키는 위젯에 등록한다. 위젯에서 이벤트가 발생하면 등록된 이벤트 처리 객체가 정의된 일을 수행한다.</p>
 
@@ -568,7 +572,7 @@ div.polaroid {
 
 <hr>
 
-<p><a href="ui-layout.html"><strong>다음</strong>: 3. 레이아웃 (Layout)</a></p>
+<p><a href="ui-layout.html"><strong>다음 학습</strong>: 레이아웃 (Layout)</a></p>
 
 
 

@@ -6,14 +6,13 @@ div.polaroid {
 	margin-bottom: 0.5cm;
 }
 </style>
-# 안드로이드 UI
+[**이전 학습**: 레이아웃(Layout)](ui-layout.html)
+# Margin/Padding/Gravity
 
-[**이전**: 3. 레이아웃(Layout)](ui-layout.html)
+## 학습목표
+- **Margins, Padding, Gravity**의 개념을 이해하고,  속성 값 설정을 통해서 View가 화면에 보이는 모양을 미세하게 제어한다.
 
-## 4. Margin/Padding/Gravity
-- 이번 장에서는 **Margins, Padding, Gravity**의 개념을 이해하고, 설정 방법을 통해서 View가 화면에 보이는 모양을 미세하게 제어할 수 있습니다.
-
-### 4.1 Margins, Padding
+## 1. Margins, Padding
 - Margins: 뷰와 다른 뷰(컨테이너) 간의 간격
 	- **layout\_margin**: 상하좌우로 동일한 마진 설정 시에 사용되는 속성
 	- **layout\_marginLeft**,  **layout\_marginRight**, **layout\_marginTop**, **layout\_marginBottom**: 4 방향의 마진을 각기 다르게 설정할 때 사용되는 속성
@@ -32,7 +31,7 @@ div.polaroid {
 	<img src="figure/margin_padding_example_code.png"> | <img src="figure/margin_padding_example.png" width=200>
 	 
 	   
-### 4.2 Gravity
+## 2. Gravity
 - **gravity** 속성
 	- 해당 뷰안의 내용물 위치에 대한 정렬 방식을 지정
 - **layout_gravity** 속성

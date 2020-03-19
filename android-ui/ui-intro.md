@@ -6,18 +6,14 @@ div.polaroid {
 	margin-bottom: 0.5cm;
 }
 </style>
-# 안드로이드 UI
+[**목차**: 안드로이드 UI](https://kwanulee.github.io/AndroidProgramming/#3-안드로이드-ui)
+
+# 안드로이드 UI 기본
 
 ## 학습목표
 - 안드로이드 UI 기본 개념 및 설계 방법을 이해한다.
-- 안드로이드 UI 기본 요소인 다양한 위젯 (Widget)의 설정 방법을 이해한다.
-- 안드로이드 UI 요소를 배치하는 레이아웃 (Layout)의 기능 및 설정 방법을 이해한다.
-- Margins/Padding/Gravity의 설정 방법을 이해하여, UI의 미세한 설정을 제어할 수 있다.
 
-
-## 1. 안드로이드 UI 기본
-
-### 1.1 UI(User Inteface) 설계 개요
+## 1. UI (User Inteface) 설계 개요
 
 - 안드로이드 앱의 UI를 구성하는 기본 단위는 뷰(View)이다.
 	- 뷰는 크게 **위젯(Widget)**과 **레이아웃(Layout)**으로 구분된다.
@@ -28,20 +24,19 @@ div.polaroid {
 	   <img src="figure/ui-overview.png">
 	    </div>
 
-### 1.2 UI 설계 방법
-#### 1.2.1 XML을 사용하여 UI 설계
-- AndroidStudio의 Layout Editor 이용
-	- 드래그 앤 드롭 방식의 WYSIWYG (what you see is what you get) 에디터
-	- 다양한 디바이스/안드로이드 버전에 대한 Preview
-	- XML 코드 자동 변환 및 동기화
+## 2. UI 설계 방법
+### 2.1 AndroidStudio의 Layout Editor 이용
+- 드래그 앤 드롭 방식의 WYSIWYG (what you see is what you get) 에디터
+- 다양한 디바이스/안드로이드 버전에 대한 Preview
+- XML 코드 자동 변환 및 동기화
 
 	<div class="polaroid">
 	<img src="figure/layout-editor.png">
 	</div>
 
-- XML file을 직접 편집
-	- 필요한 XML 태그나 속성을 잘 모를 경우 불편
-	- Copy & paste를 이용한 편집이 효율적인 경우가 많음
+### 2.2 XML file을 직접 편집
+- 필요한 XML 태그나 속성을 잘 모를 경우 불편
+- Copy & paste를 이용한 편집이 효율적인 경우가 많음
 
 	<div class="polaroid">
 	<img src="figure/xml-editor.png">
@@ -49,11 +44,11 @@ div.polaroid {
 	
 	- [activity\_main.xml](activity_main.xml.html)
 
-#### 1.2.2 자바 코드로 직접 UI 설계
+### 2.3 자바 코드로 직접 UI 설계
 - Java 코드를  이용하여 레이아웃과 뷰들을 생성하고, 뷰의 속성도 설정할 수 있다.
 - AndroidStduio에서 UIBasic2 프로젝트를 생성한 후, MainActivity.java 파일을 아래 MainActivity.java 파일의 내용으로 변경한다.
 	- [MainActivity.java](MainActivity.java.html)
 
 ---
 
-[**다음**: 2. 위젯 (Widget)](ui-widget.html)
+[**다음 학습**: 위젯 (Widget)](ui-widget.html)
