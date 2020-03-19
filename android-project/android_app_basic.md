@@ -6,7 +6,7 @@ div.polaroid {
 	margin-bottom: 0.5cm;
 }
 </style>
-
+[**목차**: 안드로이드 앱 프로젝트](https://kwanulee.github.io/AndroidProgramming/#2-%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%EC%95%B1-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8)
 # 안드로이드 앱 기본
 ## 학습목표
 - 안드로이드 앱의 기본 구성요소에 대해 이해한다.
