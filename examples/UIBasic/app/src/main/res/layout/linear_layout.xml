@@ -3,49 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ff0000"
     android:orientation="vertical"
-    tools:context="com.kwanwoo.android.uibasic.MainActivity"
-    android:background="#ff0000">
+    tools:context="com.kwanwoo.android.uibasic.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#aa00ff">
+        android:background="#aa00ff"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button 1" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button 2" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Button 3"
 
-        />
+            />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"
-        android:background="#00aaff">
+        android:background="#00aaff"
+        android:orientation="horizontal">
+
         <Button
+            android:id="@+id/button4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 4"
-            android:id="@+id/button4"/>
+            android:text="Button 4" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button 5" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
