@@ -471,6 +471,18 @@ div.polaroid {
 <h4 id="toc_10">5.1.1 버튼 위젯의 onClick 속성 활용 방법</h4>
 
 <ol>
+<li><p>버튼 위젯을 정의한 xml 레이아웃 파일(예, <em>text_views.xml</em>)에서, 버튼 위젯의 <strong>onClick</strong> 속성에 앞 단계에서 추가한 메소드(예, <em>doAction</em>())를 설정한다.</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout ...&gt;
+    ...
+    &lt;Button
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Submit&quot;
+        android:onClick=&quot;doAction&quot;/&gt;
+
+&lt;/LinearLayout&gt;</code></pre></div></li>
 <li><p>버튼 위젯을 정의한 화면을 <strong>contentView</strong>로 설정한 액티비티 클래스에 새로운 메소드(예, <em>doAction</em>())를 추가한다.</p>
 
 <div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
@@ -489,18 +501,6 @@ div.polaroid {
     }
 
 }</code></pre></div></li>
-<li><p>버튼 위젯을 정의한 xml 레이아웃 파일(예, <em>text_views.xml</em>)에서, 버튼 위젯의 <strong>onClick</strong> 속성에 앞 단계에서 추가한 메소드(예, <em>doAction</em>())를 설정한다.</p>
-
-<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout ...&gt;
-    ...
-    &lt;Button
-        android:layout_width=&quot;wrap_content&quot;
-        android:layout_height=&quot;wrap_content&quot;
-        android:text=&quot;Submit&quot;
-        android:onClick=&quot;doAction&quot;/&gt;
-
-&lt;/LinearLayout&gt;</code></pre></div></li>
 </ol>
 
 <h4 id="toc_11">5.1.2 이벤트 처리 객체를 이용하는 방법</h4>

@@ -44,7 +44,7 @@ div.polaroid {
 	[linear_layout.xml](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/UIBasic/app/src/main/res/layout/linear_layout.xml)| 실행화면
 	--- | ---	
 	<img src="figure/linearlayout_example_code.png"> | <img src="figure/linearlayout_example.png" width=200>
----
+	
 
 ## 3. RelativeLayout
 - 위젯끼리의 관계를 지정하거나 위젯과 parent(container)와의 관계 지정하여 자식 뷰를 배치

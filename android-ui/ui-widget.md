@@ -148,7 +148,22 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 - 사용자가 버튼 위젯을 클릭할 때, 지정된 행동을 수행하기 위해서는 다음 두 가지 방법 중 하나를 사용할 수 있다.
 
 #### 5.1.1 버튼 위젯의 onClick 속성 활용 방법
-1. 버튼 위젯을 정의한 화면을 **contentView**로 설정한 액티비티 클래스에 새로운 메소드(예, *doAction*())를 추가한다.
+1. 버튼 위젯을 정의한 xml 레이아웃 파일(예, *text\_views.xml*)에서, 버튼 위젯의 **onClick** 속성에 앞 단계에서 추가한 메소드(예, *doAction*())를 설정한다.
+
+	```xml
+	<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout ...>
+		...
+	    <Button
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Submit"
+	        android:onClick="doAction"/>
+	
+	</LinearLayout>
+	```
+
+2. 버튼 위젯을 정의한 화면을 **contentView**로 설정한 액티비티 클래스에 새로운 메소드(예, *doAction*())를 추가한다.
 
 	```java
 	public class MainActivity extends AppCompatActivity {
@@ -169,20 +184,6 @@ View 클래스는 모든 UI 컴포넌트들의 부모 클래스이므로, View �
 	}
 	```
 
-2. 버튼 위젯을 정의한 xml 레이아웃 파일(예, *text\_views.xml*)에서, 버튼 위젯의 **onClick** 속성에 앞 단계에서 추가한 메소드(예, *doAction*())를 설정한다.
-
-	```xml
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout ...>
-		...
-	    <Button
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Submit"
-	        android:onClick="doAction"/>
-	
-	</LinearLayout>
-	```
 
 #### 5.1.2 이벤트 처리 객체를 이용하는 방법
 이 방법에서는 이벤트를 처리하는 객체를 생성하여 해당 이벤트를 발생시키는 위젯에 등록한다. 위젯에서 이벤트가 발생하면 등록된 이벤트 처리 객체가 정의된 일을 수행한다.
