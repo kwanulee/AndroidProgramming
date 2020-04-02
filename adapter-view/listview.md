@@ -50,7 +50,7 @@ div.polaroid {
 ### 2.2 어댑터 객체 생성
 - 데이터 원본이 배열인 경우에  [ArrayAdapter](https://developer.android.com/reference/android/widget/ArrayAdapter) 객체 사용
 - ArrayAdapter 생성자
-	- **ArrayAdapter(Context context, int resource, int textViewResourceId, T[] objects)**
+	- **ArrayAdapter(Context context, int resource, T[] objects)**
 		- context: 현재 컨텍스트
 		- resource: 항목으로 표시될 텍스트 뷰의 리소스 ID
 

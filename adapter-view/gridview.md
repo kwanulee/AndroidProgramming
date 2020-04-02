@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
 	```
 	
 <a name="3.2"></a>
+<a name="imageadapter-code"></a>
 ### 3.2 어댑터 정의
 - 그리드뷰의 항목으로 간단한 텍스트가 아닌 이미지를 사용하고자 하는 경우에는 그리드뷰의 항목으로 이미지를 공급하는 ImageAdapter를 [BaseAdapter](https://developer.android.com/reference/android/widget/BaseAdapter)로부터 파생하여 정의한다.
 
@@ -178,18 +179,18 @@ public class MainActivity extends AppCompatActivity {
 
   - ImageAdapter가 관리하는 데이터는 편의상 직접 ImageAdapter 내부에 Image 리소스 ID의 배열로 설정
   - BaseAdapter의 **getCount()**, **getItem()**, **getItemId()**, **getView()** 메소드를 재정의함
-  		- getCount()는 항목의 총 개수를 반환하기 위해 *mThubIds* 배열의 크기를 반환
-    	- getItem()는 특정 위치의 항목을 반환하기 위해 *mThubIds* 배열의 지정된 위치의 항목을 반환
-    	- getItemId()는 특정위치의 항목 아이디를 반한하는 것인데, 여기서는 배열의 첨자를 항목의 아이디로 간주함
-    	- getView()는 getView 메소드는 첫번째 파라미터로 주어진 위치의 항목 뷰를 반환하는 것이므로, *mThubIds* 배열의 position 위치에 있는 이미지 리소스를 ImageView의 이미지로 설정하고, 이 설정된 ImageView 객체를 그리드 뷰의 항목뷰로 반환한다.
-      		- getView() 메소드의 두번째 파라미터인 convertView는 이전에 생성된 항목뷰 (여기서는 ImageView)를 의미한다. 만약 해당 위치의 항목뷰가 처음 만들어지는 경우라면, 새로운 이미지뷰 객체를 만들고 크기와 스케일타입, 패팅을 설정한다. 만약 이전에 이미 만들어진 것이라면, 이를 재사용한다.
-      		- 이미지 뷰의 scaleType은 원본 이미지를 이미지 뷰에 맞게 확대 및 축소시킬 때, 어떻게 처리할 지를 지정하는 것인데, 여기서 CENTER\_CROP은  종횡비를 유지하여 스케일링하며 뷰의 크기 이상으로 채우게 됨을 의미한다. 따라서 이미지 일부가 잘릴 수 있다.
+  		- **getCount()**는 항목의 총 개수를 반환하기 위해 *mThubIds* 배열의 크기를 반환
+    	- **getItem()**는 특정 위치의 항목을 반환하기 위해 *mThubIds* 배열의 지정된 위치의 항목을 반환
+    	- **getItemId()**는 특정위치의 항목 아이디를 반한하는 것인데, 여기서는 배열의 첨자를 항목의 아이디로 간주함
+    	- **getView()**는 getView 메소드는 첫번째 파라미터로 주어진 위치의 항목 뷰를 반환하는 것이므로, *mThubIds* 배열의 position 위치에 있는 이미지 리소스를 ImageView의 이미지로 설정하고, 이 설정된 ImageView 객체를 그리드 뷰의 항목뷰로 반환한다.
+      		- getView() 메소드의 두번째 파라미터인 **convertView**는 이전에 생성된 항목뷰 (여기서는 ImageView)를 의미한다. 만약 해당 위치의 항목뷰가 처음 만들어지는 경우라면, 새로운 이미지뷰 객체를 만들고 크기와 스케일타입, 패팅을 설정한다. 만약 이전에 이미 만들어진 것이라면, 이를 재사용한다.
+      		- 이미지 뷰의 **scaleType**은 원본 이미지를 이미지 뷰에 맞게 확대 및 축소시킬 때, 어떻게 처리할 지를 지정하는 것인데, 여기서 *CENTER\_CROP*은  종횡비를 유지하여 스케일링하며 뷰의 크기 이상으로 채우게 됨을 의미한다. 따라서 이미지 일부가 잘릴 수 있다.
 
 ---
 <a name="practice1"></a>
 ### [연습1] - Android Studio에서 ImageAdapter 클래스 정의하기
 1. **app>java** 하위에 ImageAdapter 클래스 생성
-2. 3.2.2절에 포함된 [ImageAdapter 코드](#imageadapter-code)를 복사함
+2. 3.2 절에 포함된 [ImageAdapter 코드](#imageadapter-code)를 복사함
 3. **app>res>drawable** 하위에 이름이 *sample\_0*에서 *sample\_7*까지인 8개의 이미지 파일을 추가한다. 이미지 파일의 확장자는 크게 중요하지 않다.
 
 ---
