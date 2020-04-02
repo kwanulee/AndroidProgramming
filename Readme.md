@@ -29,10 +29,10 @@
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview-practice.html)
 
 ## 5. 액티비티와 인텐트
-- [액티비티](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-intent.html#1) 
-- [인텐트](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-intent.html#2) 
-- [액티비티 간의 통신](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-intent.html#3) 
-- [액티비티 수명주기](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-intent.html#4) 
+- [액티비티](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity.html) 
+- [인텐트](http://kwanulee.github.io/AndroidProgramming/activity-intent/intent.html) 
+- [액티비티 간의 통신](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-communication.html) 
+- [액티비티 수명주기](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-lifecycle.html) 
 - [[실습]]()
 
 ## 6. 프래그먼트
