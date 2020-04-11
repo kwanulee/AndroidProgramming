@@ -31,7 +31,7 @@
 		
 		    //... 생략
 		    
-		    private static final String TAG = "FirstActivity";
+		    private static final String TAG = "Lifecycle";
 		    
 		    @Override
 		    protected void onStart() {
@@ -85,7 +85,7 @@
 	        //...    
 	    }
 	
-	    private static final String TAG = "SecondActivity";
+	    private static final String TAG = "Lifecycle";
 	
 	    @Override
 	    protected void onStart() {

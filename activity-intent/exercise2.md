@@ -21,7 +21,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="두번째 액티비티 시작하기"
-	        android:id="@+id/buttonSecondActivity"
+	        android:id="@+id/buttonFirstActivity"
 	        android:layout_below="@+id/textView"
 	        android:layout_alignParentLeft="true"
 	        android:layout_marginTop="43dp" />

@@ -299,15 +299,30 @@ div.polaroid {
 <li>주요 콜백 메소드
 
 <ul>
-<li>onCreate(): 반드시 구현해야 하는 메소드로서 액티비티가 생성되면서 호출됨
+<li><strong>onCreate</strong>(): <strong>반드시 구현</strong>해야 하는 메소드로서 액티비티가 생성되면서 호출됨
 
 <ul>
 <li>가장 중요한 작업은 화면을 setContentView()를 호출하여 설정하는 것</li>
 </ul></li>
-<li>onPause(): 사용자가 액티비티를 떠나고 있을 때, 호출됨
+<li><strong>onStart</strong>() : 액티비티가가 시작됨 상태에 들어가면 시스템은 이 콜백을 호출
+
+<ul>
+<li>액티비티가 시작되기 전에 초기화할 필요가 있는 작업을 수행 </li>
+</ul></li>
+<li><strong>onResume</strong>(): 액티비티가가가 재개됨 상태에 들어가면 포그라운드에 표시되고 시스템이 이 콜백을 호출 
+
+<ul>
+<li>이 상태에 들어갔을 때 앱이 사용자와 상호작용함.</li>
+</ul></li>
+<li><strong>onPause</strong>(): 시스템은 사용자가 액티비티를 떠나는 것을 나타내는 신호로 이 메소드를 호출함
 
 <ul>
 <li>액티비티가 완전히 소멸되는 것은 아니지만 사용자가 돌아오지 않을 수 있기 때문에 그 동안 이루어졌던 변경사항을 저장함</li>
+</ul></li>
+<li><strong>onStop</strong>() : 액티비티가 사용자에게 더 이상 표시되지 않으면 중단됨 상태에 들어가고, 시스템은 onStop() 콜백을 호출
+
+<ul>
+<li>필요하지 않는 리소스를 해제하거나 조정 </li>
 </ul></li>
 </ul></li>
 </ul>
@@ -319,7 +334,7 @@ div.polaroid {
 
 <ol>
 <li>FirstActivity의 onPause()</li>
-<li>SecondActivity의 onCreate(),  3. onStart(), onResume()</li>
+<li>SecondActivity의 onCreate(), onStart(), onResume()</li>
 <li>FirstActivity의 onStop()</li>
 </ol></li>
 <li>단말기의 뒤로가기 버튼 누름

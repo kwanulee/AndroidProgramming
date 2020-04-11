@@ -75,12 +75,13 @@
 	        btn.setOnClickListener(new View.OnClickListener() {
 	            @Override
 	            public void onClick(View view) {
-	                //finish();
+	                
 	                Intent resultIntent = new Intent();
 	
 	                EditText et = findViewById(R.id.editText);
 	                resultIntent.putExtra("ResultString", et.getText().toString());
 	                setResult(RESULT_OK, resultIntent);
+	                finish();
 	            }
 	        });
 	    }

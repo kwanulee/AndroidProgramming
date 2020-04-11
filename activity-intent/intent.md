@@ -16,40 +16,58 @@ div.polaroid {
 
 <a name="1"> </a>
 ## 1. 인텐트란?
-- **인텐트 (Intent)**는 일종의 메시지 객체입니다.
-- 이것을 사용해 **다른 앱 구성 요소**(액티비티, 서비스, 브로드캐스트 리시버)로
-작업을 요청할 수 있습니다.
+- **인텐트 (Intent)**는 일종의 메시지 객체입니다. 
+- 이것을 사용해  앱의 다른 **컴포넌트** (*액티비티* 혹은 *서비스*)를 시작시키거나, 다른 앱들에게 메시지를 전달할 수 있습니다.
 	- 액티비티 시작하기
 	- 서비스 시작하기
 	- 브로드캐스트 전달하기
-
 
 	<div class="polaroid">
 	<img src="figure/intent-msg.png">
 	</div>
 
 ---
-<a name="1.1"> </a>
-### 1.1 인텐트 유형
+<a name="2"> </a>
+## 2. 인텐트 유형
 
-<div class="polaroid">
-	<img src="https://developer.android.com/images/components/intent-filters_2x.png">
-</div>
+### 2.1 명시적 인텐트 (Explicit Intent)
+-  시작할 컴포넌트(예, 액티비티나 서비스)의 이름을 인텐트 객체에 설정하고 이를 **startActivity()** 또는 **startService()**에 넘긴다.
+	
+	<div class="polaroid">
+		<img src="figure/explicit-intent.png">
+	</div>
 
-- **명시적 인텐트 (Explicit Intent)**
-	- 시작할 구성요소의 이름을 인텐트 객체에 설정하고 이를 **startActivity()** 또는 **startService()**에 넘긴다.
-	- 보통 현재 앱 안에 있는 구성요소(예, 액티비티나 서비스)를 시작시킬 때 사용
+	- 보통 현재 앱 안에 있는 컴폰넌트를 시작시킬 때 사용
 
-- **암시적 인텐트 (Implicit Intent)**
-	- 시작할 구성요소의 이름을 지정하지 않고 일반적인 **작업**(예, 전화걸기, 지도보기 등)을 인텐트 객체에 설정하고 이를 **startActivity()**에 넘긴다.
-	- 안드로이드 시스템은 모든 앱을 검색하여 해당 인텐트와 일치하는 **인텐트 필터**를 찾고, 일치된 인텐트 필터를 포함한 앱 구성요소를 시작시킴
-		- **인텐트 필터**란 해당 구성요소가 수신하고자 하는 인텐트의 유형을 나타낸 것
 
-	- 보통 다른 앱 안에 있는 구성요소를 구동하는데 사용된다.
+<a name="exercise2"> </a>
+### [[연습2] - FirstActivity에서 SecondActivity 시작시키기](exercise2.html)
 
-<a name="1.2"> </a>	 
-## 1.2 인텐트 객체
-- [Intent](https://developer.android.com/reference/android/content/Intent.html) 객체에는 안드로이드 시스템이 어떤 구성요소를 시작할지 판별하는 데 필요한 정보가 담겨 있습니다.
+
+### 2.2 암시적 인텐트 (Implicit Intent)
+- 시작할 컴포넌트의 이름을 지정하지 않고, 수행할 **작업**(예, 전화걸기, 지도보기 등)과 데이터를 인텐트 객체에 설정하고 이를 **startActivity()**에 넘긴다.
+	- 예를 들어, 114 번호로 다이얼 작업을 수행할 수 있는 액티비티를 실행시키기 위해서는 다음과 같이 인텐트를 생성하고 이를 **startActivity()** 메소드에 전달하면 된다.
+
+	<div class="polaroid">
+		<img src="figure/implicit-intent.png">
+	</div>
+	
+	- 보통 다른 앱 안에 있는 컴포넌트(예, 액티비티)를 구동시키는 데 사용된다.
+
+- **Android System**은 등록된 모든 앱을 검색하여 해당 인텐트와 일치하는 **인텐트 필터**를 찾고, 일치된 인텐트 필터를 포함한 앱 컴포넌트를 시작시킴
+	- **인텐트 필터**란 해당 컴포넌트가 수신하고자 하는 인텐트의 유형을 나타낸 것
+	
+	<div class="polaroid">
+		<img src="https://developer.android.com/images/components/intent-filters_2x.png">
+	</div>
+
+### [[연습3] - FirstActivity에서 암시적 인텐트로 다른 액티비티 시작시키기](exercise3.html) 	
+
+
+
+<a name="3"> </a>	 
+## 3. 인텐트 객체
+- [Intent](https://developer.android.com/reference/android/content/Intent.html) 객체에는 안드로이드 시스템이 어떤 컴포넌트를 시작할지 판별하는 데 필요한 정보가 담겨 있습니다.
 - **컴포넌트 이름(Component Name)**: 인텐트를 처리하는 타켓 컴포넌트 이름
 	- 선택항목이므로, 컴포넌트 이름이 지정되지 않으면 암시적 인텐트를 의미함  
 - **작업(Action)**: 수행되어야할 작업을 나타내는 문자열
@@ -79,35 +97,27 @@ div.polaroid {
 	CATEGORY\_BROWSABLE | 대상 액티비티가 웹브라우저에 의해 시작되어서 이미지와 같은 데이터를 표시할 수 있다.
 	CATEGORY\_LAUNCHER | 이 액티비티가 작업의 최초 액티비티이며, 이것이 시스템의 애플리케이션 시작 관리자에 목록으로 게재되어 있다.
 
-- **엑스트라(extra)**: 요청한 작업을 수행하기 위해 필요한 추가 정보를 담고 있는 **키-값** 쌍의 데이터
-
-<a name="2"> </a>	 
-## 2. 명시적 인텐트로 다른 액티비티 시작하기
-- 명시적 인텐트로 다른 액티비티를 시작시키기 위해서는 **startActivity()** 메소드를 호출하고, 시작하고자 하는 액티비티를 설명하는 **Intent** 객체를 전달하면 됩니다.
-
-	<div class="polaroid">
-		<img src="figure/explicit-intent.png">
-	</div>
+- **엑스트라(extras)**: 요청한 작업을 수행하기 위해 필요한 추가 정보를 담고 있는 **키-값** 쌍의 데이터
 
 
-***
-<a name="exercise2"> </a>
-### [[연습2] - FirstActivity에서 SecondActivity 시작시키기](exercise2.html)
-
-
-<a name="2.4"> </a>	 
-## 3. 암시적 인텐트로 다른 액티비티 시작하기
-- 암시적 인텐트로 다른 액티비티를 시작시키기 위해서는 인텐트 안에 작업과 데이터를 지정해야 한다. 예를 들어 114 번호로 다이얼 작업을 수행할 수 있는 액티비티를 실행시키기 위해서는 다음과 같이 인텐트를 생성하고 이를 **startActivity()** 메소드에 전달하면 된다.
-
-	<div class="polaroid">
-		<img src="figure/implicit-intent.png">
-	</div>
-
-### [[연습3] - FirstActivity에서 암시적 인텐트로 다른 액티비티 시작시키기](exercise3.html) 	
 
 ## 4. 암시적 인텐트 수신 (인텐트 필터)
-- 본인의 앱이 수신할 수 있는 암시적 인텐트가 어느 것인지 알리려면, 각 앱 구성 요소에 대한 하나 이상의 인텐트 필터를 **\<intent-filter\>** 요소로 매니페스트 파일에 선언합니다.
-- 각 인텐트 필터가 인텐트의 **작업**, **데이터** 및 **카테고리**를 근거로 어느 유형의 인텐트를 수신할 지를 결정한다.
+- 본인의 앱이 수신할 수 있는 암시적 인텐트가 어느 것인지 알리려면, 각 앱 컴포넌트에 대한 하나 이상의 인텐트 필터를 **\<intent-filter\>** 요소로 AndroidManifest 파일에 선언합니다.
+- 각 인텐트 필터가 인텐트의 **작업**, **데이터** 및 **카테고리**를 근거로 어느 유형의 인텐트를 수신할 지를 결정합니다.
+	- 암시적 인텐트를 수신하기 위해서는  **카테고리**를 *android.intent.category.DEFAULT*로 설정해야 합니다.
+
+- 예제
+	-  **ShareActivity** 액티비티는 텍스트 데이터를 바탕으로 **android.intent.action.SEND** 인텐트를 처리합니다.
+	
+		```xml
+		<activity android:name="ShareActivity">
+		    <intent-filter>
+		        <action android:name="android.intent.action.SEND"/>
+		        <category android:name="android.intent.category.DEFAULT"/>
+		        <data android:mimeType="text/plain"/>
+		    </intent-filter>
+		</activity>
+		```
 
 ### [[연습4] - SecondActivity가 ACTION\_DIAL 암시적 인텐트를 수신하도록 만들기](exercise4.html)
 

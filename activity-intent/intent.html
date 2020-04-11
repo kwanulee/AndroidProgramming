@@ -273,9 +273,8 @@ div.polaroid {
 <h2 id="toc_2">1. 인텐트란?</h2>
 
 <ul>
-<li><strong>인텐트 (Intent)</strong>는 일종의 메시지 객체입니다.</li>
-<li><p>이것을 사용해 <strong>다른 앱 구성 요소</strong>(액티비티, 서비스, 브로드캐스트 리시버)로
-작업을 요청할 수 있습니다.</p>
+<li><strong>인텐트 (Intent)</strong>는 일종의 메시지 객체입니다. </li>
+<li><p>이것을 사용해  앱의 다른 <strong>컴포넌트</strong> (<em>액티비티</em> 혹은 <em>서비스</em>)를 시작시키거나, 다른 앱들에게 메시지를 전달할 수 있습니다.</p>
 
 <ul>
 <li>액티비티 시작하기</li>
@@ -290,40 +289,63 @@ div.polaroid {
 
 <hr>
 
-<p><a name="1.1"> </a></p>
+<p><a name="2"> </a></p>
 
-<h3 id="toc_3">1.1 인텐트 유형</h3>
+<h2 id="toc_3">2. 인텐트 유형</h2>
+
+<h3 id="toc_4">2.1 명시적 인텐트 (Explicit Intent)</h3>
+
+<ul>
+<li><p>시작할 컴포넌트(예, 액티비티나 서비스)의 이름을 인텐트 객체에 설정하고 이를 <strong>startActivity()</strong> 또는 <strong>startService()</strong>에 넘긴다.</p>
 
 <div class="polaroid">
-    <img src="https://developer.android.com/images/components/intent-filters_2x.png">
+    <img src="figure/explicit-intent.png">
 </div>
 
 <ul>
-<li><p><strong>명시적 인텐트 (Explicit Intent)</strong></p>
-
-<ul>
-<li>시작할 구성요소의 이름을 인텐트 객체에 설정하고 이를 <strong>startActivity()</strong> 또는 <strong>startService()</strong>에 넘긴다.</li>
-<li>보통 현재 앱 안에 있는 구성요소(예, 액티비티나 서비스)를 시작시킬 때 사용</li>
-</ul></li>
-<li><p><strong>암시적 인텐트 (Implicit Intent)</strong></p>
-
-<ul>
-<li>시작할 구성요소의 이름을 지정하지 않고 일반적인 <strong>작업</strong>(예, 전화걸기, 지도보기 등)을 인텐트 객체에 설정하고 이를 <strong>startActivity()</strong>에 넘긴다.</li>
-<li><p>안드로이드 시스템은 모든 앱을 검색하여 해당 인텐트와 일치하는 <strong>인텐트 필터</strong>를 찾고, 일치된 인텐트 필터를 포함한 앱 구성요소를 시작시킴</p>
-
-<ul>
-<li><strong>인텐트 필터</strong>란 해당 구성요소가 수신하고자 하는 인텐트의 유형을 나타낸 것</li>
-</ul></li>
-<li><p>보통 다른 앱 안에 있는 구성요소를 구동하는데 사용된다.</p></li>
+<li>보통 현재 앱 안에 있는 컴폰넌트를 시작시킬 때 사용</li>
 </ul></li>
 </ul>
 
-<p><a name="1.2"> </a>  </p>
+<p><a name="exercise2"> </a></p>
 
-<h2 id="toc_4">1.2 인텐트 객체</h2>
+<h3 id="toc_5"><a href="exercise2.html">[연습2] - FirstActivity에서 SecondActivity 시작시키기</a></h3>
+
+<h3 id="toc_6">2.2 암시적 인텐트 (Implicit Intent)</h3>
 
 <ul>
-<li><a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a> 객체에는 안드로이드 시스템이 어떤 구성요소를 시작할지 판별하는 데 필요한 정보가 담겨 있습니다.</li>
+<li><p>시작할 컴포넌트의 이름을 지정하지 않고, 수행할 <strong>작업</strong>(예, 전화걸기, 지도보기 등)과 데이터를 인텐트 객체에 설정하고 이를 <strong>startActivity()</strong>에 넘긴다.</p>
+
+<ul>
+<li>예를 들어, 114 번호로 다이얼 작업을 수행할 수 있는 액티비티를 실행시키기 위해서는 다음과 같이 인텐트를 생성하고 이를 <strong>startActivity()</strong> 메소드에 전달하면 된다.</li>
+</ul>
+
+<div class="polaroid">
+    <img src="figure/implicit-intent.png">
+</div>
+
+<ul>
+<li>보통 다른 앱 안에 있는 컴포넌트(예, 액티비티)를 구동시키는 데 사용된다.</li>
+</ul></li>
+<li><p><strong>Android System</strong>은 등록된 모든 앱을 검색하여 해당 인텐트와 일치하는 <strong>인텐트 필터</strong>를 찾고, 일치된 인텐트 필터를 포함한 앱 컴포넌트를 시작시킴</p>
+
+<ul>
+<li><strong>인텐트 필터</strong>란 해당 컴포넌트가 수신하고자 하는 인텐트의 유형을 나타낸 것</li>
+</ul>
+
+<div class="polaroid">
+    <img src="https://developer.android.com/images/components/intent-filters_2x.png">
+</div></li>
+</ul>
+
+<h3 id="toc_7"><a href="exercise3.html">[연습3] - FirstActivity에서 암시적 인텐트로 다른 액티비티 시작시키기</a></h3>
+
+<p><a name="3"> </a>    </p>
+
+<h2 id="toc_8">3. 인텐트 객체</h2>
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/content/Intent.html">Intent</a> 객체에는 안드로이드 시스템이 어떤 컴포넌트를 시작할지 판별하는 데 필요한 정보가 담겨 있습니다.</li>
 <li><strong>컴포넌트 이름(Component Name)</strong>: 인텐트를 처리하는 타켓 컴포넌트 이름
 
 <ul>
@@ -421,46 +443,31 @@ div.polaroid {
 </tr>
 </tbody>
 </table></li>
-<li><p><strong>엑스트라(extra)</strong>: 요청한 작업을 수행하기 위해 필요한 추가 정보를 담고 있는 <strong>키-값</strong> 쌍의 데이터</p></li>
+<li><p><strong>엑스트라(extras)</strong>: 요청한 작업을 수행하기 위해 필요한 추가 정보를 담고 있는 <strong>키-값</strong> 쌍의 데이터</p></li>
 </ul>
-
-<p><a name="2"> </a>    </p>
-
-<h2 id="toc_5">2. 명시적 인텐트로 다른 액티비티 시작하기</h2>
-
-<ul>
-<li><p>명시적 인텐트로 다른 액티비티를 시작시키기 위해서는 <strong>startActivity()</strong> 메소드를 호출하고, 시작하고자 하는 액티비티를 설명하는 <strong>Intent</strong> 객체를 전달하면 됩니다.</p>
-
-<div class="polaroid">
-    <img src="figure/explicit-intent.png">
-</div></li>
-</ul>
-
-<hr>
-
-<p><a name="exercise2"> </a></p>
-
-<h3 id="toc_6"><a href="exercise2.html">[연습2] - FirstActivity에서 SecondActivity 시작시키기</a></h3>
-
-<p><a name="2.4"> </a>  </p>
-
-<h2 id="toc_7">3. 암시적 인텐트로 다른 액티비티 시작하기</h2>
-
-<ul>
-<li><p>암시적 인텐트로 다른 액티비티를 시작시키기 위해서는 인텐트 안에 작업과 데이터를 지정해야 한다. 예를 들어 114 번호로 다이얼 작업을 수행할 수 있는 액티비티를 실행시키기 위해서는 다음과 같이 인텐트를 생성하고 이를 <strong>startActivity()</strong> 메소드에 전달하면 된다.</p>
-
-<div class="polaroid">
-    <img src="figure/implicit-intent.png">
-</div></li>
-</ul>
-
-<h3 id="toc_8"><a href="exercise3.html">[연습3] - FirstActivity에서 암시적 인텐트로 다른 액티비티 시작시키기</a></h3>
 
 <h2 id="toc_9">4. 암시적 인텐트 수신 (인텐트 필터)</h2>
 
 <ul>
-<li>본인의 앱이 수신할 수 있는 암시적 인텐트가 어느 것인지 알리려면, 각 앱 구성 요소에 대한 하나 이상의 인텐트 필터를 <strong>&lt;intent-filter&gt;</strong> 요소로 매니페스트 파일에 선언합니다.</li>
-<li>각 인텐트 필터가 인텐트의 <strong>작업</strong>, <strong>데이터</strong> 및 <strong>카테고리</strong>를 근거로 어느 유형의 인텐트를 수신할 지를 결정한다.</li>
+<li>본인의 앱이 수신할 수 있는 암시적 인텐트가 어느 것인지 알리려면, 각 앱 컴포넌트에 대한 하나 이상의 인텐트 필터를 <strong>&lt;intent-filter&gt;</strong> 요소로 AndroidManifest 파일에 선언합니다.</li>
+<li><p>각 인텐트 필터가 인텐트의 <strong>작업</strong>, <strong>데이터</strong> 및 <strong>카테고리</strong>를 근거로 어느 유형의 인텐트를 수신할 지를 결정합니다.</p>
+
+<ul>
+<li>암시적 인텐트를 수신하기 위해서는  <strong>카테고리</strong>를 <em>android.intent.category.DEFAULT</em>로 설정해야 합니다.</li>
+</ul></li>
+<li><p>예제</p>
+
+<ul>
+<li><p><strong>ShareActivity</strong> 액티비티는 텍스트 데이터를 바탕으로 <strong>android.intent.action.SEND</strong> 인텐트를 처리합니다.</p>
+
+<div><pre><code class="language-markup">&lt;activity android:name=&quot;ShareActivity&quot;&gt;
+    &lt;intent-filter&gt;
+        &lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;
+        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;
+        &lt;data android:mimeType=&quot;text/plain&quot;/&gt;
+    &lt;/intent-filter&gt;
+&lt;/activity&gt;</code></pre></div></li>
+</ul></li>
 </ul>
 
 <h3 id="toc_10"><a href="exercise4.html">[연습4] - SecondActivity가 ACTION_DIAL 암시적 인텐트를 수신하도록 만들기</a></h3>
@@ -473,6 +480,10 @@ div.polaroid {
 
 <script type="text/javascript">
 var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.markup={comment:/<!--[\w\W]*?-->/,prolog:/<\?[\w\W]+?\?>/,doctype:/<!DOCTYPE[\w\W]+?>/,cdata:/<!\[CDATA\[[\w\W]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=.$<]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,inside:{punctuation:/[=>"']/}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Prism.languages.xml=Prism.languages.markup,Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
 </script>
 
 <script type="text/x-mathjax-config">
