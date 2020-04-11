@@ -21,31 +21,28 @@
 - [Margin, Padding, Gravity](https://kwanulee.github.io/AndroidProgramming/android-ui/ui-mpg.html)
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/android-ui/안드로이드_UI_실습.html)
  
-## 4. 어댑터 뷰 
+## 4. 어댑터 뷰 (Adapter View)
 - [어댑터뷰 개념](http://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview.html)
 - [리스트뷰](http://kwanulee.github.io/AndroidProgramming/adapter-view/listview.html)
 - [그리드뷰](http://kwanulee.github.io/AndroidProgramming/adapter-view/gridview.html)
 - [커스텀항목뷰](http://kwanulee.github.io/AndroidProgramming/adapter-view/custom-item-view.html)
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview-practice.html)
 
-## 5. 액티비티와 인텐트
+## 5. 액티비티와 인텐트 (Activity and Intent)
 - [액티비티](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity.html) 
 - [인텐트](http://kwanulee.github.io/AndroidProgramming/activity-intent/intent.html) 
 - [액티비티 간의 통신](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-communication.html) 
 - [액티비티 수명주기](http://kwanulee.github.io/AndroidProgramming/activity-intent/activity-lifecycle.html) 
-- [[실습]]()
 
-## 6. 프래그먼트
+## 6. 프래그먼트 (Fragment)
 - [프래그먼트 개념](http://kwanulee.github.io/AndroidProgramming/fragment/fragment.html) 
 - [프래그먼트 수명주기](http://kwanulee.github.io/AndroidProgramming/fragment/fragment-lifecycle.html) 
 - [프래그먼트 예제](http://kwanulee.github.io/AndroidProgramming/fragment/fragment-example.html) 
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/fragment/fragment-practice.html)
 
-## 7. 메뉴 및 탐색
-- [AppBar (ActionBar)]()
-- [TabbedActivity]()
-- [NavigationActivity]()
-- [NavigationDrawerActivity]()
+## 7. 탐색 (Navigation)
+- [앱바와 액션 추가 및 처리](http://kwanulee.github.io/AndroidProgramming/navigation/actionbar.html)
+- [Swiping Views](http://kwanulee.github.io/AndroidProgramming/navigation/swiping-views.html)
 - [[실습]]()
 
 ## 8. 데이터 저장 및 관리 1
