@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>exercise8</title>
+<title>fragment-usage</title>
 
 
 <style type="text/css">
@@ -249,153 +249,163 @@ pre[class*="language-"] {
 
 <body>
 
-<h4 id="toc_0">[연습8] - 선택된 항목의 상세정보를 보여주는 DetailsFragment 추가하기</h4>
+<style>
+div.polaroid {
+    width: 640px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
 
-<ol>
-<li><a href="exercise7.html">연습7</a>에서 수행한 프로젝트를 바탕으로 진행</li>
-<li>안드로이드 스튜디오에서 <strong>File &gt; New &gt; Fragment &gt; Fragment(Blank)</strong> 를 이용하여 DetailsFragment를 생성한다.</li>
-<li><p><strong>Configure Component</strong> 대화창에서 아래와 같이 설정후, <strong>Finish</strong> 버튼을 클릭</p>
+<p><a href="fragment-overview.html"><strong>이전 학습</strong>: 프래그먼트 개요</a></p>
 
-<ul>
-<li><strong>Fragment Name</strong> 값을 <em>DetailsFragement</em>로 설정 </li>
-<li><strong>Fragment Layout Name</strong> 값을 <em>fragment_details</em>로 설정 </li>
-<li><strong>Include fragment factory method?</strong> 체크함</li>
-</ul></li>
-<li><p><strong>fragment_details.xml</strong> 파일을 열고, TextView 위젯을 포함한 레이아웃 정의</p>
+<h1 id="toc_0">프래그먼트 사용하기</h1>
 
-<div><pre><code class="language-markup">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:padding=&quot;5dp&quot;
-    &gt;
-
-    &lt;ScrollView
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;&gt;
-        &lt;TextView
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            android:text=&quot;@string/hello_blank_fragment&quot;
-            android:id=&quot;@+id/textview&quot;/&gt;
-    &lt;/ScrollView&gt;
-&lt;/LinearLayout&gt;</code></pre></div></li>
-<li><p><strong>DetailsFragment.java</strong></p>
+<h2 id="toc_1">학습목표</h2>
 
 <ul>
-<li><strong>mIndex 멤버 변수</strong> 선언
-
-<ul>
-<li><em>TitlesFragment</em>의 목록에서 선택된 항목 번호를 저장하기 위한 변수로서, 이 변수의 값은 <em>onCreate</em>() 콜백 메소드에 수행 시에  <em>DetailsFragment</em> 객체로 전달된 인자 값으로 초기화됩니다.</li>
-</ul></li>
-<li><strong>public static DetailsFragment newInstance(int index)</strong> 정의
-
-<ul>
-<li><em>DetailsFragment</em> 객체를 생성시키는 팩토리 메소드로서, <em>index</em> 값을 인자로 <em>DetailsFragement</em> 객체에 전달한다.</li>
-</ul></li>
-<li><strong>onCreateView()</strong> 메소드 재정의
-
-<ul>
-<li>이 프래그먼트와 관련된 View 객체를 반환해야 합니다.</li>
-<li>이 프래그먼트의 뷰를 정의한 레이아웃 리소스가 <em>fragment_details</em> 이므로, 이 리소스로부터  뷰 객체를 얻어오고, 이 뷰 객체 내에 포함된 텍스트 뷰 객체에 <em>TitlesFragment</em>의 목록에서 선택된 항목 번호에 대응되는 상세정보를 표시합니다. </li>
-</ul></li>
+<li>프래그먼트를 정적 혹은 동적으로 액티비티에 추가하는 방법을 이해한다.</li>
 </ul>
 
-<div><pre><code class="language-java">public class DetailsFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = &quot;index&quot;;
-    private int mIndex;
+<p><a name="1"> </a></p>
 
-    public DetailsFragment() {
-        // Required empty public constructor
-    }
+<h2 id="toc_2">1. 프래그먼트 정의하기</h2>
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param index selected position in the ListView.
-     * @return A new instance of fragment DetailsFragment.
-     */
-    public static DetailsFragment newInstance(int index) {
-        DetailsFragment fragment = new DetailsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, index);
-        fragment.setArguments(args);
-        return fragment;
-    }
+<ul>
+<li><p>액티비티를 만들 때와 비슷하게, 하나의 <strong>자바 소스</strong> 파일과 하나의 <strong>XML 레이아웃</strong>로 정의</p>
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mIndex = getArguments().getInt(ARG_PARAM1);
-        }
-    }
+<ul>
+<li><p><strong>자바 소스 파일 생성</strong></p>
 
+<ul>
+<li>프래그먼트를 생성하려면 <a href="https://developer.android.com/reference/android/app/Fragment.html">Fragment</a>의 서브클래스(또는 이의 기존 서브클래스)를 생성 
+
+<ul>
+<li>프래그먼트에 대해 레이아웃을 제공하려면 반드시 <a href="https://developer.android.com/reference/android/app/Fragment.html#onCreateView(android.view.LayoutInflater,%20android.view.ViewGroup,%20android.os.Bundle)">onCreateView</a>() 콜백 메서드를 구현 </li>
+</ul></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-java">public static class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.textview);
-
-        if (mIndex &gt;=0)
-            tv.setText(Shakespeare.DIALOGUE[mIndex]);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_first, container, false);
     }
 }</code></pre></div>
 
-<!--
-```java
-public class DetailsFragment extends Fragment {
-   int index=-1;
-
-    public DetailsFragment() {
-        // Required empty public constructor
-    }
-
-    public void setSelection(int i) { index = i; }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.textview);
-
-        if (index >=0)
-            tv.setText(Shakespeare.DIALOGUE[index]);
-
-        return view;
-    }
-}
-```
---></li>
-<li><p><strong>MainActivity.java</strong></p>
+<ul>
+<li><a href="https://developer.android.com/reference/android/view/LayoutInflater.html#inflate(int,%20android.view.ViewGroup,%20boolean)">inflate()</a>함수를 통해서 <em>fragment_first.xml</em> 파일로부터 레이아웃을 로드</li>
+</ul></li>
+</ul></li>
+<li><p><strong>XML 레이아웃 생성</strong></p>
 
 <ul>
-<li><strong>onTitleSelected()</strong> 메소드에서 파라미터로 전달받은 항목 선택 번호를 새롭게 생성된 DetailsFragment 객체에게 setSelection() 메소드를 통해 전달</li>
-<li>새롭게 설정된 DetailsFragment 객체를 동적으로 교체</li>
+<li>프래그먼트도 부분 화면이므로 화면에 표시될 뷰들을 정의하는 XML 파일을 /res/layout 폴더 안에 생성한다.</li>
+</ul></li>
+</ul></li>
 </ul>
 
-<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity
-                        implements TitlesFragment.OnTitleSelectedListener{
+<h3 id="toc_3"><a href="exercise1.html">[연습1] - 프래그먼트 정의하기</a></h3>
 
-    //... 기존과 동일
+<h2 id="toc_4">2. 액티비티에 프래그먼트 추가</h2>
 
-    public void onTitleSelected(int i) {
-        //Toast.makeText(getApplicationContext(),&quot;position=&quot;+i,Toast.LENGTH_SHORT).show();
-        DetailsFragment detailsFragment = new DetailsFragment();
-        detailsFragment.setSelection(i);
-        getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
-    }
-}</code></pre></div></li>
-<li><p>실행결과</p>
+<h3 id="toc_5">2.1 액티비티의 레이아웃 파일에 정적 추가하기</h3>
 
-<p><img src="figure/detailsfragment-result.png" alt=""></p></li>
-</ol>
+<ul>
+<li>프래그먼트를 액티비티의 레이아웃 파일 안에서 선언
+
+<ul>
+<li><strong>&lt;fragment&gt;</strong> 안의 <strong>android:name</strong> 특성은 레이아웃 안에서 인스턴스화할 <strong>Fragment</strong> 클래스를 지정</li>
+<li>[<strong>중요</strong>] 각 프래그먼트에는 액티비티가 재시작되는 경우 프래그먼트를 복구하기 위해 시스템이 사용할 수 있는 고유한 식별자가 필요합니다. 프래그먼트에 ID를 제공하는 데에는 다음과 같은 세 가지 방법이 있습니다.
+
+<ul>
+<li>고유한 ID와 함께 <strong>android:id</strong> 속성을 제공합니다.</li>
+<li>고유한 문자열과 함께 <strong>android:tag</strong> 속성을 제공합니다.</li>
+<li>위의 두 가지 중 어느 것도 제공하지 않으면, 시스템은 컨테이너 뷰의 ID를 사용합니다.</li>
+</ul></li>
+</ul></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+    &lt;TextView
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:text=&quot;Hello World!&quot; /&gt;
+    &lt;fragment
+            android:name=&quot;com.kwanwoo.android.fragmentbasic.FirstFragment&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:id=&quot;@+id/fragment&quot;
+            /&gt;
+&lt;/LinearLayout&gt;</code></pre></div></li>
+</ul>
+
+<h3 id="toc_6"><a href="exercise2.html">[연습2] - 프래그먼트를 액티비티의 레이아웃 파일에 정적 추가하기</a></h3>
+
+<h3 id="toc_7">2.2 자바 코드에서 동적으로 프래그먼트 추가하기</h3>
+
+<ul>
+<li><p><strong>프래그먼트 매니저(FragmentManager)</strong>는 프래그먼트를 다루는 작업을 해주는 객체로서 다음 두 가지 방법중에 하나로 얻어온다.</p>
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/app/Activity.html#getFragmentManager()">getFragmentManager()</a>: 현재 액티비티가 <a href="https://developer.android.com/reference/android/app/Activity">Activity</a>를 확장하여 만든 경우에 사용함</li>
+<li><a href="https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html#getSupportFragmentManager()">getSupportFragmentManager()</a>:  안드로이드 이전 버전들에서도 프래그먼트를 사용할 수 있도록 만든 appcompat_v7 라이브러리 프로젝트에서 지원하는 기능으로, 현재 액티비티가 <a href="https://developer.android.com/reference/android/support/v7/app/AppCompatActivity?hl=en">AppCompatActivity</a>를 확장하여 만든 경우에 사용함</li>
+</ul></li>
+<li><p><a href="https://developer.android.com/reference/android/app/FragmentTransaction.html"><strong>FragmentTransaction</strong></a>은 프래그먼트를 추가, 삭제 또는 교체 등의 작업 수행 중에 오류가 발생하면 다시 원래 상태로 되돌릴 수 있도록해주는 기능을 구현한 클래스</p>
+
+<ul>
+<li> <a href="https://developer.android.com/reference/android/app/FragmentManager.html">FragmentManager</a>의 <a href="https://developer.android.com/reference/android/app/FragmentManager.html#beginTransaction()">beginTransaction()</a> 메소드 호출을 통해 <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html">FragmentTransaction</a>의 인스턴스를 얻어온다.</li>
+<li> 주어진 트랜잭션에 대해 수행하고자 하는 모든 변경 사항을 설정하려면 <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html#add(android.app.Fragment,%20java.lang.String)">add()</a>, <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html#remove(android.app.Fragment)">remove()</a>, 및 <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html#replace(int,%20android.app.Fragment)">replace()</a>와 같은 메서드를 사용함</li>
+<li> 주어진 트랜잭션에 대해 수행하고자 하는 모든 변경 사항을 적용하려면 <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html">FragmentTransaction</a>의 <a href="https://developer.android.com/reference/android/app/FragmentTransaction.html#commit()">commit()</a>을 호출해야 함.</li>
+</ul></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-java">FragmentManager fragmentManager = getSupportFragmentManager();
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+fragmentTransaction.add(R.id.fragment_container, new FirstFragment());
+fragmentTransaction.commit();
+</code></pre></div>
+
+<p>위 코드를 아래와같이 작성할 수도 있습니다.</p>
+
+<div><pre><code class="language-java">getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new FirstFragment()).commit();</code></pre></div></li>
+</ul>
+
+<!-- 
+- 액티비티가 실행 중인 동안에 [**FragmentTransaction**](https://developer.android.com/reference/android/app/FragmentTransaction.html)의 인스턴스를 통해서, 언제든지 액티비티 레이아웃에 프래그먼트를 추가할 수 있음 
+- FragmentTransaction의 인스턴스를 액티비티에서 가져오는 방법
+    1. 액티비티와 관련된 **프래그먼트 매니저(FragmentManager)** 객체를 다음 두 가지 방법중에 하나로 얻어온다.
+        - [getFragmentManager()](https://developer.android.com/reference/android/app/Activity.html#getFragmentManager())
+        - [getSupportFragmentManager()](https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html#getSupportFragmentManager())
+    2. [FragmentManager](https://developer.android.com/reference/android/app/FragmentManager.html)의 [beginTransaction()](https://developer.android.com/reference/android/app/FragmentManager.html#beginTransaction()) 메소드 호출을 통해 [FragmentTransaction](https://developer.android.com/reference/android/app/FragmentTransaction.html)의 인스턴스를 얻어온다.
+
+    ```java
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    ```
+- 그런 다음 [add()](https://developer.android.com/reference/android/app/FragmentTransaction.html#add(int,%20android.app.Fragment)) 메서드를 사용하여 추가할 프래그먼트와 이를 포함할 뷰를 지정
+    - [add()](https://developer.android.com/reference/android/app/FragmentTransaction.html#add(int,%20android.app.Fragment))  메소드
+        - 첫번째 파라미터: 프래그먼트를 포함할 부모 뷰의 ID  
+        - 두번재 파라미터: 추가할 프래그먼트 객체
+        
+    ```java
+    FirstFragment fragment = new FirstFragment();
+    fragmentTransaction.add(R.id.fragment_container, fragment);
+    fragmentTransaction.commit();
+    ```
+-->
+
+<h3 id="toc_8"><a href="exercise3.html">[연습3]- 자바 코드에서 동적으로 프래그먼트 추가하기</a></h3>
+
+<hr>
+
+<p><a href="fragment-example.html"><strong>다음 학습</strong>: 프래그먼트 예제</a></p>
 
 
 

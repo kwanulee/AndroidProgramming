@@ -5,8 +5,8 @@
 3. **Configure Component** 대화창에서 아래와 같이 설정후, **Finish** 버튼을 클릭
 	- **Fragment Name** 값을 *TitlesFragement*로 설정 
 	- **Fragment Layout Name** 값을 *fragment\_titles*로 설정 
-	- **Include fragment factory metho..** 체크 안함
-	- **Include interface callbacks?** 체크 안함 
+	- **Include fragment factory method?** 체크 안함
+
 4. **fragment\_titles.xml** 파일을 열고, ListView 위젯을 포함한 레이아웃 정의
 
 	```xml

@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>exercise8</title>
+<title>fragment-example</title>
 
 
 <style type="text/css">
@@ -249,62 +249,161 @@ pre[class*="language-"] {
 
 <body>
 
-<h4 id="toc_0">[연습8] - 선택된 항목의 상세정보를 보여주는 DetailsFragment 추가하기</h4>
+<style>
+div.polaroid {
+    width: 640px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
+
+<p><a href="fragment-usage.html"><strong>이전 학습</strong>: 프래그먼트 사용</a></p>
+
+<h1 id="toc_0">프래그먼트 예제</h1>
+
+<h2 id="toc_1">학습목표</h2>
+
+<ul>
+<li>태블릿용 및 스마트폰용 디바이스에서 다른 화면을 구현하는 방법을 이해한다.</li>
+<li>프래그먼트를 여러 액티비티에서 재사용할 수 있도록 프래그먼트와 액티비티 간의 통신 방법에 대해서 이해한다.</li>
+</ul>
+
+<p><a name="1"> </a></p>
+
+<h2 id="toc_2">1. 개요 - 태블릿과 스마트폰에서 다른 화면 구현하기</h2>
 
 <ol>
-<li><a href="exercise7.html">연습7</a>에서 수행한 프로젝트를 바탕으로 진행</li>
-<li>안드로이드 스튜디오에서 <strong>File &gt; New &gt; Fragment &gt; Fragment(Blank)</strong> 를 이용하여 DetailsFragment를 생성한다.</li>
-<li><p><strong>Configure Component</strong> 대화창에서 아래와 같이 설정후, <strong>Finish</strong> 버튼을 클릭</p>
+<li><strong>TitlesFragment</strong>에서는 제목을 ListView로 표시하고, <strong>DetailsFragment</strong>에서는 ListView에서 선택된 제목의 상세정보를 표시한다.</li>
+<li>태블릿에서는 <strong>TitlesFragment</strong>와 <strong>DetailsFragment</strong>가 나오고, 스마트폰의 경우에는 첫화면(MainActivity)에서 <strong>TitlesFragment</strong>만 나오고, ListView에 나열된 항목이 선택되면 해당 항목에 대한 상세정보를 표시하는 <strong>DetailsFragment</strong>를 다른 화면(DetailsActivity)으로 표시한다.</li>
+</ol>
+
+<p><img src="figure/example-overview.png"></p>
 
 <ul>
-<li><strong>Fragment Name</strong> 값을 <em>DetailsFragement</em>로 설정 </li>
-<li><strong>Fragment Layout Name</strong> 값을 <em>fragment_details</em>로 설정 </li>
-<li><strong>Include fragment factory method?</strong> 체크함</li>
+<li><p><strong>TitlesFragment</strong>에서 표시된 ListView의 항목이 선택되었을 때, 해당 항목의 상세정보를 <strong>DetailsFragment</strong>에 어떻게 전달할 것인가?</p>
+
+<ul>
+<li><strong>TitlesFragment</strong>가 서로 다른 액티비티에서 재사용될 수 있도록 하기 위해서는 <strong>TitlesFragment</strong>가 <strong>DetailsFragment</strong>를 직접 접근하지 않도록 해야 합니다. 만약 <strong>TitlesFragment</strong>가 목록에서 선택된 내용을 <strong>DetailsFragment</strong>로 전달하기 위해서 <strong>DetailsFragment</strong>를 직접 접근하게 된다면 <strong>TitlesFragment</strong>는 <strong>DetailsFragment</strong>와 항상 같은 액티비티에 포함되어야 할 것입니다.</li>
 </ul></li>
-<li><p><strong>fragment_details.xml</strong> 파일을 열고, TextView 위젯을 포함한 레이아웃 정의</p>
+<li><p>따라서, <strong>TitlesFragment</strong>의 목록에서 선택된 내용을 <strong>DetailsFragment</strong>로 전달할 때, 프래그먼트가 서로 종속적이지 않고 독립적으로 동작하게 하기 위해서는 아래 그림과 같이, 선택된 항목번호를 <strong>MainActivity</strong>로 보내고, <strong>MainActivity</strong>에서 다시 <strong>DetailsFragment</strong>로 보내는 방법을 취해야 합니다. 이에 대한 구체적인 방법은 이어지는 절에서 자세히 설명합니다.</p>
 
-<div><pre><code class="language-markup">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:padding=&quot;5dp&quot;
-    &gt;
+<p><img src="figure/communication.png">     </p></li>
+<li><p><strong>예제 프로젝트 소스</strong>
+<a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/TabletPhoneFragment">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/TabletPhoneFragment</a></p></li>
+</ul>
 
-    &lt;ScrollView
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;&gt;
-        &lt;TextView
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            android:text=&quot;@string/hello_blank_fragment&quot;
-            android:id=&quot;@+id/textview&quot;/&gt;
-    &lt;/ScrollView&gt;
-&lt;/LinearLayout&gt;</code></pre></div></li>
-<li><p><strong>DetailsFragment.java</strong></p>
+<h2 id="toc_3">2. TitlesFragment 구현</h2>
 
 <ul>
-<li><strong>mIndex 멤버 변수</strong> 선언
+<li><p>제목 목록을 ListView로 보여주는 TitlesFragment를 구현한다.</p>
+
+<p><img src="figure/titlesfragment.png" width=150></p></li>
+</ul>
+
+<h3 id="toc_4"><a href="exercise4.html">[연습4] - 리스트뷰를 포함한 TitlesFragment 정의하기</a></h3>
+
+<h2 id="toc_5">3. 액티비티와의 통신 방법</h2>
 
 <ul>
-<li><em>TitlesFragment</em>의 목록에서 선택된 항목 번호를 저장하기 위한 변수로서, 이 변수의 값은 <em>onCreate</em>() 콜백 메소드에 수행 시에  <em>DetailsFragment</em> 객체로 전달된 인자 값으로 초기화됩니다.</li>
+<li><p>ListView의 선택된 항목 번호를 액티비티로 전달하는 방법을 이해한다.</p>
+
+<p><img src="figure/titlesfragment-to-mainactivity.png" width=300></p></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_6">3.1 (<strong>방법1</strong>) 액티비티에서 직접 구현된 메소드 호출</h3>
+
+<ul>
+<li><strong>MainActivity</strong>에 <strong>void onTitleSelected(int i)</strong> 메소드를 추가 정의</li>
+<li><p>ListView의 항목이 선택되었을 때 선택된 항목 위치를 <strong>MainActivity</strong>의 <strong>onTitleSelected()</strong>메소드를 호출하면서 파라미터로 전달</p>
+
+<p><img src="figure/activity-communication1.png" alt=""></p></li>
+</ul>
+
+<h3 id="toc_7"><a href="exercise5.html">[연습5] - 프래그먼트-액티비티 통신 방법 (액티비티에서 직접 구현된 메소드 호출)</a></h3>
+
+<hr>
+
+<h3 id="toc_8">3.2 (<strong>방법2</strong>) 인터페이스를 구현한 액티비티를 인터페이스로 접근</h3>
+
+<ul>
+<li> <strong>void onTitleSelected(int i)</strong> 메소드를 포함한 인터페이스 <strong>OnTitleSelectedListener</strong>를 <strong>TitlesFragment</strong> 내부에 정의</li>
+<li><p><strong>MainActivity</strong>가 이 인터페이스를 구현하도록한 후, ListView의 항목이 선택되었을 때 선택된 항목 번호를 <strong>MainActivity</strong>가 구현한 인터페이스의 <strong>onTitleSelected()</strong>메소드를 호출하면서 파라미터로 전달</p>
+
+<p><img src="figure/activity-communication2.png" alt=""></p></li>
+</ul>
+
+<h3 id="toc_9"><a href="exercise6.html">[연습6] - 프래그먼트-액티비티 통신 방법 (인터페이스를 구현한 액티비티를 인터페이스로 접근)</a></h3>
+
+<hr>
+
+<h3 id="toc_10">3.3 <strong>두 방법의 비교</strong></h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: center">장점</th>
+<th style="text-align: center">단점</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>방법1</td>
+<td style="text-align: center">간단한 구조</td>
+<td style="text-align: center">특정 Activity에 종속</td>
+</tr>
+<tr>
+<td>방법2</td>
+<td style="text-align: center">정의된 인터페이스를 구현하는 모든 Activity와 통신 가능</td>
+<td style="text-align: center">다소 복잡한 구조</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_11">4. 태블릿용 화면 레이아웃 추가</h2>
+
+<ul>
+<li><p>디바이스의 화면이 태블릿과 같이 큰 경우에 작은 크기의 화면과는 다른 화면 구성을 하고자 한다면, <strong>res/layout-large</strong> 폴더에 MainActivity의 레이아웃 파일과 동일한 이름의 레이아웃 파일을 정의</p>
+
+<p><img src="figure/layout-large.png" alt=""></p></li>
+</ul>
+
+<h3 id="toc_12"><a href="exercise7.html">[연습7]- 태블릿용 화면 레이아웃 추가하기</a></h3>
+
+<h2 id="toc_13">5. DetailsFragment 구현</h2>
+
+<ul>
+<li><p>ListView에서 선택한 항목 번호의 상세정보를 보여주는 DetailsFragment를 구현한다.
+<img src="figure/communication2.png">   </p></li>
+<li><p>TitlesFragment에서 리스트뷰 항목 선택 번호를 MainActivity로 전달하였으므로, MainActivity에서는 전달받은 항목 선택 번호를 다시 DetailsFragment로 넘긴다. </p></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_14">5.1 프래그먼트로 인자 (argument) 전달 방법</h3>
+
+<ul>
+<li><p>인자를 프래그먼트로 전달하는 일반적인 패턴은 정적 메소드인 <strong>newInstance()</strong>를 사용하는 것입니다.</p>
+
+<ol>
+<li><p><strong>newInstance(parameter)</strong> 메소드 정의</p>
+
+<ul>
+<li>프래그먼트 객체 생성합니다.
+
+<ul>
+<li>[<strong>주의</strong>] <strong>new</strong> 키워드로 프래그먼트 객체를 생성하였다고 하더라도 아직 프래그먼트 컴포넌트가 생성된 것은 아닙니다. 프래그먼트 컴포넌트의 생성은 <strong>onCreate()</strong> 프래그먼트 콜백메소드가 호출되는 시점에 생성됩니다. </li>
 </ul></li>
-<li><strong>public static DetailsFragment newInstance(int index)</strong> 정의
-
-<ul>
-<li><em>DetailsFragment</em> 객체를 생성시키는 팩토리 메소드로서, <em>index</em> 값을 인자로 <em>DetailsFragement</em> 객체에 전달한다.</li>
-</ul></li>
-<li><strong>onCreateView()</strong> 메소드 재정의
-
-<ul>
-<li>이 프래그먼트와 관련된 View 객체를 반환해야 합니다.</li>
-<li>이 프래그먼트의 뷰를 정의한 레이아웃 리소스가 <em>fragment_details</em> 이므로, 이 리소스로부터  뷰 객체를 얻어오고, 이 뷰 객체 내에 포함된 텍스트 뷰 객체에 <em>TitlesFragment</em>의 목록에서 선택된 항목 번호에 대응되는 상세정보를 표시합니다. </li>
-</ul></li>
+<li>매개변수 <em>parameter</em>를 통해 전달된 값을 프래그먼트의 <a href="https://developer.android.com/reference/androidx/fragment/app/Fragment?hl=ko#setArguments(android.os.Bundle)">setArguments()</a> 메소드를 사용하여 프래그먼트 객체에 인자로 설정합니다.</li>
+<li>설정된 프래그먼트 객체를 반환합니다.</li>
 </ul>
 
 <div><pre><code class="language-java">public class DetailsFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = &quot;index&quot;;
-    private int mIndex;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -319,12 +418,23 @@ pre[class*="language-"] {
      */
     public static DetailsFragment newInstance(int index) {
         DetailsFragment fragment = new DetailsFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, index);
-        fragment.setArguments(args);
+
+        Bundle args = new Bundle();  // 인자 값을 저장할  번들 객체 생성
+        args.putInt(ARG_PARAM1, index); // 인자 값을 (키,값) 페어로 번들 객체에 설정
+        fragment.setArguments(args);  // 인자값을 저장한 번들 객체를 프래그먼트로 전달
+
         return fragment;
     }
+}</code></pre></div></li>
+<li><p><strong>onCreate()</strong> 메소드 재정의  </p>
 
+<ul>
+<li>이 콜백 메소드가 호출되는 시점에 실질적인 프래그먼트 컴포넌트가 생성됩니다.</li>
+<li>이 시점부터 프래그먼트 객체에 설정된 인자를 <a href="">getArguments()</a> 메소드를 사용하여 얻어올 수 있습니다.</li>
+</ul>
+
+<div><pre><code class="language-java">public class DetailsFragment extends Fragment {
+   private int mIndex;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -332,70 +442,130 @@ pre[class*="language-"] {
             mIndex = getArguments().getInt(ARG_PARAM1);
         }
     }
+ }</code></pre></div></li>
+<li><p><strong>newInstance(parameter)</strong> 메소드를 통해 프래그먼트로 인자 전달</p>
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.textview);
+<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity implements TitlesFragment.OnTitleSelectedListener{
 
-        if (mIndex &gt;=0)
-            tv.setText(Shakespeare.DIALOGUE[mIndex]);
-
-        return view;
-    }
-}</code></pre></div>
-
-<!--
-```java
-public class DetailsFragment extends Fragment {
-   int index=-1;
-
-    public DetailsFragment() {
-        // Required empty public constructor
-    }
-
-    public void setSelection(int i) { index = i; }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_details, container, false);
-        TextView tv = (TextView)view.findViewById(R.id.textview);
-
-        if (index >=0)
-            tv.setText(Shakespeare.DIALOGUE[index]);
-
-        return view;
-    }
-}
-```
---></li>
-<li><p><strong>MainActivity.java</strong></p>
-
-<ul>
-<li><strong>onTitleSelected()</strong> 메소드에서 파라미터로 전달받은 항목 선택 번호를 새롭게 생성된 DetailsFragment 객체에게 setSelection() 메소드를 통해 전달</li>
-<li>새롭게 설정된 DetailsFragment 객체를 동적으로 교체</li>
-</ul>
-
-<div><pre><code class="language-java">public class MainActivity extends AppCompatActivity
-                        implements TitlesFragment.OnTitleSelectedListener{
-
-    //... 기존과 동일
-
+    //...
     public void onTitleSelected(int i) {
-        //Toast.makeText(getApplicationContext(),&quot;position=&quot;+i,Toast.LENGTH_SHORT).show();
-        DetailsFragment detailsFragment = new DetailsFragment();
-        detailsFragment.setSelection(i);
-        getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
+        if (getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE) {
+
+            // DetailsFragment로 선택된 항목번호 i  전달
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(i);
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
+        } 
     }
 }</code></pre></div></li>
-<li><p>실행결과</p>
+</ol></li>
+</ul>
 
-<p><img src="figure/detailsfragment-result.png" alt=""></p></li>
+<h3 id="toc_15"><a href="exercise8.html">[연습8] - 선택된 항목의 상세정보를 보여주는 DetailsFragment 추가하기</a></h3>
+
+<h2 id="toc_16">6. 스마트폰용 <strong>TitlesFragment</strong>와 <strong>DetailsFragment</strong>을 스마트폰용에서 재사용</h2>
+
+<p><img src="figure/communication3.png"></p>
+
+<ul>
+<li><p>스마트폰의 경우에는 첫화면(<strong>MainActivity</strong>)에서 <strong>TitlesFragment</strong>만 나오고, ListView에 나열된 항목이 선택되면 해당 항목에 대한 상세정보를 표시하는 <strong>DetailsFragment</strong>를 다른 화면(<strong>DetailsActivity</strong>)으로 표시한다. </p></li>
+</ul>
+
+<ol>
+<li><p><strong>MainActivity</strong>는 <strong>DetailsActivity</strong>에게 리스트뷰의 항목 선택 번호를 인텐트의 <strong>Extra</strong>를 통해 전달한다.</p>
+
+<ul>
+<li><p><strong>onTitleSelected()</strong> 메소드 수정</p>
+
+<ul>
+<li>파라미터로 전달받은 리스트뷰의 선택된 항목번호를 화면의 크기에 따라서 <strong>DetailsFragment</strong>와 <strong>DetailsActivity</strong> 중에 하나에게 전달될 수 있도록 수정
+
+<ul>
+<li>화면크기를 판별하는 방법
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/content/res/Configuration.html">Configuration</a> 클래스의 <a href="https://developer.android.com/reference/android/content/res/Configuration.html#isLayoutSizeAtLeast(int)">isLayoutSizeAtLeast()</a> 메소드 이용</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<div><pre><code class="language-java">public void onTitleSelected(int i) {
+        if (getResources().getConfiguration().isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE)) {
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(i);
+            getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
+        } else {    // 화면 크기가 작은 경우
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra(&quot;index&quot;, i);
+            startActivity(intent);
+        }
+    }</code></pre></div></li>
+</ul></li>
+<li><p><strong>DetailsActivity</strong>는 <strong>MainActivity</strong>로부터 전달받은 리스트뷰의 항목 선택 번호를 새로이 생성된 <strong>DetailsFragment</strong>에 전달하고 새로이 생성된 <strong>DetailsFragment</strong> 객체를 기존 것과 교체</p>
+
+<ul>
+<li><p><strong>activity_details.xml</strong></p>
+
+<ul>
+<li><p>DetailsFragment를 포함할 컨테이너로 FrameLayout을 정의 (id는 <em>details</em>로 설정됨)</p>
+
+<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:orientation=&quot;vertical&quot;&gt;
+
+    &lt;FrameLayout
+        android:id=&quot;@+id/details&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot; /&gt;
+
+&lt;/LinearLayout&gt;</code></pre></div></li>
+</ul></li>
+<li><p><strong>DetailsActivity.java</strong></p>
+
+<div><pre><code class="language-java">public class DetailsActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_details);
+
+        // 액티비티로 전달된 인텐트의 Extra에서 이름이 &quot;index&quot;인 int형 값을 뽑아와서 새로이 생성된 DetailsFragment 객체에 전달
+        DetailsFragment details = DetailsFragment.newInstance(index);
+
+        // 새로이 생성된 DetailsFragment 객체를 기존 것과 교체
+        getSupportFragmentManager().beginTransaction().replace(R.id.details, details).commit();
+    }
+}</code></pre></div></li>
+</ul></li>
 </ol>
+
+<h2 id="toc_17">핵심 정리</h2>
+
+<ul>
+<li><p>프래그먼트의 재사용을 위해서는 프래그먼트 간에 직접 통신은 배제해야 합니다. </p>
+
+<ul>
+<li><p>프래그먼트 간의 통신은 그 들의 부모 액티비티를 통해서 이루어져야 합니다.</p>
+
+<p><img src="figure/communication.png">     </p></li>
+</ul></li>
+<li><p>프래그먼트와 부모 액티비티 간의 통신 방법</p>
+
+<ol>
+<li>프래그먼트는 부모 액티비티가 구현할 인터페이스를 내부 타입으로 정의</li>
+<li>부모 액티비티는 프래그먼트의 인터페이스를 구현</li>
+<li>프래그먼트는 부모 액티비티의 인터페이스 구현을 이용하여 정보를 전달<br>
+<img src="figure/activity-communication2.png" alt=""></li>
+</ol></li>
+<li><p>프래그먼트로 인자 전달하는 방법</p>
+
+<ul>
+<li>newInstance()  팩토리 메소드 사용</li>
+<li>getArguments() 메소드를 통해 프래그먼트로 전달된 인자 획득</li>
+</ul></li>
+</ul>
 
 
 
