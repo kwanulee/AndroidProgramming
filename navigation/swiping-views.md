@@ -17,6 +17,8 @@ div.polaroid {
 - 탭을 표시하는 방법을 살펴본다.
 
 	<img src="https://stuff.mit.edu/afs/sipb/project/android/docs/design/media/swipe_tabs.mp4" width=200> 
+	
+	![](https://stuff.mit.edu/afs/sipb/project/android/docs/design/media/swipe_tabs.mp4)
 
 
 ## 1. ViewPager란?
