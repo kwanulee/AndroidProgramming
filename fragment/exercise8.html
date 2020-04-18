@@ -387,8 +387,7 @@ public class DetailsFragment extends Fragment {
 
     public void onTitleSelected(int i) {
         //Toast.makeText(getApplicationContext(),&quot;position=&quot;+i,Toast.LENGTH_SHORT).show();
-        DetailsFragment detailsFragment = new DetailsFragment();
-        detailsFragment.setSelection(i);
+        DetailsFragment detailsFragment = DetailsFragment.newInstance(i);
         getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
     }
 }</code></pre></div></li>

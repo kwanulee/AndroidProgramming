@@ -21,12 +21,7 @@
 	
 3. **MainActivity.java** 파일에서, MainActivity 클래스를 다음과 같이 수정하시오
 
-	```java
-	import android.support.v4.app.FragmentManager;
-	import android.support.v4.app.FragmentTransaction;
-	import android.support.v7.app.AppCompatActivity;
-	import android.os.Bundle;
-	
+	```java	
 	public class MainActivity extends AppCompatActivity {
 	
 	    @Override

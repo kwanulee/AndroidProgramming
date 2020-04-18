@@ -303,10 +303,10 @@ div.polaroid {
 
 <h3 id="toc_4"><a href="exercise4.html">[연습4] - 리스트뷰를 포함한 TitlesFragment 정의하기</a></h3>
 
-<h2 id="toc_5">3. 액티비티와의 통신 방법</h2>
+<h2 id="toc_5">3. 메인 액티비티와의 연결 및 정보 전달</h2>
 
 <ul>
-<li><p>ListView의 선택된 항목 번호를 액티비티로 전달하는 방법을 이해한다.</p>
+<li><p>앞서 정의한 TitlesFragment를 MainActivity에 정적으로 추가하고, TitlesFragement 내의 ListView의 선택된 항목 번호를 MainActivity로 전달하는 방법을 구현한다.</p>
 
 <p><img src="figure/titlesfragment-to-mainactivity.png" width=300></p></li>
 </ul>
@@ -425,15 +425,14 @@ div.polaroid {
 
         return fragment;
     }
-}</code></pre></div></li>
-<li><p><strong>onCreate()</strong> 메소드 재정의  </p>
+}</code></pre></div>
 
-<ul>
-<li>이 콜백 메소드가 호출되는 시점에 실질적인 프래그먼트 컴포넌트가 생성됩니다.</li>
-<li>이 시점부터 프래그먼트 객체에 설정된 인자를 <a href="">getArguments()</a> 메소드를 사용하여 얻어올 수 있습니다.</li>
-</ul>
+<!--2.  **onCreate()** 메소드 재정의  
+- 이 콜백 메소드가 호출되는 시점에 실질적인 프래그먼트 컴포넌트가 생성됩니다.
+- 이 시점부터 프래그먼트 객체에 설정된 인자를 [getArguments()]() 메소드를 사용하여 얻어올 수 있습니다.
 
-<div><pre><code class="language-java">public class DetailsFragment extends Fragment {
+```java
+public class DetailsFragment extends Fragment {
    private int mIndex;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -442,7 +441,9 @@ div.polaroid {
             mIndex = getArguments().getInt(ARG_PARAM1);
         }
     }
- }</code></pre></div></li>
+ }
+```
+--></li>
 <li><p><strong>newInstance(parameter)</strong> 메소드를 통해 프래그먼트로 인자 전달</p>
 
 <div><pre><code class="language-java">public class MainActivity extends AppCompatActivity implements TitlesFragment.OnTitleSelectedListener{
@@ -531,8 +532,10 @@ div.polaroid {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        // 액티비티로 전달된 인텐트의 Extra에서 이름이 &quot;index&quot;인 int형 값을 뽑아와서 새로이 생성된 DetailsFragment 객체에 전달
-        DetailsFragment details = DetailsFragment.newInstance(index);
+        // 액티비티로 전달된 인텐트의 Extra에서 이름이 &quot;index&quot;인 int형 값을 뽑아와서 
+        // 새로이 생성된 DetailsFragment 객체에 전달
+        DetailsFragment details = DetailsFragment.newInstance(
+                            getIntent().getIntExtra(&quot;index&quot;,-1));
 
         // 새로이 생성된 DetailsFragment 객체를 기존 것과 교체
         getSupportFragmentManager().beginTransaction().replace(R.id.details, details).commit();
@@ -562,8 +565,11 @@ div.polaroid {
 <li><p>프래그먼트로 인자 전달하는 방법</p>
 
 <ul>
-<li>newInstance()  팩토리 메소드 사용</li>
-<li>getArguments() 메소드를 통해 프래그먼트로 전달된 인자 획득</li>
+<li>newInstance()  팩토리 메소드 사용
+
+<ul>
+<li>setArguments() 메소드를 통해 프래그먼트 객체로 인자 전달</li>
+</ul></li>
 </ul></li>
 </ul>
 

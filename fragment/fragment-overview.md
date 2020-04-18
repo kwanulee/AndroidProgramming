@@ -24,7 +24,6 @@ div.polaroid {
 	</div>	
 
 ## 2. 액티비티 vs 프래그먼트 비교 
-(출처: https://24getmenot7.tistory.com/105)
 
 <div class="polaroid">
 	<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory&fname=http%3A%2F%2Fcfile8.uf.tistory.com%2Fimage%2F996C67425A5CE42E1609F2">
@@ -33,6 +32,7 @@ div.polaroid {
 - 시스템의 **액티비티 매니저**에서 인텐드를 해석해 액티비티 간 데이터를 전달
 - 액티비티의 **프래그먼트 매니저**에서 메소드로 프래그먼트 간 데이터를 전달
 
+<!--
 - [Fragement-Oriented Architecture](https://vinsol.com/blog/2014/09/15/advocating-fragment-oriented-applications-in-android/)
 	- 액티비티의 역할 
 		- 여러 프래그먼트를 관리 (추가/삭제)
@@ -41,7 +41,7 @@ div.polaroid {
 		- 세션 (사용자 인증)을 유지하거나 애플리케이션의 전역적인 로직 및 정책을 관리
 		- 전역적인 UI 담당 (NavigationDrawer UI) 
 	- 프래그먼트의 역할
-		-  재사용 가능한 컨텐츠 영역의 뷰와 이벤트 처리 로직을 담당 	
+		-  재사용 가능한 컨텐츠 영역의 뷰와 이벤트 처리 로직을 담당 -->	
 
 <a name="3"> </a>
 ## 3. 프래그먼트 수명주기	

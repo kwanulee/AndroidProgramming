@@ -44,8 +44,8 @@ div.polaroid {
 
 
 
-## 3. 액티비티와의 통신 방법
--  ListView의 선택된 항목 번호를 액티비티로 전달하는 방법을 이해한다.
+## 3. 메인 액티비티와의 연결 및 정보 전달
+- 앞서 정의한 TitlesFragment를 MainActivity에 정적으로 추가하고, TitlesFragement 내의 ListView의 선택된 항목 번호를 MainActivity로 전달하는 방법을 구현한다.
 
 	<img src="figure/titlesfragment-to-mainactivity.png" width=300>
 
@@ -125,9 +125,8 @@ div.polaroid {
 		        return fragment;
 		    }
 		}
-		```	
-	
-	2.  **onCreate()** 메소드 재정의  
+		```		
+	<!--2.  **onCreate()** 메소드 재정의  
 		- 이 콜백 메소드가 호출되는 시점에 실질적인 프래그먼트 컴포넌트가 생성됩니다.
 		- 이 시점부터 프래그먼트 객체에 설정된 인자를 [getArguments()]() 메소드를 사용하여 얻어올 수 있습니다.
 
@@ -143,6 +142,7 @@ div.polaroid {
 		    }
 		 }
 		```
+-->
 	3.  **newInstance(parameter)** 메소드를 통해 프래그먼트로 인자 전달
 
 		```java
@@ -221,8 +221,10 @@ div.polaroid {
 		        super.onCreate(savedInstanceState);
 		        setContentView(R.layout.activity_details);
 		
-				// 액티비티로 전달된 인텐트의 Extra에서 이름이 "index"인 int형 값을 뽑아와서 새로이 생성된 DetailsFragment 객체에 전달
-		        DetailsFragment details = DetailsFragment.newInstance(index);
+				// 액티비티로 전달된 인텐트의 Extra에서 이름이 "index"인 int형 값을 뽑아와서 
+				// 새로이 생성된 DetailsFragment 객체에 전달
+		        DetailsFragment details = DetailsFragment.newInstance(
+		        					getIntent().getIntExtra("index",-1));
 						        
 					        
 		        // 새로이 생성된 DetailsFragment 객체를 기존 것과 교체
@@ -244,4 +246,4 @@ div.polaroid {
 		
 - 프래그먼트로 인자 전달하는 방법
 	- newInstance()  팩토리 메소드 사용
-	- getArguments() 메소드를 통해 프래그먼트로 전달된 인자 획득
+		- setArguments() 메소드를 통해 프래그먼트 객체로 인자 전달

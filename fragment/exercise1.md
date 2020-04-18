@@ -5,15 +5,15 @@
 3. **Configure Component** 대화창에서 아래와 같이 설정후, **Finish** 버튼을 클릭
 	- **Fragment Name** 값을 *FirstFragement*로 설정 
 	- **Fragment Layout Name** 값을 *fragment\_first*로 설정 
-	- **Include fragment factory metho..** 체크 안함
-	- **Include interface callbacks?** 체크 안함 
+	- **Include fragment factory method?** 체크 안함
+
 
 	<img src="figure/create-fragment.png" width=400>
 4. [**확인**] 프로젝트에서 다음의 변경사항을 확인해 본다.
 	- FirstFragment 클래스가 생성됨
 	- fragment\_first.xml 파일이 생성됨
 
-5. 자동으로 생성된 fragment\_first.xml 파일을 열고, **FrameLayout**에 다음과 가티 **background** 속성을 추가
+5. 자동으로 생성된 fragment\_first.xml 파일을 열고, **FrameLayout**에 다음과 같이 **background** 속성을 추가
 
 	```xml
 	<?xml version="1.0" encoding="utf-8"?>

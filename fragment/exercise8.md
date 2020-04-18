@@ -124,8 +124,7 @@
 	    
 	    public void onTitleSelected(int i) {
 	        //Toast.makeText(getApplicationContext(),"position="+i,Toast.LENGTH_SHORT).show();
-	        DetailsFragment detailsFragment = new DetailsFragment();
-	        detailsFragment.setSelection(i);
+	        DetailsFragment detailsFragment = DetailsFragment.newInstance(i);
 	        getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
 	    }
 	}
