@@ -16,9 +16,7 @@ div.polaroid {
 - ViewPager를 사용하여 스와이프 뷰를 구현한다.
 - 탭을 표시하는 방법을 살펴본다.
 
-	<img src="https://stuff.mit.edu/afs/sipb/project/android/docs/design/media/swipe_tabs.mp4" width=200> 
-	
-	![](https://stuff.mit.edu/afs/sipb/project/android/docs/design/media/swipe_tabs.mp4)
+	<img src="figure/tablayout.gif" width=200>
 
 
 ## 1. ViewPager란?
@@ -197,7 +195,8 @@ div.polaroid {
 - Github 저장소 위치
 - 실행화면
 
-	<img src="figure/screen.mp4" width=200>
+	<img src="figure/screen.gif" width=200>
+
 	
 ## 3. Tab Indicator 표시하기 
 -  [**PagerTabStrip**](https://developer.android.com/reference/androidx/viewpager/widget/PagerTabStrip.html)은 [ViewPager](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager)의 자식 뷰로 XML 레이아웃에 포함되어서, **이전, 현재, 다음 페이지**를 나타내는 indicator입니다. 
