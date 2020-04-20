@@ -3,7 +3,7 @@ package com.example.kwanwoo.fragmentexample;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements TitlesFragment.OnTitleSelectedListener{
 
@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity implements TitlesFragment.On
     public void onTitleSelected(int i) {
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
-            DetailsFragment detailsFragment = new DetailsFragment();
-            detailsFragment.setSelection(i);
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(i);
             getSupportFragmentManager().beginTransaction().replace(R.id.details, detailsFragment).commit();
         } else {
             Intent intent = new Intent(this, DetailsActivity.class);

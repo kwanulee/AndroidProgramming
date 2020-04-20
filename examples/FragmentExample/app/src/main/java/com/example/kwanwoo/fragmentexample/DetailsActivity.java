@@ -2,7 +2,9 @@ package com.example.kwanwoo.fragmentexample;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class DetailsActivity extends AppCompatActivity {
 
@@ -17,8 +19,8 @@ public class DetailsActivity extends AppCompatActivity {
             return;
         }
 
-        DetailsFragment details = new DetailsFragment();
-        details.setSelection(getIntent().getIntExtra("index",-1));
+        int index = getIntent().getIntExtra("index",-1);
+        DetailsFragment details = DetailsFragment.newInstance(index);
         getSupportFragmentManager().beginTransaction().replace(R.id.details, details).commit();
     }
 }
