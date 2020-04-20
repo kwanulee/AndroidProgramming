@@ -38,7 +38,9 @@ div.polaroid {
 		
 <a name="3"></a>
 ## 3. XML로 액션 아이템 정의
-1. res 폴더 위에서 마우스 오른쪽 버튼을 눌러서 [**New**]-[**Directory**] 메뉴를 통해서 menu 폴더를 생성
+1. res 폴더 위에서 마우스 오른쪽 버튼을 눌러서 [**New**]-[**Android Resource Directory**] 메뉴를 통해서 menu 폴더를 생성
+	- **Directory name**: *menu* 선택
+	- **Resource type**: *menu* 선택
 2. menu 폴더 위해서 마우스 오른쪽 버튼을 눌러서 [**New**]-[**Menu resource file**] 선택
 3. 파일이름으로 *main\_menu* 입력 후, **OK** 버튼 선택
 4. 아래 XML 코드로 main\_menu.xml 파일 내용을 업데이트
@@ -121,7 +123,7 @@ div.polaroid {
 	                Toast.makeText(getApplicationContext(), "action_settings", Toast.LENGTH_SHORT).show();
 	                return true;
 	            case R.id.action_subactivity:
-	                Toast.makeText(getApplicationContext(), "action_subactivity", Toast.LENGTH_SHORT).show();
+	                startActivity(new Intent(this,SubActivity.class));
 	                return true;
 	            default:
 	                return super.onOptionsItemSelected(item);
@@ -132,7 +134,7 @@ div.polaroid {
 
 ## 6. '위로' 작업 이동하기 (Up 네비게이션)
 - 앱에서 사용자가 기본 화면으로 돌아가는 방법
-	- 앱바에 **위로** 버튼을 제공하여, 사용자가 **위로** 버튼을 선택하면 앱이 설정된 상위 액티비티로 이동합니다.
+	- 앱바에 **위로** 버튼을 제공하여, 사용자가 **위로** 버튼을 선택하면 앱이 설정된 상위 액티비티로 이동합니다. 
 
 	<img src="http://klutzy.github.io/android-design-ko/media/navigation_between_siblings_market1.png"> 
 
@@ -142,21 +144,65 @@ div.polaroid {
 	-  **android:parentActivityName** 속성은 Android 4.1(API 레벨 16)부터 도입되었습니다. 이전 버전의 Android를 실행하는 기기를 지원하려면 **<meta-data>** 이름-값 쌍을 정의하세요. 
 		-  여기서 이름은 "*android.support.PARENT_ACTIVITY*"이고, 값은 *상위 액티비티의 이름* 
 
-	```xml
-	<application … >
-		<activity
-			android:name=".SubActivity"
-	 		android:parentActivityName=".MainActivity" >
-	 		<meta-data
-	 			android:name="android.support.PARENT_ACTIVITY"
-	 			android:value=".MainActivity"
-	 	</activity>
-	</application>
-	```
+	- **SubActivity**의 상위 액티비티가 **MainActivity**인 경우 
+
+		```xml
+		<application … >
+			<activity
+				android:name=".SubActivity"
+		 		android:parentActivityName=".MainActivity" >
+		 		<meta-data
+		 			android:name="android.support.PARENT_ACTIVITY"
+		 			android:value=".MainActivity" />
+		 	</activity>
+		</application>
+		```
 
 ### 6.2 '위로' 버튼 사용 설정하기
-- 상위 액티비티가 있는 액티비티에 **'위로' 버튼의 사용을 설정**하려면 앱바의 **setDisplayHomeAsUpEnabled(true)**를 호출
+- 상위 액티비티가 있는 액티비티 (가령, SubActivity)에 **'위로' 버튼의 사용을 설정**하려면 앱바의 **setDisplayHomeAsUpEnabled(true)**를 해당 액티비티를 생성할 때 호출합니다. 
 
+	- 플랫폼의 [ActionBar](https://developer.android.com/reference/android/app/ActionBar?hl=ko)를 사용하는 경우
+
+		```java
+		public class SubActivity extends AppCompatActivity {
+		
+		    @Override
+		    protected void onCreate(Bundle savedInstanceState) {
+		        super.onCreate(savedInstanceState);
+		        setContentView(R.layout.activity_sub);
+		
+		        // Get a support ActionBar corresponding to this toolbar
+		        ActionBar ab = getSupportActionBar();
+		
+		        // Enable the Up button
+		        ab.setDisplayHomeAsUpEnabled(true);
+		    }
+		}
+		```
+
+
+	- 지원 라이브러리의 [Toolbar](https://developer.android.com/reference/androidx/appcompat/widget/Toolbar?hl=ko)를 사용하는 경우
+
+		```java
+		public class SubActivity extends AppCompatActivity {
+		
+		    @Override
+		    protected void onCreate(Bundle savedInstanceState) {
+		        super.onCreate(savedInstanceState);
+		        setContentView(R.layout.activity_sub);
+
+		        // my_child_toolbar is defined in the layout file
+		        Toolbar myChildToolbar =
+		            (Toolbar) findViewById(R.id.my_child_toolbar);
+		        setSupportActionBar(myChildToolbar);		        
+		        // Get a support ActionBar corresponding to this toolbar
+		        ActionBar ab = getSupportActionBar();
+		
+		        // Enable the Up button
+		        ab.setDisplayHomeAsUpEnabled(true);
+		    }
+		}
+		```
 ---
 
 [**다음 학습**: Swiping Views with Tabs)](swiping-views.html)
