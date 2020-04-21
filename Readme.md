@@ -43,7 +43,6 @@
 ## 7. 탐색 (Navigation)
 - [앱바와 액션 추가 및 처리](http://kwanulee.github.io/AndroidProgramming/navigation/actionbar.html)
 - [Swipe Views with Tabs](http://kwanulee.github.io/AndroidProgramming/navigation/swiping-views.html)
-- [[실습]]()
 
 ## 8. 데이터 저장 및 관리 1
 - [설정](http://kwanulee.github.io/AndroidProgramming/data-management/sharedpreferences.html) 
