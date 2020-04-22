@@ -18,7 +18,6 @@ div.polaroid {
 
 	<img src="figure/tablayout.gif" width=200>
 
-
 ## 1. ViewPager란?
 - **[ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)**는 데이터를 페이지 단위로 표시하고 화면을 쓸어 넘기는 동작인 스와이프(Swipe)를 통해 페이지 전환을 할 수 있는 컨테이너(Container)입니다.
 - [어댑터 뷰 단원](https://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview.html)에서 어댑터 뷰(ListView, GridView)의 항목에 표시될 정보를 [Adapter](https://developer.android.com/reference/android/widget/Adapter) 객체를 통해서 얻었듯이, **[ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)**는 [PagerAdapter](https://developer.android.com/reference/android/support/v4/view/PagerAdapter) 객체를 통해서 각 페이지에 표시될  정보를 제공 받습니다.
@@ -339,5 +338,3 @@ div.polaroid {
 - [Android ViewPager 예제 - 좌우로 스와이프로 화면 전환](https://webnautes.tistory.com/1013)
 
 ---
-
-[**다음 학습**: TabLayout](tablayout.html)
