@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setting = getSharedPreferences(PREFERENCES_GROUP, MODE_PRIVATE);
+        //setting = getPreferences(MODE_PRIVATE);
+
         final EditText textInput1 = (EditText) findViewById(R.id.textInput1);
         final EditText textInput2 = (EditText) findViewById(R.id.textInput2);
 
