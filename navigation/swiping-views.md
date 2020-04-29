@@ -190,8 +190,7 @@ div.polaroid {
 	});
 ```
 
-### 2.6 전체 프로젝트 코드
-- Github 저장소 위치
+### 2.6 실행 결과
 - 실행화면
 
 	<img src="figure/screen.gif" width=200>
@@ -249,7 +248,7 @@ div.polaroid {
 	}
 	```
 	
-### 3.3 실행 화면
+### 3.3 실행 결과
 
 - 실행화면
 
@@ -319,10 +318,14 @@ div.polaroid {
 	
 	- [추가 속성 정보](https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.html#lattrs)
 	
-### 4.3 실행화면
-- 화면
+### 4.3 실행 결과
+- 실행 화면
 
 	<img src="figure/tablayout.png" width=200>
+	
+- 전체 프로젝트 코드 (Github 저장소 위치)
+	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/ViewPagerTest
+
 
 ### 4.4 TabLayout 추가 정보
 - [Google Play Style Tabs using TabLayout](https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout#add-custom-view-to-tablayout) 자료에는  다음과 같은 작업을 수행하는 방법을 공부할 수 있습니다.
