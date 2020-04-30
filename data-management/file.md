@@ -7,7 +7,16 @@ div.polaroid {
 }
 </style>
 
-# **Files** 
+[**이전 학습**: 파일)](sharedpreferences.html)
+
+# 파일 (Files)
+
+## 학습목표
+
+- Android 기기의 파일에 자료를 저장하고 읽는 방법을 이해한다.
+
+
+## 1. 개요 
 - Linux 파일 시스템과 java.io의 입출력 스트림에 대한 이해 필수입니다.- 모든 Android 기기에는 "**내부**" 및 "**외부**" 저장소의 두 가지 파일 저장소 영역이 있습니다.
 
 	내부 저장소                          | 외부 저장소
@@ -17,8 +26,9 @@ div.polaroid {
 	기본적으로 자신의 앱에서만 액세스 할 수 있음 | 모든 사람이 읽을 수 있음
 	사용자가 앱을 삭제하면 시스템이 내장 저장소에서 앱의 모든 파일을 제거함 | 사용자가 앱을 삭제하면 getExternalFilesDir()의 디렉터리에 저장한 앱 파일에 한해서 시스템이 제거함	사용자와 다른 앱이 앱의 파일에 직접 액세스하는 것을 원치 않을 때 적합 | 다음 경우에 적합 <ul> <li>액세스 제한이 필요치 않은 파일 <li>다른 앱과 공유하기를 원하는 파일 <li>사용자가 컴퓨터에서 액세스 할 수 있도록 허용하는 파일 </ul>
 	
-- **예제 안드로이드 프로젝트 다운로드** [링크](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kwanulee/Android/tree/master/examples/FileTest) 
-## 1. 내부 저장소의 파일 입출력
+- **FileTest 안드로이드 프로젝트 Github 주소**
+	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest 
+## 2. 내부 저장소의 파일 입출력
 안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 [Context](https://developer.android.com/reference/android/content/Context.html) 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.
 
 ```java
@@ -31,7 +41,7 @@ FileOutputStream openFileOutput (String name, int mode)FileInputStream openFile
 	MODE_RPIVATE | 혼자만 사용하는 배타적인 모드로 파일을 생성. (디폴트)
 	MODE_APPEND  | 파일이 이미 존재할 경우 덮어쓰기 모드가 아닌 추가 모드로 Open.---
 
-### 1.1 OpenFileOuput
+### 2.1 OpenFileOuput
 
 ~~~java
 package com.example.kwanwoo.filetest;
@@ -54,7 +64,7 @@ package com.example.kwanwoo.filetest;
         }
     }
 ~~~
-[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136)
+[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136)
 
 - "myfile.txt"는 디바이스의 **data/data/com.example.kwanwoo.filetest/files/** 에 위치
 	- **Android Studio**의 좌측 하단에 있는 **Device File Explorer** 탭을 열어 해당 파일이 생성되었는 지 확인 가능합니다.
@@ -65,7 +75,7 @@ package com.example.kwanwoo.filetest;
 
 
 
-### 1.2 OpenFileInput
+### 2.2 OpenFileInput
 
 ```java
     private void loadFromIntenalStorage() {
@@ -91,11 +101,11 @@ package com.example.kwanwoo.filetest;
     }
 ```
 
-[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158)
+[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158)
 
 
 
-## 2. res/raw 폴더 파일 이용하기
+## 3. res/raw 폴더 파일 이용하기
 * 대용량의 읽기 전용 데이터 파일은 리소스에 포함시켜 두는 것이 좋다.
     - ( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )
 * 포함시킬 파일은 **res/raw**에 복사해 둔다
@@ -137,7 +147,7 @@ package com.example.kwanwoo.filetest;
 [https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180)
 
 
-## 3. 외부 저장소 사용하기
+## 4. 외부 저장소 사용하기
 1. 외부 저장소 접근 권한 설정
 2. 외부 저장소 상태 확인
 3. 앱 실행 시 접근 권한 확인 및 요청
@@ -146,7 +156,7 @@ package com.example.kwanwoo.filetest;
     - 앱 전용 파일 입출력
 
 
-### 3.1 외부 저장소의 접근 권한 설정
+### 4.1 외부 저장소의 접근 권한 설정
 * 외부 저장소의 파일을 읽거나 쓰러면 Manifest 파일에서 **READ\_EXTERNAL\_STORAGE** 또는 **WRITE\_EXTERNAL\_STORAGE** 권한을 요청해야 합니다.
 	*  파일을 읽고 쓰려면 읽기 액세스 권한도 암시적으로 요청하는 **WRITE\_EXTERNAL\_STORAGE** 권한만 요청하면 됩니다. 
 
@@ -155,11 +165,11 @@ package com.example.kwanwoo.filetest;
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
 ```
-[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4)
+[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4)
 
 
 
-### 3.2 외부 저장소의 상태 확인
+### 4.2 외부 저장소의 상태 확인
 * 외부 저장소를 사용하기 전에 *사용 가능성* 검사
     - static String Environment.getExternalStorageState()
         + 반환값
@@ -179,9 +189,9 @@ package com.example.kwanwoo.filetest;
 	    }
 	```
 
-[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191)
+[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191)
 
-### 3.3 앱 실행 시 접근 권한 확인 및 요청
+### 4.3 앱 실행 시 접근 권한 확인 및 요청
 
 - **Android 6.0 (API level 23)** 이상부터는앱 실행 중에 사용하려는 권한(permission)을 반드시 요청 (참고자료: [런타임에 권한 요청](https://developer.android.com/training/permissions/requesting.html))
 	1. 여러분의 앱에 위험 권한이 필요한 경우, 여러분은 해당 권한이 요구되는 작업을 실행할 때마다 이 **권한의 보유 여부를 확인**해야 합니다.
@@ -253,11 +263,11 @@ package com.example.kwanwoo.filetest;
 <img src="images/permissionreq.png" width=200 style="top:150px; right:100px; position:absolute;">
 
 
-### 3.4 외부 저장소 사용 
+### 4.4 외부 저장소 사용 
 
 ---
 
-#### 3.4.1 다른 앱과 공유되는 파일 입출력
+#### 4.4.1 다른 앱과 공유되는 파일 입출력
 * 공유 디렉토리 (Music, Pictures, Ringtones) 접근하기
     - [static File Environment.getExternalStoragePublicDirectory(String type)](https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String))
         + Type
@@ -276,11 +286,11 @@ package com.example.kwanwoo.filetest;
     out.close();
 ```
 
-[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
+[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
 
 ---
 
-#### 3.4.2 앱 전용 파일 입출력
+#### 4.4.2 앱 전용 파일 입출력
 * 외부 저장소의 앱 전용(private) 저장소 디렉토리 접근하기
     - [File getExternalFilesDir(String type)](https://developer.android.com/reference/android/content/Context.html#getExternalFilesDir(java.lang.String))    [[Context](https://developer.android.com/reference/android/content/Context.html) 클래스 메소드]
         + Type
@@ -304,4 +314,4 @@ package com.example.kwanwoo.filetest;
     PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
     out.println(data);
     out.close();
-```[https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
+```[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
