@@ -56,11 +56,11 @@
 
 	<img src="figure/data-storage-lab3.png" width=200px>
 
-* 참조코드: https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L122-L159
+* 참조코드: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L122-L159
 
 ## 3.  External Storage 실습
 * 옵션 메뉴 아이템 중 *External Storage*가 선택된 상태에서
 * 메인 화면의 *EditText* 창에 임의의 타이틀 텍스트를 입력하고, **SAVE** 버튼을 누르면, 외부저장소의 위치(**sdcard/**)에 있는 여러분이 지정한 이름의 파일에 입력된 텍스트를 저장합니다. 단 저장 시, 파일에 입력된 내용을 덧붙이는 방식으로 저장합니다.
 * **Android Studio**의 좌측 하단에 있는 **Device File Explorer** 탭을 열어 해당 파일이 생성되었는 지 확인합니다. 
 * 메인 화면의 **LOAD** 버튼을 누르면 해당 파일에서 데이터를 읽어서 결과를 보여는 *TextView* 창에 출력해 줍니다. [4번 결과와 유사함]
-* 참조코드: https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L183-L275
+* 참조코드: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L183-L275

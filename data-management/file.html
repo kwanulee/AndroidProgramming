@@ -249,15 +249,6 @@ pre[class*="language-"] {
 
 <body>
 
-<style> 
-div.polaroid {
-    width: 640px;
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    margin-bottom: 0.5cm;
-}
-</style>
-
 <p><a href="sharedpreferences.html"><strong>이전 학습</strong>: 파일)</a></p>
 
 <h1 id="toc_0">파일 (Files)</h1>
@@ -419,10 +410,9 @@ FileInputStream openFileInput (String name)</code></pre></div>
 <ul>
 <li>( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )</li>
 </ul></li>
-<li>포함시킬 파일은 <strong>res/raw</strong>에 복사해 둔다
-<div class="polaroid">
-    <img src="figure/raw-resource.png">
-</div></li>
+<li><p>포함시킬 파일은 <strong>res/raw</strong>에 복사해 둔다</p>
+
+<p><img src="figure/raw-resource.png"></p></li>
 <li><p>리소스의 파일을 읽을 때는 <a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> 클래스의 <a href="https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)">openRawResource</a> 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.</p>
 
 <div><pre><code class="language-java">    InputStream openRawResource (int id)</code></pre></div>
@@ -616,7 +606,7 @@ final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
 <li>Type
 
 <ul>
-<li>DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, or DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, \DIRECTORY_DOCUMENTS. 등</li>
+<li>DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, or DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, DIRECTORY_DOCUMENTS 등</li>
 </ul></li>
 <li>반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)</li>
 </ul></li>

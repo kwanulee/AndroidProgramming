@@ -1,11 +1,3 @@
-<style> 
-div.polaroid {
-  	width: 640px;
-  	box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
-  	text-align: center;
-	margin-bottom: 0.5cm;
-}
-</style>
 
 [**이전 학습**: 파일)](sharedpreferences.html)
 
@@ -109,9 +101,9 @@ package com.example.kwanwoo.filetest;
 * 대용량의 읽기 전용 데이터 파일은 리소스에 포함시켜 두는 것이 좋다.
     - ( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )
 * 포함시킬 파일은 **res/raw**에 복사해 둔다
-	<div class="polaroid">
-		<img src="figure/raw-resource.png">
-	</div>
+	
+	<img src="figure/raw-resource.png">
+
 * 리소스의 파일을 읽을 때는 [Resources](https://developer.android.com/reference/android/content/res/Resources.html) 클래스의 [openRawResource](https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)) 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.
 
 	```java
@@ -271,7 +263,7 @@ package com.example.kwanwoo.filetest;
 * 공유 디렉토리 (Music, Pictures, Ringtones) 접근하기
     - [static File Environment.getExternalStoragePublicDirectory(String type)](https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String))
         + Type
-            - DIRECTORY\_MUSIC, DIRECTORY\_PODCASTS, DIRECTORY\_RINGTONES, DIRECTORY\_ALARMS, DIRECTORY\_NOTIFICATIONS, DIRECTORY\_PICTURES, or DIRECTORY\_MOVIES, DIRECTORY\_DOWNLOADS, DIRECTORY\_DCIM, \DIRECTORY\_DOCUMENTS. 등
+            - DIRECTORY\_MUSIC, DIRECTORY\_PODCASTS, DIRECTORY\_RINGTONES, DIRECTORY\_ALARMS, DIRECTORY\_NOTIFICATIONS, DIRECTORY\_PICTURES, or DIRECTORY\_MOVIES, DIRECTORY\_DOWNLOADS, DIRECTORY\_DCIM, DIRECTORY\_DOCUMENTS 등
         + 반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)
 
 ```java
