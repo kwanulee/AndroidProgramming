@@ -1,5 +1,5 @@
 
-[**이전 학습**: 파일)](sharedpreferences.html)
+[**이전 학습**: 설정](sharedpreferences.html)
 
 # 파일 (Files)
 
