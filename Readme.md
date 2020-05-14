@@ -50,12 +50,16 @@
 - [[실습]](http://kwanulee.github.io/AndroidProgramming/data-management/datamanagement_lab.html)
 
 
-## 9. 데이터 저장 및 관리 2
-- [SQLite](http://kwanulee.github.io/AndroidProgramming/data-management/sqlite.html) 
+## 9. 데이터베이스
+- [데이터베이스, SQL 기본](http://kwanulee.github.io/AndroidProgramming/data-management/database_overview.html) 
+- [SQLite 라이브러리 시작하기](http://kwanulee.github.io/AndroidProgramming/data-management/sqlite.html) 
+- [실습]()
+
+## 10. Content Provider
 - [컨텐츠 프로바이더](http://kwanulee.github.io/AndroidProgramming/data-management/content-provider.html) 
 -  [[실습]](http://kwanulee.github.io/AndroidProgramming/data-management/sqlite-content-provider-lab.html)
 
-## 10. 멀티미디어
+## 11. 멀티미디어
 - [오디오 재생하기](http://kwanulee.github.io/AndroidProgramming/multimedia/multimedia.html#1)
 - [동영상 재생하기](http://kwanulee.github.io/AndroidProgramming/multimedia/multimedia.html#2)
 - [오디오 녹음하기](http://kwanulee.github.io/AndroidProgramming/multimedia/multimedia.html#3)
@@ -64,24 +68,24 @@
 
 -  [[실습]](http://kwanulee.github.io/AndroidProgramming/multimedia/multimedia_lab.html)
 
-## 11. 위치 기반 서비스 및 지도
+## 12. 위치 기반 서비스 및 지도
 - [위치기반 서비스](http://kwanulee.github.io/AndroidProgramming/location_map/location.html) 
 - [지도](http://kwanulee.github.io/AndroidProgramming/location_map/map.html) 
 -  [[실습]](http://kwanulee.github.io/AndroidProgramming/location_map/location-map-lab.html)
 
 
-## 12. 브로드캐스트 리시버 및 알림
+## 13. 브로드캐스트 리시버 및 알림
 - [브로드캐스트 리시버](http://kwanulee.github.io/AndroidProgramming/broadcast_notification/broadcast_receiver.html)
 - [알림 (Notification)](http://kwanulee.github.io/AndroidProgramming/broadcast_notification/notification.html)
 -  [[실습]](http://kwanulee.github.io/AndroidProgramming/broadcast_notification/broadcast-notification-lab.html)
 
-## 13. 센서 및 NFC
+## 14. 센서 및 NFC
 - 방향 센서
 - 가속도 센서
 - NFC
 - [[실습]]()
 
-## 14. 애니메이션 및 그래픽
+## 15. 애니메이션 및 그래픽
 - [애니메이션](http://kwanulee.github.io/AndroidProgramming/animation-graphics/animation.html) 
 - [그래픽](http://kwanulee.github.io/AndroidProgramming/animation-graphics/graphics.html) 
 -  [[실습]](http://kwanulee.github.io/AndroidProgramming/animation-graphics/animation_lab.html)

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>database_overview</title>
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+kbd {
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style> 
+div.polaroid {
+    width: 640px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
+
+<p><a href="https://kwanulee.github.io/AndroidProgramming/#9-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4"><strong>목차</strong>: 데이터베이스</a></p>
+
+<h1 id="toc_0">데이터베이스, SQL 기본</h1>
+
+<h2 id="toc_1">1. 데이터베이스 개요</h2>
+
+<ul>
+<li><strong>데이터베이스(DB: database)</strong>는 통합하여 관리되는 <strong>데이터의 집합체</strong>를 의미합니다.</li>
+<li><p><strong>데이터베이스 종류</strong></p>
+
+<ul>
+<li><p>계층형 데이터베이스</p>
+
+<p><img src="https://miro.medium.com/max/1400/1*Q09HnjOfqh4FvxdtU-pCOQ.png" width=400></p></li>
+<li><p>네트워크 데이터베이스</p>
+
+<p><img src="https://miro.medium.com/max/1400/1*ZuDEekCV_ScCSLSS8rT17g.png" width=400></p></li>
+<li><p><strong>관계형 데이터베이스</strong></p>
+
+<p><img src="https://miro.medium.com/max/1400/1*Bg3cD5fuAW3aqhgglNAM5A.png" width=400></p></li>
+<li><p>NoSQL 데이터베이스  </p>
+
+<p><img src="https://d1x2i8adp1v94i.cloudfront.net/wp-content/uploads/2019/08/NoSQL.png" width=400></p></li>
+<li><p>참고자료: <a href="https://medium.com/@rpolding/databases-evolution-and-change-29b8abe9df3e">https://medium.com/@rpolding/databases-evolution-and-change-29b8abe9df3e</a></p></li>
+</ul></li>
+<li><p><strong>데이터베이스 관리 시스템(DBMS: Database Management System)</strong>은 데이터베이스를 관리하는 미들웨어를 의미합니다.</p></li>
+</ul>
+
+<h2 id="toc_2">2. 관계형 데이터베이스</h2>
+
+<ul>
+<li><em>관계형 데이터베이스</em>는 현재 가장 많이 사용되고 있는 데이터베이스의 한 종류입니다.</li>
+<li> <em>관계형 데이터베이스</em>는 하나 이상의 <strong>테이블(table)</strong>로 구성됩니다.
+
+<ul>
+<li> <strong>테이블</strong>은 이름을 가지고 있으며, <strong>행(row)</strong>과 <strong>열(column)</strong> 그리고 거기에 대응하는 값</li>
+</ul></li>
+</ul>
+
+<p><img src="http://tcpschool.com/lectures/img_mysql_table.png" alt=""></p>
+
+<ul>
+<li><p><em>관계형 데이터베이스</em>는 위와 같이 구성된 테이블이 <strong>다른 테이블들과 관계를 맺고 모여있는 집합체</strong>로 이해</p></li>
+<li><p><strong>관계형 데이터베이스의 특징</strong></p>
+
+<ol>
+<li>데이터의 분류, 정렬, 탐색 속도가 빠릅니다.</li>
+<li>오랫동안 사용된 만큼 신뢰성이 높고, 어떤 상황에서도 데이터의 무결성을 보장해 줍니다.</li>
+<li>기존에 작성된 스키마를 수정하기가 어렵습니다.</li>
+</ol></li>
+<li><p><strong>관계형 DBMS 예</strong></p>
+
+<ul>
+<li>Oracle </li>
+<li>MS SQL</li>
+<li>MySQL </li>
+<li>MariaDB</li>
+<li>SQLite</li>
+</ul></li>
+<li><p>참고자료: <a href="http://tcpschool.com/mysql/DB">http://tcpschool.com/mysql/DB</a></p></li>
+</ul>
+
+<h2 id="toc_3">3. SQLite 개요</h2>
+
+<ul>
+<li><p><strong>SQLite</strong> </p>
+
+<ul>
+<li><strong>SQL (Structured Query Language)</strong> 문을 이용해 데이터를 조회하는 <strong>관계형 데이터베이스 관리시스템</strong></li>
+<li>안정적 이며, 소규모 데이터베이스에 적합</li>
+<li>단순한 파일로 데이터를 저장 (별도의 서버 연결 및 권한 설정 불필요)</li>
+<li>복수 사용자는 지원되지 않음</li>
+<li><p>안드로이드의 일부로 포함됨</p>
+
+<p><img src="figure/sqlite.png" width=400></p></li>
+</ul></li>
+<li><p>SQLite DB Browser</p>
+
+<ul>
+<li>SQLite과 호환가능한 데이터베이스 파일을 생성,  변경, 삭제할 수 있고, 데이터를 추가,삭제,변경, 조회할 수 있는 기능을 제공해 주는 비주얼 도구.<br></li>
+<li><a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a> 접속하여 자신의 OS에 맞는 버전을 설치</li>
+</ul>
+
+<p><img src="https://sqlitebrowser.org/images/screenshot.png" alt=""></p></li>
+</ul>
+
+<p><a name="2"></a></p>
+
+<h2 id="toc_4">4. SQL (Structured Query Language)</h2>
+
+<ul>
+<li><p><strong>SQL</strong>은 데이터베이스에서 데이터를 정의, 조작, 제어하기 위해 사용하는 언어입니다.</p></li>
+<li><p>데이터 정의 언어 (Data Definition Language)</p>
+
+<ul>
+<li>데이터베이스나 테이블 등을 생성, 삭제하거나 그 구조를 변경하기 위한 명령어</li>
+<li><a href="https://ko.wikipedia.org/wiki/CREATE_(SQL)">CREATE</a>: 테이블 생성</li>
+<li><a href="https://ko.wikipedia.org/wiki/CREATE_(SQL)">DROP</a>: 테이블 삭제</li>
+<li><a href="https://ko.wikipedia.org/wiki/ALTER_(SQL)">ALTER</a>: 테이블 수정</li>
+</ul></li>
+<li><p>데이터 조작 언어 (Data Manipulation Language)</p>
+
+<ul>
+<li>데이터베이스에 저장된 데이터를 처리하거나 조회, 검색하기 위한 명령어</li>
+<li><a href="https://ko.wikipedia.org/wiki/Insert_(SQL)">INSERT INTO</a>: 레코드(행) 추가</li>
+<li><a href="https://ko.wikipedia.org/wiki/Update_(SQL)">UPDATE ~ SET</a>: 레코드(행) 변경</li>
+<li><a href="https://ko.wikipedia.org/wiki/Delete_(SQL)">DELETE FROM</a>: 레코드(행) 삭제</li>
+<li><a href="https://ko.wikipedia.org/wiki/Select_(SQL)">SELECT ~ FROM ~ WHERE</a>: 레코드(행) 검색</li>
+</ul></li>
+<li><p>데이터 제어 언어 (Data Control Language) </p>
+
+<ul>
+<li>데이터베이스에 저장된 데이터를 관리하기 위하여 데이터의 보안성 및 무결성 등을 제어하기 위한 명령어</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_5">4.1 테이블 생성</h3>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">CREATE TABLE 테이블이름
+(
+    필드이름1 필드타입1,
+    필드이름2 필드타입2,
+    ...
+)</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">CREATE TABLE &quot;Users&quot; (
+  &quot;Id&quot;  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  &quot;Name&quot;    TEXT NOT NULL,
+  &quot;Phone&quot;   TEXT
+);</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li>데이터베이스 생성
+
+<ul>
+<li>[<strong>파일</strong>]-[<strong>새 데이터베이스</strong>] 메뉴 선택 혹은 툴바의 [<strong>새 데이터베이스</strong>] 버튼 클릭</li>
+<li>파일이름(예, <em>sampleDB</em>)을 입력 후에 <strong>저장</strong> 버튼 클릭</li>
+</ul></li>
+<li><p>데이블 정의</p>
+
+<ul>
+<li>[<strong>테이블 정의 변경</strong>] 다이얼로그의 <strong>테이블</strong> 입력창에 <em>Users</em> 입력</li>
+<li><p><strong>필드 추가</strong> 버튼을 클릭하여 다음과 같이 테이블을 정의한 수에 <strong>확인</strong> 버튼 클릭</p>
+
+<p><img src="figure/sqlite-table-definition.png" alt=""></p></li>
+</ul></li>
+</ol></li>
+</ul>
+
+<h3 id="toc_6">4.2 데이터 조작</h3>
+
+<h4 id="toc_7">4.2.1 레코드 추가</h4>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">1. INSERT INTO 테이블이름(필드이름1, 필드이름2, 필드이름3, ...)
+   VALUES (데이터값1, 데이터값2, 데이터값3, ...)
+
+2. INSERT INTO 테이블이름
+   VALUES (데이터값1, 데이터값2, 데이터값3, ...)</code></pre></div>
+
+<ul>
+<li>두 번째 문법처럼 필드의 이름을 생략할 수 있으며, 이 경우에는 데이터베이스의 스키마와 같은 순서대로 필드의 값이 자동 대입됩니다. </li>
+</ul></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">INSERT INTO Users (Id, Name, Phone)
+VALUES (1, &#39;홍길동&#39;, &#39;010-1234-5678&#39;);</code></pre></div>
+
+<div><pre><code class="language-none">INSERT INTO Users 
+VALUES (1, &#39;홍길동&#39;, &#39;010-1234-5678&#39;);</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li><strong>SQL 실행</strong> 탭을 선택</li>
+<li><p>다음 SQL문을 입력한 후에, <strong>Execute SQL</strong>  버튼을 클릭 </p>
+
+<div><pre><code class="language-none">INSERT INTO Users (Id, Name, Phone) VALUES (1, &#39;홍길동&#39;, &#39;010-1234-5678&#39;);
+INSERT INTO Users VALUES (2, &#39;홍길동&#39;, &#39;114&#39;);
+INSERT INTO Users VALUES (3,&#39;이순신&#39;, &#39;011-2772-8282&#39;);</code></pre></div></li>
+<li><p><strong>데이터 보기</strong> 탭을 선택하여 결과 확인</p>
+
+<p><img src="figure/sqlite-data-result.png" alt=""></p></li>
+</ol></li>
+</ul>
+
+<h4 id="toc_8">4.2.2 레코드 변경</h4>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">UPDATE 테이블이름
+SET 필드이름1=데이터값1, 필드이름2=데이터값2, ...
+WHERE 필드이름=데이터값</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">UPDATE Users
+SET Phone = &#39;1234&#39;
+WHERE Name = &#39;홍길동&#39;;</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li><strong>SQL 실행</strong> 탭을 선택</li>
+<li><p><strong>탭 열기</strong> 아이콘을 클릭하여 새로운 탭을 열고, 다음 SQL문을 입력한 후에, <strong>Execute SQL</strong>  버튼을 클릭 </p>
+
+<div><pre><code class="language-none">UPDATE Users SET Phone = &#39;1234&#39; WHERE Name = &#39;이순신&#39;;</code></pre></div></li>
+<li><p><strong>데이터 보기</strong> 탭을 선택하여 결과 확인</p>
+
+<p><img src="figure/sqlite-data-result2.png" alt=""></p></li>
+</ol></li>
+</ul>
+
+<h4 id="toc_9">4.2.3 레코드 조회</h4>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">SELECT 필드이름
+FROM 테이블이름
+[WHERE 조건]</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">SELECT *
+FROM Users;</code></pre></div>
+
+<div><pre><code class="language-none">SELECT Name, Phone
+FROM Users;</code></pre></div>
+
+<div><pre><code class="language-none">SELECT *
+FROM Users;
+WHERE Name=&#39;홍길동&#39;;</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li><strong>SQL 실행</strong> 탭을 선택</li>
+<li><p><strong>탭 열기</strong> 아이콘을 클릭하여 새로운 탭을 열고, 다음 SQL문을 입력한 후에, <strong>Execute SQL</strong>  버튼을 클릭하여 실행 결과를 확인해 본다. </p>
+
+<div><pre><code class="language-none">SELECT * FROM Users;</code></pre></div>
+
+<p><img src="figure/sqlite-data-result3.png" alt=""></p></li>
+<li><p>앞의 다른 SELECT 예제에 대해서도 실행해 본다.</p></li>
+</ol></li>
+</ul>
+
+<h4 id="toc_10">4.2.4 레코드 삭제</h4>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">DELETE FROM 테이블이름
+WHERE 필드이름=데이터값</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">DELETE FROM Users
+WHERE Name = &#39;홍길동&#39;;</code></pre></div>
+
+<div><pre><code class="language-none">DELETE FROM Users;</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li><strong>SQL 실행</strong> 탭을 선택</li>
+<li><p><strong>탭 열기</strong> 아이콘을 클릭하여 새로운 탭을 열고, 다음 SQL문을 입력한 후에, <strong>Execute SQL</strong>  버튼을 클릭하여 실행 결과를 확인해 본다. </p>
+
+<div><pre><code class="language-none">DELETE FROM Users WHERE Phone = &#39;114&#39;;</code></pre></div></li>
+<li><p><strong>데이터 보기</strong> 탭을 선택하여 결과 확인</p>
+
+<p><img src="figure/sqlite-data-result4.png" alt=""></p></li>
+</ol></li>
+</ul>
+
+<h3 id="toc_11">4.3 테이블 수정</h3>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">ALTER TABLE 테이블이름 ADD 필드이름 필드타입</code></pre></div>
+
+<div><pre><code class="language-none">ALTER TABLE 테이블이름 MODIFY COLUMN 필드이름 필드타입</code></pre></div>
+
+<div><pre><code class="language-none">ALTER TABLE 테이블이름 DROP 필드이름</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">ALTER TABLE Users ADD Height INTEGER;</code></pre></div>
+
+<div><pre><code class="language-none">ALTER TABLE Users MODIFY COLUMN Height REAL;</code></pre></div>
+
+<div><pre><code class="language-none">ALTER TABLE Users DROP Height;</code></pre></div></li>
+<li><p><strong>SQLite DB Browser 실습</strong></p>
+
+<ol>
+<li><strong>SQL 실행</strong> 탭을 선택</li>
+<li><p><strong>탭 열기</strong> 아이콘을 클릭하여 새로운 탭을 열고, 다음 SQL문을 입력한 후에, <strong>Execute SQL</strong>  버튼을 클릭하여 실행 결과를 확인해 본다. </p>
+
+<div><pre><code class="language-none">ALTER TABLE Users ADD Height INTEGER;</code></pre></div></li>
+<li><p><strong>데이터 보기</strong> 탭을 선택하여 결과 확인</p>
+
+<p><img src="figure/sqlite-data-result5.png" alt=""></p></li>
+</ol></li>
+</ul>
+
+<h3 id="toc_12">4.2 테이블 삭제</h3>
+
+<ul>
+<li><p>문법</p>
+
+<div><pre><code class="language-none">DROP DATABASE 데이터베이스이름</code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-none">DROP TABLE Users;</code></pre></div></li>
+</ul>
+
+<h2 id="toc_13">참고자료</h2>
+
+<ul>
+<li>SQLite로 가볍게 배우는 데이터베이스, <a href="https://wikidocs.net/book/1530">https://wikidocs.net/book/1530</a></li>
+</ul>
+
+<hr>
+
+<p><a href="sqlite.html"><strong>다음 학습</strong>: SQLite 라이브러리 사용하기</a></p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>
