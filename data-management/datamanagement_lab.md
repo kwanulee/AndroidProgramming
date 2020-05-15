@@ -64,3 +64,11 @@
 * **Android Studio**의 좌측 하단에 있는 **Device File Explorer** 탭을 열어 해당 파일이 생성되었는 지 확인합니다. 
 * 메인 화면의 **LOAD** 버튼을 누르면 해당 파일에서 데이터를 읽어서 결과를 보여는 *TextView* 창에 출력해 줍니다. [4번 결과와 유사함]
 * 참조코드: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L183-L275
+
+## 4.  SQLite DB Storage 실습
+
+* 옵션 메뉴 아이템 중 *External Storage*가 선택된 상태에서
+* 메인 화면의 *EditText* 창에 임의의 타이틀 텍스트를 입력하고, **SAVE** 버튼을 누르면,  데이터베이스(**data/data/패키지/databases**)에 있는 여러분이 지정한 이름의 db 파일에 입력된 텍스트를 저장합니다. 단 저장 시, 입력된 시간도 같이 저장합니다.
+* Android Studio의 [**Device File Explorer**] 탭을 열어 해당 파일이 생성되었는 지 확인합니다.
+* 메인 화면의 **LOAD** 버튼을 누르면 해당 데이터베이스에서 데이터를 읽어서 결과를 보여는 *TextView* 창에 출력해 줍니다. 
+* 참조코드: https://github.com/kwanu70/AndroidExamples/blob/master/chap7/SQLiteDBTest/app/src/main/java/com/example/kwanwoo/sqlitedbtest/MainActivity.java   
