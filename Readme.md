@@ -47,13 +47,13 @@
 ## 8. 데이터 저장 및 관리 1
 - [설정](http://kwanulee.github.io/AndroidProgramming/data-management/sharedpreferences.html) 
 - [파일](http://kwanulee.github.io/AndroidProgramming/data-management/file.html) 
-- [[실습]](http://kwanulee.github.io/AndroidProgramming/data-management/datamanagement_lab.html)
+
 
 
 ## 9. 데이터베이스
 - [데이터베이스, SQL 기본](http://kwanulee.github.io/AndroidProgramming/data-management/database_overview.html) 
 - [SQLite 라이브러리 시작하기](http://kwanulee.github.io/AndroidProgramming/data-management/sqlite.html) 
-- [실습]()
+- [[실습]](http://kwanulee.github.io/AndroidProgramming/data-management/datamanagement_lab.html)
 
 ## 10. Content Provider
 - [컨텐츠 프로바이더](http://kwanulee.github.io/AndroidProgramming/data-management/content-provider.html) 
