@@ -293,7 +293,17 @@ div.polaroid {
 <ul>
 <li>안드로이드 앱에서 내부 데이터베이스를 사용하여 데이터를 저장하기 위해서는 데이터베이스 생성하고 테이블을 구성해야 합니다.</li>
 <li><strong>스키마</strong>는 데이터베이스의 구성 체계에 대한 공식적인 선언입니다. </li>
-<li><strong>계약 (Contract) 클래스</strong>라고 하는 도우미 클래스 내에서 <em>테이블</em> 및 <em>컬럼</em>의 <em>이름</em> 및 <em>타입</em>을 <strong>상수</strong>로 정의하고, 이를 통해 패키지 내의 모든 클래스에서 정의된 <strong>상수</strong>를 사용하도록 하면,  <em>이름</em> 및 <em>타입</em>의 변경이 효과적으로 관리될 수 있습니다.</li>
+<li><strong>계약 (Contract) 클래스</strong>는 <em>테이블 및 컬럼의 이름</em>을 정의하는 <strong>상수</strong>를 유지하는 컨테이너입니다.
+
+<ul>
+<li>이를 통해 패키지 내의 모든 클래스에서 동일한 <strong>상수</strong>를 사용하도록 한다면, <em>컬럼의 이름</em>이 변경될 때, 변경사항을 효과적으로 관리할 수 있습니다.</li>
+<li>데이터베이스 전체에 적용되는 상수는 <strong>클래스의 루트</strong>에 정의</li>
+<li>특정 테이블에 관련된 상수는 <strong>내부 클래스</strong>에 정의
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/provider/BaseColumns">BaseColumns</a> 인터페이스는 <strong>_ID</strong>라고 하는 기본 키 필드를 상수로 정의하고 있습니다.</li>
+</ul></li>
+</ul></li>
 </ul>
 
 <div><pre><code class="language-java">public final class UserContract {
@@ -628,7 +638,7 @@ div.polaroid {
 <li>long <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#insert(java.lang.String,%20java.lang.String,%20android.content.ContentValues)"><strong>insert</strong></a> (String table, String nullColumnHack, <a href="https://developer.android.com/reference/android/content/ContentValues.html">ContentValues</a> values)</li>
 <li>int <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#delete(java.lang.String,%20java.lang.String,%20java.lang.String%5B%5D)"><strong>delete</strong></a> (String table, String whereClause, String[] whereArgs)</li>
 <li>int <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#update(java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String%5B%5D)"><strong>update</strong></a> (String table, <a href="https://developer.android.com/reference/android/content/ContentValues.html">ContentValues</a> values, String whereClause, String[] whereArgs)</li>
-<li><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a> <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#query(java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String,%20java.lang.String)"><strong>query</strong></a> (String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)</li>
+<li><a href="https://developer.android.com/reference/android/database/Cursor.html">Cursor</a> <a href="https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase?hl=en#query(java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String,%20java.lang.String)"><strong>query</strong></a> (String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)</li>
 </ul></li>
 <li><p>예제코드 (insert)</p>
 

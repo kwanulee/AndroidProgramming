@@ -30,7 +30,11 @@ div.polaroid {
 ## 2. 스키마 (계약 클래스) 정의
 - 안드로이드 앱에서 내부 데이터베이스를 사용하여 데이터를 저장하기 위해서는 데이터베이스 생성하고 테이블을 구성해야 합니다.
 * **스키마**는 데이터베이스의 구성 체계에 대한 공식적인 선언입니다. 
-* **계약 (Contract) 클래스**라고 하는 도우미 클래스 내에서 *테이블* 및 *컬럼*의 *이름* 및 *타입*을 **상수**로 정의하고, 이를 통해 패키지 내의 모든 클래스에서 정의된 **상수**를 사용하도록 하면,  *이름* 및 *타입*의 변경이 효과적으로 관리될 수 있습니다.
+* **계약 (Contract) 클래스**는 *테이블 및 컬럼의 이름*을 정의하는 **상수**를 유지하는 컨테이너입니다.
+	* 이를 통해 패키지 내의 모든 클래스에서 동일한 **상수**를 사용하도록 한다면, *컬럼의 이름*이 변경될 때, 변경사항을 효과적으로 관리할 수 있습니다.
+	* 데이터베이스 전체에 적용되는 상수는 **클래스의 루트**에 정의
+	* 특정 테이블에 관련된 상수는 **내부 클래스**에 정의
+		* [BaseColumns] (https://developer.android.com/reference/android/provider/BaseColumns) 인터페이스는 **\_ID**라고 하는 기본 키 필드를 상수로 정의하고 있습니다.
 
 ```java
 public final class UserContract {
@@ -265,7 +269,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SQLiteDBTest
 	* long [**insert**](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#insert(java.lang.String,%20java.lang.String,%20android.content.ContentValues)) (String table, String nullColumnHack, [ContentValues](https://developer.android.com/reference/android/content/ContentValues.html) values)
 	* int [**delete**](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#delete(java.lang.String,%20java.lang.String,%20java.lang.String[])) (String table, String whereClause, String[] whereArgs)
 	* int [**update**](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#update(java.lang.String,%20android.content.ContentValues,%20java.lang.String,%20java.lang.String[])) (String table, [ContentValues](https://developer.android.com/reference/android/content/ContentValues.html) values, String whereClause, String[] whereArgs)
-	* [Cursor](https://developer.android.com/reference/android/database/Cursor.html) [**query**](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#query(java.lang.String,%20java.lang.String[],%20java.lang.String,%20java.lang.String[],%20java.lang.String,%20java.lang.String,%20java.lang.String)) (String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
+	* [Cursor](https://developer.android.com/reference/android/database/Cursor.html) [**query**](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase?hl=en#query(java.lang.String,%20java.lang.String[],%20java.lang.String,%20java.lang.String[],%20java.lang.String,%20java.lang.String,%20java.lang.String)) (String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy)
 
 * 예제코드 (insert)
 

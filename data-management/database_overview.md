@@ -265,26 +265,12 @@ div.polaroid {
     ```
     ALTER TABLE 테이블이름 ADD 필드이름 필드타입
     ```
-    ```
-    ALTER TABLE 테이블이름 MODIFY COLUMN 필드이름 필드타입
-    ```
-    ```
-    ALTER TABLE 테이블이름 DROP 필드이름
-    ```
-
 -  예제
 
     ```
     ALTER TABLE Users ADD Height INTEGER;
     ```
-    
-    ```
-    ALTER TABLE Users MODIFY COLUMN Height REAL;
-    ```
-    
-    ```
-    ALTER TABLE Users DROP Height;
-    ```
+
 
 - **SQLite DB Browser 실습**
 	1. **SQL 실행** 탭을 선택
@@ -303,7 +289,7 @@ div.polaroid {
 -  문법
   
     ```
-    DROP DATABASE 데이터베이스이름
+    DROP Table 테이블이름
     ```
 -  예제
 
