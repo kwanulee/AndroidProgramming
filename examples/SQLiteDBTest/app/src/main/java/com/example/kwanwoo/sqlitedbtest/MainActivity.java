@@ -2,7 +2,6 @@ package com.example.kwanwoo.sqlitedbtest;
 
 import android.database.Cursor;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -13,6 +12,8 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     final static String TAG="SQLITEDBTEST";
