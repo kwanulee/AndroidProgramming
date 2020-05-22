@@ -46,53 +46,8 @@ div.polaroid {
 	    ...
 	</manifest>
 	```
-
- 
-
-### 2.1 데이터나 장치에 접근하기 전에 **권한**을 확인
-- **Android 6.0 (API level 23) 이상**부터는 **앱 실행 중에 필요한 권한(permission)을 반드시 확인하고 없으면 요청**해야 합니다.
-
-```java
-public class MainActivity extends AppCompatActivity {
-
-    final int REQUEST_CODE_ACCESS_CALENDARS = 1;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // 권한 확인
-        if ((ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_CALENDAR) &&
-        	(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_CALENDAR)) {
-                != PackageManager.PERMISSION_GRANTED) { // 권한이 없으므로, 사용자에게 권한 요청 다이얼로그 표시
-            	ActivityCompat.requestPermissions(
-            			MainActivity.this,
-   						new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS}, 
-       					REQUEST_CODE_ACCESS_CALENDARS);
-        } else // 권한 있음! 해당 데이터나 장치에 접근!
-            readCalendars();
-    }
-```
-
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/java/com/kwanwoo/android/contentresolvertest/MainActivity.java#L20-L36
-
-### 2.2 요청 다이얼로그 결과(Allow 또는 Deny)에 따라
-
-```java
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_ACCESS_CALENDARS) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                readCalendars();
-            } else {
-                Toast.makeText(getApplicationContext(), "READ_CONTACTS 접근 권한이 필요합니다", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-```
-
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/java/com/kwanwoo/android/contentresolvertest/MainActivity.java#L78-L88
+- **Android 6.0 (API level 23) 이상**부터는 **앱 실행 중에 필요한 권한(permission)을 반드시 확인하고 없으면 요청**해야 합니다. 이에 대한 자세한 내용은 다음 링크를 참조합니다.
+	- https://kwanulee.github.io/AndroidProgramming/data-management/content-provider.html#2
 
 
 ## 3. 캘린더 테이블
@@ -108,137 +63,384 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResol
 - 지원되는 필드의 전체 목록은 [CalendarContract.Calendars](https://developer.android.com/reference/android/provider/CalendarContract.Calendars?hl=ko) 참조 
 
 ### 3.1 캘린더 쿼리
-- 다음은 특정한 사용자가 소유한 캘린더를 가져오는 방법을 나타낸 예시입니다.
-- 
-- [query](https://developer.android.com/reference/android/content/ContentResolver.html#query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)) 메소드 ([ContentResolver](https://developer.android.com/reference/android/content/ContentResolver.html) 클래스 내)
+- 다음은 CalendarProvider를 통해서 캘린더 테이블의 캘린더 레코드를 가져오는 방법을 나타낸 예시입니다.
+	<img src="figure/calendarprovider-screenshot1.png" width=200>
+	<img src="figure/calendarprovider-screenshot2.png" width=200>
+
+	- **ACCOUNT\_Name** 은 캘린더를 디바이스와 동기화할 때 사용하는 계정 이름을 나타내며, 이를 바탕으로 캘린더 테이블의 레코드를 검색합니다.
+	-  **캘린더 조회** 버튼을 누르면, 입력된 Account\_Name 값과 매칭되는 캘린더 레코드만 리스트뷰로 출력합니다. Account\_Name 값을 입력하지 않으면, 모든 캘린더 레코드를 출력합니다.
+
+- 코드
+
+	```java
+    private void queryCalendars() {
+        // 권한 검사
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[] {Manifest.permission.READ_CALENDAR},
+                    REQUEST_CODE_QUERY_CALENDARS);
+            return;
+        }
+
+        // Projection array. Creating indices for this array instead of doing
+        // dynamic lookups improves performance.
+        final String[] CALENDAR_PROJECTION = new String[]{
+                CalendarContract.Calendars._ID,
+                CalendarContract.Calendars.ACCOUNT_NAME,
+                CalendarContract.Calendars.CALENDAR_DISPLAY_NAME
+        };
+
+        ContentResolver contentResolver = getContentResolver();
+
+        // 화면의 EditText 창으로부터 사용자가 입력한 문자열을 읽어와 mAccountName 변수에 저장
+        mAccountName = ((EditText) findViewById(R.id.account_name)).getText().toString();
+
+        Cursor cursor = null;
+        Uri uri = CalendarContract.Calendars.CONTENT_URI;
+
+        if (mAccountName == null || mAccountName.equals(""))
+            cursor = contentResolver.query(uri, CALENDAR_PROJECTION, null, null, null);
+        else { // ACCOUNT_NAME 속성 값이 mAccountName의 값과 일치하는 캘린더를 추출함
+            String selection = "(" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?)";
+            String[] selectionArgs = new String[]{mAccountName};
+            cursor = contentResolver.query(uri, CALENDAR_PROJECTION, selection, selectionArgs, null);
+        }
+
+        // SimpleCursorAdapter 설정 및 생성
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                getApplicationContext(),
+                R.layout.calendar_item,
+                cursor,
+                CALENDAR_PROJECTION,
+                new int[] {R.id._id, R.id.accountName, R.id.displayName},
+                0);
+
+        ListView lv = findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+	//...
+    }
+	```
+	
+		
+## 4. 이벤트 테이블
+- [CalendarContract.Events](https://developer.android.com/reference/android/provider/CalendarContract.Events?hl=ko) 테이블에는 각각의 이벤트에 대한 세부 정보가 포함되어 있습니다. 
+
+| 상수 | 설명|
+|----|------|
+|CALENDAR_ID|	이벤트가 속한 캘린더의 _ID입니다.|
+|ORGANIZER|	이벤트 조직자(소유자)의 이메일입니다.|
+|TITLE|	이벤트 제목입니다.|
+|EVENT_LOCATION|	이벤트가 일어나는 장소입니다.|
+|DESCRIPTION|	이벤트 설명입니다.|
+|DTSTART|	이벤트가 시작되는 시간을 Epoch 이후 UTC 밀리초 단위로 나타낸 것입니다.|
+|DTEND|	이벤트가 종료되는 시간을 Epoch 이후 UTC 밀리초 단위로 나타낸 것입니다.|
+|EVENT_TIMEZONE|	이벤트의 표준 시간대입니다.|
+- 지원되는 필드의 전체 목록은 [CalendarContract.Events](https://developer.android.com/reference/android/provider/CalendarContract.Events?hl=ko) 참조 
+
+- 이벤트를 추가, 업데이트 또는 삭제하려면 애플리케이션의 매니페스트 파일에 **[WRITE_CALENDAR](https://developer.android.com/reference/android/Manifest.permission?hl=ko#WRITE_CALENDAR)** 권한이 포함되어야 합니다.
+
+### 4.1 CALENDAR\_ID로 이벤트 조회
+- 이벤트 테이블에는 모든 캘린더의 이벤트 레코드를 포함하고 있습니다. 
+- 다음은 특정 캘린더와 관련된 이벤트만 CalendarProvider를 통해서 가져오는 방법을 나타낸 예시입니다. 
+
+- 코드
 
 
 	```java
-	Cursor query (Uri uri, 
-	                String[] projection, 
-	                String selectionClause, 
-	                String[] selectionArgs, 
-	                String sortOrder)
-	```
-	인수            | 설명
-	--------------|-------------------
-	uri           | 콘텐츠 제공자의 URI. content:// 형식
-	projection    | 반환해야 할 열들
-	selectionClause     | 선택될 행들에 대한 조건
-	selectionArgs | 조건에 필요한 인수
-	sortOrder     | 선택된 행들의 정렬 방법
-	
-- 콘텐츠 URI
-	+ 콘텐츠 URI는 제공자에서 데이터를 식별하는 URI
-	+ 콘텐츠 URI에는 전체 제공자의 상징적인 이름(제공자의 권한)과 테이블을 가리키는 이름(경로)이 포함
-	+ 형식
-	
-		```
-		content://AUTHORITY/PATH/ID
-		```
+    private void queryEventByCalendar_ID() {
+        // 권한 검사 및 요청
+        if (ActivityCompat.checkSelfPermission(EventActivity.this, Manifest.permission.READ_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    EventActivity.this,
+                    new String[]{Manifest.permission.READ_CALENDAR},
+                    REQUEST_CODE_QUERY_EVENT);
+            return;
+        }
 
-- 예제
-	+ **연락처 정보**를 제공하는 제공자에 액세스하는 데 필요한 변수를 **ContactsContract** 계약 클래스에 정의된 상수를 이용하여 정의 
+        // 이벤트 테이블의 프로젝션
+        final String[] EVENT_PROJECTION = new String[]{
+                CalendarContract.Events._ID,
+                CalendarContract.Events.TITLE,
+                CalendarContract.Events.DTSTART,
+                CalendarContract.Events.DTEND
+        };
 
-		```java
-	        String [] projection = {
-	                ContactsContract.CommonDataKinds.Phone._ID,
-	                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-	                ContactsContract.CommonDataKinds.Phone.NUMBER
-	        };
-	
-			 // 연락처 전화번호 타입에 따른 행 선택을 위한 선택 절
-	        String selectionClause = ContactsContract.CommonDataKinds.Phone.TYPE + " = ? ";
-	
-	        // 전화번호 타입이 'MOBILE'인 것을 지정
-	        String[] selectionArgs = {""+ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE};
-		```
-		
-		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/java/com/kwanwoo/android/contentresolvertest/MainActivity.java#L40-L50
-		
-	+ 설정된 파라미터를 바탕으로 query() 메소드를 실행
-	
-		```java
-	        Cursor c = getContentResolver().query(
-	                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,  // 조회할 데이터 URI
-	                projection, 		// 조회할 컬럼 들
-	                selectionClause, 	// 선택될 행들에 대한 조건절
-	                selectionArgs, 		// 조건절에 필요한 파라미터
-	                null);				// 정렬 안함
-		```
+        ContentResolver cr = getContentResolver();
 
-		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/java/com/kwanwoo/android/contentresolvertest/MainActivity.java#L49-L54
-		
-### 3.2 쿼리 결과 표시
+		//  selection 문자열 설정.  "(calendar_id = ?)"
+        String selection = "(" + CalendarContract.Events.CALENDAR_ID + " = ?) ";
+        // selection 문자열의 ?에 대응될 값을 포함하는 문자열 배열
+        String[] selectionArgs = new String[]{mCalendarId}; // mCalendarId는 이벤트가 속한 캘린더 ID
 
-- 쿼리 결과인 Cursor 객체가 들어 있는 [SimpleCursorAdapter](https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html) 객체를 생성하며, 이 객체를 [ListView](https://developer.android.com/reference/android/widget/ListView.html)에 대한 어댑터로 설정
+		// 이벤트 테이블에서 calendar_id가 id와 일치하는 레코드의 결과셋을 가리키는 커서를 반환
+        Cursor cursor = cr.query(
+                CalendarContract.Events.CONTENT_URI,
+                EVENT_PROJECTION,
+                selection,
+                selectionArgs,
+                null);
 
-	1. ListView의 항목 뷰 정의 (item.xml)
-	
-		```java
-		<LinearLayout
-		    xmlns:android="http://schemas.android.com/apk/res/android"
-		    android:orientation="horizontal" android:layout_width="match_parent"
-		    android:layout_height="match_parent">
-		
-		    <TextView
- 	     		android:id="@+id/name"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textAppearance="?android:attr/textAppearanceMedium"
-		        android:textColor="@color/colorPrimaryDark"
-		        android:layout_weight="1"/>
-		    <TextView
-		    	android:id="@+id/phone"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:textColor="@color/colorPrimaryDark"
-		        android:textAppearance="?android:attr/textAppearanceMedium"
-		        android:layout_weight="1"/>
-		
-		</LinearLayout>
-		```
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/res/layout-port/item.xml
-	
-	2.  SimpleCursorAdapter 설정 
+        // ConvertSimpleCursorAdapter 설정 및 생성
+        // ConvertSimpleCusrorAdapter - epoch 시간 값을 YYYY-MM-DD HH:mm 형식으로 변환
+        ConvertSimpleCursorAdapter adapter = new ConvertSimpleCursorAdapter(
+                getApplicationContext(),
+                R.layout.event_item,
+                cursor,
+                new String[]{
+                        CalendarContract.Events.TITLE,
+                        CalendarContract.Events.DTSTART,
+                        CalendarContract.Events.DTEND},
+                new int[]{
+                        R.id.tv_title,
+                        R.id.tv_dtstart,
+                        R.id.tv_dtend},
+                0);
 
-		```java
-	        String[] contactsColumns = { // 쿼리결과인 Cursor 객체로부터 출력할 열들
-	                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-	                ContactsContract.CommonDataKinds.Phone.NUMBER
-	        };
-	
-	        int[] contactsListItems = { // 열의 값을 출력할 뷰 ID (layout/item.xml 내) 
-	                R.id.name,
-	                R.id.phone
-	        };
-	
-	        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-	                R.layout.item,
-	                c,
-	                contactsColumns,
-	                contactsListItems,
-	                0);
-	
-	        ListView lv = (ListView) findViewById(R.id.listview);
-	        lv.setAdapter(adapter);
-		```
-		
-		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResolverTest/app/src/main/java/com/kwanwoo/android/contentresolvertest/MainActivity.java#L49-L75
-		
-	
-		
-## 4. 콘텐츠 제공자에 데이터 삽입, 업데이트 및 삭제
-- SQL과 유사하게 query뿐 아니라 insert, update, delete를 지원
-- [ContentResolver](https://developer.android.com/reference/android/content/ContentResolver.html)의 아래 메소드를 사용
-	- Uri [insert](https://developer.android.com/reference/android/content/ContentResolver.html#insert(android.net.Uri, android.content.ContentValues)) (Uri url, ContentValues values);
+        ListView lv = findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+        ```
+
+### 4.2 이벤트 추가	
+- 다음은 새 이벤트를 삽입할 때 지켜야 하는 규칙입니다.
+	- CALENDAR_ID 및 DTSTART를 포함해야 합니다.
+	- EVENT_TIMEZONE을 포함해야 합니다.  
+	- 반복되지 않는 이벤트의 경우, DTEND를 포함해야 합니다.
+	- 반복적인 이벤트의 경우 RRULE 또는 RDATE와 함께 DURATION을 포함해야 합니다. 
+
+- 코드
+
+	```java
+    private final static int REQUEST_CODE_ADD_EVENT = 1;
+    
+    private void addEvent() {
+        // WRITE_CALENDAR 권한 검사 및 요청
+        if (ActivityCompat.checkSelfPermission(EventActivity.this, Manifest.permission.WRITE_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    EventActivity.this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR},
+                    REQUEST_CODE_ADD_EVENT);
+            return;
+        }
+
+        // ...
+
+        ContentResolver cr = getContentResolver();
+        
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.CALENDAR_ID, mCalendarId);
+        values.put(CalendarContract.Events.TITLE, title);	// tile은 이벤트 제목을 나타내는 문자열
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, "Asia/Seoul");
+        values.put(CalendarContract.Events.DTSTART, startMillis); // startMills 는 epoch 시간으로 설정된 long 형 변수
+        values.put(CalendarContract.Events.DTEND, endMillis); 	// endMills 는 epoch 시간으로 설정된 long 형 변수
+
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);		
+```
+
+### 4.3 이벤트 수정
+- 애플리케이션이 사용자에게 이벤트 편집을 허용할 경우, 인텐트를 사용하여  EDIT 인텐트를 사용하는 것이 좋습니다. 그러나 필요한 경우 직접 이벤트를 편집해도 됩니다. 
+- 이벤트 업데이트를 직접 수행하려면, 다음 메소드를 이용합니다.
+
 	- int [update](https://developer.android.com/reference/android/content/ContentResolver.html#update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])) (Uri uri, ContentValues values, String where, String[] selectionArgs);
-	- int [delete](https://developer.android.com/reference/android/content/ContentResolver.html#delete(android.net.Uri, java.lang.String, java.lang.String[])) (Uri url, String where, String[] selectionArgs);
+		1. 수정할 대상(예, 이벤트 테이블 혹은 이벤트 레코드)을 uri로 설정
+		2.  [ContentValues](https://developer.android.com/reference/android/content/ContentValues)
+ 객체에 변경이 필요한 이벤트 항목과 값을 설정
 
-- [**주의**] 모든 콘텐츠 제공자가 데이터 삽입,업데이트,삭제 기능을 제공하지는 않습니다. 필요에 따라서 이 기능들을 제공할 수도 있고, 안할 수도 있습니다.
-	- 가령, 연락처 정보를 제공하는 콘텐츠 제공자는 연락처 정보를 직접 삽입, 업데이트, 삭제하는 기능을 제공하고 있지 않습니다.
+	-  두 가지 사용 방식
+		1. [**방식1**] 수정할 이벤트 레코드의 **_ID**를 URI에 추가된 ID로 제공 ([withAppendedId()](https://developer.android.com/reference/android/content/ContentUris?hl=ko#withAppendedId(android.net.Uri,%20long)) 메소드 이용)
+		2. [**방식2**] 수정할 이벤트 레코드를 선택하기 위해서 where 문자열과 selectionArgs 문자열 배열 설정
 
+#### 4.3.1 **방식1** 코드
+
+```java
+    private void updateEvent() {
+    	// 권한 검사 및 요청
+        if (ActivityCompat.checkSelfPermission(EventActivity.this, Manifest.permission.WRITE_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    EventActivity.this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR},
+                    REQUEST_CODE_UPDATE_EVENT);
+            return;
+        }
+
+		// 화면상의 EditText 객체에  입력된 값을 읽어옴
+        String idString = ((EditText) findViewById(R.id._id)).getText().toString();
+        String title = ((EditText) findViewById(R.id.edit_title)).getText().toString();
+        String dtstart = ((EditText) findViewById(R.id.edit_dtstart)).getText().toString();
+        String dtend = ((EditText) findViewById(R.id.edit_dtend)).getText().toString();
+
+        ContentResolver cr = getContentResolver();
+        
+        //  수정할 항목과 값을 ContentValues 객체에 설정
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.TITLE, title);
+        values.put(CalendarContract.Events.DTSTART, convertDateToTime(dtstart));
+        values.put(CalendarContract.Events.DTEND, convertDateToTime(dtend));
+
+		// Events 테이블 URI 마지막 부분에 id를 덧붙여 새로운 URI를 얻음
+        Uri updateUri  = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, Long.parseLong(idString));
+        
+        // 
+        int rows = cr.update(updateUri, values, null, null);
+   }
+```
+
+#### 4.3.2 **방식2** 코드
+
+```java
+    private void updateEvent() {
+    	// 권한 검사 및 요청
+        if (ActivityCompat.checkSelfPermission(EventActivity.this, Manifest.permission.WRITE_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    EventActivity.this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR},
+                    REQUEST_CODE_UPDATE_EVENT);
+            return;
+        }
+
+		// 화면상의 EditText 객체에  입력된 값을 읽어옴
+        String idString = ((EditText) findViewById(R.id._id)).getText().toString();
+        String title = ((EditText) findViewById(R.id.edit_title)).getText().toString();
+        String dtstart = ((EditText) findViewById(R.id.edit_dtstart)).getText().toString();
+        String dtend = ((EditText) findViewById(R.id.edit_dtend)).getText().toString();
+
+        ContentResolver cr = getContentResolver();
+        
+        //  수정할 항목과 값을 ContentValues 객체에 설정
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.TITLE, title);
+        values.put(CalendarContract.Events.DTSTART, convertDateToTime(dtstart));
+        values.put(CalendarContract.Events.DTEND, convertDateToTime(dtend));
+
+	// 수정할 이벤트 레코드를 선택하기 위해서 where 문자열과 selectionArgs 문자열 배열 설정
+        String where = "(" + CalendarContract.Events._ID + " = ?) ";
+        String[] selectionArgs = new String[]{idString};
+        int rows = cr.update(CalendarContract.Events.CONTENT_URI, values, where, selectionArgs);
+   }
+```
+		
+### 4.4 이벤트 삭제
+- 이벤트 삭제도 이벤트 수정과 마찬가지로 두 가지 방식을 사용할 수 있습니다.
+	1.  삭제할 이벤트의 _ID가 추가된 URI를 사용
+	2. 삭제할 이벤트 레코드를 선택하기 위ㅐ where 문자열과 selectionArgs 문자열 배열을 사용.
+
+- 다음 코드는 "삭제할 이벤트의 \_ID가 추가된 URI를 사용한 예제 코드입니다.
+
+	```java
+    private void deleteEvent() {
+        if (ActivityCompat.checkSelfPermission(EventActivity.this, Manifest.permission.WRITE_CALENDAR)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                    EventActivity.this,
+                    new String[]{Manifest.permission.WRITE_CALENDAR},
+                    REQUEST_CODE_DELETE_EVENT);
+            return;
+        }
+
+        String idString = ((EditText) findViewById(R.id._id)).getText().toString();
+
+
+        Uri deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, Long.parseLong(idString));
+        
+        ContentResolver cr = getContentResolver();
+        int rows = cr.delete(deleteUri, null, null);
+    }
+```
+
+## 5. 기타 다른 테이블
+- 참석자 테이블 
+	-  [CalendarContract.Attendees](https://developer.android.com/reference/android/provider/CalendarContract.Attendees?hl=ko) 테이블의 각 행은 이벤트의 참석자 또는 게스트 하나를 나타냅니다. 
+	- 추가 자료:  https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko#attendees
+- 알림 테이블
+	- [CalendarContract.Reminders](https://developer.android.com/reference/android/provider/CalendarContract.Reminders?hl=ko) 테이블의 각 행은 이벤트의 알림 하나를 나타냅니다. 
+	- 추가 자료:  https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko#reminders
+- 인스턴스 테이블
+	- [CalendarContract.Instances](https://developer.android.com/reference/android/provider/CalendarContract.Instances?hl=ko) 테이블에는 이벤트 발생의 시작 및 종료 시간이 포함됩니다. 
+	- 이 테이블의 각 행이 하나의 이벤트 발생을 나타냅니다. 
+	- 이 인스턴스 테이블은 쓰기가 허용되지 않으며 이벤트 발생을 쿼리하는 수단을 제공할 뿐입니다.
+	- 추가 자료: https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko#instances 
+
+## 6. 캘린더 인텐트
+- 애플리케이션에 권한이 없어도 캘린더 데이터를 읽고 쓸 수 있습니다. 대신 Android의 캘린더 애플리케이션이 지원하는 인텐트를 사용하여 해당 애플리케이션에 읽기 및 쓰기 작업을 분배하면 됩니다. 다음 표는 캘린더 제공자가 지원하는 인텐트를 나열한 것입니다.
+
+| 작업 | URI | 설명 |
+|-------|------|-----|
+|VIEW| content://com.android.calendar/time/\<ms\_since\_epoch\> | 캘린더를 \<ms\_since\_epoch\>에서 지정한 시간으로 엽니다.|
+|View| content://com.android.calendar/events/\<event\_id\>|  \<event\_id\>에서 지정한 이벤트를 봅니다.|
+|EDIT| content://com.android.calendar/events/\<event\_id\> | \<event\_id\>에서 지정한 이벤트를 편집합니다.|
+|INSERT| content://com.android.calendar/events | 이벤트를 생성합니다.|
+
+
+### 6.1 인텐트를 사용하여 이벤트 삽입
+- INSERT 인텐트를 사용하면 애플리케이션이 이벤트 삽입 작업을 캘린더 자체에 넘길 수 있습니다. 이 방법을 사용하면 애플리케이션이 WRITE_CALENDAR 권한을 매니페스트 파일에 포함할 필요도 없습니다.
+- 다음은 2012년 1월 19일 오전 7:30~8:30까지 한 시간 동안 실시되는 이벤트 일정을 예약하는 스니펫입니다. 이 스니펫에서 다음 사항에 주목하세요.
+	- Events.CONTENT_URI를 URI로 지정합니다.
+	- CalendarContract.EXTRA\_EVENT\_BEGIN\_TIME 및 CalendarContract.EXTRA\_EVENT\_END\_TIME 추가 필드를 사용하여 이벤트 시간으로 양식을 미리 채웁니다. 이 시간에 해당하는 값은 Epoch로부터 UTC 밀리초 단위로 표시해야 합니다.
+	- Intent.EXTRA\_EMAIL 추가 필드를 사용하여 쉼표로 구분된 초청인 목록을 제공하며, 이는 이메일 주소로 나타냅니다.
+
+	```java
+	Calendar beginTime = Calendar.getInstance();
+	beginTime.set(2012, 0, 19, 7, 30);
+	Calendar endTime = Calendar.getInstance();
+	endTime.set(2012, 0, 19, 8, 30);
+	Intent intent = new Intent(Intent.ACTION_INSERT)
+	        .setData(Events.CONTENT_URI)
+	        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+	        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+	        .putExtra(Events.TITLE, "Yoga")
+	        .putExtra(Events.DESCRIPTION, "Group class")
+	        .putExtra(Events.EVENT_LOCATION, "The gym")
+	        .putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY)
+	        .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
+	startActivity(intent);
+	```
 	
----
+### 6.2 인텐트를 사용하여 이벤트 편집
+- 이벤트 업데이트에서 설명한 바와 같이 이벤트를 직접 업데이트할 수 있습니다. 그러나 EDIT 인텐트를 사용하면 권한이 없는 애플리케이션이 캘린더 애플리케이션에 이벤트 편집을 넘길 수 있습니다. 사용자가 캘린더에서 이벤트 편집을 마치면 원래 애플리케이션으로 돌아오게 됩니다.
 
-[**다음 학습**: 캘린더 제공자](https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko)
+- 다음은 지정된 이벤트에 새 제목을 설정하여 사용자에게 캘린더에서 이벤트를 편집할 수 있도록 해주는 인텐트의 예입니다.
+
+	```java
+long eventID = 208;
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_EDIT)
+    .setData(uri)
+    .putExtra(Events.TITLE, "My New Title");
+startActivity(intent);
+```
+
+### 6.3 인텐트를 사용하여 캘린더 데이터 보기
+- 캘린더 제공자는 VIEW 인텐트를 사용하는 방식을 두 가지 제공합니다.
+
+	1. 캘린더를 특정 날짜에 여는 방식
+	2. 이벤트를 보는 방식
+
+
+- 다음은 캘린더를 특정 날짜에 여는 방법을 보여주는 예입니다.
+
+	```java
+// A date-time specified in milliseconds since the epoch.
+long startMillis;
+...
+Uri.Builder builder = CalendarContract.CONTENT_URI.buildUpon();
+builder.appendPath("time");
+ContentUris.appendId(builder, startMillis);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+    .setData(builder.build());
+startActivity(intent);
+```
+
+- 다음은 이벤트를 보기 위해 여는 방법을 나타낸 예입니다.
+
+	```java
+long eventID = 208;
+...
+Uri uri = ContentUris.withAppendedId(Events.CONTENT_URI, eventID);
+Intent intent = new Intent(Intent.ACTION_VIEW)
+   .setData(uri);
+startActivity(intent);
+```
