@@ -261,7 +261,7 @@ pre[class*="language-"] {
 
 <h3 id="toc_3">나. [옵션메뉴 실습]</h3>
 
-<p>액션바의 옵션 메뉴를 누르면 다음과 같이 2개의 메뉴가 나오고, 이중 하나만 선택되도록 하기 위해 메뉴 리소스의 메뉴 아이템을 <strong>&lt;group&gt;</strong> 태그로 묶고, <strong>android:checkableBehavior</strong> 의 값을 <q><em>single</em></q>로 설정하라.</p>
+<p>액션바의 옵션 메뉴를 누르면 다음과 같이 3개의 메뉴가 나오고, 이중 하나만 선택되도록 하기 위해 메뉴 리소스의 메뉴 아이템을 <strong>&lt;group&gt;</strong> 태그로 묶고, <strong>android:checkableBehavior</strong> 의 값을 <q><em>single</em></q>로 설정하라.</p>
 
 <p><img src="figure/data-storage-lab2.png" width=200px></p>
 
@@ -274,7 +274,10 @@ pre[class*="language-"] {
             &lt;item
                 android:id=&quot;@+id/external_storage&quot;
                 android:title=&quot;External Storage&quot;
-                 /&gt;        
+                 /&gt;
+             &lt;item 
+                android:id=&quot;@+id/sqlite&quot;
+                android:title=&quot;SQLite Database&quot;             /&gt;        
       &lt;/group&gt;
 &lt;/menu&gt;</code></pre></div>
 
@@ -330,7 +333,7 @@ pre[class*="language-"] {
 <h2 id="toc_7">4.  SQLite DB Storage 실습</h2>
 
 <ul>
-<li>옵션 메뉴 아이템 중 <em>External Storage</em>가 선택된 상태에서</li>
+<li>옵션 메뉴 아이템 중 <em>SQLite Database</em>가 선택된 상태에서</li>
 <li>메인 화면의 <em>EditText</em> 창에 임의의 타이틀 텍스트를 입력하고, <strong>SAVE</strong> 버튼을 누르면,  데이터베이스(<strong>data/data/패키지/databases</strong>)에 있는 여러분이 지정한 이름의 db 파일에 입력된 텍스트를 저장합니다. 단 저장 시, 입력된 시간도 같이 저장합니다.</li>
 <li>Android Studio의 [<strong>Device File Explorer</strong>] 탭을 열어 해당 파일이 생성되었는 지 확인합니다.</li>
 <li>메인 화면의 <strong>LOAD</strong> 버튼을 누르면 해당 데이터베이스에서 데이터를 읽어서 결과를 보여는 <em>TextView</em> 창에 출력해 줍니다. </li>

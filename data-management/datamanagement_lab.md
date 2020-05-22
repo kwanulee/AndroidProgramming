@@ -8,7 +8,7 @@
 <img src="figure/data-storage-lab1.png" width=400px>
 
 ### 나. [옵션메뉴 실습] 
-액션바의 옵션 메뉴를 누르면 다음과 같이 2개의 메뉴가 나오고, 이중 하나만 선택되도록 하기 위해 메뉴 리소스의 메뉴 아이템을 **\<group\>** 태그로 묶고, **android:checkableBehavior** 의 값을 "*single*"로 설정하라.
+액션바의 옵션 메뉴를 누르면 다음과 같이 3개의 메뉴가 나오고, 이중 하나만 선택되도록 하기 위해 메뉴 리소스의 메뉴 아이템을 **\<group\>** 태그로 묶고, **android:checkableBehavior** 의 값을 "*single*"로 설정하라.
 
 <img src="figure/data-storage-lab2.png" width=200px>
 
@@ -22,7 +22,10 @@
 	        <item
 	            android:id="@+id/external_storage"
 	            android:title="External Storage"
-	             />        
+	             />
+	         <item 
+	         	android:id="@+id/sqlite"
+            	android:title="SQLite Database"             />        
 	  </group>
 </menu>
 ```
@@ -67,7 +70,7 @@
 
 ## 4.  SQLite DB Storage 실습
 
-* 옵션 메뉴 아이템 중 *External Storage*가 선택된 상태에서
+* 옵션 메뉴 아이템 중 *SQLite Database*가 선택된 상태에서
 * 메인 화면의 *EditText* 창에 임의의 타이틀 텍스트를 입력하고, **SAVE** 버튼을 누르면,  데이터베이스(**data/data/패키지/databases**)에 있는 여러분이 지정한 이름의 db 파일에 입력된 텍스트를 저장합니다. 단 저장 시, 입력된 시간도 같이 저장합니다.
 * Android Studio의 [**Device File Explorer**] 탭을 열어 해당 파일이 생성되었는 지 확인합니다.
 * 메인 화면의 **LOAD** 버튼을 누르면 해당 데이터베이스에서 데이터를 읽어서 결과를 보여는 *TextView* 창에 출력해 줍니다. 
