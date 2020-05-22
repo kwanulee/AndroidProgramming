@@ -240,4 +240,4 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ContentResol
 	
 ---
 
-[**다음 학습**: 캘린더 제공자](https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko)
+[**다음 학습**: 캘린더 제공자](calendar-provider.html)
