@@ -12,7 +12,10 @@ div.polaroid {
 # 캘린더 제공자 (Calendar Provider)
 - 본 자료는 다음 내용을 바탕으로 요약 및 각색된 것입니다. 
 	- 참고문서: https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko
-
+- 예제 프로젝트 링크
+	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/CalendarProviderTest 
+	- 프로젝트 다운로드를 위해 이 [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-939c8993fd5f2939a526/CalendarProviderTest.zip)를 클릭하세요.
+	 
 ## 1. 개요
 
 - **캘린더 제공자**는 사용자의 캘린더 이벤트에 대한 리포지토리입니다. 
@@ -64,10 +67,11 @@ div.polaroid {
 
 ### 3.1 캘린더 쿼리
 - 다음은 CalendarProvider를 통해서 캘린더 테이블의 캘린더 레코드를 가져오는 방법을 나타낸 예시입니다.
+
 	<img src="figure/calendarprovider-screenshot1.png" width=200>
 	<img src="figure/calendarprovider-screenshot2.png" width=200>
 
-	- **ACCOUNT\_Name** 은 캘린더를 디바이스와 동기화할 때 사용하는 계정 이름을 나타내며, 이를 바탕으로 캘린더 테이블의 레코드를 검색합니다.
+	- **ACCOUNT\_NAME** 은 캘린더를 디바이스와 동기화할 때 사용하는 계정 이름을 나타내며, 이를 바탕으로 캘린더 테이블의 레코드를 검색합니다.
 	-  **캘린더 조회** 버튼을 누르면, 입력된 Account\_Name 값과 매칭되는 캘린더 레코드만 리스트뷰로 출력합니다. Account\_Name 값을 입력하지 않으면, 모든 캘린더 레코드를 출력합니다.
 
 - 코드
