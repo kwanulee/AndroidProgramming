@@ -11,16 +11,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -177,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         final String AUDIO_URL1 = "http://www.robtowns.com/music/blind_willie.mp3";
         final String AUDIO_URL2 = "http://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3";
 
-        final String VIDEO_URL ="https://kwanulee.github.io/Android/multimedia/media/makerton.mp4";
+        final String VIDEO_URL ="https://kwanulee.github.io/AndroidProgramming/multimedia/media/makerton.mp4";
         ArrayList mediaList = new ArrayList<MediaItem>();
 
         // Raw 리소스 데이터 추가
