@@ -4,9 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -220,18 +221,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void saveToExtenalStorage() {
         String data = input.getText().toString();
         Log.i(TAG, getLocalClassName() + ":file save start");
         try {
-            // 공유 디렉토리 (sdcard/Download) 사용할 경우
-            File path = Environment.getExternalStoragePublicDirectory
-                    (Environment.DIRECTORY_DOWNLOADS);
-
             //  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/를 사용할 경우
-//          File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+            File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
 
+            // 공유 디렉토리 (sdcard/Download) 사용할 경우
+//            File path = Environment.getExternalStoragePublicDirectory
+//                    (Environment.DIRECTORY_DOWNLOADS);
 
             File f = new File(path, "external.txt"); // 경로, 파일명
             FileWriter write = new FileWriter(f, true);
@@ -246,15 +245,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void loadFromExternalStorage(){
         try {
-            // 공유 디렉토리 (sdcard/Download) 사용할 경우
-            File path = Environment.getExternalStoragePublicDirectory
-                    (Environment.DIRECTORY_DOWNLOADS);
-
             //  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/를 사용할 경우
-//            File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+            File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+
+            // 공유 디렉토리 (sdcard/Download) 사용할 경우
+//            File path = Environment.getExternalStoragePublicDirectory
+//                    (Environment.DIRECTORY_DOWNLOADS);
 
             File f = new File(path, "external.txt");
             StringBuffer data = new StringBuffer();
