@@ -9,29 +9,38 @@
 
 
 ## 1. 개요 
-- Linux 파일 시스템과 java.io의 입출력 스트림에 대한 이해 필수입니다.- 모든 Android 기기에는 "**내부**" 및 "**외부**" 저장소의 두 가지 파일 저장소 영역이 있습니다.
+- Linux 파일 시스템과 java.io의 입출력 스트림에 대한 이해 필수입니다.
+- 모든 Android 기기에는 "**내부**" 및 "**외부**" 저장소의 두 가지 파일 저장소 영역이 있습니다.
 
 	내부 저장소                          | 외부 저장소
 	--------------------------------- | -------------
 	내장 메모리                          | 이동식 저장장치 (SD 카드)
 	항상 사용 가능                        | 외부 저장소의 마운트 여부에 따라 사용 가능
 	기본적으로 자신의 앱에서만 액세스 할 수 있음 | 모든 사람이 읽을 수 있음
-	사용자가 앱을 삭제하면 시스템이 내장 저장소에서 앱의 모든 파일을 제거함 | 사용자가 앱을 삭제하면 getExternalFilesDir()의 디렉터리에 저장한 앱 파일에 한해서 시스템이 제거함	사용자와 다른 앱이 앱의 파일에 직접 액세스하는 것을 원치 않을 때 적합 | 다음 경우에 적합 <ul> <li>액세스 제한이 필요치 않은 파일 <li>다른 앱과 공유하기를 원하는 파일 <li>사용자가 컴퓨터에서 액세스 할 수 있도록 허용하는 파일 </ul>
+	사용자가 앱을 삭제하면 시스템이 내장 저장소에서 앱의 모든 파일을 제거함 | 사용자가 앱을 삭제하면 getExternalFilesDir()의 디렉터리에 저장한 앱 파일에 한해서 시스템이 제거함
+	사용자와 다른 앱이 앱의 파일에 직접 액세스하는 것을 원치 않을 때 적합 | 다음 경우에 적합 <ul> <li>액세스 제한이 필요치 않은 파일 <li>다른 앱과 공유하기를 원하는 파일 <li>사용자가 컴퓨터에서 액세스 할 수 있도록 허용하는 파일 </ul>
 	
 - **FileTest 안드로이드 프로젝트 Github 주소**
-	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest 
+	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest 
 ## 2. 내부 저장소의 파일 입출력
 안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 [Context](https://developer.android.com/reference/android/content/Context.html) 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.
 
 ```java
-FileOutputStream openFileOutput (String name, int mode)FileInputStream openFileInput (String name)
+FileOutputStream openFileOutput (String name, int mode)
+FileInputStream openFileInput (String name)
 ```	
 - name
-	- 파일의 이름으로 경로를 표시하는 ‘/’ 문자가 들어가면 에러	- 파일의 위치는 **/data/data/패키지명/files** 디렉토리로 지정- mode
-	모드          | 설명
+	- 파일의 이름으로 경로를 표시하는 ‘/’ 문자가 들어가면 에러
+	- 파일의 위치는 **/data/data/패키지명/files** 디렉토리로 지정
+
+- mode
+
+	모드          | 설명
 	-------------|---------------------------------------------------
 	MODE_RPIVATE | 혼자만 사용하는 배타적인 모드로 파일을 생성. (디폴트)
-	MODE_APPEND  | 파일이 이미 존재할 경우 덮어쓰기 모드가 아닌 추가 모드로 Open.---
+	MODE_APPEND  | 파일이 이미 존재할 경우 덮어쓰기 모드가 아닌 추가 모드로 Open.
+
+---
 
 ### 2.1 OpenFileOuput
 
@@ -246,7 +255,8 @@ package com.example.kwanwoo.filetest;
     }
 	
 		```
-			- 앱의 권한 설정은 **설정>애플리케이션>**[해당 앱]**>권한**에서 언제든지 변경할 수 있음
+			
+- 앱의 권한 설정은 **설정>애플리케이션>**[해당 앱]**>권한**에서 언제든지 변경할 수 있음
 					
 	<img width= 200 src="figure/permission-change.png">
 	
@@ -257,32 +267,6 @@ package com.example.kwanwoo.filetest;
 
 ### 4.4 외부 저장소 사용 
 
----
-
-#### 4.4.1 다른 앱과 공유되는 파일 입출력
-* 공유 디렉토리 (Music, Pictures, Ringtones) 접근하기
-    - [static File Environment.getExternalStoragePublicDirectory(String type)](https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String))
-        + Type
-            - DIRECTORY\_MUSIC, DIRECTORY\_PODCASTS, DIRECTORY\_RINGTONES, DIRECTORY\_ALARMS, DIRECTORY\_NOTIFICATIONS, DIRECTORY\_PICTURES, or DIRECTORY\_MOVIES, DIRECTORY\_DOWNLOADS, DIRECTORY\_DCIM, DIRECTORY\_DOCUMENTS 등
-        + 반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)
-
-```java
-    // 공유 디렉토리 (sdcard/Download) 사용할 경우
-    File path = Environment.getExternalStoragePublicDirectory
-                           (Environment.DIRECTORY_DOWNLOADS);
-    File f = new File(path, "external.txt");      // 경로, 파일명
-    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
-
-    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
-    out.println(data);
-    out.close();
-```
-
-[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
-
----
-
-#### 4.4.2 앱 전용 파일 입출력
 * 외부 저장소의 앱 전용(private) 저장소 디렉토리 접근하기
     - [File getExternalFilesDir(String type)](https://developer.android.com/reference/android/content/Context.html#getExternalFilesDir(java.lang.String))    [[Context](https://developer.android.com/reference/android/content/Context.html) 클래스 메소드]
         + Type
@@ -295,15 +279,57 @@ package com.example.kwanwoo.filetest;
             - DIRECTORY\_MOVIES 등
         + 반환값: 외부저장소의 Android/data/패키지명/files 디렉토리 아래의 지정된 타입의 서브 디렉토리
             - (예,sdcard/Android/data/com.example.kwanwoo.filetest/files/Download)
+	- 예제 코드
 
-```java
-//  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/Download를 사용할 경우
-    File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-    
-    File f = new File(path, "external.txt");      // 경로, 파일명
-    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
+		```java
+		//  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/Download를 사용할 경우
+		    File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+		    
+		    File f = new File(path, "external.txt");      // 경로, 파일명
+		    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
+		
+		    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
+		    out.println(data);
+		    out.close();
+		```
 
-    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
-    out.println(data);
-    out.close();
-```[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
+		[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241)
+
+#### 4.4.1 다른 앱과 공유되는 파일 입출력 (API 28이하에서만 동작)
+
+* 공유 디렉토리 (Music, Pictures, Ringtones) 접근하기
+    - [static File Environment.getExternalStoragePublicDirectory(String type)](https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String))
+    	+ Type
+            - DIRECTORY\_MUSIC, DIRECTORY\_PODCASTS, DIRECTORY\_RINGTONES, DIRECTORY\_ALARMS, DIRECTORY\_NOTIFICATIONS, DIRECTORY\_PICTURES, or DIRECTORY\_MOVIES, DIRECTORY\_DOWNLOADS, DIRECTORY\_DCIM, DIRECTORY\_DOCUMENTS 등
+        + 반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)
+        + [주의] **This method was deprecated in API level 29.**
+    		- 이 메소드를 이용하기 위해서는 두가지 방법이 있습니다.
+    			1. **build.gradle (Module)** 파일의 **targetSdkVersion** 값을 28로 설정
+    			2. Manifest 파일에 다음과 같이 application 태그 속성을 추가하면 된다.
+
+					```xml
+					<manifest ... >
+					    <!-- This attribute is "false" by default on apps targeting Android Q. -->
+					    <application android:requestLegacyExternalStorage="true" ... >
+					     ...
+					    </application>
+					</manifest>	 
+					```
+
+	- 예제 코드       
+	
+		```java
+		    // 공유 디렉토리 (sdcard/Download) 사용할 경우
+		    File path = Environment.getExternalStoragePublicDirectory
+		                           (Environment.DIRECTORY_DOWNLOADS);
+		    File f = new File(path, "external.txt");      // 경로, 파일명
+		    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
+		
+		    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
+		    out.println(data);
+		    out.close();
+		```
+
+		[https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241](https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L231-L241)
+
+---

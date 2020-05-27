@@ -299,13 +299,11 @@ pre[class*="language-"] {
 <li><p><strong>FileTest 안드로이드 프로젝트 Github 주소</strong></p>
 
 <ul>
-<li><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest</a> </li>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest</a> 
+## 2. 내부 저장소의 파일 입출력
+안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.</li>
 </ul></li>
 </ul>
-
-<h2 id="toc_3">2. 내부 저장소의 파일 입출력</h2>
-
-<p>안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.</p>
 
 <div><pre><code class="language-java">FileOutputStream openFileOutput (String name, int mode)
 FileInputStream openFileInput (String name)</code></pre></div>
@@ -342,7 +340,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 
 <hr>
 
-<h3 id="toc_4">2.1 OpenFileOuput</h3>
+<h3 id="toc_3">2.1 OpenFileOuput</h3>
 
 <div><pre><code class="language-java">package com.example.kwanwoo.filetest;
 ... 생략 ...
@@ -376,7 +374,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 </ul></li>
 </ul>
 
-<h3 id="toc_5">2.2 OpenFileInput</h3>
+<h3 id="toc_4">2.2 OpenFileInput</h3>
 
 <div><pre><code class="language-java">    private void loadFromIntenalStorage() {
         try {
@@ -402,7 +400,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 
 <p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158</a></p>
 
-<h2 id="toc_6">3. res/raw 폴더 파일 이용하기</h2>
+<h2 id="toc_5">3. res/raw 폴더 파일 이용하기</h2>
 
 <ul>
 <li>대용량의 읽기 전용 데이터 파일은 리소스에 포함시켜 두는 것이 좋다.
@@ -447,7 +445,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 <p><a href="https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180">https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180</a></p></li>
 </ul>
 
-<h2 id="toc_7">4. 외부 저장소 사용하기</h2>
+<h2 id="toc_6">4. 외부 저장소 사용하기</h2>
 
 <ol>
 <li>외부 저장소 접근 권한 설정</li>
@@ -461,7 +459,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 </ul></li>
 </ol>
 
-<h3 id="toc_8">4.1 외부 저장소의 접근 권한 설정</h3>
+<h3 id="toc_7">4.1 외부 저장소의 접근 권한 설정</h3>
 
 <ul>
 <li>외부 저장소의 파일을 읽거나 쓰러면 Manifest 파일에서 <strong>READ_EXTERNAL_STORAGE</strong> 또는 <strong>WRITE_EXTERNAL_STORAGE</strong> 권한을 요청해야 합니다.
@@ -477,7 +475,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 
 <p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4</a></p>
 
-<h3 id="toc_9">4.2 외부 저장소의 상태 확인</h3>
+<h3 id="toc_8">4.2 외부 저장소의 상태 확인</h3>
 
 <ul>
 <li><p>외부 저장소를 사용하기 전에 <em>사용 가능성</em> 검사</p>
@@ -509,7 +507,7 @@ FileInputStream openFileInput (String name)</code></pre></div>
 
 <p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191</a></p>
 
-<h3 id="toc_10">4.3 앱 실행 시 접근 권한 확인 및 요청</h3>
+<h3 id="toc_9">4.3 앱 실행 시 접근 권한 확인 및 요청</h3>
 
 <ul>
 <li><p><strong>Android 6.0 (API level 23)</strong> 이상부터는앱 실행 중에 사용하려는 권한(permission)을 반드시 요청 (참고자료: <a href="https://developer.android.com/training/permissions/requesting.html">런타임에 권한 요청</a>)</p>
@@ -590,47 +588,10 @@ final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
 
 <p><img src="images/permissionreq.png" width=200 style="top:150px; right:100px; position:absolute;"></p>
 
-<h3 id="toc_11">4.4 외부 저장소 사용</h3>
-
-<hr>
-
-<h4 id="toc_12">4.4.1 다른 앱과 공유되는 파일 입출력</h4>
+<h3 id="toc_10">4.4 외부 저장소 사용</h3>
 
 <ul>
-<li>공유 디렉토리 (Music, Pictures, Ringtones) 접근하기
-
-<ul>
-<li><a href="https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String)">static File Environment.getExternalStoragePublicDirectory(String type)</a>
-
-<ul>
-<li>Type
-
-<ul>
-<li>DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, or DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, DIRECTORY_DOCUMENTS 등</li>
-</ul></li>
-<li>반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)</li>
-</ul></li>
-</ul></li>
-</ul>
-
-<div><pre><code class="language-java">    // 공유 디렉토리 (sdcard/Download) 사용할 경우
-    File path = Environment.getExternalStoragePublicDirectory
-                           (Environment.DIRECTORY_DOWNLOADS);
-    File f = new File(path, &quot;external.txt&quot;);      // 경로, 파일명
-    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
-
-    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
-    out.println(data);
-    out.close();</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241</a></p>
-
-<hr>
-
-<h4 id="toc_13">4.4.2 앱 전용 파일 입출력</h4>
-
-<ul>
-<li>외부 저장소의 앱 전용(private) 저장소 디렉토리 접근하기
+<li><p>외부 저장소의 앱 전용(private) 저장소 디렉토리 접근하기</p>
 
 <ul>
 <li><a href="https://developer.android.com/reference/android/content/Context.html#getExternalFilesDir(java.lang.String)">File getExternalFilesDir(String type)</a>    [<a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 클래스 메소드]
@@ -653,12 +614,11 @@ final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
 <li>(예,sdcard/Android/data/com.example.kwanwoo.filetest/files/Download)</li>
 </ul></li>
 </ul></li>
-</ul></li>
-</ul>
+<li><p>예제 코드</p>
 
 <div><pre><code class="language-java">//  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/Download를 사용할 경우
     File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-    
+
     File f = new File(path, &quot;external.txt&quot;);      // 경로, 파일명
     FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
 
@@ -666,7 +626,60 @@ final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
     out.println(data);
     out.close();</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241</a></p></li>
+</ul></li>
+</ul>
+
+<h4 id="toc_11">4.4.1 다른 앱과 공유되는 파일 입출력 (API 28이하에서만 동작)</h4>
+
+<ul>
+<li><p>공유 디렉토리 (Music, Pictures, Ringtones) 접근하기</p>
+
+<ul>
+<li><p><a href="https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String)">static File Environment.getExternalStoragePublicDirectory(String type)</a></p>
+
+<ul>
+<li>Type
+
+<ul>
+<li>DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, or DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, DIRECTORY_DOCUMENTS 등</li>
+</ul></li>
+<li>반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)</li>
+<li><p>[주의] <strong>This method was deprecated in API level 29.</strong></p>
+
+<ul>
+<li><p>이 메소드를 이용하기 위해서는 두가지 방법이 있습니다.</p>
+
+<ol>
+<li><strong>build.gradle (Module)</strong> 파일의 <strong>targetSdkVersion</strong> 값을 28로 설정</li>
+<li><p>Manifest 파일에 다음과 같이 application 태그 속성을 추가하면 된다.</p>
+
+<div><pre><code class="language-markup">&lt;manifest ... &gt;
+    &lt;!-- This attribute is &quot;false&quot; by default on apps targeting Android Q. --&gt;
+    &lt;application android:requestLegacyExternalStorage=&quot;true&quot; ... &gt;
+     ...
+    &lt;/application&gt;
+&lt;/manifest&gt;  </code></pre></div></li>
+</ol></li>
+</ul></li>
+</ul></li>
+<li><p>예제 코드       </p>
+
+<div><pre><code class="language-java">    // 공유 디렉토리 (sdcard/Download) 사용할 경우
+    File path = Environment.getExternalStoragePublicDirectory
+                           (Environment.DIRECTORY_DOWNLOADS);
+    File f = new File(path, &quot;external.txt&quot;);      // 경로, 파일명
+    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
+
+    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
+    out.println(data);
+    out.close();</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L231-L241">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241</a></p></li>
+</ul></li>
+</ul>
+
+<hr>
 
 
 
