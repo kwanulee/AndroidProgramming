@@ -308,7 +308,54 @@ pre[class*="language-"] {
 
 <hr>
 
-<h3 id="toc_9">1.3     URL로부터 오디오 재생</h3>
+<h3 id="toc_9">1.3 로컬에서 사용 가능한 URI 기반 재생 방법</h3>
+
+<ul>
+<li><p><strong>URI</strong>는 정보의 고유한 명칭으로 웹 주소를 나타내는 URL보다 더 상위의 개념</p>
+
+<ul>
+<li><p>File 타입: file://파일패스/파일이름</p>
+
+<div><pre><code class="language-none">file:///storage/emulated/0/Pictures/camera_image.jpg</code></pre></div></li>
+<li><p>안드로이드 리소스 타입: android.resource://패키지이름/리소스폴더/리소스이름</p>
+
+<div><pre><code class="language-none">android.resource://com.example.kwanwoo.multimediatest/raw/instrumental</code></pre></div></li>
+<li><p>컨텐츠 타입: content://정보제공자/패스/아이디</p>
+
+<div><pre><code class="language-none">content://media/external/video/media/154</code></pre></div></li>
+</ul></li>
+<li><p><strong>Uri 클래스의 주요 메소드</strong></p>
+
+<ul>
+<li><p>static Uri parse(String uriString) - Uri문자열로부터 Uri 객체 생성</p>
+
+<div><pre><code class="language-java">Uri image_Uri = Uri.parse(&quot;file:///storage/emulated/0/Pictures/camera_image.jpg&quot;);</code></pre></div></li>
+<li><p>static Uri.fromFile(File file) - file로부터 Uri 객체 생성</p>
+
+<div><pre><code class="language-java">Uri image_Uri = Uri.fromFile(
+                new File(Environment.getExternalStorageDirectory().getPath()+
+                        &quot;/Pictures/camera_imge.jpg&quot;)));</code></pre></div></li>
+</ul></li>
+<li><p>단말 외부 저장소 파일을 사용하는 경우에는 접근 권한(<strong>android.permission.READ_EXTERNAL_STORAGE</strong>) 필요</p>
+
+<div><pre><code class="language-markup">&lt;manifest ... &gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
+&lt;/manifest&gt;</code></pre></div></li>
+<li><p>사용방법 </p>
+
+<div><pre><code class="language-java">Uri myUri = ....; // initialize Uri here
+MediaPlayer mediaPlayer = new MediaPlayer();
+mediaPlayer.setDataSource(getApplicationContext(), myUri);
+// or just mediaPlayer.setDataSource(mFileName);
+mMediaPlayer.prepare();
+mediaPlayer.start();</code></pre></div>
+
+<p>예제 프로젝트 코드: <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L293">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L293</a></p></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_10">1.4     URL로부터 오디오 재생</h3>
 
 <ul>
 <li><p>인터넷 접근 권한(<strong>android.permission.INTERNET</strong>) 필요</p>
@@ -360,58 +407,7 @@ mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 });
 mediaPlayer.prepareAsync();</code></pre></div>
 
-<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L301-L317">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L301-L317</a></p></li>
-</ul>
-
-<hr>
-
-<h3 id="toc_10">1.4 로컬에서 사용 가능한 URI 기반 재생 방법</h3>
-
-<ul>
-<li><p><strong>URI</strong>는 정보의 고유한 명칭으로 웹 주소를 나타내는 URL보다 더 상위의 개념</p>
-
-<ul>
-<li><p>File 타입: file://파일패스/파일이름</p>
-
-<div><pre><code class="language-none">file:///storage/emulated/0/Pictures/camera_image.jpg</code></pre></div></li>
-<li><p>안드로이드 리소스 타입: android.resource://패키지이름/리소스폴더/리소스이름</p>
-
-<div><pre><code class="language-none">android.resource://com.example.kwanwoo.multimediatest/raw/instrumental</code></pre></div></li>
-<li><p>컨텐츠 타입: content://정보제공자/패스/아이디</p>
-
-<div><pre><code class="language-none">content://media/external/video/media/154</code></pre></div></li>
-</ul></li>
-<li><p><strong>Uri 클래스의 주요 메소드</strong></p>
-
-<ul>
-<li><p>static Uri parse(String uriString) - Uri문자열로부터 Uri 객체 생성</p>
-
-<div><pre><code class="language-java">Uri image_Uri = Uri.parse(&quot;file:///storage/emulated/0/Pictures/camera_image.jpg&quot;);</code></pre></div></li>
-<li><p>static Uri.fromFile(File file) - file로부터 Uri 객체 생성</p>
-
-<div><pre><code class="language-java">Uri image_Uri = Uri.fromFile(
-                new File(Environment.getExternalStorageDirectory().getPath()+
-                        &quot;/Pictures/camera_imge.jpg&quot;)));</code></pre></div></li>
-</ul></li>
-<li><p>단말 외부 저장소 파일을 사용하는 경우에는 접근 권한(<strong>android.permission.READ_EXTERNAL_STORAGE</strong>) 필요</p>
-
-<div><pre><code class="language-markup">&lt;manifest ... &gt;
-    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;
-&lt;/manifest&gt;</code></pre></div></li>
-<li><p>사용방법 (별도의 스레드에서 비동기 실행)</p>
-
-<div><pre><code class="language-java">Uri myUri = ....; // initialize Uri here
-MediaPlayer mediaPlayer = new MediaPlayer();
-mediaPlayer.setDataSource(getApplicationContext(), myUri);
-mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-        mediaPlayer.start();
-    }
-});
-mediaPlayer.prepareAsync();</code></pre></div>
-
-<p>예제 프로젝트 코드: <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L299">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L299</a></p></li>
+<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L295-L311">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L295-L311</a></p></li>
 </ul>
 
 <hr>
@@ -488,7 +484,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
             mSelectedPosition = position;
         }</code></pre></div>
 
-<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L189">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L189</a></p></li>
+<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L179">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L179</a></p></li>
 </ul>
 
 <p><a name="2"></a></p>
@@ -639,7 +635,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
            }
    }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L319-L335">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L319-L335</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L329">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L329</a></p>
 
 <div><pre><code class="language-java">    private void stopAudioRec()  {
 
@@ -658,7 +654,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
 
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L337-L347">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L337-L347</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L331-L341">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L331-L341</a></p>
 
 <p><a name="4"></a></p>
 
@@ -697,7 +693,12 @@ mediaPlayer.prepareAsync();</code></pre></div>
 
 <ul>
 <li>Android 7.0 이전에서는 특정한 앱과 관련된 파일 객체를 다른 앱(예, 카메라 앱)에서 사용하고자 때, 해당 파일 객체에 대한 Uri를 <em>file:///URI</em> 형식으로 사용할 수 있었으나, Android 7.0 이상에서는 <a href="https://developer.android.com/reference/android/os/FileUriExposedException.html">FileUriExposedException</a>을 발생 시킴</li>
-<li><a href="fileprovider.html">FileProvider 설정 방법</a></li>
+</ul>
+
+<p><img src="images/fileprovider-concept.png" width=500></p>
+
+<ul>
+<li>[<strong>중요</strong>] <a href="fileprovider.html">FileProvider 설정 방법</a></li>
 </ul></li>
 <li><p>[사전조건] 외부 저장소에 저장하기 위해서 Permission 획득 과정 필요</p>
 
@@ -718,10 +719,10 @@ If (takePictureIntent.resolveActivity(getPackageManager()) != null) {
 *       startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     } else
         Toast.makeText(getApplicationContext(), ＂file null＂, Toast.LENGTH_SHORT).show();
-}</code></pre></div></li>
-</ul>
+}</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L376-L394">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L376-L394</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388</a></p></li>
+</ul>
 
 <h3 id="toc_23">4.3 카메라 앱으로 찍은 사진 결과 처리</h3>
 
@@ -737,10 +738,10 @@ If (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             ImageView imageView = findViewById(R.id.imageView);
             imageView.setImageURI(Uri.fromFile(mPhotoFile));            }
     }
-}</code></pre></div></li>
-</ul>
+}</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L427-L432">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L427-L432</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L421-L426">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L421-L426</a></p></li>
+</ul>
 
 <h3 id="toc_24">4.4 카메라 앱으로 촬영한 동영상 저장하기</h3>
 
@@ -773,7 +774,7 @@ private void dispatchTakeVideoIntent() {
           }
 }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L396-L413">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L396-L413</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407</a></p></li>
 </ol>
 
 <h3 id="toc_25">4.5 카메라 앱으로 촬영한 결과를 처리하기</h3>
@@ -794,7 +795,7 @@ private void dispatchTakeVideoIntent() {
         }
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L437-L442">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L437-L442</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L431-L436">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L431-L436</a></p></li>
 </ul>
 
 <p><a name="5"> </a></p>
@@ -817,7 +818,7 @@ private void dispatchTakeVideoIntent() {
 }
 </code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L374">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L374</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L361-L368">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L361-L368</a></p></li>
 </ul>
 
 <h3 id="toc_28">5.2 Photo/Gallery 앱으로 사진 선택한 결과 저장하기</h3>
@@ -860,7 +861,7 @@ private void dispatchTakeVideoIntent() {
         } catch (IOException e) {}
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L445-L455">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L445-L455</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L439-L449">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L439-L449</a></p></li>
 </ul></li>
 </ul>
 
