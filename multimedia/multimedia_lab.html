@@ -106,16 +106,16 @@ kbd {
 
 <style type="text/css">
 /**
- * prism.js Dark theme for JavaScript, CSS and HTML
- * Based on the slides of the talk “/Reg(exp){2}lained/”
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: white;
+	color: black;
 	background: none;
-	text-shadow: 0 -.1em .2em black;
+	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;
@@ -134,6 +134,18 @@ pre[class*="language-"] {
 	hyphens: none;
 }
 
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
 @media print {
 	code[class*="language-"],
 	pre[class*="language-"] {
@@ -141,27 +153,22 @@ pre[class*="language-"] {
 	}
 }
 
-pre[class*="language-"],
-:not(pre) > code[class*="language-"] {
-	background: hsl(30, 20%, 25%);
-}
-
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
 	overflow: auto;
-	border: .3em solid hsl(30, 20%, 40%);
-	border-radius: .5em;
-	box-shadow: 1px 1px .5em black inset;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .15em .2em .05em;
+	padding: .1em;
 	border-radius: .3em;
-	border: .13em solid hsl(30, 20%, 40%);
-	box-shadow: 1px 1px .3em -.1em black inset;
 	white-space: normal;
 }
 
@@ -169,11 +176,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: hsl(30, 20%, 50%);
+	color: slategray;
 }
 
 .token.punctuation {
-	opacity: .7;
+	color: #999;
 }
 
 .namespace {
@@ -185,8 +192,9 @@ pre[class*="language-"] {
 .token.boolean,
 .token.number,
 .token.constant,
-.token.symbol {
-	color: hsl(350, 40%, 70%);
+.token.symbol,
+.token.deleted {
+	color: #905;
 }
 
 .token.selector,
@@ -195,26 +203,31 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: hsl(75, 70%, 60%);
+	color: #690;
 }
 
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: hsl(40, 90%, 60%);
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: hsl(350, 40%, 70%);
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
 }
 
 .token.regex,
-.token.important {
+.token.important,
+.token.variable {
 	color: #e90;
 }
 
@@ -228,10 +241,6 @@ pre[class*="language-"] {
 
 .token.entity {
 	cursor: help;
-}
-
-.token.deleted {
-	color: red;
 }
 </style>
 
@@ -254,7 +263,7 @@ div.polaroid {
 <h2 id="toc_1">0. MainActivity의 화면</h2>
 
 <div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/AndroidProgramming&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
     android:layout_width=&quot;match_parent&quot;
     android:layout_height=&quot;match_parent&quot;
@@ -311,6 +320,7 @@ div.polaroid {
         /&gt;
     &lt;VideoView
         android:id=&quot;@+id/videoView&quot;
+        android:layout_gravity=&quot;center&quot;
         android:layout_width=&quot;match_parent&quot;
         android:layout_height=&quot;wrap_content&quot;
         android:layout_marginTop=&quot;20dp&quot;
@@ -325,7 +335,7 @@ div.polaroid {
 
 <p><img src="images/multimedia-lab0.png" width="200"></p>
 
-<h2 id="toc_2">1. 음악 파일을 재생하기 실습입니다.</h2>
+<h2 id="toc_2">1. 음악 파일 재생</h2>
 
 <ul>
 <li>먼저 아래 링크의 음악 파일을 다운로드 하세요.
@@ -334,45 +344,32 @@ div.polaroid {
 <li><a href="https://github.com/kwanu70/AndroidExamples/tree/master/musics/gitan.mp3">https://github.com/kwanu70/AndroidExamples/tree/master/musics/gitan.mp3</a>,</li>
 </ul></li>
 <li>위 음악파일을 res/raw 폴더에 저장한 후에 이 음악 파일을 재생하는 코드를 작성해 보세요.</li>
-<li>위 음악파일을 공용 외부저장소의 Music 폴더에 저장한 후에 이 음악 파일을 재생하는 코드를 작성해 보세요</li>
+<li>위 음악파일을 앱전용 외부저장소의 Music 폴더에 저장한 후에 이 음악 파일을 재생하는 코드를 작성해 보세요</li>
 <li><p>[참조코드]     </p>
 
 <ul>
-<li>raw 폴더 리소스 URI
+<li>raw 폴더 리소스 재생
 
 <ul>
-<li><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L187">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L187</a></li>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L165-L166">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L165-L166</a></li>
 </ul></li>
-<li><p>공용 외부저장소 파일 URI</p>
+<li>앱전용 외부저장소 파일 재생
 
 <ul>
-<li><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L218">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L218</a></li>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L172-L173">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L172-L173</a></li>
 </ul></li>
-<li><p>음악파일 재생</p>
+</ul></li>
+<li><p>앱전용 외부저장소의 Music 폴더에 파일을 복사하는 방법 </p>
 
 <ul>
-<li><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L239-L245">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L239-L245</a><br></li>
-</ul></li>
-</ul></li>
-<li><p>공용 외부저장소의 Music 폴더에 파일을 복사하는 방법 </p>
-
-<ol>
-<li>Tools&gt;android&gt;Android Device Monitor를 띄운후,아래 그림에서 표시된 버튼을 눌러 해당 파일을 디바이스의 폴더로 복사 
-
-<ul>
-<li>(단 API level 23 이하의 에뮤레이터에서만 File Explorer가 정상 작동합니다.)
-<div class="polaroid">
-<img src="images/multimedia-lab1.png">
-</div><br></li>
-</ul></li>
-<li>Android Studio 3.0 Upgrade 후, 화면 우측 하단에 Device File Explorer 클릭하여 폴더 탐색 후 파일 업로드.
+<li>Android Studio 화면 우측 하단에 Device File Explorer 클릭하여 폴더 탐색 후 파일 업로드.
 <div class="polaroid">
     <img src="images/device-file-explorer.png">
 </div><br></li>
-</ol></li>
+</ul></li>
 </ul>
 
-<h2 id="toc_3">2. 다음은 동영상 재생하기 실습입니다.</h2>
+<h2 id="toc_3">2. 동영상 파일 재생</h2>
 
 <ul>
 <li>먼저 아래 링크의 mp4 파일을 다운로드 하세요.
@@ -380,35 +377,34 @@ div.polaroid {
 <ul>
 <li><a href="https://github.com/kwanu70/AndroidExamples/tree/master/musics/twice.mp4">https://github.com/kwanu70/AndroidExamples/tree/master/musics/twice.mp4</a></li>
 </ul></li>
-<li><p>위 동영상 파일을  공용 외부저장소의 Movies 폴더에 저장한 후에 이 파일을 재생하는 코드를 작성해 보세요</p></li>
+<li><p>위 동영상 파일을  앱 전용 외부저장소의 Movies 폴더에 저장한 후에 이 파일을 재생하는 코드를 작성해 보세요</p></li>
 <li><p>[참조코드]<br>
-<a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java</a></p></li>
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L182-L194">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L182-L194</a></p></li>
 </ul>
 
-<h2 id="toc_4">3. 사진찍기 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 사진을 sdcard의 Pictures 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.</h2>
+<h2 id="toc_4">3. 카메라 앱의 사진 저장하기</h2>
 
 <ul>
+<li>사진찍기 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 사진을 앱 전용 외부저장소의 Pictures 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.</li>
 <li><p>저장된 이미지가 해당 폴더에 제대로 있는지도 확인해 보세요</p>
 
 <p><img src="images/multimedia-lab2.png" width="200"></p></li>
 <li><p>[참조코드]<br>
-<a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L306-L324">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L306-L324</a> </p>
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388</a></p>
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L362-L365">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L362-L365</a> </p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L412-L416">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L412-L416</a></p></li>
 </ul>
 
-<h2 id="toc_5">4. 동영상 촬영 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 동영상을 공용 외부저장소의 Movie 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.</h2>
+<h2 id="toc_5">4. 카메라 앱의 동영상 저장하기</h2>
 
 <ul>
-<li><p>저장된 동영상 파일이 해당 폴더에 제대로 있는지도 확인해 보세요
-<div class="polaroid">
-<img src="images/multimedia-lab3.png">
-</div></p></li>
+<li>동영상 촬영 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 동영상을 앱전용 외부저장소의 Movies 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.</li>
+<li><p>저장된 동영상 파일이 해당 폴더에 제대로 있는지도 확인해 보세요</p></li>
 <li><p>[참조코드]  </p>
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L328-L345">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L328-L345</a>   </p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407</a>  </p>
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L368-L374">https://github.com/kwanulee/Android/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L368-L374</a>   </p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java</a></p></li>
 </ul>
 
 
@@ -438,7 +434,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>
