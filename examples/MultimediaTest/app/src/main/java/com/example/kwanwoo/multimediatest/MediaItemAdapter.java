@@ -10,21 +10,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Kwanwoo on 2016-11-10.
- */
-
 public class MediaItemAdapter extends BaseAdapter {
     private Context mContext;
     private int mResource;
     private ArrayList<MediaItem> mItems = new ArrayList<MediaItem>();
 
-
     public MediaItemAdapter(Context context, int resource, ArrayList<MediaItem> items) {
         mContext = context;
         mItems = items;
         mResource = resource;
-
     }
 
     public void addItem(MediaItem item) {
@@ -52,14 +46,14 @@ public class MediaItemAdapter extends BaseAdapter {
         if (view == null) {
             LayoutInflater inflater =
                     (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(mResource, parent,false);
+            view = inflater.inflate(mResource, parent, false);
         }
         TextView name = (TextView) view.findViewById(R.id.title);
         name.setText(mItems.get(i).name);
 
         // Set Text 02
         TextView source = (TextView) view.findViewById(R.id.source);
-        switch(mItems.get(i).source) {
+        switch (mItems.get(i).source) {
             case MediaItem.RAW:
                 source.setText("RAW");
                 break;
@@ -69,16 +63,19 @@ public class MediaItemAdapter extends BaseAdapter {
             case MediaItem.WEB:
                 source.setText("WEB");
                 break;
+            case MediaItem.GALLERY:
+                source.setText("GALLERY");
+                break;
 
         }
 
         ImageView image = (ImageView) view.findViewById(R.id.image);
         if (mItems.get(i).type == MediaItem.AUDIO) {
             image.setImageResource(R.drawable.music);
-        }else if (mItems.get(i).type == MediaItem.VIDEO)
+        } else if (mItems.get(i).type == MediaItem.VIDEO)
             image.setImageResource(R.drawable.movie);
         else if (mItems.get(i).type == MediaItem.IMAGE)
-            image.setImageBitmap(mItems.get(i).bitmap);
+            image.setImageResource(R.drawable.capture);
         return view;
     }
 }

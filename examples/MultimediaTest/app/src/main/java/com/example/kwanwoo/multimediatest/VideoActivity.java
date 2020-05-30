@@ -20,7 +20,7 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video);
 
         String VIDEO_URL = getIntent().getStringExtra("video_uri");
-        Button finishBtn = (Button) findViewById(R.id.finishBtn);
+        Button finishBtn = findViewById(R.id.finishBtn);
 
         finishBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -29,7 +29,7 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
 
-        videoView = (VideoView) findViewById(R.id.videoView);
+        videoView = findViewById(R.id.videoView);
 
         MediaController mc = new MediaController(this);
         videoView.setMediaController(mc);

@@ -4,18 +4,17 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,16 +31,21 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private static String TAG="MultimediaTest";
+    private static String TAG = "MultimediaTest";
+    static final int REQUEST_IMAGE_PICK = 0;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_VIDEO_CAPTURE = 2;
+    final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 3;
+
     private ListView mListView;
-    private int mSelectePoistion;
+    private int mSelectedPosition;
     private MediaItemAdapter mAdapter;
     private MediaPlayer mMediaPlayer;
     private MediaRecorder mMediaRecorder;
     private String mVideoFileName = null;
     private String mAudioFileName = null;
-    private File mPhotoFile =null;
     private String mPhotoFileName = null;
+    private File mPhotoFile = null;
 
     private int mPlaybackPosition = 0;   // media play 위치
 
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Button videoRecBtn = findViewById(R.id.videoRecBtn);
         Button imageCaptureBtn = findViewById(R.id.imageCaptureBtn);
         Button imagePickBtn = findViewById(R.id.imagePickBtn);
+
+        mMediaPlayer = new MediaPlayer();
 
         checkDangerousPermissions();
         initListView();
@@ -95,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    final int  REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA=1;
 
     private void checkDangerousPermissions() {
         String[] permissions = {
@@ -119,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // permission was granted
             switch (requestCode) {
@@ -128,99 +133,128 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         } else { // permission was denied
-            Toast.makeText(getApplicationContext(),"접근 권한이 필요합니다",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "접근 권한이 필요합니다", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void initListView() {
-        mListView = (ListView) findViewById(R.id.listView);
+        mListView = findViewById(R.id.listView);
         ArrayList<MediaItem> mediaList = prepareDataSource();
         mAdapter = new MediaItemAdapter(this, R.layout.item, mediaList);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (mMediaPlayer != null && mSelectePoistion == position) {
-                    if (mMediaPlayer.isPlaying()) { // 현재 재생 중인 미디어를 선택한 경우
-                        mPlaybackPosition = mMediaPlayer.getCurrentPosition();
-                        mMediaPlayer.pause();
-                        Toast.makeText(getApplicationContext(), "음악 파일 재생 중지됨.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mMediaPlayer.start();
-                        mMediaPlayer.seekTo(mPlaybackPosition);
-                        Toast.makeText(getApplicationContext(), "음악 파일 재생 재시작됨.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {     // 현재 재생중인 미디어가 없거나, 다른 미디어를 선택한 경우
-                    switch (((MediaItem) mAdapter.getItem(position)).type) {
-                        case MediaItem.AUDIO:
-                            try {
-                                playAudio(((MediaItem) mAdapter.getItem(position)).uri);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                MediaItem item = (MediaItem) mAdapter.getItem(position);
+                switch (item.type) {
+                    case MediaItem.AUDIO:
+                        if (mMediaPlayer != null && mSelectedPosition == position) {  // 이전 선택과 동일한 항목을 선택한 경우
+                            if (mMediaPlayer.isPlaying()) { // 미디어가 재생 중인 경우
+                                mPlaybackPosition = mMediaPlayer.getCurrentPosition();
+                                mMediaPlayer.pause();
+                                Toast.makeText(getApplicationContext(), "음악 파일 재생 중지됨.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                mMediaPlayer.seekTo(mPlaybackPosition);
+                                mMediaPlayer.start();
+                                Toast.makeText(getApplicationContext(), "음악 파일 재생 재시작됨.", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {    // 생성된 미디어가 없거나, 이전 선택과 다른 항목(미디어)을 선택한 경우
+                            releaseMediaPlayer();  // 기존 미디어 리소스 해
+                            switch (item.source) {
+                                case MediaItem.RAW:
+                                    int resourceId = getResources().getIdentifier(item.name, "raw", getPackageName());
+                                    playAudioByRawResource(resourceId);
+                                    break;
+                                case MediaItem.WEB:
+                                    playAudioByURL(item.name);
+                                    break;
+                                case MediaItem.SDCARD:
+                                    Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + "/" + item.name);
+                                    playAudioByUri(uri);
+                                    break;
                             }
                             Toast.makeText(getApplicationContext(), "음악 파일 재생 시작됨.", Toast.LENGTH_SHORT).show();
+                            mSelectedPosition = position;
                             break;
-                        case MediaItem.VIDEO:
-                            Intent intent = new Intent(MainActivity.this, VideoActivity.class);
-                            intent.putExtra("video_uri", ((MediaItem) mAdapter.getItem(position)).uri.toString());
-                            startActivity(intent);
-                            break;
-                        case MediaItem.IMAGE:
-                            Toast.makeText(getApplicationContext(), "이미지 항목 선.", Toast.LENGTH_SHORT).show();
-                            break;
-                    }
-                    mSelectePoistion = position;
+                        }
+                        break;
+                    case MediaItem.VIDEO:
+                        Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+                        Uri uri = null;
+                        switch (item.source) {
+                            case MediaItem.WEB:
+                                uri = Uri.parse(item.name);
+                                break;
+                            case MediaItem.SDCARD:
+                                uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MOVIES).getPath() + "/" + item.name);
+                                break;
+                        }
+
+                        intent.putExtra("video_uri", uri.toString());
+                        startActivity(intent);
+                        break;
+                    case MediaItem.IMAGE:
+                        ImageView imageView = findViewById(R.id.imageView);
+
+                        switch (item.source) {
+                            case MediaItem.GALLERY:
+                                uri = Uri.parse(item.name);
+                                break;
+                            case MediaItem.SDCARD:
+                                uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/" + item.name);
+                                break;
+                            default:
+                                uri = Uri.parse("android.resource://" + getPackageName() + "/drawable/ic_launcher_foreground");
+                        }
+
+                        imageView.setImageURI(uri);
+                        break;
                 }
+
+
             }
         });
     }
 
     private ArrayList<MediaItem> prepareDataSource() {
-        final String AUDIO_URL1 = "http://www.robtowns.com/music/blind_willie.mp3";
-        final String AUDIO_URL2 = "http://www.hrupin.com/wp-content/uploads/mp3/testsong_20_sec.mp3";
+        final String AUDIO_URL = "http://www.robtowns.com/music/blind_willie.mp3";
 
-        final String VIDEO_URL ="https://kwanulee.github.io/AndroidProgramming/multimedia/media/makerton.mp4";
-        ArrayList mediaList = new ArrayList<MediaItem>();
+        final String VIDEO_URL = "https://kwanulee.github.io/AndroidProgramming/multimedia/media/makerton.mp4";
+        ArrayList<MediaItem> mediaList = new ArrayList<MediaItem>();
 
         // Raw 리소스 데이터 추가
         String rawResourceName1 = "instrumental";
         String rawResourceName2 = "scott_holmes_summer_fun";
 
-        mediaList.add(new MediaItem(MediaItem.RAW,
-                rawResourceName1 + ".mp3",
-                Uri.parse("android.resource://" + getPackageName() + "/raw/" + rawResourceName1)));
-
-        mediaList.add(new MediaItem(MediaItem.RAW,
-                rawResourceName2 + ".mp3",
-                Uri.parse("android.resource://" + getPackageName() + "/raw/" + rawResourceName2)));
+        // Raw 리소스 데이터 추가
+        mediaList.add(new MediaItem(MediaItem.RAW, rawResourceName1, MediaItem.AUDIO));
+        mediaList.add(new MediaItem(MediaItem.RAW, rawResourceName2, MediaItem.AUDIO));
 
         // Web 데이터 추가
-        mediaList.add(new MediaItem(MediaItem.WEB, AUDIO_URL1, Uri.parse(AUDIO_URL1)));
-        mediaList.add(new MediaItem(MediaItem.WEB, AUDIO_URL2, Uri.parse(AUDIO_URL2)));
-
-        mediaList.add(new MediaItem(MediaItem.WEB, VIDEO_URL, Uri.parse(VIDEO_URL), MediaItem.VIDEO));
+        mediaList.add(new MediaItem(MediaItem.WEB, AUDIO_URL, MediaItem.AUDIO));
+        mediaList.add(new MediaItem(MediaItem.WEB, VIDEO_URL, MediaItem.VIDEO));
 
         // sdcard/Android/data/com.example.kwanwoo.multimediatest/fiels/Pictures 데이터 추가
         File file = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File[] files = file.listFiles();
         if (files != null) {
             for (File f : files) {
-                Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() +"/"+ f.getName());
+                Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath() + "/" + f.getName());
                 if (f.getName().contains(".jpg")) {
-                    MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), uri, MediaItem.IMAGE);
+                    MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), MediaItem.IMAGE);
                     mediaList.add(item);
                 }
             }
         }
 
-        // sdcard/Music 데이터 추가
-        file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+        // sdcard/Android/data/com.example.kwanwoo.multimediatest/fiels/Music 데이터 추가
+        file = getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         files = file.listFiles();
         if (files != null) {
             for (File f : files) {
                 Log.i(TAG, "File name=" + f.getName());
-                Uri uri = Uri.parse("file://" + Environment.getExternalStorageDirectory().getPath() + "/Music/" + f.getName());
-                MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), uri);
+                Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + "/" + f.getName());
+                MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), MediaItem.AUDIO);
                 mediaList.add(item);
             }
         }
@@ -231,49 +265,65 @@ public class MainActivity extends AppCompatActivity {
         if (files != null) {
             for (File f : files) {
                 Log.i(TAG, "File name=" + f.getName());
-                Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MOVIES).getPath()  +"/"+ f.getName());
+                Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MOVIES).getPath() + "/" + f.getName());
 
-                MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), uri, MediaItem.VIDEO);
+                MediaItem item = new MediaItem(MediaItem.SDCARD, f.getName(), MediaItem.VIDEO);
                 mediaList.add(item);
             }
         }
         return mediaList;
     }
 
-    private void playAudio(Uri uri) throws Exception {
-        killMediaPlayer();
-        mMediaPlayer = new MediaPlayer();
-        mMediaPlayer.setDataSource(getApplicationContext(), uri);
-        mMediaPlayer.prepare();
+    private void playAudioByRawResource(int resource) {
+        mMediaPlayer = MediaPlayer.create(this, resource);
         mMediaPlayer.start();
     }
 
-    private void playAudioByURL(String url) throws Exception {
-        killMediaPlayer();
+    private void playAudioByUri(Uri uri) {
+
+        mMediaPlayer = new MediaPlayer();
+
         try {
-            mMediaPlayer = new MediaPlayer();
-            mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mMediaPlayer.setDataSource(url);
-            mMediaPlayer.prepare();
-            mMediaPlayer.start();
-            Log.i(TAG, "url="+url);
-        } catch (IllegalArgumentException e) {
-            Log.i(TAG, "IllegalArgumentException");
-            Toast.makeText(this, "IllegalArgumentException", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            Log.i(TAG, "IOException:"+e.getMessage());
-            Toast.makeText(this, "IOException", Toast.LENGTH_SHORT).show();
+            //mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mMediaPlayer.setDataSource(getApplicationContext(), uri);
+        }  catch (IOException e) {
+            e.printStackTrace();
         }
+        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mMediaPlayer.start();
+            }
+        });
+        mMediaPlayer.prepareAsync();
     }
 
-    private void startAudioRec()  {
+    private void playAudioByURL(String url) {
+
+        mMediaPlayer = new MediaPlayer();
+        try {
+            mMediaPlayer.setDataSource(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mMediaPlayer.start();
+            }
+        });
+        mMediaPlayer.prepareAsync();
+    }
+
+    private void startAudioRec() {
         mMediaRecorder = new MediaRecorder();
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 
         mAudioFileName = "VOICE" + currentDateFormat() + ".mp4";
-        mMediaRecorder.setOutputFile(Environment.getExternalStorageDirectory().getPath() + "/Music/" + mAudioFileName);
+        mMediaRecorder.setOutputFile(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + File.pathSeparator + mAudioFileName);
 
         try {
             mMediaRecorder.prepare();
@@ -284,80 +334,76 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void stopAudioRec()  {
+    private void stopAudioRec() {
 
         mMediaRecorder.stop();
         mMediaRecorder.release();
         mMediaRecorder = null;
 
-        Uri uri = Uri.parse("file://" + Environment.getExternalStorageDirectory().getPath() + "/Music/"+ mAudioFileName);
-        mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mAudioFileName,uri));
+        Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + File.pathSeparator + mAudioFileName);
+        mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mAudioFileName, MediaItem.AUDIO));
         Toast.makeText(getApplicationContext(), "녹음이 중지되었습니다.", Toast.LENGTH_SHORT).show();
 
     }
 
-    private String currentDateFormat(){
+    private String currentDateFormat() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
-        String  currentTimeStamp = dateFormat.format(new Date());
+        String currentTimeStamp = dateFormat.format(new Date());
         return currentTimeStamp;
     }
 
-    private void killMediaPlayer() {
+    private void releaseMediaPlayer() {
+        // 기존 미디어 플레이어가 존재하는 경우 리소스를 해제하고 초기화
         if (mMediaPlayer != null) {
             try {
                 mMediaPlayer.release();
+                mMediaPlayer = null;
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.i(TAG,"Execption during mMediaPlayer.release()");
             }
         }
     }
-
-    static final int REQUEST_IMAGE_PICK = 0;
 
     private void dispatchPickPictureIntent() {
         Intent pickPictureIntent = new Intent(Intent.ACTION_PICK);
         pickPictureIntent.setType("image/*");
 
         if (pickPictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(pickPictureIntent,REQUEST_IMAGE_PICK);
+            startActivityForResult(pickPictureIntent, REQUEST_IMAGE_PICK);
         }
     }
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             //1. 카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성
-            mPhotoFileName = "IMG"+currentDateFormat()+".jpg";
+            mPhotoFileName = "IMG" + currentDateFormat() + ".jpg";
             mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
 
-            if (mPhotoFile !=null) {
+            if (mPhotoFile != null) {
                 //2. 생성된 파일 객체에 대한 Uri 객체를 얻기
-                Uri imageUri = FileProvider.getUriForFile(this, "com.example.kwanwoo.multimediatest", mPhotoFile);
+                Uri imageUri = FileProvider.getUriForFile(this, "com.example.kwanwoo.multimediatest.fileprovider", mPhotoFile);
 
                 //3. Uri 객체를 Extras를 통해 카메라 앱으로 전달
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             } else
                 Toast.makeText(getApplicationContext(), "file null", Toast.LENGTH_SHORT).show();
         }
     }
 
-    static final int REQUEST_VIDEO_CAPTURE = 2;
-
     private void dispatchTakeVideoIntent() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
             //1. 카메라 앱으로 찍은 동영상을 저장할 파일 객체 생성
-            mVideoFileName = "VIDEO"+currentDateFormat()+".mp4";
+            mVideoFileName = "VIDEO" + currentDateFormat() + ".mp4";
             File destination = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), mVideoFileName);
 
             if (destination != null) {
                 //2. 생성된 파일 객체에 대한 Uri 객체를 얻기
-                Uri videoUri = FileProvider.getUriForFile(this, "com.example.kwanwoo.multimediatest", destination);
+                Uri videoUri = FileProvider.getUriForFile(this, "com.example.kwanwoo.multimediatest.fileprovider", destination);
 
                 //3. Uri 객체를 Extras를 통해 카메라 앱으로 전달
                 takeVideoIntent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
@@ -367,33 +413,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
             Uri imgUri = data.getData();
-            try {
-                Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
 
-                mPhotoFileName = "IMG"+currentDateFormat()+".jpg";
-                mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+            ImageView imageView = findViewById(R.id.imageView);
+            imageView.setImageURI(imgUri);
 
-                imgBitmap.compress(Bitmap.CompressFormat.JPEG,100,
-                        new FileOutputStream(mPhotoFile));
-                mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mPhotoFileName, Uri.fromFile(mPhotoFile), MediaItem.IMAGE));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //saveToExternalFile(imgUri);
+
+            mAdapter.addItem(new MediaItem(MediaItem.GALLERY, imgUri.toString(), MediaItem.IMAGE));
         } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mPhotoFileName != null) {
                 mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
-                mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mPhotoFileName, Uri.fromFile(mPhotoFile), MediaItem.IMAGE));
+
+                ImageView imageView = findViewById(R.id.imageView);
+                imageView.setImageURI(Uri.fromFile(mPhotoFile));
+
+                mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mPhotoFileName, MediaItem.IMAGE));
             } else
                 Toast.makeText(getApplicationContext(), "mPhotoFile is null", Toast.LENGTH_SHORT).show();
         } else if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
             if (mVideoFileName != null) {
-                File destination = new File(getExternalFilesDir(Environment.DIRECTORY_MOVIES), mVideoFileName);
-                mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mVideoFileName, Uri.fromFile(destination) ,MediaItem.VIDEO));
+                mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mVideoFileName, MediaItem.VIDEO));
             } else
                 Toast.makeText(getApplicationContext(), "!!! null video.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void saveToExternalFile(Uri imgUri) {
+        try {
+            Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imgUri);
+
+            mPhotoFileName = "IMG"+currentDateFormat()+".jpg";
+            mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+
+            imgBitmap.compress(Bitmap.CompressFormat.JPEG,100,
+                    new FileOutputStream(mPhotoFile));
+        } catch (IOException e) {}
     }
 
     /*
@@ -402,18 +460,14 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString("mPhotoFileName",mPhotoFileName);
+        outState.putString("mPhotoFileName", mPhotoFileName);
         super.onSaveInstanceState(outState);
     }
 
+    @Override
     protected void onStop() {
         super.onStop();
-        killMediaPlayer();
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-        killMediaPlayer();
+        releaseMediaPlayer();
     }
 
 }
