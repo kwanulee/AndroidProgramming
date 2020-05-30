@@ -284,18 +284,12 @@ public class MainActivity extends AppCompatActivity {
         mMediaPlayer = new MediaPlayer();
 
         try {
-            //mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setDataSource(getApplicationContext(), uri);
+            mMediaPlayer.prepare();
         }  catch (IOException e) {
             e.printStackTrace();
         }
-        mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mMediaPlayer.start();
-            }
-        });
-        mMediaPlayer.prepareAsync();
+        mMediaPlayer.start();
     }
 
     private void playAudioByURL(String url) {
@@ -322,8 +316,8 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 
-        mAudioFileName = "VOICE" + currentDateFormat() + ".mp4";
-        mMediaRecorder.setOutputFile(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + File.pathSeparator + mAudioFileName);
+        mAudioFileName = "VOICE" + currentDateFormat() + ".mp3";
+        mMediaRecorder.setOutputFile(getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + "/" + mAudioFileName);
 
         try {
             mMediaRecorder.prepare();
@@ -340,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.release();
         mMediaRecorder = null;
 
-        Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + File.pathSeparator + mAudioFileName);
+        Uri uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MUSIC).getPath() + "/" + mAudioFileName);
         mAdapter.addItem(new MediaItem(MediaItem.SDCARD, mAudioFileName, MediaItem.AUDIO));
         Toast.makeText(getApplicationContext(), "녹음이 중지되었습니다.", Toast.LENGTH_SHORT).show();
 
