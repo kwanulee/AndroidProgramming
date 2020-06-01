@@ -16,7 +16,7 @@
 		```java
 		dependencies {
 		      ...
-		      implementation 'com.google.android.gms:play-services-maps:16.1.0'
+		      implementation 'com.google.android.gms:play-services-maps:17.0.0'
 		}
 		```
     3. 툴바에서 "Sync Project with Graddle Files(<img src="images/sync.png">)" 또는 Sync Now 클릭
@@ -27,30 +27,46 @@
 ---
 <a name="2"> </a>
 ##2. Google Maps API 키 가져오기
+Maps SDK for Android를 사용하려면 Google Cloud Platform Console에 앱 프로젝트를 등록하고 앱에 추가할 수 있는 Google API 키를 가져와야 합니다.
+
 1. Google Developers Console로 이동	- https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&reusekey=true  2. 프로젝트 만들기 (또는 선택) 	- 화면 상단의 [**프로젝트 선택**] 클릭
 	- **[새프로젝트]**  클릭 
 		<img src="figures/console_project1.png">
 	- 프로젝트 이름 (*MyMapTest*) 입력 후, **[만들기]** 버튼 클릭
 		<img src="figures/console_project2.png">
 	- 화면 상단의 [**프로젝트 선택**] 에서 생성된 *MyMapTest* 선택
-	3. Google Maps Android API 활성화
-	1. (사용할 수 있는 API가 설정되지 않은 경우) **API 및 서비스 사용 설정** 클릭 
-		<img src="figures/console_project3.png">	2. API 목록 중 **Maps SDK for Android** 선택 후, **사용 설정** 클릭4. API 키 획득	- **사용자 인증 정보**로 이동
-	- **사용자 인증 정보 만들기** 클릭 후, **API 키** 선택
-	- 생성된 API 키를 복사		(다음 형식: AIzaSyDo7I4h4OzrOb3MXYfWArS1fYo0rU0BiXg)
+	3. . 좌측상단의 메뉴 버튼 을 클릭하고 **API 및 서비스 > 사용자 인증 정보**를 선택합니다.
+		
+	<img src="figures/google-api.png">
+4. 사용자 인증 정보 페이지에서 **사용자 인증 정보 만들기 > API 키**를 클릭합니다.
 
----
+	**API 키 생성 완료** 대화상자에 새로 만든 API 키가 표시됩니다.
+5. **닫기**를 클릭합니다.
+		새 API 키는 **사용자 인증 정보** 페이지의 **API 키** 아래 나열됩니다.	
+
 <a name="3"></a>
 ##3. 앱에 지도 추가 및 설정
-1. Manifest 파일에 API 키 추가	```xml
-	    <application ...>
-	        <meta-data
-	            android:name="com.google.android.geo.API_KEY"
-	            android:value="생성된 API 키를 여기로 붙여넣기" />
-	         ...
-	    </application>
+1. Google Play 서비스 버전 번호 지정
+	- AndroidManifest.xml의 \<application\> 요소 내에 다음 선언을 추가합니다. 
+
+		```xml
+		<application ...>
+			<meta-data
+		        	android:name="com.google.android.gms.version"
+		        	android:value="@integer/google_play_services_version" />
+		</application>
+		```	
+
+1. Google 지도 API 키 설정
+	-  AndroidManifest.xml의 \<application\> 요소 내에 다음 선언을 추가하고, 앞서 얻은 API 키를 설정합니다.		```xml
+		    <application ...>
+		        <meta-data
+		            android:name="com.google.android.geo.API_KEY"
+		            android:value="생성된 API 키를 여기로 붙여넣기" />
+		         ...
+		    </application>
+		```
 	
-	```
 2. Activity에 지도를 위한 프레그먼트 추가	```xml
 	<?xml version="1.0" encoding="utf-8"?>
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -233,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 	}
 
 	```	
-https://github.com/kwanulee/Android/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java
 	
 ---
 <a name="5"></a>
@@ -253,4 +269,4 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 - [**GoogleMap** 클래스] public final void [animateCamera](https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.html#animateCamera(com.google.android.gms.maps.CameraUpdate, int, com.google.android.gms.maps.GoogleMap.CancelableCallback)) (CameraUpdate update, int duration, GoogleMap.CancelableCallback callback)	- 주어진 **CameraUpdate** 객체로 지도가 매끄럽게 이동됨	- update: 카메라가 이동할 위치	- duration: 애니메이션 지속시간	- callback: GoogleMap.CancellableCallback을 구현하는 객체로 다음 두 가지 메소드를 포함		- onFinish() 애니메이션이 중단 없이 완료되면 호출됨.		- onCancel() stopAnimation()를 호출하거나 새로운 카메라 이동이 시작되어 애니메이션이 중단되면 호출됩니다.
 
 ```java
-private static final LatLng SYDNEY = new LatLng(-33.88,151.21);private static final LatLng MOUNTAIN_VIEW = new LatLng(37.4, -122.1);private GoogleMap map;... // Obtain the map from a MapFragment or MapView.// Move the camera instantly to Sydney with a zoom of 15.map.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 15));// Zoom in, animating the camera.map.animateCamera(CameraUpdateFactory.zoomIn());// Zoom out to zoom level 10, animating with a duration of 2 seconds.map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);```[더 많은 예제: https://github.com/googlemaps/android-samples/blob/master/ApiDemos/app/src/main/java/com/example/mapdemo/CameraDemoActivity.java]
+private static final LatLng SYDNEY = new LatLng(-33.88,151.21);private static final LatLng MOUNTAIN_VIEW = new LatLng(37.4, -122.1);private GoogleMap map;... // Obtain the map from a MapFragment or MapView.// Move the camera instantly to Sydney with a zoom of 15.map.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 15));// Zoom in, animating the camera.map.animateCamera(CameraUpdateFactory.zoomIn());// Zoom out to zoom level 10, animating with a duration of 2 seconds.map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);```[더 많은 예제: https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/gms/java/com/example/mapdemo/CameraDemoActivity.java]

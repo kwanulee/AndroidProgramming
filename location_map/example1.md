@@ -9,7 +9,7 @@
 		```java
 		dependencies {
 		      ...
-		      implementation 'com.google.android.gms:play-services-location:16.0.0'
+		      implementation 'com.google.android.gms:play-services-location:17.0.0'
 		}
 		```
     3. 툴바에서 "Sync Project with Graddle File" 또는 "Sync Now" 클릭

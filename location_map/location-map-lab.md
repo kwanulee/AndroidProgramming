@@ -14,12 +14,12 @@
 
 * 참조코드
 	* 현재 위치 알아내는 방법
-		* https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L148-L162
+		* https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L138-L152
 	* 지정된 위치와 줌 레벨로 지도 이동 방법
-		*  	https://github.com/kwanulee/Android/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java#L45
+		*  	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java#L45
 
 ##3. Geocoding 실습
-* EditText 창에 찾고자 하는 장소 이름을 입력한 후에 Button을 클릭하면, Geocoder를 이용하여 입력된 장소 이름으로부터 위치(위도, 경도 값)를 얻고(편의상 첫번째 결과만 이용) 	* 해당 위치 정보를 TextView 창에 표시	* 해당 위치로 지도를 이동 (줌 레벨은 15)	* 해당 위치에 마커로 표시 (마커의 타이틀로 장소 이름 설정)	* 참조코드: (해당 위치 마커 표시 방법)		* https://github.com/kwanulee/Android/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java#L37-L44 	 
+* EditText 창에 찾고자 하는 장소 이름을 입력한 후에 Button을 클릭하면, Geocoder를 이용하여 입력된 장소 이름으로부터 위치(위도, 경도 값)를 얻고(편의상 첫번째 결과만 이용) 	* 해당 위치 정보를 TextView 창에 표시	* 해당 위치로 지도를 이동 (줌 레벨은 15)	* 해당 위치에 마커로 표시 (마커의 타이틀로 장소 이름 설정)	* 참조코드: (해당 위치 마커 표시 방법)		* https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java#L37-L44 	 
 * [실행 결과 예시] “낙산공원” 입력후, 검색(Find) 버튼을 누른 결과
 
 	<img src="figures/google-map-lab3.png" width=500>

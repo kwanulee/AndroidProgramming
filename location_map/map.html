@@ -285,7 +285,7 @@ pre[class*="language-"] {
 
 <div><pre><code class="language-java">dependencies {
       ...
-      implementation &#39;com.google.android.gms:play-services-maps:16.1.0&#39;
+      implementation &#39;com.google.android.gms:play-services-maps:17.0.0&#39;
 }</code></pre></div></li>
 <li><p>툴바에서 <q>Sync Project with Graddle Files(&lt;img src=</q>images/sync.png<q>&gt;)</q> 또는 Sync Now 클릭</p></li>
 </ol></li>
@@ -298,6 +298,8 @@ pre[class*="language-"] {
 <p><a name="2"> </a></p>
 
 <h2 id="toc_2">2. Google Maps API 키 가져오기</h2>
+
+<p>Maps SDK for Android를 사용하려면 Google Cloud Platform Console에 앱 프로젝트를 등록하고 앱에 추가할 수 있는 Google API 키를 가져와야 합니다.</p>
 
 <ol>
 <li>Google Developers Console로 이동
@@ -315,39 +317,44 @@ pre[class*="language-"] {
 <img src="figures/console_project2.png"></li>
 <li>화면 상단의 [<strong>프로젝트 선택</strong>] 에서 생성된 <em>MyMapTest</em> 선택</li>
 </ul></li>
-<li><p>Google Maps Android API 활성화</p>
+<li><p>. 좌측상단의 메뉴 버튼 을 클릭하고 <strong>API 및 서비스 &gt; 사용자 인증 정보</strong>를 선택합니다.</p>
 
-<ol>
-<li>(사용할 수 있는 API가 설정되지 않은 경우) <strong>API 및 서비스 사용 설정</strong> 클릭 
-<img src="figures/console_project3.png"></li>
-<li>API 목록 중 <strong>Maps SDK for Android</strong> 선택 후, <strong>사용 설정</strong> 클릭</li>
-</ol></li>
-<li><p>API 키 획득</p>
+<p><img src="figures/google-api.png"></p></li>
+<li><p>사용자 인증 정보 페이지에서 <strong>사용자 인증 정보 만들기 &gt; API 키</strong>를 클릭합니다.</p>
 
-<ul>
-<li><strong>사용자 인증 정보</strong>로 이동</li>
-<li><strong>사용자 인증 정보 만들기</strong> 클릭 후, <strong>API 키</strong> 선택</li>
-<li>생성된 API 키를 복사
-(다음 형식: AIzaSyDo7I4h4OzrOb3MXYfWArS1fYo0rU0BiXg)</li>
-</ul></li>
+<p><strong>API 키 생성 완료</strong> 대화상자에 새로 만든 API 키가 표시됩니다.</p></li>
+<li><p><strong>닫기</strong>를 클릭합니다.
+    새 API 키는 <strong>사용자 인증 정보</strong> 페이지의 <strong>API 키</strong> 아래 나열됩니다. </p></li>
 </ol>
-
-<hr>
 
 <p><a name="3"></a></p>
 
 <h2 id="toc_3">3. 앱에 지도 추가 및 설정</h2>
 
 <ol>
-<li><p>Manifest 파일에 API 키 추가</p>
+<li><p>Google Play 서비스 버전 번호 지정</p>
+
+<ul>
+<li><p>AndroidManifest.xml의 &lt;application&gt; 요소 내에 다음 선언을 추가합니다. </p>
+
+<div><pre><code class="language-markup">&lt;application ...&gt;
+    &lt;meta-data
+            android:name=&quot;com.google.android.gms.version&quot;
+            android:value=&quot;@integer/google_play_services_version&quot; /&gt;
+&lt;/application&gt;</code></pre></div></li>
+</ul></li>
+<li><p>Google 지도 API 키 설정</p>
+
+<ul>
+<li><p>AndroidManifest.xml의 &lt;application&gt; 요소 내에 다음 선언을 추가하고, 앞서 얻은 API 키를 설정합니다.</p>
 
 <div><pre><code class="language-markup">    &lt;application ...&gt;
         &lt;meta-data
             android:name=&quot;com.google.android.geo.API_KEY&quot;
             android:value=&quot;생성된 API 키를 여기로 붙여넣기&quot; /&gt;
          ...
-    &lt;/application&gt;
-</code></pre></div></li>
+    &lt;/application&gt;</code></pre></div></li>
+</ul></li>
 <li><p>Activity에 지도를 위한 프레그먼트 추가</p>
 
 <div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -559,7 +566,7 @@ pre[class*="language-"] {
 </code></pre></div></li>
 </ul>
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java">https://github.com/kwanulee/Android/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/SampleMapTest/app/src/main/java/com/kwanwoo/android/samplemaptest/MainActivity.java</a></p>
 
 <hr>
 
@@ -627,8 +634,7 @@ map.animateCamera(CameraUpdateFactory.zoomIn());
 // Zoom out to zoom level 10, animating with a duration of 2 seconds.
 map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);</code></pre></div>
 
-<p>[더 많은 예제: <a href="https://github.com/googlemaps/android-samples/blob/master/ApiDemos/app/src/main/java/com/example/mapdemo/CameraDemoActivity.java">https://github.com/googlemaps/android-samples/blob/master/ApiDemos/app/src/main/java/com/example/mapdemo/CameraDemoActivity.java</a>
-]</p>
+<p>[더 많은 예제: <a href="https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/gms/java/com/example/mapdemo/CameraDemoActivity.java">https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/gms/java/com/example/mapdemo/CameraDemoActivity.java</a>]</p>
 
 
 
@@ -665,7 +671,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>

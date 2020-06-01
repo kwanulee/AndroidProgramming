@@ -278,9 +278,9 @@ pre[class*="language-"] {
 <li><strong>Location Service 예제 프로젝트 다운로드</strong> <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kwanulee/Android/tree/master/examples/LocationService">링크</a></li>
 </ul>
 
-<h2 id="toc_2"><a name="1"> </a></h2>
+<p><a name="1"> </a></p>
 
-<h2 id="toc_3">1. Google Play Services 설정</h2>
+<h2 id="toc_2">1. Google Play Services 설정</h2>
 
 <ul>
 <li><p><strong>Google Play Services SDK</strong> 다운로드 및 설치</p>
@@ -302,7 +302,7 @@ pre[class*="language-"] {
 
 <div><pre><code class="language-java">dependencies {
       ...
-      implementation &#39;com.google.android.gms:play-services-location:16.0.0&#39;
+      implementation &#39;com.google.android.gms:play-services-location:17.0.0&#39;
 }</code></pre></div></li>
 <li><p>툴바에서 <q>Sync Project with Graddle File</q> 또는 <q>Sync Now</q> 클릭</p></li>
 </ol></li>
@@ -310,14 +310,45 @@ pre[class*="language-"] {
 
 <p>[출처: <a href="https://developers.google.com/android/guides/setup">https://developers.google.com/android/guides/setup</a>]</p>
 
-<h3 id="toc_4"><a href="example1.html">연습1 - 예제 프로젝트 시작하기</a></h3>
+<h3 id="toc_3"><a href="example1.html">연습1 - 예제 프로젝트 시작하기</a></h3>
 
-<h2 id="toc_5"><a name="3"> </a></h2>
+<p><a name="2"></a></p>
 
-<h2 id="toc_6">2. 마지막으로 알려진 위치 얻기</h2>
+<h2 id="toc_4">2. 위치 접근에 필요한 권한 얻기</h2>
 
 <ul>
-<li><strong>Fused Location Provider</strong>
+<li>위치 접근에 필요한 권한 
+
+<ul>
+<li><a href="https://developer.android.com/reference/android/Manifest.permission?hl=ko#ACCESS_COARSE_LOCATION">ACCESS_COARSE_LOCATION</a> : 대략적 위치 접근 허용 (도시의 블럭 단위)</li>
+<li><a href="https://developer.android.com/reference/android/Manifest.permission?hl=ko#ACCESS_FINE_LOCATION">ACCESS_FINE_LOCATION</a> : 정밀한 위치 접근 허용</li>
+<li><a href="https://developer.android.com/reference/android/Manifest.permission?hl=ko#ACCESS_BACKGROUND_LOCATION">ACCESS_BACKGROUND_LOCATION</a> : 앱이 백그라운드에 있는 동안 기기 위치에 액세스 허용 (Android 10, API 29 이상)</li>
+</ul></li>
+<li><p>Android Manifest 파일에서 권한 설정</p>
+
+<div><pre><code class="language-markup"> &lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+        package=&quot;com.kwanwoo.android.locationservice&quot; &gt;
+
+      &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
+ &lt;/manifest&gt;</code></pre></div></li>
+<li><p>Android 6.0 (API level 23) 이상부터는 앱 실행 중에 사용하려는 권한(permission)을 반드시 요청</p>
+
+<div><pre><code class="language-java">if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    ActivityCompat.requestPermissions(
+            MainActivity.this,            // MainActivity 액티비티의 객체 인스턴스를 나타냄
+            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},        // 요청할 권한 목록을 설정한 String 배열
+            REQUEST_PERMISSIONS_FOR_LOCATION_UPDATES    // 사용자 정의 int 상수. 권한 요청 결과를 받을 때
+    );
+    return;
+}   </code></pre></div></li>
+</ul>
+
+<p><a name="3"> </a></p>
+
+<h2 id="toc_5">3. 마지막으로 알려진 위치 얻기</h2>
+
+<ul>
+<li><strong>통합 위치 정보 제공자 (Fused Location Provider)</strong> 
 
 <ul>
 <li><strong>Google Play Services</strong> 중에 location API</li>
@@ -330,10 +361,10 @@ pre[class*="language-"] {
 </ul></li>
 </ul>
 
-<h3 id="toc_7">2.1 <strong>Fused Location Provider</strong> 클라이언트 객체 얻기</h3>
+<h3 id="toc_6">3.1 <strong>통합 위치 정보 제공자 (Fused Location Provider)</strong> 클라이언트 객체 얻기</h3>
 
 <ul>
-<li><p>액티비티 onCreate()메소드에서 다음 코드를 통해 <strong>Fused Location Provider</strong> 클라이언트 객체를 얻어온다.</p>
+<li><p>액티비티 onCreate()메소드에서 다음 코드를 통해 <strong>통합 위치 정보 제공자 (Fused Location Provider)</strong>  클라이언트 객체를 얻어온다.</p>
 
 <div><pre><code class="language-java">private FusedLocationProviderClient mFusedLocationClient;
 
@@ -345,7 +376,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }</code></pre></div></li>
 </ul>
 
-<h3 id="toc_8">2.2 버튼 클릭시 마지막으로 알려진 위치 가져오기</h3>
+<h3 id="toc_7">3.2 버튼 클릭시 마지막으로 알려진 위치 가져오기</h3>
 
 <div><pre><code class="language-java">public class MainActivity extends AppCompatActivity {
 
@@ -374,58 +405,13 @@ protected void onCreate(Bundle savedInstanceState) {
     }
 }</code></pre></div>
 
-<h3 id="toc_9">2.3 마지막으로 알려진 위치 가져오기 구현하기</h3>
+<h3 id="toc_8">3.3 마지막으로 알려진 위치 가져오기 구현하기 - getLastLocation()</h3>
 
 <ul>
-<li><p><strong>Fused Location Provider</strong>의 <a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#getLastLocation()">getLastLocation()</a> 메소드 이용</p>
+<li><p><strong>FusedLocationProvider</strong>의 <a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#getLastLocation()">getLastLocation()</a> 메소드 이용</p>
 
 <ol>
-<li><p>위치 접근에 필요한 권한 설정</p>
-
-<ul>
-<li><p>Android Manifest 파일에서 권한 설정</p>
-
-<div><pre><code class="language-markup">&lt;manifest ...&gt;
-     ...
-     &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot;/&gt;
-     &lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot;/&gt;
-     ...
-&lt;/manifest&gt;</code></pre></div>
-
-<ul>
-<li>ACCESS_COARSE_LOCATION : 대략적 위치 접근 허용 (도시의 블럭 단위)</li>
-<li>ACCESS_FINE_LOCATION : 정밀한 위치 접근 허용</li>
-</ul></li>
-<li><p>Android 6.0 (API level 23) 이상부터는 앱 실행 중에 사용하려는 권한(예, ACCESS_FINE_LOCATION)을 검사하고, 권한이 허용되지 않았으면 반드시 요청해야 함</p>
-
-<ul>
-<li><p>앱이 권한을 요청하면 시스템은 사용자에게 대화상자를 표시합니다. 사용자가 이에 응답하면 시스템은 앱의 <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback.html#onRequestPermissionsResult(int,%20java.lang.String%5B%5D,%20int%5B%5D)"><strong>onRequestPermissionsResult</strong></a>() 메서드를 호출하여 사용자 응답에 전달합니다.</p>
-
-<div><pre><code class="language-java">    @Override
-    public void onRequestPermissionsResult(
-                                            int requestCode, 
-                                            String[] permissions, 
-                                            int[] grantResults) {
-
-        switch (requestCode) {
-            case REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION: {
-                if (grantResults.length &gt; 0 
-                    &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                     /* 권한 획득 후 수행할 일: 
-                         getLastLocation(); 
-                     */
-                } else {
-                    Toast.makeText(this, &quot;Permission required&quot;, Toast.LENGTH_SHORT);
-                }
-            }
-        }
-    }</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L100-L112">https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L100-L112</a></p></li>
-</ul>
-
-<p>[참고자료: <a href="https://developer.android.com/training/permissions/requesting.html">https://developer.android.com/training/permissions/requesting.html</a>]</p></li>
-</ul></li>
+<li><p>위치 접근에 필요한 권한 설정</p></li>
 <li><p><a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#getLastLocation()">getLastLocation()</a> 메소드를 호출하면 <a href="https://developers.google.com/android/reference/com/google/android/gms/tasks/Task">Task</a> 객체를 반환 </p></li>
 <li><p>Task가 성공적으로 완료 후 호출되는 <a href="https://developers.google.com/android/reference/com/google/android/gms/tasks/OnSuccessListener">OnSuccessListener</a> 등록 </p></li>
 <li><p>onSuccess() 메소드를 통해 디바이스에 마지막으로 알려진 위치를 <a href="https://developer.android.com/reference/android/location/Location.html">Location</a> 객체 (위도, 경도, 정확도, 고도 값 등을 얻을 수 있음)로 받음</p>
@@ -490,11 +476,11 @@ protected void onCreate(Bundle savedInstanceState) {
 <p><a href="https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L123-L173">https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L123-L173</a></p></li>
 </ul>
 
-<h2 id="toc_10"><a name="4"> </a></h2>
+<h2 id="toc_9"><a name="4"> </a></h2>
 
-<h2 id="toc_11">4. 주기적인 위치 업데이트</h2>
+<h2 id="toc_10">4. 주기적인 위치 업데이트</h2>
 
-<h3 id="toc_12">4.1. 업데이트 <strong>시작 버튼</strong>/<strong>중지 버튼</strong> 동작 설정</h3>
+<h3 id="toc_11">4.1. 업데이트 <strong>시작 버튼</strong>/<strong>중지 버튼</strong> 동작 설정</h3>
 
 <ul>
 <li>업데이트 <strong>시작 버튼</strong> 클릭시, 
@@ -502,11 +488,10 @@ protected void onCreate(Bundle savedInstanceState) {
 <ul>
 <li><strong>위치 업데이트 시작</strong>, <strong>시작 버튼</strong> 비활성화, <strong>중지 버튼</strong> 활성화</li>
 </ul></li>
-<li>업데이트 <strong>중지 버튼</strong> 클릭시, 
+<li><p>업데이트 <strong>중지 버튼</strong> 클릭시, </p>
 
 <ul>
 <li><strong>위치 업데이트 중지</strong>, <strong>중지 버튼</strong> 비활성화, <strong>시작 버튼</strong> 활성화</li>
-</ul></li>
 </ul>
 
 <div><pre><code class="language-java">    private Button mStartUpdatesButton;
@@ -516,7 +501,7 @@ protected void onCreate(Bundle savedInstanceState) {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
        // ...
-       
+
         mStartUpdatesButton = findViewById(R.id.start_updates_button);
         mStartUpdatesButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -545,14 +530,15 @@ protected void onCreate(Bundle savedInstanceState) {
             }
         });
     }
-</code></pre></div>
+</code></pre></div></li>
+</ul>
 
-<h3 id="toc_13">4.2 주기적인 위치 업데이트 시작</h3>
+<h3 id="toc_12">4.2 주기적인 위치 업데이트 시작</h3>
 
 <ol>
-<li><a href="#4.1.1">위치 요청 설정</a></li>
-<li><a href="#4.1.2">위치 업데이트 콜백 정의</a></li>
-<li><a href="#4.1.3">위치 업데이트 요청</a></li>
+<li><a href="#4.2.1">위치 요청 설정</a></li>
+<li><a href="#4.2.2">위치 업데이트 콜백 정의</a></li>
+<li><a href="#4.2.3">위치 업데이트 요청</a></li>
 </ol>
 
 <div><pre><code class="language-java">    private LocationCallback mLocationCallback;
@@ -560,7 +546,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
     private void startLocationUpdates() {
         // 1. 위치 요청 (Location Request) 설정
-        LocationRequest locRequest = new LocationRequest();
+        LocationRequest locRequest = LocationRequest.create();
         locRequest.setInterval(10000);
         locRequest.setFastestInterval(5000);
         locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -598,17 +584,18 @@ protected void onCreate(Bundle savedInstanceState) {
 
 <hr>
 
-<p><a name="4.1.1"> </a></p>
+<p><a name="4.2.1"> </a></p>
 
-<h4 id="toc_14">4.1.1 위치 요청 설정</h4>
+<h4 id="toc_13">4.2.1 위치 요청 설정</h4>
 
 <ul>
-<li><p>Fused Location Provider에 위치 요청을 위한 파라미터를 설정</p>
+<li>앱에서 <strong>통합 위치 정보 제공자 (Fused Location Provider)</strong> 에 위치를 요청하기 위해서는 필요한 수준의 정확도/전력 소비 및 원하는 업데이트 간격을 설정해야 합니다.</li>
+<li><p><strong>통합 위치 정보 제공자</strong>에 위치 요청에 대한 설정을 지정하려면, <a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest.html?hl=ko">LocationRequest</a> 객체를 생성하고, 다음 메소드를 통해서 파라미터를 설정</p>
 
 <ul>
 <li>setInterval(): 요구되는 위치 업데이트 간격 설정 (더 빠를 수도, 더 느릴 수도 있음)</li>
-<li>setFastestInterval(): 위치 업데이트를 처리하는 가장 빠른 주기</li>
-<li>setPriority(): 어떤 위치 소스를 사용할 지에 대한 힌트
+<li>setFastestInterval(): 위치 업데이트를 처리하는 가장 빠른 주기 설정</li>
+<li>setPriority(): 요청 우선 순위 설정. 다음 파라미터 값은 어떤 위치 소스를 사용할 지에 대한 힌트를 제공
 
 <ul>
 <li>PRIORITY_BALANCED_POWER_ACCURACY: 대략적인 정밀도 (100m, 도시 블럭), 적은 전력 소비, Wifi와 기지국 위치 사용.</li>
@@ -618,8 +605,7 @@ protected void onCreate(Bundle savedInstanceState) {
 </ul></li>
 </ul>
 
-<div><pre><code class="language-java">LocationRequest locRequest = new LocationRequest();
-
+<div><pre><code class="language-java">LocationRequest locRequest = LocationRequest.create();
 locRequest.setInterval(10000);      // 10초 보다 빠를 수도 느릴 수도 있음
 locRequest.setFastestInterval(5000);        // 5초 보다 더 빠를 순 없음
 locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></div></li>
@@ -627,12 +613,12 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 
 <hr>
 
-<p><a name="4.1.2"> </a></p>
+<p><a name="4.2.2"> </a></p>
 
-<h4 id="toc_15">4.1.2 위치 업데이트 콜백 정의</h4>
+<h4 id="toc_14">4.2.2 위치 업데이트 콜백 정의</h4>
 
 <ul>
-<li><p>Fused Location Provider는 위치 정보가 가용할 때, LocationCallback의 <a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationCallback.html#onLocationResult(com.google.android.gms.location.LocationResult)">onLocationResult</a>(<a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationResult">LocationResult</a> result) 콜백 메소드를 호출</p>
+<li><p><strong>통합 위치 정보 제공자 (Fused Location Provider)</strong>는 위치 정보가 가용할 때, 설정된 LocationCallback 객체의 <a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationCallback.html#onLocationResult(com.google.android.gms.location.LocationResult)">onLocationResult</a>(<a href="https://developers.google.com/android/reference/com/google/android/gms/location/LocationResult">LocationResult</a> result) 콜백 메소드를 호출</p>
 
 <ul>
 <li>LocationResult 객체로부터 가장 최근 위치 및 <a href="https://developer.android.com/reference/android/location/Location.html">Location</a> 객체 리스트를 얻을 수 있음.<br></li>
@@ -651,12 +637,12 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 
 <hr>
 
-<p><a name="4.1.3"> </a></p>
+<p><a name="4.2.3"> </a></p>
 
-<h4 id="toc_16">4.1.3 위치 업데이트 요청</h4>
+<h4 id="toc_15">4.2.3 위치 업데이트 요청</h4>
 
 <ul>
-<li>Fused Location Provider의 <strong><a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#requestLocationUpdates(com.google.android.gms.location.LocationRequest,%20com.google.android.gms.location.LocationCallback,%20android.os.Looper)">requestLocationUpdates()</a></strong> 메소드 호출</li>
+<li>FusedLocationProvider의 <strong><a href="https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#requestLocationUpdates(com.google.android.gms.location.LocationRequest,%20com.google.android.gms.location.LocationCallback,%20android.os.Looper)">requestLocationUpdates()</a></strong> 메소드 호출</li>
 <li><p>[사전 조건] </p>
 
 <ul>
@@ -674,7 +660,7 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 
 <hr>
 
-<h3 id="toc_17">4.2 주기적인 위치 업데이트 중단하기</h3>
+<h3 id="toc_16">4.3 주기적인 위치 업데이트 중단하기</h3>
 
 <ul>
 <li><p>위치 업데이트 중단</p>
@@ -684,11 +670,11 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 }</code></pre></div></li>
 </ul>
 
-<h2 id="toc_18"><a name="6"> </a></h2>
+<h2 id="toc_17"><a name="5"> </a></h2>
 
-<h2 id="toc_19">6. 주소 찾기</h2>
+<h2 id="toc_18">5. 주소 찾기</h2>
 
-<h3 id="toc_20">6.1 Geocoding</h3>
+<h3 id="toc_19">5.1 Geocoding</h3>
 
 <ul>
 <li>위치좌표를 주소로 변경하거나 주소를 위치좌표로 변경하는 것</li>
@@ -726,7 +712,7 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 
 <hr>
 
-<h3 id="toc_21">6.2 위치로부터 주소 얻기 예제 (코드 발췌)</h3>
+<h3 id="toc_20">5.2 위치로부터 주소 얻기 예제 (코드 발췌)</h3>
 
 <div><pre><code class="language-java">    protected void onCreate(Bundle savedInstanceState) {
         // ...
@@ -767,7 +753,7 @@ locRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);</code></pre></di
 
 <hr>
 
-<h3 id="toc_22">6.3 주소 이름으로부터 위치 얻기 예제</h3>
+<h3 id="toc_21">5.3 주소 이름으로부터 위치 얻기 예제</h3>
 
 <div><pre><code class="language-java">try {
     Geocoder geocoder = new Geocoder(this, Locale.KOREA);
@@ -819,7 +805,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>
