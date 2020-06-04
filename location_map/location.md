@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	```
 
-	https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L123-L173
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L123-L173
 
 
 <a name="4"> </a>
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
 
 ```
 
-https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L175-L208
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L175-L208
 
 ---
 <a name="4.2.1"> </a>
@@ -421,8 +421,8 @@ https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src
 
     }
 ```
-https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L91-L97
-https://github.com/kwanulee/Android/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L215-L233
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L91-L97
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L215-L233
 
 ---
 ### 5.3 주소 이름으로부터 위치 얻기 예제
