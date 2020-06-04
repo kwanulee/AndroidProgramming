@@ -7,16 +7,16 @@
     - [Google Play Services location APIs](https://developers.google.com/android/reference/com/google/android/gms/location/package-summary) (**추천**)
 * 이번 시간에 다룰 내용 (Google Play Service 이용)
     - [Google Play Services 설정](#1)
+    - [위치 접근에 필요한 권한 얻기](#2)
     - [마지막으로 알려진 위치 얻기](#3)
     - [주기적인 위치 업데이트 시작](#4)/[중단](#5) 하기
     - [주소 찾기](#6)
 
 [출처: https://developer.android.com/training/location/index.html]
 
-- **Location Service 예제 프로젝트 다운로드** [링크](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/kwanulee/Android/tree/master/examples/LocationService)
+- **Location Service 예제 프로젝트 다운로드** [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-82c67cbc2b074a78b2f4/LocationService.zip) 
 
 <a name="1"> </a>
-
 ##1. Google Play Services 설정
 - **Google Play Services SDK** 다운로드 및 설치
     - **Android Studio**에서 **Tools>SDK Manager** 이용
