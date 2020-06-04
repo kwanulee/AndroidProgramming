@@ -380,7 +380,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 
 	<img src="images/fileprovider-concept.png" width=500>
 
-	- [**중요**] [FileProvider 설정 방법](fileprovider.html)
+	- [**중요**] [FileProvider 설정 방법](FileProvider.html)
 
 
 
