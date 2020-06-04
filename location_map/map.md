@@ -29,13 +29,13 @@
 ##2. Google Maps API 키 가져오기
 Maps SDK for Android를 사용하려면 Google Cloud Platform Console에 앱 프로젝트를 등록하고 앱에 추가할 수 있는 Google API 키를 가져와야 합니다.
 
-1. Google Developers Console로 이동	- https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&reusekey=true  2. 프로젝트 만들기 (또는 선택) 	- 화면 상단의 [**프로젝트 선택**] 클릭
+1. Google Cloud Platform Console로 이동	- https://cloud.google.com/console/google/maps-apis/overview?hl=ko  2. 프로젝트 만들기 (또는 선택) 	- 화면 상단의 [**프로젝트 선택**] 클릭
 	- **[새프로젝트]**  클릭 
 		<img src="figures/console_project1.png">
 	- 프로젝트 이름 (*MyMapTest*) 입력 후, **[만들기]** 버튼 클릭
 		<img src="figures/console_project2.png">
 	- 화면 상단의 [**프로젝트 선택**] 에서 생성된 *MyMapTest* 선택
-	3. . 좌측상단의 메뉴 버튼 을 클릭하고 **API 및 서비스 > 사용자 인증 정보**를 선택합니다.
+	3. 좌측상단의 메뉴 버튼 을 클릭하고 **API 및 서비스 > 사용자 인증 정보**를 선택합니다.
 		
 	<img src="figures/google-api.png">
 4. 사용자 인증 정보 페이지에서 **사용자 인증 정보 만들기 > API 키**를 클릭합니다.
