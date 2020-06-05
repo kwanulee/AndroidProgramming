@@ -16,7 +16,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAGz8Lb2PqIsFhxEsaeNjYsXBe6gu44OVU" />
+            android:value="생성된 API 키를 여기로 붙여넣기" />
 
 
         <activity android:name=".MainActivity">
