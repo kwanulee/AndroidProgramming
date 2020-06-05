@@ -131,38 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 	- [OnMarkerClickListener](https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.OnMarkerClickListener)를 사용하여 마커에서 클릭 이벤트를 처리
 
 ### 4.2 마커 사용 예제
-- activity\_main.xml
-
-	```xml
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:orientation="vertical">
-	
-	   <LinearLayout
-	       android:layout_width="match_parent"
-	       android:layout_height="wrap_content"
-	       android:orientation="horizontal">
-	      <Button
-	          android:id="@+id/subway1"
-	          android:layout_width="wrap_content"
-	          android:layout_height="wrap_content"
-	          android:text="한성대입구역"/>
-	      <Button
-	          android:id="@+id/subway2"
-	          android:layout_width="wrap_content"
-	          android:layout_height="wrap_content"
-	          android:text="창신역"/>
-	   </LinearLayout>
-	   <fragment
-	       android:id="@+id/map"
-	       android:layout_width="match_parent"
-	       android:layout_height="match_parent"
-	       android:name="com.google.android.gms.maps.SupportMapFragment" />
-	
-	</LinearLayout>
-	```
+- [SampleMapTest](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/SampleMapTest) 프로젝트 다운 [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-d1923f38e9d8d6ea48a0/SampleMapTest.zip)
 
 
 - MainActivity.java

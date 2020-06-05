@@ -452,36 +452,7 @@ pre[class*="language-"] {
 <h3 id="toc_6">4.2 마커 사용 예제</h3>
 
 <ul>
-<li><p>activity_main.xml</p>
-
-<div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    android:orientation=&quot;vertical&quot;&gt;
-
-   &lt;LinearLayout
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;wrap_content&quot;
-       android:orientation=&quot;horizontal&quot;&gt;
-      &lt;Button
-          android:id=&quot;@+id/subway1&quot;
-          android:layout_width=&quot;wrap_content&quot;
-          android:layout_height=&quot;wrap_content&quot;
-          android:text=&quot;한성대입구역&quot;/&gt;
-      &lt;Button
-          android:id=&quot;@+id/subway2&quot;
-          android:layout_width=&quot;wrap_content&quot;
-          android:layout_height=&quot;wrap_content&quot;
-          android:text=&quot;창신역&quot;/&gt;
-   &lt;/LinearLayout&gt;
-   &lt;fragment
-       android:id=&quot;@+id/map&quot;
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;match_parent&quot;
-       android:name=&quot;com.google.android.gms.maps.SupportMapFragment&quot; /&gt;
-
-&lt;/LinearLayout&gt;</code></pre></div></li>
+<li><p><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/SampleMapTest">SampleMapTest</a> 프로젝트 다운 <a href="https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-d1923f38e9d8d6ea48a0/SampleMapTest.zip">링크</a></p></li>
 <li><p>MainActivity.java</p>
 
 <div><pre><code class="language-java">public class MainActivity extends AppCompatActivity implements OnMapReadyCallback{
