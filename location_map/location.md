@@ -14,7 +14,7 @@
 
 [출처: https://developer.android.com/training/location/index.html]
 
-- **Location Service 예제 프로젝트 다운로드** [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-82c67cbc2b074a78b2f4/LocationService.zip) 
+- **Location Service 예제 프로젝트 다운로드** [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/5/LocationService.zip) 
 
 <a name="1"> </a>
 ##1. Google Play Services 설정

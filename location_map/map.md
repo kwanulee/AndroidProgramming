@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 	- [OnMarkerClickListener](https://developers.google.com/android/reference/com/google/android/gms/maps/GoogleMap.OnMarkerClickListener)를 사용하여 마커에서 클릭 이벤트를 처리
 
 ### 4.2 마커 사용 예제
-- [SampleMapTest](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/SampleMapTest) 프로젝트 다운 [링크](https://downgit.github.io/#/home?url=https://github.com/kwanulee/AndroidProgramming/tree/master/examples/SampleMapTest)
+- [SampleMapTest](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/SampleMapTest) 프로젝트 다운 [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/1/SampleMapTest.zip)
 
 
 - MainActivity.java
