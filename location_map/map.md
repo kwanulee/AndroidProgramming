@@ -32,17 +32,24 @@ Maps SDK for Android를 사용하려면 Google Cloud Platform Console에 앱 프
 1. Google Cloud Platform Console로 이동	- https://cloud.google.com/console/google/maps-apis/overview?hl=ko  2. 프로젝트 만들기 (또는 선택) 	- 화면 상단의 [**프로젝트 선택**] 클릭
 	- **[새프로젝트]**  클릭 
 		<img src="figures/console_project1.png">
+		
 	- 프로젝트 이름 (*MyMapTest*) 입력 후, **[만들기]** 버튼 클릭
 		<img src="figures/console_project2.png">
-	- 화면 상단의 [**프로젝트 선택**] 에서 생성된 *MyMapTest* 선택
-	3. 좌측상단의 메뉴 버튼 을 클릭하고 **API 및 서비스 > 사용자 인증 정보**를 선택합니다.
+		
+	- 화면에서 생성된 *MyMapTest* 선택
+		<img src="figures/console_project4.png">
+
+3. **Maps SDK for Android** 사용 설정하기
+	-  **Maps SDK for Android** 선택하고, 다음 화면에서 **사용** 버튼을 클릭합니다.4. 좌측상단의 메뉴 버튼 을 클릭하고 **API 및 서비스 > 사용자 인증 정보**를 선택합니다.
 		
 	<img src="figures/google-api.png">
-4. 사용자 인증 정보 페이지에서 **사용자 인증 정보 만들기 > API 키**를 클릭합니다.
+	
+5. 사용자 인증 정보 페이지에서 **사용자 인증 정보 만들기 > API 키**를 클릭합니다.
 
 	**API 키 생성 완료** 대화상자에 새로 만든 API 키가 표시됩니다.
 5. **닫기**를 클릭합니다.
-		새 API 키는 **사용자 인증 정보** 페이지의 **API 키** 아래 나열됩니다.	
+		새 API 키는 **사용자 인증 정보** 페이지의 **API 키** 아래 나열됩니다.
+
 
 <a name="3"></a>
 ##3. 앱에 지도 추가 및 설정
