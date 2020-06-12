@@ -106,16 +106,16 @@ kbd {
 
 <style type="text/css">
 /**
- * prism.js Dark theme for JavaScript, CSS and HTML
- * Based on the slides of the talk “/Reg(exp){2}lained/”
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
-	color: white;
+	color: black;
 	background: none;
-	text-shadow: 0 -.1em .2em black;
+	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
 	white-space: pre;
@@ -134,6 +134,18 @@ pre[class*="language-"] {
 	hyphens: none;
 }
 
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
 @media print {
 	code[class*="language-"],
 	pre[class*="language-"] {
@@ -141,27 +153,22 @@ pre[class*="language-"] {
 	}
 }
 
-pre[class*="language-"],
-:not(pre) > code[class*="language-"] {
-	background: hsl(30, 20%, 25%);
-}
-
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
 	overflow: auto;
-	border: .3em solid hsl(30, 20%, 40%);
-	border-radius: .5em;
-	box-shadow: 1px 1px .5em black inset;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: .15em .2em .05em;
+	padding: .1em;
 	border-radius: .3em;
-	border: .13em solid hsl(30, 20%, 40%);
-	box-shadow: 1px 1px .3em -.1em black inset;
 	white-space: normal;
 }
 
@@ -169,11 +176,11 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: hsl(30, 20%, 50%);
+	color: slategray;
 }
 
 .token.punctuation {
-	opacity: .7;
+	color: #999;
 }
 
 .namespace {
@@ -185,8 +192,9 @@ pre[class*="language-"] {
 .token.boolean,
 .token.number,
 .token.constant,
-.token.symbol {
-	color: hsl(350, 40%, 70%);
+.token.symbol,
+.token.deleted {
+	color: #905;
 }
 
 .token.selector,
@@ -195,26 +203,31 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: hsl(75, 70%, 60%);
+	color: #690;
 }
 
 .token.operator,
 .token.entity,
 .token.url,
 .language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: hsl(40, 90%, 60%);
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: hsl(350, 40%, 70%);
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
 }
 
 .token.regex,
-.token.important {
+.token.important,
+.token.variable {
 	color: #e90;
 }
 
@@ -229,10 +242,6 @@ pre[class*="language-"] {
 .token.entity {
 	cursor: help;
 }
-
-.token.deleted {
-	color: red;
-}
 </style>
 
 
@@ -242,29 +251,52 @@ pre[class*="language-"] {
 
 <h1 id="toc_0">알림 (Notification)</h1>
 
+<h2 id="toc_1">1. 개요</h2>
+
 <ul>
 <li>토스트 메시지는 잠시만 보였다가 사라짐</li>
 <li><p>알림(Notification)은 애플리케이션의 정상 UI 외부에서 사용자에게 표시할 수 있는 메시지</p>
 
 <ul>
-<li><p>시스템에 알림을 실행하라고 명령하면 처음에 알림 영역에서 아이콘으로 나타납니다. </p>
-
-<p><img src="figures/notification.png" width=300/></p></li>
-<li><p>알림 세부 정보를 보려면 사용자는 알림 창을 열어야 합니다. </p></li>
-<li><p>알림 영역과 알림 창은 사용자가 언제든 볼 수 있는, 시스템이 제어하는 영역 입니다.</p>
-
-<p><img src="figures/notification_drawer.png" width=300/></p></li>
-</ul>
-
-<p>[소스: <a href="https://developer.android.com/guide/topics/ui/notifiers/notifications.html?hl=ko">https://developer.android.com/guide/topics/ui/notifiers/notifications.html?hl=ko</a>]</p></li>
-</ul>
-
-<h2 id="toc_1">1.간단한 알림 생성</h2>
-
-<h3 id="toc_2">1.1  알림 내용 설정</h3>
+<li><p>시스템에 알림을 실행하라고 명령하면 처음에 알림 영역(상태 표시줄)에서 아이콘으로 나타납니다. 
+<img src="https://developer.android.com/images/ui/notifications/notification-area_2x.png?hl=ko" width=300/></p></li>
+<li><p>알림 세부 정보를 보려면, 사용자는 상태 표시줄을 아래로 스와이프하여 알림 창을 열 수 있습니다. 
+<img src="https://developer.android.com/images/ui/notifications/notification-drawer_2x.png?hl=ko" width=300/></p></li>
+</ul></li>
+<li><p><strong>알림 분석</strong></p>
 
 <ul>
-<li><strong><a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a></strong>를 사용하여 알림을 위한 내용과 행동을 지정하여 Builder 객체를 생성</li>
+<li><p>알림의 가장 일반적인 부분은 다음 그림과 같습니다.</p>
+
+<p><img src="https://developer.android.com/images/ui/notifications/notification-callouts_2x.png?hl=ko" width=300/></p>
+
+<ol>
+<li>소형 아이콘: 이는 필수 항목이며 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setSmallIcon(int)">setSmallIcon()</a>으로 설정합니다.</li>
+<li>앱 이름: 시스템에서 제공합니다.</li>
+<li>타임 스탬프: 시스템에서 제공하지만 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setWhen(long)">setWhen()</a>으로 재정의하거나<a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setShowWhen(boolean)">setShowWhen(false)</a>으로 숨길 수 있습니다.</li>
+<li>대형 아이콘: 이는 선택 항목이며(일반적으로 연락처 사진에만 사용되며, 앱 아이콘에는 사용하지 않음) <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setLargeIcon(android.graphics.Bitmap)">setLargeIcon()</a>으로 설정합니다.</li>
+<li>제목: 이는 선택 항목이며 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setContentTitle(java.lang.CharSequence)">setContentTitle()</a>로 설정합니다.</li>
+<li> 텍스트: 이는 선택 항목이며 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setContentText(java.lang.CharSequence)">setContentText()</a>로 설정합니다.</li>
+</ol></li>
+</ul>
+
+<p>[참고자료: <a href="https://developer.android.com/guide/topics/ui/notifiers/notifications.html?hl=ko">https://developer.android.com/guide/topics/ui/notifiers/notifications.html?hl=ko</a>]</p></li>
+<li><p><strong>알림 채널</strong></p>
+
+<ul>
+<li><strong>Android 8.0(API 레벨 26)</strong>부터 모든 알림은 채널에 할당되어야 합니다. 그렇지 않으면 알림이 나타나지 않습니다. </li>
+<li>알림을 채널로 분류하면 사용자가 (모든 알림을 비활성화하지 않고도) 앱의 특정 알림 채널을 비활성화할 수 있고 각 채널의 시청각적 옵션을 제어할 수 있습니다.<br></li>
+</ul>
+
+<p><img src="https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko" alt=""></p></li>
+</ul>
+
+<h2 id="toc_2">2.간단한 알림 생성</h2>
+
+<h3 id="toc_3">2.1  알림 내용 설정</h3>
+
+<ul>
+<li><strong><a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html">NotificationCompat.Builder</a></strong>를 사용하여 알림을 위한 내용과 채널을 지정하여 Builder 객체를 생성</li>
 <li>최소한 다음 요소를 포함해야 함
 
 <ul>
@@ -274,71 +306,78 @@ pre[class*="language-"] {
 </ul></li>
 <li><p>예제</p>
 
-<div><pre><code class="language-java">NotificationCompat.Builder mBuilder =
-    new NotificationCompat.Builder(this)
-    .setSmallIcon(R.drawable.notification_icon)
-    .setContentTitle(&quot;My notification&quot;)
-    .setContentText(&quot;Detailed description of My notification &quot;);</code></pre></div></li>
-<li><p>부가 설정</p>
+<div><pre><code class="language-java">NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        .setSmallIcon(R.drawable.notification_icon)
+        .setContentTitle(&quot;My notification&quot;)
+        .setContentText(&quot;Detailed description of My notification &quot;);</code></pre></div></li>
+<li><p>기본적으로 알림의 텍스트 콘텐츠는 한 줄에 맞춰 잘립니다. 알림을 더 길게 표시하고 싶은 경우 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setStyle(android.support.v4.app.NotificationCompat.Style)">setStyle()</a>을 사용하여 스타일 템플릿을 추가하여 확장 가능한 알림을 사용 설정할 수 있습니다. 예를 들어 다음 코드를 사용하면 더 큰 텍스트 영역이 생성됩니다</p>
 
-<ul>
-<li>알림 우선순위 : <a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html?hl=ko#setPriority(int)">setPriority()</a>
-
-<ul>
-<li>NotificationCompat.PRIORITY_MIN ~ NotificationCompat.PRIORITY_MAX</li>
-</ul></li>
-<li>자동 취소: <a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#setAutoCancel(boolean)">setAutoCancel()</a>
-
-<ul>
-<li>클릭시, 알림이 자동 취소됨<br></li>
-</ul></li>
-<li>디폴트 알림: <a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#setDefaults(int)">setDefaults()</a>
-
-<ul>
-<li>DEFAULT_SOUND, DEFAULT_VIBRATE, DEFAULT_LIGHTS의 bitwise-or</li>
-<li>DEFAULT_ALL: 모든 값 적용 </li>
-</ul></li>
-<li>알림 발생 시간: <a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#setWhen(long)">setWhen()</a></li>
+<div><pre><code class="language-java">NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+        .setSmallIcon(R.drawable.notification_icon)
+        .setContentTitle(&quot;My notification&quot;)
+        .setContentText(&quot;Much longer text that cannot fit one line...&quot;)
+        .setStyle(new NotificationCompat.BigTextStyle()
+                    .bigText(&quot;Much longer text that cannot fit one line...&quot;));</code></pre></div></li>
 </ul>
 
-<div><pre><code class="language-java">NotificationCompat.Builder mBuilder =
-    new NotificationCompat.Builder(this)
-    .setSmallIcon(R.drawable.notification_icon)
-    .setContentTitle(&quot;My notification&quot;)
-    .setContentText(&quot;Detailed description of My notification &quot;); 
+<h3 id="toc_4">2.2 채널 만들기 및 중요도 설정</h3>
 
-    .setAutoCancel(true)
-    .setWhen(System.currentTimeMillis())
-    .setPriority(Notification.PRIORITY_HIGH)
-    .setDefaults(Notification.DEFAULT_ALL);</code></pre></div></li>
+<ul>
+<li><p><strong>Android 8.0</strong> 이상에서 알림을 제공하려면 먼저 <a href="https://developer.android.com/reference/android/app/NotificationChannel?hl=ko">NotificationChannel</a> 인스턴스를 <a href="https://developer.android.com/reference/android/app/NotificationManager?hl=ko#createNotificationChannel(android.app.NotificationChannel)">createNotificationChannel()</a>에 전달하여 앱의 알림 채널 을 시스템에 등록해야 합니다.</p></li>
+<li><p>NotificationChannel 생성 예제</p>
+
+<div><pre><code class="language-java">final String CHANNEL_ID = &quot;my_channel_01&quot;;
+
+private void createNotificationChannel() {
+        if (android.os.Build.VERSION.SDK_INT &gt;=26) {                
+            // The user-visible name of the channel.
+            CharSequence name = getString(R.string.channel_name);
+
+            // The user-visible description of the channel.
+            String description = getString(R.string.channel_description);
+
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+
+            // Configure the notification channel.
+            channel.setDescription(description);
+            channel.enableLights(true);
+            channel.setLightColor(Color.BLUE);
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+
+            // Register the channel with the system
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+    }</code></pre></div></li>
 </ul>
 
-<h3 id="toc_3">1.2 알림 발행</h3>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67</a></p>
+
+<h3 id="toc_5">2.3 알림 발행</h3>
 
 <ul>
-<li><a href="https://developer.android.com/reference/android/app/NotificationManager.html">NotificationManager</a> 객체의 <a href="https://developer.android.com/reference/android/app/NotificationManager.html#notify(int,%20android.app.Notification)">notify()</a> 메소드 호출해서 <a href="https://developer.android.com/reference/android/app/Notification.html?hl=ko">Notification</a> 객체를 전달
-
-<ul>
-<li>NotificationManager 객체는 시스템 서비스로부터 획득</li>
-<li>Notification 객체는 NotificationCompat.Builder 객체의 build() 메소드로 획득 </li>
-</ul></li>
+<li><p>알림을 표시하려면 <a href="https://developer.android.com/reference/androidx/core/app/NotificationManagerCompat?hl=ko#notify(int,%20android.app.Notification)">NotificationManagerCompat.notify()</a>를 호출하고 알림의 고유 ID 및 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#build()">NotificationCompat.Builder.build()</a>의 결과를 전달하세요. </p></li>
 <li><p>예제</p>
 
-<div><pre><code class="language-java">NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+<div><pre><code class="language-java">NotificationManagerCompat nm = NotificationManagerCompat.from(this);
 nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
 </ul>
 
-<h2 id="toc_4">2. 알림 클릭 행동 정의</h2>
+<h2 id="toc_6">3. 알림 클릭 행동 정의</h2>
 
 <ul>
 <li>사용자가 알림을 클릭했을 때의 행동을 정의</li>
-<li><strong>행동</strong>은 <a href="">PendingIntent</a>로 정의되며, 이는 액티비티를 시작시킬 인텐트를 포함하고 있음</li>
+<li><strong>행동</strong>은 <a href="https://developer.android.com/reference/android/app/PendingIntent?hl=ko">PendingIntent</a>로 정의되며, 이는 액티비티를 시작시킬 인텐트를 포함하고 있음</li>
 </ul>
 
-<h3 id="toc_5">2.1 PendingIntent</h3>
+<h3 id="toc_7">3.1 PendingIntent</h3>
 
 <ul>
-<li><p>PendingIntent 클래스는 다른 인텐트를 래핑하며 다른 응용 프로그램으로 전달하여 실행 권한을 준다</p>
+<li><p><a href="https://developer.android.com/reference/android/app/PendingIntent?hl=ko">PendingIntent</a> 클래스는 다른 인텐트를 래핑하며 다른 응용 프로그램으로 전달하여 실행 권한을 준다</p>
 
 <ul>
 <li><p>일반 인텐트와의 차이점으로는 다른 컴포넌트에게 작업을 요청하는 인텐트를 사전에 생성시키고 만든다는 점과 <q>특정 시점</q>에 자신이 아닌 다른 컴포넌트들이 펜딩인텐트를 사용하여 다른 컴포넌트에게 작업을 요청시키는 데 사용된다는 점이 차이점</p>
@@ -369,14 +408,14 @@ nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
 </ul></li>
 </ul>
 
-<h3 id="toc_6">2.2 PendingIntent를 알림 클릭 동작과 연결</h3>
+<h3 id="toc_8">3.2 PendingIntent를 알림 클릭 동작과 연결</h3>
 
 <ul>
-<li>  NotificationCompat.Builder의 <a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#setContentIntent(android.app.PendingIntent)">setContentIntent()</a> 메소드 사용</li>
+<li>  NotificationCompat.Builder의 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setContentIntent(android.app.PendingIntent)">setContentIntent()</a> 메소드 사용</li>
 <li><p>예제 </p>
 
 <div><pre><code class="language-java">    Intent notificationIntent = new Intent(this, NotificationDetail.class);
-    notificationIntent.putExtra(&quot;notificationId&quot;, 9999); //전달할 값
+    notificationIntent.putExtra(&quot;notificationId&quot;, NOTI_ID); //전달할 값
     PendingIntent contentIntent 
             = PendingIntent.getActivity(
                         this, 
@@ -389,65 +428,61 @@ nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
             .setContentText(getString(R.string.notification_text))
             .setSmallIcon(R.drawable.ic_access_alarm_black_24dp)
             .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-*           .setContentIntent(contentIntent)
-            .setAutoCancel(true)
-            .setWhen(System.currentTimeMillis())
-            .setPriority(Notification.PRIORITY_HIGH)
-            .setDefaults(Notification.DEFAULT_ALL);
+*           .setContentIntent(contentIntent);
 
-    NotificationManager mNotificationManager = 
-        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-    mNotificationManager.notify(NOTI_ID, notification.build());
-</code></pre></div></li>
+    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+    notificationManager.notify(NOTI_ID, notification.build());
+</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90</a></p></li>
 </ul>
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90">https://github.com/kwanulee/Android/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90</a></p>
-
-<h2 id="toc_7">3. NotificationChannel</h2>
+<h2 id="toc_9">4. 알림 삭제</h2>
 
 <ul>
-<li><p>Android O에는 사용자의 알림 관리에 도움이 되는 통합 시스템을 제공하기 위해 알림 채널이 도입됨</p>
+<li><p>알림 삭제는 다음 중 한 가지가 발생할 때 일어납니다.</p>
 
 <ul>
-<li>참고 사이트: <a href="http://shnoble.tistory.com/81">http://shnoble.tistory.com/81</a></li>
-</ul></li>
-<li><p>API level 26 (Android 8.0) 이상의 플랫폼 부터는 NotificationChannel을 먼저 생성한 후에, 다음 생성자를 사용하여 생성된 NotificationChannel ID를 두번째 파라미터로 넘겨줌</p>
+<li><p>알림을 만들 때 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setAutoCancel(boolean)">setAutoCancel()</a>을 호출했으며 사용자가 알림을 클릭합니다.</p>
 
-<ul>
-<li><a href="https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context,%20java.lang.String)">NotificationCompat.Builder(Context context, String channelId)</a></li>
-</ul></li>
-<li><p>NotificationChannel 생성 예제</p>
+<div><pre><code class="language-java">    NotificationCompat.Builder notification = new NotificationCompat.Builder(this, CHANNEL_ID);
+    notification.setContentTitle(getString(R.string.notification_title))
+            .setContentText(getString(R.string.notification_text))
+            .setSmallIcon(R.drawable.ic_access_alarm_black_24dp)
+            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+            .setContentIntent(contentIntent)
+    *       .setAutoCancel(true);</code></pre></div></li>
+<li><p>특정 알림 ID에 <a href="https://developer.android.com/reference/android/app/NotificationManager?hl=ko#cancel(int)">cancel()</a>을 호출합니다. 이 메서드는 진행 중인 알림도 삭제합니다.</p>
 
-<div><pre><code class="language-java">private void initChannel() {
-        if (android.os.Build.VERSION.SDK_INT &gt;=26) {
-            // The id of the channel.
-            String id = &quot;my_channel_01&quot;;
+<div><pre><code class="language-java">public class NotificationDetail extends AppCompatActivity {
 
-            // The user-visible name of the channel.
-            CharSequence name = getString(R.string.channel_name);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notification_detail);
+        CharSequence s = &quot;전달 받은 값은 &quot;;
+        int id=0;
 
-            // The user-visible description of the channel.
-            String description = getString(R.string.channel_description);
-
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-
-            NotificationChannel mChannel = new NotificationChannel(id, name, importance);
-
-            // Configure the notification channel.
-            mChannel.setDescription(description);
-            mChannel.enableLights(true);
-            mChannel.setLightColor(Color.BLUE);
-            mChannel.enableVibration(true);
-            mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-
-            NotificationManager mNotificationManager =
-                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.createNotificationChannel(mChannel);
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            s = &quot;error&quot;;
         }
-    }</code></pre></div></li>
-</ul>
+        else {
+            id = extras.getInt(&quot;notificationId&quot;);
+        }
+        TextView t = (TextView) findViewById(R.id.textView);
+        s = s+&quot; &quot;+id;
+        t.setText(s);
+        NotificationManager nm =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67">https://github.com/kwanulee/Android/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67</a></p>
+        //노티피케이션 제거
+*       nm.cancel(id);
+    }
+}</code></pre></div></li>
+<li><p><a href="https://developer.android.com/reference/android/app/NotificationManager?hl=ko#cancelAll()">cancelAll()</a>을 호출하여 이전에 발행한 모든 알림을 삭제합니다. </p></li>
+</ul></li>
+</ul>
 
 
 
@@ -480,7 +515,7 @@ if (typeof MathJaxListener !== 'undefined') {
 })();
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 </body>
