@@ -7,10 +7,13 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Telephony;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,11 +32,6 @@ public class MainActivity extends AppCompatActivity {
             mSMSBR = registSMSBR();
         } else
             requestPermission();
-    }
-
-
-    public void onResume() {
-        super.onResume();
 
         TextView status_output = findViewById(R.id.status);
 
@@ -43,22 +41,19 @@ public class MainActivity extends AppCompatActivity {
         filter.addAction(Intent.ACTION_BATTERY_OKAY);
         filter.addAction(Intent.ACTION_POWER_CONNECTED);
         filter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        filter.addAction(Intent.ACTION_BATTERY_CHANGED);
         registerReceiver(mBatteryBR, filter);
+        Log.d("TAG","registerReceiver(mBatteryBR, filter);");
 
     }
 
-    public void onPause() {
-        super.onPause();
 
-        unregisterReceiver(mBatteryBR);
-    }
 
     private BroadcastReceiver registSystemBR() {
         SystemBroadcastReceiver my_br = new SystemBroadcastReceiver();
         IntentFilter intentFilter_br = new IntentFilter();
         intentFilter_br.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         intentFilter_br.addAction(Intent.ACTION_BOOT_COMPLETED);
-        //intentFilter_br.addAction(Intent.ACTION_POWER_CONNECTED);
         registerReceiver(my_br, intentFilter_br);
 
         return my_br;
@@ -75,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         unregisterReceiver(mSystemBR);
+        unregisterReceiver(mBatteryBR);
         if (mSMSBR != null)
             unregisterReceiver(mSMSBR);
         super.onDestroy();
