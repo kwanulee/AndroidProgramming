@@ -52,7 +52,7 @@
 
 	* exported 속성은 해당 리시버가 앱 외부에서도 호출 가능한지를 나타냄
 
-	https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/main/AndroidManifest.xml#L22-L30
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/AndroidManifest.xml#L22-L30
 
 
 * SystemBroadcastReceiver.java
@@ -75,7 +75,7 @@
 
 * 실행 결과: 에어플래인 모드를 켜고 끌때마다 토스트 메시지와 로그가 출력됨
 
-https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/SystemBroadcastReceiver.java
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/SystemBroadcastReceiver.java
 
 ---
 ###2.2 컨텍스트에 리시버 정의하기
@@ -130,7 +130,7 @@ https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/m
 	}
 	```
 
-https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/MainActivity.java
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/MainActivity.java
 
 ---
 ##3. 배터리 상태 표시
@@ -225,7 +225,7 @@ public class BatteryWatchBR extends BroadcastReceiver {
 }
 ```
 	
-https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/BatteryWatchBR.java
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/BatteryWatchBR.java
 
 
 
@@ -272,4 +272,4 @@ https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/m
 	}
 	```
 
-  https://github.com/kwanulee/Android/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/SMSBroadcastReceiver.java
+  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/java/com/kwanwoo/android/broadcasttest/SMSBroadcastReceiver.java
