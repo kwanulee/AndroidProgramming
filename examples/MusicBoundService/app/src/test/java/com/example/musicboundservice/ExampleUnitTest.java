@@ -1,4 +1,4 @@
-package com.example.musicintentservice;
+package com.example.musicboundservice;
 
 import org.junit.Test;
 
