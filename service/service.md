@@ -211,11 +211,14 @@
 		<img src="figures/musicboundservice.png" width=500>
 	
 - 설정 절차
-	1. 서비스에서 다음 기능을 하는 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko)  인스턴스를 생성합니다.
-		- 현재 Service 인스턴스를 반환하는 메소드를 포함하고 있습니다.
-	2. [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko)의 인스턴스를 [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드에서 반환합니다.
-	3. [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko) 구현 객체 생성
-	4. 클라이언트의 경우, [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko)를 [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder)) 콜백 메서드에서 받아서 제공된 메서드로 바인딩된 서비스를 호출합니다
+	1. 서비스 클래스 구현
+		- [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드 재정의
+			- 서비스 객체 인스턴스를 참조할 수 있는 메소드를 지닌  [Binder](https://developer.android.com/reference/android/os/Binder) 객체 반환
+		- 기타 필요한 수명주기 콜백 메소드를 재정의하고, 클라이언트가 사용할 공개 메소드를 정의
+	2. 클라이언트 (액티비티) 클래스 구현
+		- 클라이언트는  [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 를 호출하여 서비스에 바인딩
+			-  이때, 서비스와의 연결을 모니터링하는  [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko)의 구현을 제공하여, 서비스와 연결이 이루어진 경우에 바인딩된 서비스 객체 인스턴스를 확보
+		- 클라이언트는 확보된 서비스 객체 인스턴스를 통해 서비스 객체의 공개 메소드를 사용
 
 ### 3.2  예제 ([MusicBoundService](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicBoundService))
 - 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicBoundService)  
@@ -223,8 +226,8 @@
 	<img src="figures/musicboundservice.png" width=500>
 
 #### 3.2.1 MusicBoundService 클래스 구현
-- [Service](https://developer.android.com/reference/android/app/Service?hl=ko)의 서브 클래스에서 [IBinder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 객체를 반환하는 [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드를 구현해야 합니다.
-	- [IBinder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 객체는 클라이언트가 바인딩된 서비스 객체 인스턴스를  참조할 수 있도록 서비스 객체 인스턴스를 반환하는 메소드(**getService()**)를 제공합니다.
+- [Service](https://developer.android.com/reference/android/app/Service?hl=ko)의 서브 클래스에서 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko) 객체를 반환하는 [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드를 구현해야 합니다.
+	- [Binder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 객체는 클라이언트가 바인딩된 서비스 객체 인스턴스를  참조할 수 있도록 서비스 객체 인스턴스를 반환하는 메소드(**getService()**)를 제공합니다.
 
 	```java
 	public class MusicBoundService extends Service {
@@ -314,11 +317,12 @@
 
 #### 3.2.2 MainActivity 클래스 구현
 
-1. 서비스와의 연결 상태를 모니터링하는 [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko) 구현 객체 생성 
-- 클라이언트는  [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 를 호출하여 서비스에 바인딩합니다. 이때 반드시 서비스와의 연결을 모니터링하는  [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko)의 구현을 제공해야 합니다. 
+1. **서비스와의 연결 상태를 모니터링하는 [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko) 구현 객체 생성** 
+2. **클라이언트는  [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 를 호출하여 서비스에 바인딩**합니다. 
+	- 이때 반드시 서비스와의 연결을 모니터링하는  [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko)의 구현을 제공해야 합니다. 
 3. Android 시스템이 클라이언트와 서비스 사이에 연결을 설정하면  [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko) 객체의 [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder))을 호출합니다. 
-	- [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder)) 메서드에는 [IBinder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 인수가 포함되고 클라이언트는 이를 사용(예, binder.getService())하여 바인딩된 서비스 객체 인스턴스를 얻습니다.
-4. 클라이언트는 확보된 서비스 객체 인스턴스를 통해 서비스 객체의 공개 메소드를 사용합니다.
+	- [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder)) 메서드에는 [IBinder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 인수가 포함되고 **클라이언트는 이를 사용(예, binder.getService())하여 바인딩된 서비스 객체 인스턴스를 얻습니다**.
+4. 클라이언트는 확보된 서비스 객체 인스턴스를 통해 **서비스 객체의 공개 메소드를 사용**합니다.
 		
 	```java
 	public class MainActivity extends AppCompatActivity {
