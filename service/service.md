@@ -207,7 +207,7 @@
 ### 3.1 바인더 클래스 확장 방법
 - 서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko) 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.
 
-	<img src="figures/binderclass.png" width=500>
+	<img src="figures/binderclass.png" width=600>
 	
 - 설정 절차
 	1. 서비스 클래스 구현
