@@ -29,6 +29,9 @@
 
 	![](https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko)
 	
+### 예제 프로젝트
+- 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/NotificationTest)  
+	
 ##2.간단한 알림 생성
   
 ###2.1  알림 내용 설정

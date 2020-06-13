@@ -57,6 +57,7 @@
 
 ##2. 시작된 서비스 구현하기
 - 배경음악을 백그라운드에서 재생하는 서비스 구현을 예제로 설명합니다.
+	- 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicService) 
 - 구현 절차
 	1. 프로젝트 및 서비스 컴포넌트 생성 (AndroidStudio Wizard 사용)
 	2. 서비스 클래스 구현
@@ -206,6 +207,7 @@
 ### 3.1 바인더 클래스 확장 방법
 - 서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko) 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.
 	- 사례:  백그라운드에서 음악을 재생하는 서비스에 여러 액티비티가 바인딩하여 제어하는 예제 
+		
 		<img src="figures/musicboundservice.png" width=500>
 	
 - 설정 절차
@@ -216,7 +218,9 @@
 	4. 클라이언트의 경우, [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko)를 [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder)) 콜백 메서드에서 받아서 제공된 메서드로 바인딩된 서비스를 호출합니다
 
 ### 3.2  예제 ([MusicBoundService]())
-<img src="figures/musicboundservice.png" width=500>
+- 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicBoundService)  
+
+	<img src="figures/musicboundservice.png" width=500>
 
 #### 3.2.1 MusicBoundService 클래스 구현
 - [Service](https://developer.android.com/reference/android/app/Service?hl=ko)의 서브 클래스에서 [IBinder](https://developer.android.com/reference/android/os/IBinder?hl=ko) 객체를 반환하는 [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드를 구현해야 합니다.
