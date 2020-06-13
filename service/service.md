@@ -217,7 +217,7 @@
 	3. [ServiceConnection](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko) 구현 객체 생성
 	4. 클라이언트의 경우, [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko)를 [onServiceConnected()](https://developer.android.com/reference/android/content/ServiceConnection?hl=ko#onServiceConnected(android.content.ComponentName,%20android.os.IBinder)) 콜백 메서드에서 받아서 제공된 메서드로 바인딩된 서비스를 호출합니다
 
-### 3.2  예제 ([MusicBoundService]())
+### 3.2  예제 ([MusicBoundService](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicBoundService))
 - 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MusicBoundService)  
 
 	<img src="figures/musicboundservice.png" width=500>
