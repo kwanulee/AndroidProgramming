@@ -193,7 +193,7 @@
 
 ## 3. 바인딩된 서비스 구현하기
 - **바인딩된 서비스**는 애플리케이션 컴포넌트(예, 액티비티)가 [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 를 통해서 연결하는 서비스로서, 애플리케이션 컴포넌트는 이 서비스가 제공하는 인터페이스를 통해서 직접 상호작용을 할 수 있다.
-- 애플리케이션 컴포넌트는 다음과 같은 세 가지 방법으로 BindService 메서드를 사용 하 여 서비스에 바인딩할 수 있습니다.
+- 애플리케이션 컴포넌트는 다음과 같은 세 가지 방법으로 [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 메서드를 사용하여 서비스에 바인딩할 수 있습니다.
 	1. **바인더 클래스 확장**  [본 강의자료에서 다루는 내용]
 		- 서비스가 애플리케이션과 동일한 프로세스에서 백그라운드로 동작하는 경우에 적합
 	2. [메신저 사용](https://developer.android.com/guide/components/bound-services?hl=ko#Messenger)
@@ -207,7 +207,7 @@
 ### 3.1 바인더 클래스 확장 방법
 - 서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko) 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.
 
-	<img src="figures/binderclass.png" width=600>
+	<img src="figures/binderclass.png">
 	
 - 설정 절차
 	1. 서비스 클래스 구현

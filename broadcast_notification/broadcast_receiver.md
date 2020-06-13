@@ -21,7 +21,7 @@
         + Intent에 extra 데이터가 있기도 함
         + Intent를 받기 위해 IntentFilter가 필요함
     - 시스템 브로드캐스트 전체 목록
-      + Sdk/platforms/android-26/data/broadcast_actions.txt
+      + Sdk/platforms/android-XX/data/broadcast_actions.txt
 
 ### 예제 프로젝트
 - 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/BroadcastTest)  
@@ -55,7 +55,7 @@
 
 	* exported 속성은 해당 리시버가 앱 외부에서도 호출 가능한지를 나타냄
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/AndroidManifest.xml#L22-L30
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/BroadcastTest/app/src/main/AndroidManifest.xml#L23-L31
 
 
 * SystemBroadcastReceiver.java

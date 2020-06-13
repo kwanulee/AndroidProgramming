@@ -27,7 +27,7 @@
 	- **Android 8.0(API 레벨 26)**부터 모든 알림은 채널에 할당되어야 합니다. 그렇지 않으면 알림이 나타나지 않습니다. 
 	- 알림을 채널로 분류하면 사용자가 (모든 알림을 비활성화하지 않고도) 앱의 특정 알림 채널을 비활성화할 수 있고 각 채널의 시청각적 옵션을 제어할 수 있습니다.  
 
-	![](https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko)
+	<img src="https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko" width=500>
 	
 ### 예제 프로젝트
 - 예제 프로젝트 Github [링크](https://github.com/kwanulee/AndroidProgramming/tree/master/examples/NotificationTest)  
@@ -49,16 +49,7 @@
 	    	.setContentText("Detailed description of My notification ");
 	```
 	
-- 기본적으로 알림의 텍스트 콘텐츠는 한 줄에 맞춰 잘립니다. 알림을 더 길게 표시하고 싶은 경우 [setStyle()](https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setStyle(android.support.v4.app.NotificationCompat.Style))을 사용하여 스타일 템플릿을 추가하여 확장 가능한 알림을 사용 설정할 수 있습니다. 예를 들어 다음 코드를 사용하면 더 큰 텍스트 영역이 생성됩니다
-
-	```java
-	NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-	        .setSmallIcon(R.drawable.notification_icon)
-	        .setContentTitle("My notification")
-	        .setContentText("Much longer text that cannot fit one line...")
-	        .setStyle(new NotificationCompat.BigTextStyle()
-	                    .bigText("Much longer text that cannot fit one line..."));
-	```
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L75-L80
 
 ###2.2 채널 만들기 및 중요도 설정
 - **Android 8.0** 이상에서 알림을 제공하려면 먼저 [NotificationChannel](https://developer.android.com/reference/android/app/NotificationChannel?hl=ko) 인스턴스를 [createNotificationChannel()](https://developer.android.com/reference/android/app/NotificationManager?hl=ko#createNotificationChannel(android.app.NotificationChannel))에 전달하여 앱의 알림 채널 을 시스템에 등록해야 합니다.
@@ -90,12 +81,12 @@
 				// Register the channel with the system
 	            NotificationManager notificationManager =
 	                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-	            notificationManager.createNotificationChannel(mChannel);
+	            notificationManager.createNotificationChannel(channel);
 	        }
 	    }
 	```
 	
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L65
 
 	
 ###2.3 알림 발행
@@ -107,6 +98,8 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/Notification
 	NotificationManagerCompat nm = NotificationManagerCompat.from(this);
     nm.notify(NOTI_ID, mBuilder.build());
 	```
+
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L82-L83
 
 		
 ##3. 알림 클릭 행동 정의
@@ -156,7 +149,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/Notification
 
 	```
 	
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L71-L83
 	
 
 ## 4. 알림 삭제	
@@ -180,21 +173,13 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/Notification
 		
 		    @Override
 		    protected void onCreate(Bundle savedInstanceState) {
-		        super.onCreate(savedInstanceState);
-		        setContentView(R.layout.activity_notification_detail);
-		        CharSequence s = "전달 받은 값은 ";
+		        //...
 		        int id=0;
 		
 		        Bundle extras = getIntent().getExtras();
-		        if (extras == null) {
-		            s = "error";
-		        }
-		        else {
+		        //...
 		            id = extras.getInt("notificationId");
-		        }
-		        TextView t = (TextView) findViewById(R.id.textView);
-		        s = s+" "+id;
-		        t.setText(s);
+		        //...
 		        NotificationManager nm =
 		                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		
@@ -203,6 +188,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/Notification
 		    }
 		}
 		```
+		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/NotificationDetail.java#L9-L34
 	- [cancelAll()](https://developer.android.com/reference/android/app/NotificationManager?hl=ko#cancelAll())을 호출하여 이전에 발행한 모든 알림을 삭제합니다. 
 
 	

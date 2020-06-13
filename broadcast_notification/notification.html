@@ -288,7 +288,7 @@ pre[class*="language-"] {
 <li>알림을 채널로 분류하면 사용자가 (모든 알림을 비활성화하지 않고도) 앱의 특정 알림 채널을 비활성화할 수 있고 각 채널의 시청각적 옵션을 제어할 수 있습니다.<br></li>
 </ul>
 
-<p><img src="https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko" alt=""></p></li>
+<p><img src="https://developer.android.com/images/ui/notifications/channel-settings_2x.png?hl=ko" width=500></p></li>
 </ul>
 
 <h3 id="toc_2">예제 프로젝트</h3>
@@ -315,15 +315,9 @@ pre[class*="language-"] {
 <div><pre><code class="language-java">NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
         .setSmallIcon(R.drawable.notification_icon)
         .setContentTitle(&quot;My notification&quot;)
-        .setContentText(&quot;Detailed description of My notification &quot;);</code></pre></div></li>
-<li><p>기본적으로 알림의 텍스트 콘텐츠는 한 줄에 맞춰 잘립니다. 알림을 더 길게 표시하고 싶은 경우 <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder?hl=ko#setStyle(android.support.v4.app.NotificationCompat.Style)">setStyle()</a>을 사용하여 스타일 템플릿을 추가하여 확장 가능한 알림을 사용 설정할 수 있습니다. 예를 들어 다음 코드를 사용하면 더 큰 텍스트 영역이 생성됩니다</p>
+        .setContentText(&quot;Detailed description of My notification &quot;);</code></pre></div>
 
-<div><pre><code class="language-java">NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-        .setSmallIcon(R.drawable.notification_icon)
-        .setContentTitle(&quot;My notification&quot;)
-        .setContentText(&quot;Much longer text that cannot fit one line...&quot;)
-        .setStyle(new NotificationCompat.BigTextStyle()
-                    .bigText(&quot;Much longer text that cannot fit one line...&quot;));</code></pre></div></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L75-L80">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L75-L80</a></p></li>
 </ul>
 
 <h3 id="toc_5">2.2 채널 만들기 및 중요도 설정</h3>
@@ -356,12 +350,12 @@ private void createNotificationChannel() {
             // Register the channel with the system
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(mChannel);
+            notificationManager.createNotificationChannel(channel);
         }
-    }</code></pre></div></li>
-</ul>
+    }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L67</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L65">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L41-L65</a></p></li>
+</ul>
 
 <h3 id="toc_6">2.3 알림 발행</h3>
 
@@ -370,7 +364,9 @@ private void createNotificationChannel() {
 <li><p>예제</p>
 
 <div><pre><code class="language-java">NotificationManagerCompat nm = NotificationManagerCompat.from(this);
-nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
+nm.notify(NOTI_ID, mBuilder.build());</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L82-L83">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L82-L83</a></p></li>
 </ul>
 
 <h2 id="toc_7">3. 알림 클릭 행동 정의</h2>
@@ -440,7 +436,7 @@ nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
     notificationManager.notify(NOTI_ID, notification.build());
 </code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L73-L90</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L71-L83">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/MainActivity.java#L71-L83</a></p></li>
 </ul>
 
 <h2 id="toc_10">4. 알림 삭제</h2>
@@ -464,28 +460,22 @@ nm.notify(NOTI_ID, mBuilder.build());</code></pre></div></li>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification_detail);
-        CharSequence s = &quot;전달 받은 값은 &quot;;
+        //...
         int id=0;
 
         Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            s = &quot;error&quot;;
-        }
-        else {
+        //...
             id = extras.getInt(&quot;notificationId&quot;);
-        }
-        TextView t = (TextView) findViewById(R.id.textView);
-        s = s+&quot; &quot;+id;
-        t.setText(s);
+        //...
         NotificationManager nm =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         //노티피케이션 제거
 *       nm.cancel(id);
     }
-}</code></pre></div></li>
+}</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/NotificationDetail.java#L9-L34">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/NotificationTest/app/src/main/java/com/kwanwoo/android/notificationtest/NotificationDetail.java#L9-L34</a></p></li>
 <li><p><a href="https://developer.android.com/reference/android/app/NotificationManager?hl=ko#cancelAll()">cancelAll()</a>을 호출하여 이전에 발행한 모든 알림을 삭제합니다. </p></li>
 </ul></li>
 </ul>
