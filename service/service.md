@@ -206,14 +206,12 @@
 	
 ### 3.1 바인더 클래스 확장 방법
 - 서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 [Binder](https://developer.android.com/reference/android/os/Binder?hl=ko) 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.
-	- 사례:  백그라운드에서 음악을 재생하는 서비스에 여러 액티비티가 바인딩하여 제어하는 예제 
-		
-		<img src="figures/musicboundservice.png" width=500>
+	<img src="figures/binderclass.png" width=500>
 	
 - 설정 절차
 	1. 서비스 클래스 구현
 		- [onBind()](https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)) 콜백 메서드 재정의
-			- 서비스 객체 인스턴스를 참조할 수 있는 메소드를 지닌  [Binder](https://developer.android.com/reference/android/os/Binder) 객체 반환
+			- 서비스 객체 인스턴스를 참조할 수 있는 메소드(*getService*())를 지닌  [Binder](https://developer.android.com/reference/android/os/Binder) 객체 반환
 		- 기타 필요한 수명주기 콜백 메소드를 재정의하고, 클라이언트가 사용할 공개 메소드를 정의
 	2. 클라이언트 (액티비티) 클래스 구현
 		- 클라이언트는  [bindService()](https://developer.android.com/reference/android/content/Context?hl=ko#bindService(android.content.Intent,%20android.content.ServiceConnection,%20int)) 를 호출하여 서비스에 바인딩

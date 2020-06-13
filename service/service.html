@@ -532,13 +532,8 @@ pre[class*="language-"] {
 <h3 id="toc_11">3.1 바인더 클래스 확장 방법</h3>
 
 <ul>
-<li><p>서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 <a href="https://developer.android.com/reference/android/os/Binder?hl=ko">Binder</a> 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.</p>
-
-<ul>
-<li><p>사례:  백그라운드에서 음악을 재생하는 서비스에 여러 액티비티가 바인딩하여 제어하는 예제 </p>
-
-<p><img src="figures/musicboundservice.png" width=500></p></li>
-</ul></li>
+<li><p>서비스가 해당 애플리케이션에서만 사용되는 경우, 자체적인 <a href="https://developer.android.com/reference/android/os/Binder?hl=ko">Binder</a> 클래스를 구현하여 클라이언트가 서비스 내의 공개 메서드에 직접 액세스하도록 할 수도 있습니다.
+<img src="figures/binderclass.png" width=500></p></li>
 <li><p>설정 절차</p>
 
 <ol>
@@ -548,7 +543,7 @@ pre[class*="language-"] {
 <li><a href="https://developer.android.com/reference/android/app/Service?hl=ko#onBind(android.content.Intent)">onBind()</a> 콜백 메서드 재정의
 
 <ul>
-<li>서비스 객체 인스턴스를 참조할 수 있는 메소드를 지닌  <a href="https://developer.android.com/reference/android/os/Binder">Binder</a> 객체 반환</li>
+<li>서비스 객체 인스턴스를 참조할 수 있는 메소드(<em>getService</em>())를 지닌  <a href="https://developer.android.com/reference/android/os/Binder">Binder</a> 객체 반환</li>
 </ul></li>
 <li>기타 필요한 수명주기 콜백 메소드를 재정의하고, 클라이언트가 사용할 공개 메소드를 정의</li>
 </ul></li>
