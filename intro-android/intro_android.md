@@ -6,6 +6,9 @@ div.polaroid {
 	margin-bottom: 0.5cm;
 }
 </style>
+
+[**목차**: 안드로이드 개요](https://kwanulee.github.io/AndroidProgramming/#1)
+
 # 안드로이드 소개
 
 
@@ -28,16 +31,16 @@ div.polaroid {
 ### 1.2 모바일 운영체제
 - **운영체제 (Operating System)**은 시스템 하드웨어(CPU, Memory, IO Device)를 관리할 뿐 아니라 응용 소프트웨어를 실행하기 위하여 하드웨어 추상화 플랫폼과 공통 시스템 서비스를 제공하는 시스템 소프트웨어이다. [[1](https://ko.wikipedia.org/wiki/운영_체제)]
 	
-	<img src="https://upload.wikimedia.org/wikipedia/ko/thumb/a/a3/Operating_system_placement_kor.png/200px-Operating_system_placement_kor.png">
+	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Operating_system_placement_kor.png/180px-Operating_system_placement_kor.png">
 
 - **모바일 운영체제**는 모바일 기기에서 실행되는 운영체제
 	- 모바일 하드웨어 자원을 직접 제어하고 관리
 	- 모바일 앱 (응용 소프트웨어)를 실행하기 위한 플랫폼을 제공
-- 모바일 운영체제의 종류 및 시장 점유률 (2020.2)
+- 모바일 운영체제의 종류 및 시장 점유률 (2021.1)
 
 	<img src="figure/market_share.png">
 	
-	- 출처: https://netmarketshare.com
+	- 출처: https://netmarketshare.com/operating-system-market-share.aspx?options=%7B%22filter%22%3A%7B%22%24and%22%3A%5B%7B%22deviceType%22%3A%7B%22%24in%22%3A%5B%22Mobile%22%5D%7D%7D%5D%7D%2C%22dateLabel%22%3A%22Trend%22%2C%22attributes%22%3A%22share%22%2C%22group%22%3A%22platform%22%2C%22sort%22%3A%7B%22share%22%3A-1%7D%2C%22id%22%3A%22platformsMobile%22%2C%22dateInterval%22%3A%22Monthly%22%2C%22dateStart%22%3A%222019-11%22%2C%22dateEnd%22%3A%222020-10%22%2C%22segments%22%3A%22-1000%22%7D
 
 ### 1.3 모바일 플랫폼
 - **기차역 플랫폼**
@@ -85,7 +88,8 @@ div.polaroid {
 | **O**reo | Android 8.0| 2017년 8월| 26-27|
 | **P**ie | Android 9.0| 2018년 8월| 28|
 | **Q** | Android 10 | 2019년 9월| 29|
-| |  Android 11 | 2020년 2월 | 30 |
+| **R**|  Android 11 | 2020년 9월 | 30 |
+| **S**|  Android 12 (preview) | 2021년 2월 | 31 |
 
 ### 2.2 안드로이드 플랫폼 아키텍처 [[2](https://developer.android.com/guide/platform/)]
 - Linux 기반의 오픈 소스 소프트웨어 스택 
@@ -126,4 +130,7 @@ div.polaroid {
 1. https://ko.wikipedia.org/wiki/운영_체제
 2. https://developer.android.com/guide/platform/
 
+---
+
+[**다음 학습**: 개발환경 설치](install_dev_env.html)
 	

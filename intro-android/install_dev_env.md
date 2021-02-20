@@ -13,6 +13,10 @@ div.polaroid2 {
 }
 
 </style>
+
+
+[**이전 학습**: 안드로이드 소개](intro_android.html)
+
 # 개발환경 설치
 1. [Java SE Development Kit 8 설치](#install_jdk)
 2. [Android Studio 설치](#install_android_studio)
@@ -63,7 +67,9 @@ div.polaroid2 {
 	</div>
 
 3. 다운로드한 파일을 더블클릭하여 설치마법사의 안내에 따라 설치
-
+	- 2021년 2월 현재, Android Studio 최신버전은 **4.1.1**
+	- 다음 화면 캡처는 **3.5.3** 버전의 설치과정이나, 최신버전의 설치과정과 유사함.
+	
 	<div class="polaroid2">
 	 	<img src="figure/as-setup1.PNG">
 	</div>
@@ -108,6 +114,7 @@ div.polaroid2 {
     <div class="polaroid2">
     <img src="figure/as-setup14.PNG">
   </div>
+  
 
 
 ## <a name="sdk_tools_plaforms"></a>3. SDK Manager를 이용하여 최신 SDK 도구와 플랫폼을 설치
@@ -154,7 +161,11 @@ div.polaroid2 {
 		- 기본 SDK 도구
 			* Android SDK Build-Tools
 			* Android SDK Platform-Tools
-			* Android SDK Tools
 			* Android Emulator
 		- 추가 지원 도구
 			* Intel X86 Emulator Accerlerator (HAXM installer)
+			* Google Play services
+
+---
+
+[**다음 학습**: 안드로이드 앱 시작하기](start-android-project.html)

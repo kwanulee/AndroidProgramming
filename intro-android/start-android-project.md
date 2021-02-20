@@ -7,6 +7,8 @@ div.polaroid {
 }
 </style>
 
+[**이전 학습**: 개발환경 설치](install_dev_env.html)
+
 # 안드로이드 앱 시작하기
 1. [**Android Studio**을 이용한 HelloAndroid 프로젝트 만들기](#start-android)
 2. [**에뮬레이터 (Android Virtual Device, AVD)** 만들기](#create-avd)
