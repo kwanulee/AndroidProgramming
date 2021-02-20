@@ -7,7 +7,7 @@
 - [안드로이드 소개](http://kwanulee.github.io/AndroidProgramming/intro-android/intro_android.html) 
 - [개발환경 설치](http://kwanulee.github.io/AndroidProgramming/intro-android/install_dev_env.html) 
 - [안드로이드 앱 시작하기](http://kwanulee.github.io/AndroidProgramming/intro-android/start-android-project.html)  
-- [[실습-안드로이드 시작하기]](안드로이드_시작하기_실습.html) 
+- [[실습-안드로이드 시작하기]](http://kwanulee.github.io/AndroidProgramming/intro-android/안드로이드_시작하기_실습.html) 
 
 <a name="2"></a>
 ## 2. 안드로이드 앱 프로젝트
