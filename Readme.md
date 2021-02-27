@@ -14,7 +14,9 @@
 - [안드로이드 앱 기본](http://kwanulee.github.io/AndroidProgramming/android-project/android_app_basic.html)
 - [안드로이드 앱 프로젝트 기본](http://kwanulee.github.io/AndroidProgramming/android-project/android_project_basic.html)
 - [프로젝트 빌드](http://kwanulee.github.io/AndroidProgramming/android-project/project-build.html)
+- [git/GitHub를 이용한 프로젝트 관리](http://kwanulee.github.io/AndroidProgramming/git-github/git_github.html)
 - [[실습-안드로이드 프로젝트]](http://kwanulee.github.io/AndroidProgramming/android-project/안드로이드_프로젝트_실습.html) 
+- [[실습-Git/Github]](http://kwanulee.github.io/AndroidProgramming/git-github/git_github_실습.html)
 
 <a name="3"></a>
 ## 3. 안드로이드 UI
@@ -98,9 +100,7 @@
 -  [[실습-애니메이션]](http://kwanulee.github.io/AndroidProgramming/animation-graphics/animation_lab.html)
 
 
-## 기타
-- [git/GitHub를 이용한 프로젝트 관리](http://kwanulee.github.io/AndroidProgramming/git-github/git_github.html)
-- [[실습]](http://kwanulee.github.io/AndroidProgramming/git-github/git_github_실습.html)
+
 
 ## Android 예제 프로젝트 
 - **Android 예제 프로젝트 위치**

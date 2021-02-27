@@ -8,18 +8,32 @@ div.polaroid {
 </style>
 
 # **Git과 GitHub**을 이용한 프로젝트 관리 
+## 학습목표
+- Git/GitHub을 이용한 프로젝트 버전 관리 방법을 이해한다.
+- GitHub을 이용한 프로젝트 협업 방법을 이해한다.
 
-[**git**](https://git-scm.com/)은 소스코드의 변경을 효과적으로 관리하기 위해 개발된 '**[분산형 버전 관리 시스템](https://git-scm.com/book/ko/v1/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EB%9E%80%3F#분산-버전-관리-시스템)**'이지만, 소스코드 외에 텍스트 기반 파일의 버전관리에 널리 사용되고 있다. 
-
-[**GitHub**](https://github.com/)는 **git**의 원격 저장소로서 협업플랫폼의 역할을 수행한다. 여기서 **저장소**란 버전관리 대상이 되는 특정한 프로젝트의 파일들을 저장하는 공간을 나타내며, 지역 저장소와 원격 저장소로 구분된다. *지역 저장소*는 현재 작업하고 있는 컴퓨터 내에 위치하는 프로젝트 파일을 저장하는 디렉토리를 의미하고, *원격 저장소*는 인터넷 상의 서버에 위치하며, 여러 **git** 클라이언트와 공유될 수 있다.
-
-[**GitHub Desktop**](https://desktop.github.com/)은 GUI 기반의 git 클라이언트 중에 하나로, 이 문서에서는 **GitHub Desktop**를 이용하여 **Android Project**의 소스를 관리하는 두 가지 시나리오를 설명한다. 
-
-1. [**Android Project**의 버전관리](#1)
-2. [**GitHub**을 이용한 협업하기](#2)
-
+---
 <a name="1"></a>
-## 1. **Android Project**의 버전관리
+## 1. Git/Github 개요
+- [**git**](https://git-scm.com/)이란? 
+	- 소스코드의 변경을 효과적으로 관리하기 위해 개발된 '**[분산형 버전 관리 시스템](https://git-scm.com/book/ko/v1/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EB%9E%80%3F#분산-버전-관리-시스템)**'
+	- 소스코드 외에 **텍스트 기반 파일의 버전관리**에 널리 사용되고 있다. 
+
+- [**GitHub**](https://github.com/)이란?
+	-  **git**의 원격 저장소로서 **협업플랫폼의 역할**을 수행한다. 
+	- 여기서 **저장소**란 버전관리 대상이 되는 특정한 프로젝트의 파일들을 저장하는 공간을 나타내며, 지역 저장소와 원격 저장소로 구분된다. 
+		-  *지역 저장소*는 현재 작업하고 있는 컴퓨터 내에 위치하는 프로젝트 파일을 저장하는 디렉토리를 의미
+		-  *원격 저장소*는 인터넷 상의 서버에 위치하며, 여러 **git** 클라이언트와 공유될 수 있다.
+
+- [**GitHub Desktop**](https://desktop.github.com/)이란?
+	- GUI 기반의 **git 클라이언트** 중에 하나
+- 이 문서에서는 **GitHub Desktop**를 이용하여 **Android Project**의 소스를 관리하는 두 가지 시나리오를 설명한다. 
+
+	1. [**Android Project**의 버전관리](#2)
+	2. [**GitHub**을 이용한 협업하기](#3)
+
+<a name="2"></a>
+## 2. **Android Project**의 버전관리
 **Android Project**의 버전관리 시나리오는 다음과 같다.
 
 1. [**Android Project**를 위한 새로운 지역 **git** 저장소 생성](#1.1)
@@ -27,13 +41,15 @@ div.polaroid {
 3. [**git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한경우*)](#1.3) 
 4. [원격 **git** 저장소(**GitHub**)에 푸시(push)](#1.4)
 
-###가. 사전준비
+---
+
+###0. 사전준비
 - [**Android Project** 생성 (예, HelloAndroid)](https://kwanulee.github.io/Android/intro-android/start-android-project.html#start-android)
 - [**git** 클라이언트 설치](install_git_clients.html) 
 - [**GitHub** 계정 만들기](create-github-account.html)  
 
 <a name="1.1"></a>
-###나. **Android Project**를 위한 새로운 지역 **git** 저장소 생성
+###1. **Android Project**를 위한 새로운 지역 **git** 저장소 생성
 1. **GitHub Desktop** 시작화면에서 **Create new repository** 클릭
 	<div class="polaroid">
 		<img src="figure/github-desktop-new-repository.JPG"> 
@@ -54,7 +70,7 @@ div.polaroid {
 3. 새로운 **git** 저장소(예, *C:\Users\kwlee\AndroidStudioProjects\HelloAndroid*)에 .git 폴더 및 .gitattributes, .gitignore 파일이 생성되어 있음을 확인할 수 있다.
 
 <a name="1.2"></a>
-###다. **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)
+###2. **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)
 	
 **커밋(commit)**이란 하나 이상의 파일에 대한 변경을 **git** 저장소에 저장하는 것을 의미한다. 다음은 **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋을 하는 절차를 설명한다.
 
@@ -71,7 +87,7 @@ div.polaroid {
 	</div>
 
 <a name="1.3"></a>
-###라. 지역 **git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한 경우*)
+###3. 지역 **git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한 경우*)
 다음은 현재 **git** 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.
 
 1. **[GitHub Desktop]**: **History** 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 **Revert this commit** 클릭 
@@ -80,7 +96,7 @@ div.polaroid {
 	</div>
 
 <a name="1.4"></a>
-###마. 지역 **git** 저장소를 원격 저장소(**GitHub**)에 푸시(push)
+###4. 지역 **git** 저장소를 원격 저장소(**GitHub**)에 푸시(push)
 
 1. **GitHub Desktop**에서 **GitHub** 계정에 로그인 설정 
 
@@ -103,7 +119,7 @@ div.polaroid {
 		</div>
 
 
-## <a name="2"></a>2. **GitHub**이용한 협업하기
+## <a name="3"></a>3. **GitHub**이용한 협업하기
 **GitHub**이용한 협업하기 두 명의 시나리오는 다음과 같다.
 
 	가정
@@ -117,7 +133,7 @@ div.polaroid {
 4.  *kwanulee*는 자신의 지역 **git** 저장소를 **kwanulee/HelloAndroid** 원격 저장소의 최신 상태로 동기화 (참조. [라.  원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기](#2.4))
 
 <a name="2.1"></a>
-### 가. **GitHub** 저장소에 Collaborator 추가하기
+### 1. **GitHub** 저장소에 Collaborator 추가하기
 1. **GitHub** 저장소의 메인 화면에서 **Settings** 탭 선택
 	<div class="polaroid">
 			<img src="figure/github-settings.png">
@@ -140,7 +156,7 @@ div.polaroid {
 
 
 <a name="2.2"></a>
-### 나. **GitHub** 저장소를 복제하기
+### 2. **GitHub** 저장소를 복제하기
 
 1. **GitHub Desktop**의 [**File**] 메뉴에서 [**Clone respository..**] 클릭
 	<div class="polaroid">
@@ -154,7 +170,7 @@ div.polaroid {
 	</div>	
 
 <a name="2.3"></a>
-### 다. 복제된 **GitHub** 저장소를 수정하고 동기화하기
+### 3. 복제된 **GitHub** 저장소를 수정하고 동기화하기
 1. AndroidStudio에서 복제된 *HelloAndroidCloned* 프로젝트를 열고, activity_main.xml 파일을 변경
 	<code>
 
@@ -192,7 +208,7 @@ div.polaroid {
 		</div>
  
 <a name="2.4"></a>
-### 라 . 원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기
+### 4 . 원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기
 1. **[GitHub Desktop]**의 **Fetch origin**을 클릭
 	<div class="polaroid">
 			<img src="figure/fetch-origin.PNG">
