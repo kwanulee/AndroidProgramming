@@ -308,28 +308,30 @@ div.polaroid {
 
 <h2 id="toc_3">2. <strong>Android Project</strong>의 버전관리</h2>
 
-<p><strong>Android Project</strong>의 버전관리 시나리오는 다음과 같다.</p>
+<ul>
+<li><p><strong>Android Project</strong>의 버전관리 시나리오는 다음과 같다.</p>
 
 <ol>
 <li><a href="#1.1"><strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</a></li>
 <li><a href="#1.2"><strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</a></li>
 <li><a href="#1.3"><strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한경우</em>)</a> </li>
 <li><a href="#1.4">원격 <strong>git</strong> 저장소(<strong>GitHub</strong>)에 푸시(push)</a></li>
-</ol>
+</ol></li>
+</ul>
 
 <hr>
 
 <h3 id="toc_4">0. 사전준비</h3>
 
 <ul>
-<li><a href="https://kwanulee.github.io/Android/intro-android/start-android-project.html#start-android"><strong>Android Project</strong> 생성 (예, HelloAndroid)</a></li>
+<li><a href="https://kwanulee.github.io/AndroidProgramming/intro-android/start-android-project.html#start-android"><strong>Android Project</strong> 생성 (예, HelloAndroid)</a></li>
 <li><a href="install_git_clients.html"><strong>git</strong> 클라이언트 설치</a> </li>
-<li><a href="create-github-account.html"><strong>GitHub</strong> 계정 만들기</a><br></li>
+<li><a href="https://git-scm.com/book/ko/v2/GitHub-%EA%B3%84%EC%A0%95-%EB%A7%8C%EB%93%A4%EA%B3%A0-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0"><strong>GitHub</strong> 계정 만들기</a><br></li>
 </ul>
 
 <p><a name="1.1"></a></p>
 
-<h3 id="toc_5">1. <strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</h3>
+<h3 id="toc_5">가. <strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</h3>
 
 <ol>
 <li><p><strong>GitHub Desktop</strong> 시작화면에서 <strong>Create new repository</strong> 클릭
@@ -356,39 +358,40 @@ div.polaroid {
 
 <p><a name="1.2"></a></p>
 
-<h3 id="toc_6">2. <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</h3>
+<h3 id="toc_6">나. <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</h3>
 
-<p><strong>커밋(commit)</strong>이란 하나 이상의 파일에 대한 변경을 <strong>git</strong> 저장소에 저장하는 것을 의미한다. 다음은 <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋을 하는 절차를 설명한다.</p>
+<ul>
+<li><p><strong>커밋(commit)</strong>이란 하나 이상의 파일에 대한 변경을 <strong>git</strong> 저장소에 저장하는 것을 의미한다. 다음은 <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋을 하는 절차를 설명한다.</p>
 
 <ol>
 <li><p><strong>[Android Studio]</strong>:  <strong>Android Project</strong>의 일부 파일을 수정 </p>
 
-<p>예를 들어, <strong>HelloAndroid</strong> 프로젝트에서 <em>activity_main.xml</em> 파일의 <strong>TextView</strong> 위젯의 <em>android:text</em> 속성 값을 &#39;<em>Hello Android</em>&#39;로 변경 
- <div class="polaroid">
-    <img src="figure/helloandroid-project-change1.png">
-</div></p></li>
+<p>예를 들어, <strong>HelloAndroid</strong> 프로젝트에서 <em>activity_main.xml</em> 파일의 <strong>TextView</strong> 위젯의 <em>android:text</em> 속성 값을 &#39;<em>Hello Android</em>&#39;로 변경 </p></li>
 <li><p><strong>[GitHub Desktop]</strong>: 커밋에 포함시킬 혹은 포함하지 않을 변경을 선택 하고, 커밋 메시지 작성후, [<strong>Commit to BRANCH</strong>] 클릭 
 <div class="polaroid">
     <img src="figure/commit-message.PNG">
 </div></p></li>
-</ol>
+</ol></li>
+</ul>
 
 <p><a name="1.3"></a></p>
 
-<h3 id="toc_7">3. 지역 <strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한 경우</em>)</h3>
+<h3 id="toc_7">다. 지역 <strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한 경우</em>)</h3>
 
-<p>다음은 현재 <strong>git</strong> 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.</p>
+<ul>
+<li><p>다음은 현재 <strong>git</strong> 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.</p>
 
 <ol>
 <li><strong>[GitHub Desktop]</strong>: <strong>History</strong> 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 <strong>Revert this commit</strong> 클릭 
 <div class="polaroid">
     <img src="figure/revert-commit.PNG">
 </div></li>
-</ol>
+</ol></li>
+</ul>
 
 <p><a name="1.4"></a></p>
 
-<h3 id="toc_8">4. 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 푸시(push)</h3>
+<h3 id="toc_8">라. 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 푸시(push)</h3>
 
 <ol>
 <li><p><strong>GitHub Desktop</strong>에서 <strong>GitHub</strong> 계정에 로그인 설정 </p>
@@ -418,23 +421,27 @@ div.polaroid {
 
 <h2 id="toc_9"><a name="3"></a>3. <strong>GitHub</strong>이용한 협업하기</h2>
 
-<p><strong>GitHub</strong>이용한 협업하기 두 명의 시나리오는 다음과 같다.</p>
+<ul>
+<li> 가정
 
-<div><pre><code class="language-none">가정
-    - GitHub에 두 개의 사용자 계정(예, kwanulee, kwanu70)이 존재 
-    - kwanulee/HelloAndroid 저장소가 존재
-    - kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함</code></pre></div>
+<ul>
+<li>GitHub에 두 개의 사용자 계정(예, kwanulee, kwanu70)이 존재 </li>
+<li>kwanulee/HelloAndroid 저장소가 존재</li>
+<li><strong>kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함</strong></li>
+</ul></li>
+<li><strong>GitHub</strong>이용한 협업하기 시나리오는 다음과 같다.
 
 <ol>
 <li><strong>kwanulee/HelloAndroid</strong> 저장소의 Collaborator로 <em>kwanu70</em>을 추가 (참조. <a href="#2.1">가. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</a>)</li>
 <li><em>kwanu70</em>은 <strong>kwanulee/HelloAndroid</strong> 원격 저장소의 파일을 지역 <strong>git</strong> 저장소로 복제 (참조. <a href="#2.2">나. <strong>GitHub</strong> 저장소를 복제하기</a>)</li>
 <li><em>kwanu70</em>은 지역 <strong>git</strong> 저장소로 복제된 파일을 변경/커밋하고, 이를 <strong>kwanulee/HelloAndroid</strong> 저장소와 동기화  (참조. <a href="#2.3">다.  복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</a>)</li>
 <li> <em>kwanulee</em>는 자신의 지역 <strong>git</strong> 저장소를 <strong>kwanulee/HelloAndroid</strong> 원격 저장소의 최신 상태로 동기화 (참조. <a href="#2.4">라.  원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</a>)</li>
-</ol>
+</ol></li>
+</ul>
 
 <p><a name="2.1"></a></p>
 
-<h3 id="toc_10">1. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</h3>
+<h3 id="toc_10">가. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</h3>
 
 <ol>
 <li><p><strong>GitHub</strong> 저장소의 메인 화면에서 <strong>Settings</strong> 탭 선택
@@ -457,7 +464,7 @@ div.polaroid {
 
 <p><a name="2.2"></a></p>
 
-<h3 id="toc_11">2. <strong>GitHub</strong> 저장소를 복제하기</h3>
+<h3 id="toc_11">나. <strong>GitHub</strong> 저장소를 복제하기</h3>
 
 <ol>
 <li><strong>GitHub Desktop</strong>의 [<strong>File</strong>] 메뉴에서 [<strong>Clone respository..</strong>] 클릭
@@ -477,7 +484,7 @@ div.polaroid {
 
 <p><a name="2.3"></a></p>
 
-<h3 id="toc_12">3. 복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</h3>
+<h3 id="toc_12">다. 복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</h3>
 
 <ol>
 <li><p>AndroidStudio에서 복제된 <em>HelloAndroidCloned</em> 프로젝트를 열고, activity_main.xml 파일을 변경
@@ -517,7 +524,7 @@ div.polaroid {
 
 <p><a name="2.4"></a></p>
 
-<h3 id="toc_13">4 . 원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</h3>
+<h3 id="toc_13">라. 원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</h3>
 
 <ol>
 <li><p><strong>[GitHub Desktop]</strong>의 <strong>Fetch origin</strong>을 클릭

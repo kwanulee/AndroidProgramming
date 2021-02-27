@@ -34,22 +34,22 @@ div.polaroid {
 
 <a name="2"></a>
 ## 2. **Android Project**의 버전관리
-**Android Project**의 버전관리 시나리오는 다음과 같다.
+- **Android Project**의 버전관리 시나리오는 다음과 같다.
 
-1. [**Android Project**를 위한 새로운 지역 **git** 저장소 생성](#1.1)
-2. [**Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)](#1.2)
-3. [**git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한경우*)](#1.3) 
-4. [원격 **git** 저장소(**GitHub**)에 푸시(push)](#1.4)
+	1. [**Android Project**를 위한 새로운 지역 **git** 저장소 생성](#1.1)
+	2. [**Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)](#1.2)
+	3. [**git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한경우*)](#1.3) 
+	4. [원격 **git** 저장소(**GitHub**)에 푸시(push)](#1.4)
 
 ---
 
 ###0. 사전준비
-- [**Android Project** 생성 (예, HelloAndroid)](https://kwanulee.github.io/Android/intro-android/start-android-project.html#start-android)
+- [**Android Project** 생성 (예, HelloAndroid)](https://kwanulee.github.io/AndroidProgramming/intro-android/start-android-project.html#start-android)
 - [**git** 클라이언트 설치](install_git_clients.html) 
-- [**GitHub** 계정 만들기](create-github-account.html)  
+- [**GitHub** 계정 만들기](https://git-scm.com/book/ko/v2/GitHub-%EA%B3%84%EC%A0%95-%EB%A7%8C%EB%93%A4%EA%B3%A0-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0)  
 
 <a name="1.1"></a>
-###1. **Android Project**를 위한 새로운 지역 **git** 저장소 생성
+###가. **Android Project**를 위한 새로운 지역 **git** 저장소 생성
 1. **GitHub Desktop** 시작화면에서 **Create new repository** 클릭
 	<div class="polaroid">
 		<img src="figure/github-desktop-new-repository.JPG"> 
@@ -70,33 +70,30 @@ div.polaroid {
 3. 새로운 **git** 저장소(예, *C:\Users\kwlee\AndroidStudioProjects\HelloAndroid*)에 .git 폴더 및 .gitattributes, .gitignore 파일이 생성되어 있음을 확인할 수 있다.
 
 <a name="1.2"></a>
-###2. **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)
+###나. **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋(commit)
 	
-**커밋(commit)**이란 하나 이상의 파일에 대한 변경을 **git** 저장소에 저장하는 것을 의미한다. 다음은 **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋을 하는 절차를 설명한다.
+- **커밋(commit)**이란 하나 이상의 파일에 대한 변경을 **git** 저장소에 저장하는 것을 의미한다. 다음은 **Android Project**의 일부 파일을 수정 후, 지역 **git** 저장소에 커밋을 하는 절차를 설명한다.
 
-1. **[Android Studio]**:  **Android Project**의 일부 파일을 수정 
-
-	예를 들어, **HelloAndroid** 프로젝트에서 *activity_main.xml* 파일의 **TextView** 위젯의 *android:text* 속성 값을 '*Hello Android*'로 변경 
-	 <div class="polaroid">
-		<img src="figure/helloandroid-project-change1.png">
-	</div>
-
-2. **[GitHub Desktop]**: 커밋에 포함시킬 혹은 포함하지 않을 변경을 선택 하고, 커밋 메시지 작성후, [**Commit to BRANCH**] 클릭 
-	<div class="polaroid">
-		<img src="figure/commit-message.PNG">
-	</div>
+	1. **[Android Studio]**:  **Android Project**의 일부 파일을 수정 
+	
+		예를 들어, **HelloAndroid** 프로젝트에서 *activity_main.xml* 파일의 **TextView** 위젯의 *android:text* 속성 값을 '*Hello Android*'로 변경 
+	
+	2. **[GitHub Desktop]**: 커밋에 포함시킬 혹은 포함하지 않을 변경을 선택 하고, 커밋 메시지 작성후, [**Commit to BRANCH**] 클릭 
+		<div class="polaroid">
+			<img src="figure/commit-message.PNG">
+		</div>
 
 <a name="1.3"></a>
-###3. 지역 **git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한 경우*)
-다음은 현재 **git** 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.
+###다. 지역 **git** 저장소를 이전 커밋(commit)으로 되돌림 (*필요한 경우*)
+- 다음은 현재 **git** 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.
 
-1. **[GitHub Desktop]**: **History** 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 **Revert this commit** 클릭 
-	<div class="polaroid">
-		<img src="figure/revert-commit.PNG">
-	</div>
+	1. **[GitHub Desktop]**: **History** 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 **Revert this commit** 클릭 
+		<div class="polaroid">
+			<img src="figure/revert-commit.PNG">
+		</div>
 
 <a name="1.4"></a>
-###4. 지역 **git** 저장소를 원격 저장소(**GitHub**)에 푸시(push)
+###라. 지역 **git** 저장소를 원격 저장소(**GitHub**)에 푸시(push)
 
 1. **GitHub Desktop**에서 **GitHub** 계정에 로그인 설정 
 
@@ -120,20 +117,18 @@ div.polaroid {
 
 
 ## <a name="3"></a>3. **GitHub**이용한 협업하기
-**GitHub**이용한 협업하기 두 명의 시나리오는 다음과 같다.
-
-	가정
-		- GitHub에 두 개의 사용자 계정(예, kwanulee, kwanu70)이 존재 
-		- kwanulee/HelloAndroid 저장소가 존재
-		- kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함
-
-1. **kwanulee/HelloAndroid** 저장소의 Collaborator로 *kwanu70*을 추가 (참조. [가. **GitHub** 저장소에 Collaborator 추가하기](#2.1))
-2. *kwanu70*은 **kwanulee/HelloAndroid** 원격 저장소의 파일을 지역 **git** 저장소로 복제 (참조. [나. **GitHub** 저장소를 복제하기](#2.2))
-3. *kwanu70*은 지역 **git** 저장소로 복제된 파일을 변경/커밋하고, 이를 **kwanulee/HelloAndroid** 저장소와 동기화  (참조. [다.  복제된 **GitHub** 저장소를 수정하고 동기화하기](#2.3))
-4.  *kwanulee*는 자신의 지역 **git** 저장소를 **kwanulee/HelloAndroid** 원격 저장소의 최신 상태로 동기화 (참조. [라.  원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기](#2.4))
+-  가정
+	- GitHub에 두 개의 사용자 계정(예, kwanulee, kwanu70)이 존재 
+	- kwanulee/HelloAndroid 저장소가 존재
+	- **kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함**
+- **GitHub**이용한 협업하기 시나리오는 다음과 같다.
+	1. **kwanulee/HelloAndroid** 저장소의 Collaborator로 *kwanu70*을 추가 (참조. [가. **GitHub** 저장소에 Collaborator 추가하기](#2.1))
+	2. *kwanu70*은 **kwanulee/HelloAndroid** 원격 저장소의 파일을 지역 **git** 저장소로 복제 (참조. [나. **GitHub** 저장소를 복제하기](#2.2))
+	3. *kwanu70*은 지역 **git** 저장소로 복제된 파일을 변경/커밋하고, 이를 **kwanulee/HelloAndroid** 저장소와 동기화  (참조. [다.  복제된 **GitHub** 저장소를 수정하고 동기화하기](#2.3))
+	4.  *kwanulee*는 자신의 지역 **git** 저장소를 **kwanulee/HelloAndroid** 원격 저장소의 최신 상태로 동기화 (참조. [라.  원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기](#2.4))
 
 <a name="2.1"></a>
-### 1. **GitHub** 저장소에 Collaborator 추가하기
+### 가. **GitHub** 저장소에 Collaborator 추가하기
 1. **GitHub** 저장소의 메인 화면에서 **Settings** 탭 선택
 	<div class="polaroid">
 			<img src="figure/github-settings.png">
@@ -156,7 +151,7 @@ div.polaroid {
 
 
 <a name="2.2"></a>
-### 2. **GitHub** 저장소를 복제하기
+### 나. **GitHub** 저장소를 복제하기
 
 1. **GitHub Desktop**의 [**File**] 메뉴에서 [**Clone respository..**] 클릭
 	<div class="polaroid">
@@ -170,7 +165,7 @@ div.polaroid {
 	</div>	
 
 <a name="2.3"></a>
-### 3. 복제된 **GitHub** 저장소를 수정하고 동기화하기
+### 다. 복제된 **GitHub** 저장소를 수정하고 동기화하기
 1. AndroidStudio에서 복제된 *HelloAndroidCloned* 프로젝트를 열고, activity_main.xml 파일을 변경
 	<code>
 
@@ -208,7 +203,7 @@ div.polaroid {
 		</div>
  
 <a name="2.4"></a>
-### 4 . 원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기
+### 라. 원격 **GitHub** 저장소의 최신 내용을  지역 **git** 저장소로 가져오기
 1. **[GitHub Desktop]**의 **Fetch origin**을 클릭
 	<div class="polaroid">
 			<img src="figure/fetch-origin.PNG">
