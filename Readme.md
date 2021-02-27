@@ -99,8 +99,8 @@
 
 
 ## 기타
-- [git/GitHub를 이용한 프로젝트 관리](http://kwanulee.github.io/AndroidProgramming/android-project/git_github.html)
-- [[실습]](http://kwanulee.github.io/AndroidProgramming/android-project/git_github_실습.html)
+- [git/GitHub를 이용한 프로젝트 관리](http://kwanulee.github.io/AndroidProgramming/git-github/git_github.html)
+- [[실습]](http://kwanulee.github.io/AndroidProgramming/git-github/git_github_실습.html)
 
 ## Android 예제 프로젝트 
 - **Android 예제 프로젝트 위치**
