@@ -1,485 +1,489 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>git_github</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
 <style type="text/css">
-/* GitHub stylesheet for MarkdownPad (http://markdownpad.com) */
-/* Author: Nicolas Hery - http://nicolashery.com */
-/* Version: b13fe65ca28d2e568c6ed5d7f06581183df8f2ff */
-/* Source: https://github.com/nicolahery/markdownpad-github */
-
-/* RESET
-=============================================================================*/
-
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-/* BODY
-=============================================================================*/
-
+*{margin:0;padding:0;}
 body {
-  font-family: Helvetica, arial, freesans, clean, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #333;
-  background-color: #fff;
-  padding: 20px;
-  max-width: 960px;
-  margin: 0 auto;
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
 }
-
-body>*:first-child {
-  margin-top: 0 !important;
+p {
+	margin:1em 0;
+	line-height:1.5em;
 }
-
-body>*:last-child {
-  margin-bottom: 0 !important;
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
 }
-
-/* BLOCKS
-=============================================================================*/
-
-p, blockquote, ul, ol, dl, table, pre {
-  margin: 15px 0;
-}
-
-/* HEADERS
-=============================================================================*/
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-}
-
-h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
-  font-size: inherit;
-}
-
-h1 {
-  font-size: 28px;
-  color: #000;
-}
-
-h2 {
-  font-size: 24px;
-  border-bottom: 1px solid #ccc;
-  color: #000;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-h4 {
-  font-size: 16px;
-}
-
-h5 {
-  font-size: 14px;
-}
-
-h6 {
-  color: #777;
-  font-size: 14px;
-}
-
-body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
-  margin-top: 0;
-  padding-top: 0;
-}
-
-h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
-  margin-top: 10px;
-}
-
-/* LINKS
-=============================================================================*/
-
-a {
-  color: #4183C4;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* LISTS
-=============================================================================*/
-
-ul, ol {
-  padding-left: 30px;
-}
-
-ul li > :first-child, 
-ol li > :first-child, 
-ul li ul:first-of-type, 
-ol li ol:first-of-type, 
-ul li ol:first-of-type, 
-ol li ul:first-of-type {
-  margin-top: 0px;
-}
-
-ul ul, ul ol, ol ol, ol ul {
-  margin-bottom: 0;
-}
-
-dl {
-  padding: 0;
-}
-
-dl dt {
-  font-size: 14px;
-  font-weight: bold;
-  font-style: italic;
-  padding: 0;
-  margin: 15px 0 5px;
-}
-
-dl dt:first-child {
-  padding: 0;
-}
-
-dl dt>:first-child {
-  margin-top: 0px;
-}
-
-dl dt>:last-child {
-  margin-bottom: 0px;
-}
-
-dl dd {
-  margin: 0 0 15px;
-  padding: 0 15px;
-}
-
-dl dd>:first-child {
-  margin-top: 0px;
-}
-
-dl dd>:last-child {
-  margin-bottom: 0px;
-}
-
-/* CODE
-=============================================================================*/
-
-pre, code, tt {
-  font-size: 12px;
-  font-family: Consolas, "Liberation Mono", Courier, monospace;
-}
-
-code, tt {
-  margin: 0 0px;
-  padding: 0px 0px;
-  white-space: nowrap;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  border-radius: 3px;
-}
-
-pre>code {
-  margin: 0;
-  padding: 0;
-  white-space: pre;
-  border: none;
-  background: transparent;
-}
-
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
 pre {
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  font-size: 13px;
-  line-height: 19px;
-  overflow: auto;
-  padding: 6px 10px;
-  border-radius: 3px;
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
 }
-
-pre code, pre tt {
-  background-color: transparent;
-  border: none;
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
 }
-
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
 kbd {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: #DDDDDD;
-    background-image: linear-gradient(#F1F1F1, #DDDDDD);
-    background-repeat: repeat-x;
-    border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
-    border-image: none;
-    border-radius: 2px 2px 2px 2px;
-    border-style: solid;
-    border-width: 1px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    line-height: 10px;
-    padding: 1px 4px;
+  display: inline-block;padding: 3px 5px;font-size: 11px;line-height: 10px;color: #555;vertical-align: middle;background-color: #fcfcfc;border: solid 1px #ccc;border-bottom-color: #bbb;border-radius: 3px;box-shadow: inset 0 -1px 0 #bbb;
 }
-
-/* QUOTES
-=============================================================================*/
-
-blockquote {
-  border-left: 4px solid #DDD;
-  padding: 0 15px;
-  color: #777;
+* {
+	-webkit-print-color-adjust: exact;
 }
-
-blockquote>:first-child {
-  margin-top: 0px;
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
 }
-
-blockquote>:last-child {
-  margin-bottom: 0px;
-}
-
-/* HORIZONTAL RULES
-=============================================================================*/
-
-hr {
-  clear: both;
-  margin: 15px 0;
-  height: 0px;
-  overflow: hidden;
-  border: none;
-  background: transparent;
-  border-bottom: 4px solid #ddd;
-  padding: 0;
-}
-
-/* TABLES
-=============================================================================*/
-
-table th {
-  font-weight: bold;
-}
-
-table th, table td {
-  border: 1px solid #ccc;
-  padding: 6px 13px;
-}
-
-table tr {
-  border-top: 1px solid #ccc;
-  background-color: #fff;
-}
-
-table tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-
-/* IMAGES
-=============================================================================*/
-
-img {
-  max-width: 100%
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
 }
 </style>
-</head>
-<body>
-<p><style> 
-div.polaroid {
-  	width: 640px;
-  	box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
-  	text-align: center;
-	margin-bottom: 0.5cm;
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
 }
-</style></p>
-<h1><strong>Git과 GitHub</strong>을 이용한 프로젝트 관리</h1>
-<p><a href="https://git-scm.com/"><strong>git</strong></a>은 소스코드의 변경을 효과적으로 관리하기 위해 개발된 '<strong><a href="https://git-scm.com/book/ko/v1/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EB%9E%80%3F#분산-버전-관리-시스템">분산형 버전 관리 시스템</a></strong>'이지만, 소스코드 외에 텍스트 기반 파일의 버전관리에 널리 사용되고 있다. </p>
-<p><a href="https://github.com/"><strong>GitHub</strong></a>는 <strong>git</strong>의 원격 저장소로서 협업플랫폼의 역할을 수행한다. 여기서 <strong>저장소</strong>란 버전관리 대상이 되는 특정한 프로젝트의 파일들을 저장하는 공간을 나타내며, 지역 저장소와 원격 저장소로 구분된다. <em>지역 저장소</em>는 현재 작업하고 있는 컴퓨터 내에 위치하는 프로젝트 파일을 저장하는 디렉토리를 의미하고, <em>원격 저장소</em>는 인터넷 상의 서버에 위치하며, 여러 <strong>git</strong> 클라이언트와 공유될 수 있다.</p>
-<p><a href="https://desktop.github.com/"><strong>GitHub Desktop</strong></a>은 GUI 기반의 git 클라이언트 중에 하나로, 이 문서에서는 <strong>GitHub Desktop</strong>를 이용하여 <strong>Android Project</strong>의 소스를 관리하는 두 가지 시나리오를 설명한다. </p>
-<ol>
-<li><a href="#1"><strong>Android Project</strong>의 버전관리</a></li>
-<li><a href="#2"><strong>GitHub</strong>을 이용한 협업하기</a></li>
-</ol>
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style> 
+div.polaroid {
+    width: 640px;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.2), 0 16px 30px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin-bottom: 0.5cm;
+}
+</style>
+
+<h1 id="toc_0"><strong>Git과 GitHub</strong>을 이용한 프로젝트 관리</h1>
+
+<h2 id="toc_1">학습목표</h2>
+
+<ul>
+<li>Git/GitHub을 이용한 프로젝트 버전 관리 방법을 이해한다.</li>
+<li>GitHub을 이용한 프로젝트 협업 방법을 이해한다.</li>
+</ul>
+
+<hr>
+
 <p><a name="1"></a></p>
-<h2>1. <strong>Android Project</strong>의 버전관리</h2>
+
+<h2 id="toc_2">1. Git/Github 개요</h2>
+
+<ul>
+<li><p><a href="https://git-scm.com/"><strong>git</strong></a>이란? </p>
+
+<ul>
+<li>소스코드의 변경을 효과적으로 관리하기 위해 개발된 &#39;<strong><a href="https://git-scm.com/book/ko/v1/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC%EB%9E%80%3F#%EB%B6%84%EC%82%B0-%EB%B2%84%EC%A0%84-%EA%B4%80%EB%A6%AC-%EC%8B%9C%EC%8A%A4%ED%85%9C">분산형 버전 관리 시스템</a></strong>&#39;</li>
+<li>소스코드 외에 <strong>텍스트 기반 파일의 버전관리</strong>에 널리 사용되고 있다. </li>
+</ul></li>
+<li><p><a href="https://github.com/"><strong>GitHub</strong></a>이란?</p>
+
+<ul>
+<li> <strong>git</strong>의 원격 저장소로서 <strong>협업플랫폼의 역할</strong>을 수행한다. </li>
+<li>여기서 <strong>저장소</strong>란 버전관리 대상이 되는 특정한 프로젝트의 파일들을 저장하는 공간을 나타내며, 지역 저장소와 원격 저장소로 구분된다. 
+
+<ul>
+<li> <em>지역 저장소</em>는 현재 작업하고 있는 컴퓨터 내에 위치하는 프로젝트 파일을 저장하는 디렉토리를 의미</li>
+<li> <em>원격 저장소</em>는 인터넷 상의 서버에 위치하며, 여러 <strong>git</strong> 클라이언트와 공유될 수 있다.</li>
+</ul></li>
+</ul></li>
+<li><p><a href="https://desktop.github.com/"><strong>GitHub Desktop</strong></a>이란?</p>
+
+<ul>
+<li>GUI 기반의 <strong>git 클라이언트</strong> 중에 하나</li>
+</ul></li>
+<li><p>이 문서에서는 <strong>GitHub Desktop</strong>를 이용하여 <strong>Android Project</strong>의 소스를 관리하는 두 가지 시나리오를 설명한다. </p>
+
+<ol>
+<li><a href="#2"><strong>Android Project</strong>의 버전관리</a></li>
+<li><a href="#3"><strong>GitHub</strong>을 이용한 협업하기</a></li>
+</ol></li>
+</ul>
+
+<p><a name="2"></a></p>
+
+<h2 id="toc_3">2. <strong>Android Project</strong>의 버전관리</h2>
+
 <p><strong>Android Project</strong>의 버전관리 시나리오는 다음과 같다.</p>
+
 <ol>
 <li><a href="#1.1"><strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</a></li>
 <li><a href="#1.2"><strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</a></li>
 <li><a href="#1.3"><strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한경우</em>)</a> </li>
 <li><a href="#1.4">원격 <strong>git</strong> 저장소(<strong>GitHub</strong>)에 푸시(push)</a></li>
 </ol>
-<h3>가. 사전준비</h3>
+
+<hr>
+
+<h3 id="toc_4">0. 사전준비</h3>
+
 <ul>
 <li><a href="https://kwanulee.github.io/Android/intro-android/start-android-project.html#start-android"><strong>Android Project</strong> 생성 (예, HelloAndroid)</a></li>
 <li><a href="install_git_clients.html"><strong>git</strong> 클라이언트 설치</a> </li>
-<li><a href="create-github-account.html"><strong>GitHub</strong> 계정 만들기</a>  
-</li>
+<li><a href="create-github-account.html"><strong>GitHub</strong> 계정 만들기</a><br></li>
 </ul>
+
 <p><a name="1.1"></a></p>
-<h3>나. <strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</h3>
+
+<h3 id="toc_5">1. <strong>Android Project</strong>를 위한 새로운 지역 <strong>git</strong> 저장소 생성</h3>
+
 <ol>
-<li>
-<p><strong>GitHub Desktop</strong> 시작화면에서 <strong>Create new repository</strong> 클릭</p>
+<li><p><strong>GitHub Desktop</strong> 시작화면에서 <strong>Create new repository</strong> 클릭
 <div class="polaroid">
-	<img src="figure/github-desktop-new-repository.JPG"> 
-</div>	
-<p>[<strong>다른 방법</strong>] [<strong>File<strong>] 메뉴에서 [</strong>New respository..</strong>] 클릭</p>
+    <img src="figure/github-desktop-new-repository.JPG"> 
+</div>  </p>
+
+<p>[<strong>다른 방법</strong>] [<strong>File</strong>] 메뉴에서 [<strong>New respository..</strong>] 클릭
 <div class="polaroid">
-	<img src="figure/create-local-repository-windows.PNG">
-</div>	
-</li>
-<li>
-<p>다음 정보 입력 및 선택 후 [<strong>Create repository</strong>] 선택</p>
+    <img src="figure/create-local-repository-windows.PNG">
+</div>  </p></li>
+<li><p>다음 정보 입력 및 선택 후 [<strong>Create repository</strong>] 선택</p>
+
 <ul>
 <li>[<strong>Name</strong>]: 저장소 (프로젝트) 이름 (예, <em>HelloAndroid</em> - 이 이름의 Android Project이 생성된 것을 가정 )</li>
 <li>[<strong>Local path</strong>]: 저장소의 위치 (예, <em>C:\Users\kwlee\AndroidStudioProjects</em>)</li>
-<li>[Git ignore]: <strong>Android</strong> 선택 (Git에서 버전관리되지 않는 대상 파일들을 설정한 것)</li>
-</ul>
+<li>[Git ignore]: <strong>Android</strong> 선택 (Git에서 버전관리되지 않는 대상 파일들을 설정한 것)
 <div class="polaroid">
-	<img src="figure/create-new-repository-wizard.PNG">
-</div>
-</li>
-<li>새로운 <strong>git</strong> 저장소(예, <em>C:\Users\kwlee\AndroidStudioProjects\HelloAndroid</em>)에 .git 폴더 및 .gitattributes, .gitignore 파일이 생성되어 있음을 확인할 수 있다.</li>
+<img src="figure/create-new-repository-wizard.PNG">
+</div></li>
+</ul></li>
+<li><p>새로운 <strong>git</strong> 저장소(예, <em>C:\Users\kwlee\AndroidStudioProjects\HelloAndroid</em>)에 .git 폴더 및 .gitattributes, .gitignore 파일이 생성되어 있음을 확인할 수 있다.</p></li>
 </ol>
+
 <p><a name="1.2"></a></p>
-<h3>다. <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</h3>
+
+<h3 id="toc_6">2. <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋(commit)</h3>
+
 <p><strong>커밋(commit)</strong>이란 하나 이상의 파일에 대한 변경을 <strong>git</strong> 저장소에 저장하는 것을 의미한다. 다음은 <strong>Android Project</strong>의 일부 파일을 수정 후, 지역 <strong>git</strong> 저장소에 커밋을 하는 절차를 설명한다.</p>
+
 <ol>
-<li>
-<p><strong>[Android Studio]</strong>:  <strong>Android Project</strong>의 일부 파일을 수정 </p>
-<p>예를 들어, <strong>HelloAndroid</strong> 프로젝트에서 <em>activity_main.xml</em> 파일의 <strong>TextView</strong> 위젯의 <em>android:text</em> 속성 값을 '<em>Hello Android</em>'로 변경 </p>
+<li><p><strong>[Android Studio]</strong>:  <strong>Android Project</strong>의 일부 파일을 수정 </p>
+
+<p>예를 들어, <strong>HelloAndroid</strong> 프로젝트에서 <em>activity_main.xml</em> 파일의 <strong>TextView</strong> 위젯의 <em>android:text</em> 속성 값을 &#39;<em>Hello Android</em>&#39;로 변경 
+ <div class="polaroid">
+    <img src="figure/helloandroid-project-change1.png">
+</div></p></li>
+<li><p><strong>[GitHub Desktop]</strong>: 커밋에 포함시킬 혹은 포함하지 않을 변경을 선택 하고, 커밋 메시지 작성후, [<strong>Commit to BRANCH</strong>] 클릭 
 <div class="polaroid">
-	<img src="figure/helloandroid-project-change1.png">
-</div>
-</li>
-<li>
-<p><strong>[GitHub Desktop]</strong>: 커밋에 포함시킬 혹은 포함하지 않을 변경을 선택 하고, 커밋 메시지 작성후, [<strong>Commit to BRANCH</strong>] 클릭 </p>
-<div class="polaroid">
-	<img src="figure/commit-message.PNG">
-</div>
-</li>
+    <img src="figure/commit-message.PNG">
+</div></p></li>
 </ol>
+
 <p><a name="1.3"></a></p>
-<h3>라. 지역 <strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한 경우</em>)</h3>
+
+<h3 id="toc_7">3. 지역 <strong>git</strong> 저장소를 이전 커밋(commit)으로 되돌림 (<em>필요한 경우</em>)</h3>
+
 <p>다음은 현재 <strong>git</strong> 저장소를 이전 커밋 상태로 되돌리는 방법이다. 만약 여러 커밋을 되돌리고자 하는 경우에는 최신것부터 시작하여 순서대로 되돌리는 것이 좋다.</p>
+
 <ol>
-<li>
-<strong>[GitHub Desktop]</strong>: <strong>History</strong> 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 <strong>Revert this commit</strong> 클릭 
+<li><strong>[GitHub Desktop]</strong>: <strong>History</strong> 탭의 커밋 목록에서 되돌리고자 하는 커밋의 오른쪽 마우스버튼  클릭 후, 메뉴의 <strong>Revert this commit</strong> 클릭 
 <div class="polaroid">
-	<img src="figure/revert-commit.PNG">
-</div>
-</li>
+    <img src="figure/revert-commit.PNG">
+</div></li>
 </ol>
+
 <p><a name="1.4"></a></p>
-<h3>마. 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 푸시(push)</h3>
+
+<h3 id="toc_8">4. 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 푸시(push)</h3>
+
 <ol>
-<li>
-<p><strong>GitHub Desktop</strong>에서 <strong>GitHub</strong> 계정에 로그인 설정 </p>
+<li><p><strong>GitHub Desktop</strong>에서 <strong>GitHub</strong> 계정에 로그인 설정 </p>
+
 <ul>
 <li><strong>File</strong> &gt; <strong>Options..</strong> 메뉴를 클릭</li>
 <li><strong>GitHub.com</strong>의 <strong>Sign in</strong> 버튼 클릭 </li>
-<li>
-<strong>Sign in</strong> 화면에서 <strong>GitHub</strong>의 Username과 Password 입력후 <strong>Sign in</strong> 클릭 
+<li><strong>Sign in</strong> 화면에서 <strong>GitHub</strong>의 Username과 Password 입력후 <strong>Sign in</strong> 클릭 
 <div class="polaroid">
-	<img src="figure/signin-github.PNG">
-</div>
-</li>
-</ul>
-</li>
-<li>
-<p>작업중인 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 올리기</p>
+    <img src="figure/signin-github.PNG">
+</div></li>
+</ul></li>
+<li><p>작업중인 지역 <strong>git</strong> 저장소를 원격 저장소(<strong>GitHub</strong>)에 올리기</p>
+
 <ul>
 <li><strong>GitHub Desktop</strong> 화면 상단의 <strong>Publish repository</strong> 클릭 </li>
-<li>
-<em>Keep this code private</em> 체크박스 선택 해제 후, [<strong>Publish repository</strong>] 버튼 클릭
+<li><em>Keep this code private</em> 체크박스 선택 해제 후, [<strong>Publish repository</strong>] 버튼 클릭
 <div class="polaroid">
-	<img src="figure/publish-repository.png">
-</div>
-</li>
-</ul>
-</li>
-<li>
-<p>웹브라우저를 통해 <strong>GitHub</strong>의 원격 저장소에 지역 <strong>git</strong> 저장소의 내용이 동기화 되어 있는 확인  
-</p>
+    <img src="figure/publish-repository.png">
+</div></li>
+</ul></li>
+<li><p>웹브라우저를 통해 <strong>GitHub</strong>의 원격 저장소에 지역 <strong>git</strong> 저장소의 내용이 동기화 되어 있는 확인<br>
 <div class="polaroid">
-		<img src="figure/github-sync-result.png">
-	</div>
-</li>
+        <img src="figure/github-sync-result.png">
+    </div></p></li>
 </ol>
-<h2><a name="2"></a>2. <strong>GitHub</strong>이용한 협업하기</h2>
+
+<h2 id="toc_9"><a name="3"></a>3. <strong>GitHub</strong>이용한 협업하기</h2>
+
 <p><strong>GitHub</strong>이용한 협업하기 두 명의 시나리오는 다음과 같다.</p>
-<pre><code>가정
+
+<div><pre><code class="language-none">가정
     - GitHub에 두 개의 사용자 계정(예, kwanulee, kwanu70)이 존재 
     - kwanulee/HelloAndroid 저장소가 존재
-    - kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함
-</code></pre>
+    - kwanulee/HelloAndroid 저장소를 kwanulee와 kwanu70이 공유하여 협업하고자 함</code></pre></div>
 
 <ol>
 <li><strong>kwanulee/HelloAndroid</strong> 저장소의 Collaborator로 <em>kwanu70</em>을 추가 (참조. <a href="#2.1">가. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</a>)</li>
 <li><em>kwanu70</em>은 <strong>kwanulee/HelloAndroid</strong> 원격 저장소의 파일을 지역 <strong>git</strong> 저장소로 복제 (참조. <a href="#2.2">나. <strong>GitHub</strong> 저장소를 복제하기</a>)</li>
 <li><em>kwanu70</em>은 지역 <strong>git</strong> 저장소로 복제된 파일을 변경/커밋하고, 이를 <strong>kwanulee/HelloAndroid</strong> 저장소와 동기화  (참조. <a href="#2.3">다.  복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</a>)</li>
-<li><em>kwanulee</em>는 자신의 지역 <strong>git</strong> 저장소를 <strong>kwanulee/HelloAndroid</strong> 원격 저장소의 최신 상태로 동기화 (참조. <a href="#2.4">라.  원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</a>)</li>
+<li> <em>kwanulee</em>는 자신의 지역 <strong>git</strong> 저장소를 <strong>kwanulee/HelloAndroid</strong> 원격 저장소의 최신 상태로 동기화 (참조. <a href="#2.4">라.  원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</a>)</li>
 </ol>
+
 <p><a name="2.1"></a></p>
-<h3>가. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</h3>
+
+<h3 id="toc_10">1. <strong>GitHub</strong> 저장소에 Collaborator 추가하기</h3>
+
 <ol>
-<li>
-<p><strong>GitHub</strong> 저장소의 메인 화면에서 <strong>Settings</strong> 탭 선택</p>
+<li><p><strong>GitHub</strong> 저장소의 메인 화면에서 <strong>Settings</strong> 탭 선택
 <div class="polaroid">
-		<img src="figure/github-settings.png">
-</div>
-</li>
-<li>
-<p><strong>Settings</strong> 탭의 왼쪽 메뉴 중에 <strong>Collaborators</strong> 선택 한후, Collaborator로 추가할 <strong>GitHub</strong> 계정 ID (예, <em>kwanu70<em>)를 입력하고, [</em><em>Add collaborator</em></em>] 클릭</p>
+        <img src="figure/github-settings.png">
+</div></p></li>
+<li><p><strong>Settings</strong> 탭의 왼쪽 메뉴 중에 <strong>Manage access</strong> 선택 한후  <strong>Invite a collaborator</strong>를 클릭한다.  Collaborator로 추가할 <strong>GitHub</strong> 계정 ID (예, <em>kwanu70</em>)를 입력하고, [<strong>Add XXXXX to this repository</strong>] 클릭
 <div class="polaroid">
-		<img src="figure/github-add-collaborator.png">
-</div>
-</li>
-<li>
-<p>Collaborator로 추가한 계정 사용자의 이메일로 아래와 같은 내용의 이메일이 전송되며, <strong>accept or decline</strong> 링크를 클릭하여 수락을 해야함</p>
+        <img src="figure/github-add-collaborator.png">
+</div></p></li>
+<li><p>Collaborator로 추가한 계정 사용자의 이메일로 아래와 같은 내용의 이메일이 전송되며, <strong>View inviation</strong>을 클릭하여 요청을 확인한다.
 <div class="polaroid">
-		<img src="figure/email-authentication.png">
-</div>
+        <img src="figure/email-authentication.png">
+</div></p></li>
+<li><p>다음과 같은 페이지가 나오면 <strong>Accept invitation</strong>을 클릭하여 Collaborator 요청을 받아들인다. 
 <div class="polaroid">
-		<img src="figure/accept-invitation.png">
-</div>
-</li>
+        <img src="figure/accept-invitation.png">
+</div></p></li>
 </ol>
+
 <p><a name="2.2"></a></p>
-<h3>나. <strong>GitHub</strong> 저장소를 복제하기</h3>
+
+<h3 id="toc_11">2. <strong>GitHub</strong> 저장소를 복제하기</h3>
+
 <ol>
-<li>
-<strong>GitHub Desktop</strong>의 [<strong>File<strong>] 메뉴에서 [</strong>Clone respository..</strong>] 클릭
+<li><strong>GitHub Desktop</strong>의 [<strong>File</strong>] 메뉴에서 [<strong>Clone respository..</strong>] 클릭
 <div class="polaroid">
-	<img src="figure/clone-file-menu-windows.png">
-</div>	
-</li>
-<li>
-저장소 복제 
+    <img src="figure/clone-file-menu-windows.png">
+</div><br></li>
+<li>저장소 복제 
+
 <ul>
 <li><strong>GitHub 사용자이름</strong>과 복제(Clone)하려는 <strong>GitHub 리파지토리</strong>를 입력, (예, kwanulee/HelloAndroid)</li>
-<li>복제할  리포지토리가 저장될 로컬 패스를 지정 후, [<strong>Clone</strong>] 클릭 </li>
-</ul>
+<li>복제할  리포지토리가 저장될 로컬 패스를 지정 후, [<strong>Clone</strong>] 클릭 
 <div class="polaroid">
-	<img src="figure/clone-url-win.png">
-</div>	
-</li>
+<img src="figure/clone-url-win.png">
+</div><br></li>
+</ul></li>
 </ol>
+
 <p><a name="2.3"></a></p>
-<h3>다. 복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</h3>
+
+<h3 id="toc_12">3. 복제된 <strong>GitHub</strong> 저장소를 수정하고 동기화하기</h3>
+
 <ol>
-<li>
-<p>AndroidStudio에서 복제된 <em>HelloAndroidCloned</em> 프로젝트를 열고, activity_main.xml 파일을 변경
+<li><p>AndroidStudio에서 복제된 <em>HelloAndroidCloned</em> 프로젝트를 열고, activity_main.xml 파일을 변경
 <code></p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+<div><pre><code class="language-none">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
@@ -494,48 +498,64 @@ div.polaroid {
         android:text=&quot;Hello Android!&quot;
         /&gt;
 
-&lt;/LinearLayout&gt;
-</code></pre>
+&lt;/LinearLayout&gt;</code></pre></div>
 
-<p></code></p>
-</li>
-<li>
-<p>커밋에 포함시킬 혹은 포함하지 않을 <strong>변경을 선택</strong>하고 <strong>커밋 메시지 작성<strong>후, [</strong>Commit to master</strong>] 클릭 </p>
+<p></code></p></li>
+<li><p>커밋에 포함시킬 혹은 포함하지 않을 <strong>변경을 선택</strong>하고 <strong>커밋 메시지 작성</strong>후, [<strong>Commit to master</strong>] 클릭 
 <div class="polaroid">
-	<img src="figure/commit-message2.PNG">
-</div>
-</li>
-<li>
-<p><strong>GitHub Desktop</strong> 화면 우측 상단의 [<strong>Push origin</strong>] 버튼 클릭
-	<div class="polaroid">
-		<img src="figure/github-desktop-sync-button.png">
-	</div></p>
-</li>
-<li>
-<p>웹브라우저를 통해 <strong>GitHub</strong>의 원격 저장소에 지역 <strong>git</strong> 저장소의 내용이 동기화 되어 있는 확인  
-</p>
+    <img src="figure/commit-message2.PNG">
+</div></p></li>
+<li><p><strong>GitHub Desktop</strong> 화면 우측 상단의 [<strong>Push origin</strong>] 버튼 클릭
+    <div class="polaroid">
+        <img src="figure/github-desktop-sync-button.png">
+    </div></p></li>
+<li><p>웹브라우저를 통해 <strong>GitHub</strong>의 원격 저장소에 지역 <strong>git</strong> 저장소의 내용이 동기화 되어 있는 확인<br>
 <div class="polaroid">
-		<img src="figure/github-sync-result.png">
-	</div>
-</li>
+        <img src="figure/github-sync-result.png">
+    </div></p></li>
 </ol>
+
 <p><a name="2.4"></a></p>
-<h3>라 . 원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</h3>
+
+<h3 id="toc_13">4 . 원격 <strong>GitHub</strong> 저장소의 최신 내용을  지역 <strong>git</strong> 저장소로 가져오기</h3>
+
 <ol>
-<li>
-<p><strong>[GitHub Desktop]</strong>의 <strong>Fetch origin</strong>을 클릭</p>
+<li><p><strong>[GitHub Desktop]</strong>의 <strong>Fetch origin</strong>을 클릭
 <div class="polaroid">
-		<img src="figure/fetch-origin.PNG">
-	</div>
-</li>
-<li>
-<p>만약 원격 <strong>GitHub</strong> 저장소에서 지역 <strong>git</strong> 저장소로 가져올 커밋이 존재한다면, <strong>Pull origin</strong>을 클릭하여 원격 <strong>GitHub</strong> 저장소의  커밋을 가져온다.</p>
+        <img src="figure/fetch-origin.PNG">
+    </div></p></li>
+<li><p>만약 원격 <strong>GitHub</strong> 저장소에서 지역 <strong>git</strong> 저장소로 가져올 커밋이 존재한다면, <strong>Pull origin</strong>을 클릭하여 원격 <strong>GitHub</strong> 저장소의  커밋을 가져온다.
 <div class="polaroid">
-		<img src="figure/pull-origin.PNG">
-	</div>
-</li>
+        <img src="figure/pull-origin.PNG">
+    </div></p></li>
 </ol>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 </body>
+
 </html>
-<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->
