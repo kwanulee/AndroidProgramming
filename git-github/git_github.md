@@ -123,15 +123,17 @@ div.polaroid {
 			<img src="figure/github-settings.png">
 	</div>
 
-2. **Settings** 탭의 왼쪽 메뉴 중에 **Collaborators** 선택 한후, Collaborator로 추가할 **GitHub** 계정 ID (예, *kwanu70*)를 입력하고, [**Add collaborator**] 클릭
+2. **Settings** 탭의 왼쪽 메뉴 중에 **Manage access** 선택 한후  **Invite a collaborator**를 클릭한다.  Collaborator로 추가할 **GitHub** 계정 ID (예, *kwanu70*)를 입력하고, [**Add XXXXX to this repository**] 클릭
 	<div class="polaroid">
 			<img src="figure/github-add-collaborator.png">
 	</div>
 
-3. Collaborator로 추가한 계정 사용자의 이메일로 아래와 같은 내용의 이메일이 전송되며, **accept or decline** 링크를 클릭하여 수락을 해야함
+3. Collaborator로 추가한 계정 사용자의 이메일로 아래와 같은 내용의 이메일이 전송되며, **View inviation**을 클릭하여 요청을 확인한다.
 	<div class="polaroid">
 			<img src="figure/email-authentication.png">
 	</div>
+	
+4. 다음과 같은 페이지가 나오면 **Accept invitation**을 클릭하여 Collaborator 요청을 받아들인다. 
 	<div class="polaroid">
 			<img src="figure/accept-invitation.png">
 	</div>
