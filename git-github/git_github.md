@@ -104,7 +104,7 @@ div.polaroid {
 	- **GitHub.com**의 **Sign in** 버튼 클릭 
 	- **Sign in** 화면에서 **GitHub**의 Username과 Password 입력후 **Sign in** 클릭 
 		<div class="polaroid">
-			<img src="figure/signin-github.PNG">
+			<img src="figure/signin-github.png">
 		</div>
 2. 작업중인 지역 **git** 저장소를 원격 저장소(**GitHub**)에 올리기
 	- **GitHub Desktop** 화면 상단의 **Publish repository** 클릭 
