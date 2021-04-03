@@ -13,29 +13,41 @@ div.polaroid {
 
 ## 학습목표
 
-- ViewPager를 사용하여 스와이프 뷰를 구현한다.
+- ViewPager2를 사용하여 스와이프 뷰를 구현한다.
 - 탭을 표시하는 방법을 살펴본다.
 
 	<img src="figure/tablayout.gif" width=200>
 
-## 1. ViewPager란?
-- **[ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)**는 데이터를 페이지 단위로 표시하고 화면을 쓸어 넘기는 동작인 스와이프(Swipe)를 통해 페이지 전환을 할 수 있는 컨테이너(Container)입니다.
-- [어댑터 뷰 단원](https://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview.html)에서 어댑터 뷰(ListView, GridView)의 항목에 표시될 정보를 [Adapter](https://developer.android.com/reference/android/widget/Adapter) 객체를 통해서 얻었듯이, **[ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)**는 [PagerAdapter](https://developer.android.com/reference/android/support/v4/view/PagerAdapter) 객체를 통해서 각 페이지에 표시될  정보를 제공 받습니다.
-	-  **[ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)**는 보통 [Fragment](https://developer.android.com/reference/android/app/Fragment.html)와 함께 사용되므로, 다음 두 가지 유형의 내장 어댑터 중에 하나를 사용할 수 있습니다. 두 어댑터의 차이점은 
-		-  [FragmentPagerAdapter](https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter) : 고정된 소수의 화면 간을 탐색할 때 사용
-		-  [FragmentStatePagerAdapter](https://developer.android.com/reference/androidx/fragment/app/FragmentStatePagerAdapter): 알 수 없는 수의 페이지를 페이징할 때 사용.  사용자가 다른 곳을 탐색할 때 프래그먼트를 삭제하여 메모리 사용량을 최적화
+## 1. Swipe Views란?
+- **스와이핑 뷰**는 화면을 쓸어 넘기는 동작인 스와이프(Swipe)를 통해 페이지 전환을 할 수 있는 뷰
+	- 이 단원에서는 [ViewPager2](https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2)를 통해  스와이핑 뷰 구현을 예시함
+	-  [ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager)는 ViewPager2의 이전 버전으로서 현재 deprecated된 라이브러리 이므로, 가급적 사용하지 않는 것이 좋음
+		- 참고 가이드: [ViewPager로 프래그먼트 간 슬라이드 전환](https://developer.android.com/training/animation/screen-slide?hl=ko)
+- [어댑터 뷰 단원](https://kwanulee.github.io/AndroidProgramming/adapter-view/adapterview.html)에서 어댑터 뷰(ListView, GridView)의 항목에 표시될 정보를 [Adapter](https://developer.android.com/reference/android/widget/Adapter) 객체를 통해서 얻었듯이, [ViewPager2](https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2)는 [FragmentStateAdapter](https://developer.android.com/reference/kotlin/androidx/viewpager2/adapter/FragmentStateAdapter?hl=ko) 객체를 통해서 각 페이지에 표시될  정보를 제공 받습니다.
+
 	<img src="figure/viewpager.png">
 			
 
-## 2. ViewPager 사용하기
-- [FragmentPagerAdapter](https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter)를 이용한  [ViewPager](https://developer.android.com/reference/android/support/v4/view/ViewPager) 사용 예제 구현은 다음과 같은 절차로 진행됩니다.
-	1. [XML 레이아웃에 ViewPager를 추가](#2.1)
+## 2. ViewPager2 사용하기
+- [ViewPager2](https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2)를 사용하기 위해서는 다음 의존성을 app/build.gradle 파일에 추가해야 함
+- [Create swipe views with tabs using ViewPager2](https://developer.android.com/guide/navigation/navigation-swipe-view-2)
+
+
+	```
+	dependencies {
+		 ...
+		 implementation 'androidx.viewpager2:viewpager2:1.0.0'
+	}
+	```
+
+- [FragmentStateAdapter](https://developer.android.com/reference/kotlin/androidx/viewpager2/adapter/FragmentStateAdapter?hl=ko)를 이용한  [ViewPager2](https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2) 사용 예제 구현은 다음과 같은 절차로 진행됩니다.
+	1. [XML 레이아웃에 ViewPager2를 추가](#2.1)
 	2. [페이지를 나타내는 프레그먼트 정의](#2.2)
-	3.  [FragementPagerAdapter 재정의](#2.3)
-	4.  [ViewPager 객체에 FragmentPagerAdapter 객체 설정](#2.4)
+	3. [FragementStateAdapter 재정의](#2.3)
+	4. [ViewPager 객체에 FragmentPagerAdapter 객체 설정](#2.4)
 
 <a name="2.1"></a>
-### 2.1 XML 레이아웃에 ViewPager를 추가
+### 2.1 XML 레이아웃에 ViewPager2를 추가
 -  **ViewPagerTest** 안드로이드 프로젝트를 생성하고, **activity\_main.xml** 파일을 아래와 같이 정의합니다.
 
 	```xml
@@ -45,7 +57,7 @@ div.polaroid {
 	    android:layout_height="match_parent"
 	    android:orientation="vertical">
 	 
-	    <androidx.viewpager.widget.ViewPager
+	    <androidx.viewpager2.widget.ViewPager2
 	        android:id="@+id/vpPager"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content">
@@ -90,20 +102,20 @@ div.polaroid {
 	```
 
 <a name="2.3"></a>
-### 2.3  FragementPagerAdapter 재정의
-- [FragmentPagerAdapter](https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter) 재정의하여 몇 개의 페이지가 존재하며, 각 페이지를 나타내는 프래그먼트가 무엇인지를 정의합니다.
+### 2.3  FragementStateAdapter 재정의
+- [FragmentStateAdapter](https://developer.android.com/reference/kotlin/androidx/viewpager2/adapter/FragmentStateAdapter?hl=ko)를 재정의하여 몇 개의 페이지가 존재하며, 각 페이지를 나타내는 프래그먼트가 무엇인지를 정의합니다.
 
 	```java
-	public class PagerAdapter extends FragmentPagerAdapter {
+	public class PagerAdapter extends FragmentStateAdapter {
 	    private static int NUM_ITEMS=3;
 	
-	    public PagerAdapter(FragmentManager fm) {
-	        super(fm);
+	    public PagerAdapter(FragmentActivity fa) {
+	        super(fa);
 	    }
 	
 	    // 각 페이지를 나타내는 프래그먼트 반환
 	    @Override
-	    public Fragment getItem(int position) {
+	    public Fragment createFragment(int position) {
 	
 	        switch (position) {
 	            case 0:
@@ -122,14 +134,14 @@ div.polaroid {
 	
 	    // 전체 페이지 개수 반환
 	    @Override
-	    public int getCount() {
+	    public int getItemCount() {
 	        return NUM_ITEMS;
 	    }
 	}
 	```
 
 <a name="2.4"></a>
-### 2.4  ViewPager 객체에 FragmentPagerAdapter 객체 설정
+### 2.4  ViewPager2 객체에 FragmentStateAdapter 객체 설정
 - 이제, MainActivity 클래스의 onCreate() 메소드에서 ViewPager 객체에 앞서 정의한 PagerAdapter 객체를 설정합니다.
 
 	```java
@@ -140,8 +152,8 @@ div.polaroid {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_main);
 	
-	        ViewPager vpPager = findViewById(R.id.vpPager);
-	        FragmentPagerAdapter adapterViewPager = new PagerAdapter(getSupportFragmentManager());
+	        ViewPager2 vpPager = findViewById(R.id.vpPager);
+	        FragmentStateAdapter adapterViewPager = new PagerAdapter(this);
 	        vpPager.setAdapter(adapterViewPager);
 	    }
 	}
@@ -164,116 +176,40 @@ div.polaroid {
 	```
 - [ViewPager.OnPageChangeListener](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.OnPageChangeListener.html): ViewPager 객체의 페이지 변화가 일어날 때, 특정한 일을 처리해 주기 위해서 사용
 
+
 	```java
 	// Attach the page change listener inside the activity
-	vpPager.addOnPageChangeListener(new OnPageChangeListener() {
-		
-		// This method will be invoked when a new page becomes selected.
+	vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 		@Override
 		public void onPageSelected(int position) {
-			Toast.makeText(MainActivity.this, 
-	                    "Selected page position: " + position, Toast.LENGTH_SHORT).show();
-		}
-		
-		// This method will be invoked when the current page is scrolled
-		@Override
-		public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-			// Code goes here
-		}
-		
-		// Called when the scroll state changes: 
-		// SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
-		@Override
-		public void onPageScrollStateChanged(int state) {
-			// Code goes here
+	                Toast.makeText(MainActivity.this,
+	                        "Selected page position: " + position, Toast.LENGTH_SHORT).show();
 		}
 	});
-```
+	```
 
 ### 2.6 실행 결과
 - 실행화면
 
 	<img src="figure/screen.gif" width=200>
 
-	
-## 3. Tab Indicator 표시하기 
--  [**PagerTabStrip**](https://developer.android.com/reference/androidx/viewpager/widget/PagerTabStrip.html)은 [ViewPager](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager)의 자식 뷰로 XML 레이아웃에 포함되어서, **이전, 현재, 다음 페이지**를 나타내는 indicator입니다. 
--  **PagerTabStrip**을 *ViewPager*에 추가하기 위해서는 2장까지 진행된 프로젝트에 다음 두 가지 단계를 추가합니다.
-
-	1. XML 레이아웃에 PagerTabStrip 위젯 추가
-	2.  [PagerAdapter.getPageTitle(int)](https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter#getPageTitle(int)) 메소드 재정의
-
-### 3.1 XML 레이아웃에 PagerTabStrip 위젯 추가
-- XML 레이아웃의 ViewPager 위젯의 자식뷰로 PagerTabStrip 을 추가합니다.
-
-	```xml
-	<?xml version="1.0" encoding="utf-8"?>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:orientation="vertical">
-	
-	    <androidx.viewpager.widget.ViewPager
-	        android:id="@+id/vpPager"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content">
-	        
-	        <androidx.viewpager.widget.PagerTabStrip
-	            android:id="@+id/pager_header"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_gravity="top"
-	            android:paddingBottom="4dp"
-	            android:paddingTop="4dp" />
-	            
-	    </androidx.viewpager.widget.ViewPager>
-	</LinearLayout>	
-	```
-	-  **android:layout_gravity**:  Indicator의 위치(top 혹은 bottom)를 설정 
-
-### 3.2  [PagerAdapter.getPageTitle(int)](https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter#getPageTitle(int)) 메소드를 재정의
-- 각 페이지의 제목을 반환하는 [PagerAdapter.getPageTitle(int)](https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter#getPageTitle(int)) 메소드를 재정의합니다. [2.3절](#2.3)의 코드에 다음 부분을 추가하세요.
-
-	```java
-	public class PagerAdapter extends FragmentPagerAdapter {
-	    //...
-	    private String tabTitles[] = new String[] { "First", "Second", "Third" };
-	
-	    //...
-	    @Override
-	    public CharSequence getPageTitle(int position) {
-	        // Generate title based on item position
-	        return tabTitles[position];
-	    }
-	}
-	```
-	
-### 3.3 실행 결과
-
-- 실행화면
-
-	| android:layout_gravity="top" | android:layout_gravity="bottom"|
-	|:---:|:---:|
-	|<img src="figure/pagertabstrip-top.png" width=200>|<img src="figure/pagertabstrip-bottom.png" width=200>|
-	
-	
-## 4. Google Play Style 탭 표시하기
+## 3. Google Play Style 탭 표시하기
 -  [**TabLayout**](https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.html)은 Google Play Style의 슬라이딩 탭을 구현한 것으로, 디자인 지원 라이브러리에 포함되어 있습니다.
 -  이를 이용하기 위해서는 3장까지 진행된 프로젝트에 다음 두 단계를 추가합니다. (PagerAdapter.getPageTitle(int) 메소드가 재정의 되어 있는 것을 가정)
 	1. 디자인 지원 라이브러리 설정
 	2.  XML 레이아웃에 TabLayout 추가 
 	
-### 4.1  디자인 지원 라이브러리 설정
+### 3.1  디자인 지원 라이브러리 설정
 - app/build.gradle 파일에 다음 의존성을 추가
 
 	```
 	dependencies {
 	    ...
-	    implementation 'com.google.android.material:material:1.0.0'
+	    implementation 'com.google.android.material:material:1.1.0'
 	}
 	```
 
-### 4.2 XML 레이아웃에 TabLayout 추가
+### 3.2 XML 레이아웃에 TabLayout 추가
 - XML 레이아웃에서 ViewPager 위젯의 자식뷰로 **com.google.android.material.tabs.TabLayout**을 추가 (PagerTabStrip 위젯은 제거)
 
 	``` xml
@@ -284,22 +220,16 @@ div.polaroid {
 	    android:layout_height="match_parent"
 	    android:orientation="vertical">
 	    
-	    <androidx.viewpager.widget.ViewPager
+	    <com.google.android.material.tabs.TabLayout
+	        android:id="@+id/sliding_tabs"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        app:tabMode="fixed" />
+	    
+	    <androidx.viewpager2.widget.ViewPager2
 	        android:id="@+id/vpPager"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content">
-	        
-	        <!-- TabLayout 추가-->
-	        <com.google.android.material.tabs.TabLayout
-	            android:id="@+id/sliding_tabs"
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            app:tabMode="fixed" />
-	
-	        <!-- PagerTabStrip 삭제-->
-	        
-	    </androidx.viewpager.widget.ViewPager>
-	
+	        android:layout_height="wrap_content"/>
 	
 	</LinearLayout>	
 	```
@@ -317,8 +247,30 @@ div.polaroid {
 	|tabTextColor	|@color/blue	|Color of the text on the tab
 	
 	- [추가 속성 정보](https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.html#lattrs)
+
+### 3.3 TabLayoutMediator
+
+- [TabLayoutMediator](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator)는 TabLayout을 ViewPager2로 연결시켜 주는 역할을 함
+-  탭의 스타일 및 텍스트를 설정하기 위해서는 [TabLayoutMediator.TabConfigurationStrategy](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator.TabConfigurationStrategy?hl=ko) 인터페이스를 구현하여, TabLayoutMediator 생성자 파라미터로 설정해 주어야 함.
+
+	```java
+	    protected void onCreate(Bundle savedInstanceState) {
+	        //...	
+	        // create a TabLayoutMediator to link the TabLayout to the ViewPager2, and attach it
+	        new TabLayoutMediator(tabLayout, vpPager,
+	                new TabLayoutMediator.TabConfigurationStrategy() {
+	                    @Override
+	                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+	                        tab.setText(((PagerAdapter)adapterViewPager).getPageTitle(position));
+	                    }
+	                }
+	        ).attach();
+	        //...
+		}
+	```
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ViewPagerTest/app/src/main/java/com/example/viewpagertest/MainActivity.java#L30-L38
 	
-### 4.3 실행 결과
+### 3.4 실행 결과
 - 실행 화면
 
 	<img src="figure/tablayout.png" width=200>
@@ -327,7 +279,7 @@ div.polaroid {
 	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/ViewPagerTest
 
 
-### 4.4 TabLayout 추가 정보
+### 3.5 TabLayout 추가 정보
 - [Google Play Style Tabs using TabLayout](https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout#add-custom-view-to-tablayout) 자료에는  다음과 같은 작업을 수행하는 방법을 공부할 수 있습니다.
 	
 	| TabLayout의 탭에 Icon 설정 | TabLayout의 탭에 Icon+Text 설정|
@@ -336,8 +288,7 @@ div.polaroid {
 	-  TabLayout의 탭에 커스텀 뷰 설정
 
 ### 참고링크
+- [ViewPager2로 프래그먼트 간 슬라이드 전환](https://developer.android.com/training/animation/screen-slide-2?hl=ko)
 - [ViewPager with FragmentPagerAdapter](https://guides.codepath.com/android/ViewPager-with-FragmentPagerAdapter)
-- [[Android] ViewPager와 Fragment를 활용하여 효율적인 UI 구성하기](https://coding-factory.tistory.com/206)
-- [Android ViewPager 예제 - 좌우로 스와이프로 화면 전환](https://webnautes.tistory.com/1013)
 
 ---
