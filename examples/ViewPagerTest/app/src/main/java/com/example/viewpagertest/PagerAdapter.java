@@ -1,20 +1,20 @@
 package com.example.viewpagertest;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapter extends FragmentStateAdapter {
     private static int NUM_ITEMS=3;
     private String tabTitles[] = new String[] { "First", "Second", "Third" };
 
-    public PagerAdapter(FragmentManager fm) {
-        super(fm);
+    public PagerAdapter(FragmentActivity fa) {
+        super(fa);
     }
 
     // 각 페이지를 나타내는 프래그먼트 반환
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
 
         switch (position) {
             case 0:
@@ -26,6 +26,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 2:
                 ThirdFragment third = new ThirdFragment();
                 return third;
+
             default:
                 return null;
         }
@@ -33,13 +34,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     // 전체 페이지 개수 반환
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return NUM_ITEMS;
     }
 
-    @Override
+
     public CharSequence getPageTitle(int position) {
-        // Generate title based on item position
         return tabTitles[position];
     }
 }

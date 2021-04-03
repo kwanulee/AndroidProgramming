@@ -1,13 +1,15 @@
 package com.example.viewpagertest;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,36 +18,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ViewPager vpPager = findViewById(R.id.vpPager);
-        FragmentPagerAdapter adapterViewPager = new PagerAdapter(getSupportFragmentManager());
+        ViewPager2 vpPager = findViewById(R.id.vpPager);
+        final FragmentStateAdapter adapterViewPager = new PagerAdapter(this);
         vpPager.setAdapter(adapterViewPager);
 
-//        // Give the TabLayout the ViewPager
-//        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
-//        tabLayout.setupWithViewPager(vpPager);
+
+
+        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
+        //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);  //scrollable tab indicator
+
+        // create a TabLayoutMediator to link the TabLayout to the ViewPager2, and attach it
+        new TabLayoutMediator(tabLayout, vpPager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        tab.setText(((PagerAdapter)adapterViewPager).getPageTitle(position));
+                    }
+                }
+        ).attach();
+
 
         vpPager.setCurrentItem(1);  // SecondFragment를 첫 화면에 표시되도록 설정
 
-        vpPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            // This method will be invoked when a new page becomes selected.
+        vpPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 Toast.makeText(MainActivity.this,
                         "Selected page position: " + position, Toast.LENGTH_SHORT).show();
-            }
-
-            // This method will be invoked when the current page is scrolled
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // Code goes here
-            }
-
-            // Called when the scroll state changes:
-            // SCROLL_STATE_IDLE, SCROLL_STATE_DRAGGING, SCROLL_STATE_SETTLING
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                // Code goes here
             }
         });
     }
