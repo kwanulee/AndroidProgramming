@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ViewPager2 vpPager = findViewById(R.id.vpPager);
-        final FragmentStateAdapter adapterViewPager = new PagerAdapter(this);
-        vpPager.setAdapter(adapterViewPager);
+        final FragmentStateAdapter adapter = new PagerAdapter(this);
+        vpPager.setAdapter(adapter);
 
 
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override
                     public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                        tab.setText(((PagerAdapter)adapterViewPager).getPageTitle(position));
+                        tab.setText(((PagerAdapter)adapter).getPageTitle(position));
                     }
                 }
         ).attach();
