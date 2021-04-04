@@ -60,8 +60,7 @@ div.polaroid {
 	    <androidx.viewpager2.widget.ViewPager2
 	        android:id="@+id/vpPager"
 	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content">
-	    </androidx.viewpager.widget.ViewPager>
+	        android:layout_height="wrap_content"/>
 	</LinearLayout>
 	```
 
@@ -153,28 +152,28 @@ div.polaroid {
 	        setContentView(R.layout.activity_main);
 	
 	        ViewPager2 vpPager = findViewById(R.id.vpPager);
-	        FragmentStateAdapter adapterViewPager = new PagerAdapter(this);
-	        vpPager.setAdapter(adapterViewPager);
+	        FragmentStateAdapter adapter = new PagerAdapter(this);
+	        vpPager.setAdapter(adapter);
 	    }
 	}
 	```
 	
 
 	
-### 2.5 기타 ViewPager 설정
+### 2.5 기타 ViewPager2 설정
 
-- [getCurrentItem()](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.html#getCurrentItem()): ViewPager 객체의 현재 페이지를 반환
+- [getCurrentItem()](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.html#getCurrentItem()): ViewPager2 객체의 현재 페이지를 반환
 
 	```java
 	vpPager.getCurrentItem(); // --> 2
 	```
 
-- [setCurrentItem(int item)](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.html#setCurrentItem(int)): ViewPager 객체의 현재 페이지를 설정
+- [setCurrentItem(int item)](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.html#setCurrentItem(int)): ViewPager2 객체의 현재 페이지를 설정
 
 	```java
 	vpPager.setCurrentItem(2)
 	```
-- [ViewPager.OnPageChangeListener](https://developer.android.com/reference/androidx/viewpager/widget/ViewPager.OnPageChangeListener.html): ViewPager 객체의 페이지 변화가 일어날 때, 특정한 일을 처리해 주기 위해서 사용
+- [egisterOnPageChangeCallback(ViewPager2.OnPageChangeCallback callback)](https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2#registerOnPageChangeCallback(androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback)): ViewPager2 객체의 페이지 변화가 일어날 때, 특정한 일을 처리해 주기 위해서 사용
 
 
 	```java
@@ -195,9 +194,10 @@ div.polaroid {
 
 ## 3. Google Play Style 탭 표시하기
 -  [**TabLayout**](https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.html)은 Google Play Style의 슬라이딩 탭을 구현한 것으로, 디자인 지원 라이브러리에 포함되어 있습니다.
--  이를 이용하기 위해서는 3장까지 진행된 프로젝트에 다음 두 단계를 추가합니다. (PagerAdapter.getPageTitle(int) 메소드가 재정의 되어 있는 것을 가정)
+-  이를 이용하기 위해서는 2장까지 진행된 프로젝트에 다음 세 단계를 추가합니다.
 	1. 디자인 지원 라이브러리 설정
-	2.  XML 레이아웃에 TabLayout 추가 
+	2. XML 레이아웃에 TabLayout 추가 
+	3. TabLayoutMediator를 통해 TabLayout과 ViewPager2를 연결
 	
 ### 3.1  디자인 지원 라이브러리 설정
 - app/build.gradle 파일에 다음 의존성을 추가
@@ -246,12 +246,16 @@ div.polaroid {
 	|tabMode|	fixed, scrollable|	Small number of fixed tabs or scrolling list
 	|tabTextColor	|@color/blue	|Color of the text on the tab
 	
+	- 예제 : https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ViewPagerTest/app/src/main/res/layout/activity_main.xml#L8-L18
 	- [추가 속성 정보](https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.html#lattrs)
 
-### 3.3 TabLayoutMediator
+### 3.3 TabLayoutMediator를 통해 TabLayout과 ViewPager2를 연결
+- 사전 준비
+	-  앞에서 정의한 PagerAdapter 클래스에 탭에 표시될 제목을 반환하는 getPageTitle(int) 메소드를 정의  
+		-  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/ViewPagerTest/app/src/main/java/com/example/viewpagertest/PagerAdapter.java#L42-L44)
 
 - [TabLayoutMediator](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator)는 TabLayout을 ViewPager2로 연결시켜 주는 역할을 함
--  탭의 스타일 및 텍스트를 설정하기 위해서는 [TabLayoutMediator.TabConfigurationStrategy](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator.TabConfigurationStrategy?hl=ko) 인터페이스를 구현하여, TabLayoutMediator 생성자 파라미터로 설정해 주어야 함.
+	-  탭에 제목를 표시하기 위해서 [TabLayoutMediator.TabConfigurationStrategy](https://developer.android.com/reference/com/google/android/material/tabs/TabLayoutMediator.TabConfigurationStrategy?hl=ko) 인터페이스를  아래와 같이 구현하여, TabLayoutMediator의 세번째 생성자 파라미터로 설정해 주어야 함.
 
 	```java
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -261,7 +265,8 @@ div.polaroid {
 	                new TabLayoutMediator.TabConfigurationStrategy() {
 	                    @Override
 	                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-	                        tab.setText(((PagerAdapter)adapterViewPager).getPageTitle(position));
+	                        // 탭에 표시될 제목을 PagerAdapter 클래스의 getPageTitle(int) 메소드로부터 공급 받아 설정
+	                        tab.setText(((PagerAdapter)adapter).getPageTitle(position));
 	                    }
 	                }
 	        ).attach();
