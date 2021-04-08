@@ -30,8 +30,6 @@ div.polaroid {
 
 ## 2. ViewPager2 사용하기
 - [ViewPager2](https://developer.android.com/reference/kotlin/androidx/viewpager2/widget/ViewPager2)를 사용하기 위해서는 다음 의존성을 app/build.gradle 파일에 추가해야 함
-- [Create swipe views with tabs using ViewPager2](https://developer.android.com/guide/navigation/navigation-swipe-view-2)
-
 
 	```
 	dependencies {
@@ -173,7 +171,7 @@ div.polaroid {
 	```java
 	vpPager.setCurrentItem(2)
 	```
-- [egisterOnPageChangeCallback(ViewPager2.OnPageChangeCallback callback)](https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2#registerOnPageChangeCallback(androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback)): ViewPager2 객체의 페이지 변화가 일어날 때, 특정한 일을 처리해 주기 위해서 사용
+- [registerOnPageChangeCallback(ViewPager2.OnPageChangeCallback callback)](https://developer.android.com/reference/androidx/viewpager2/widget/ViewPager2#registerOnPageChangeCallback(androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback)): ViewPager2 객체의 페이지 변화가 일어날 때, 특정한 일을 처리해 주기 위해서 사용
 
 
 	```java
