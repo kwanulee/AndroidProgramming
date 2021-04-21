@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView result;
     private EditText input;
 
-    final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
-    final int REQUEST_LOADFROM_EXTERNAL_STORAGE = 2;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,21 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!isExternalStorageWritable())
                     return;     // 외부메모리를 사용하지 못하면 끝냄
 
-                String[] PERMISSIONS_STORAGE = {
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                };
-
-                if (ContextCompat.checkSelfPermission(MainActivity.this,
-                                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(
-                            MainActivity.this,
-                            PERMISSIONS_STORAGE,
-                            REQUEST_SAVETO_EXTERNAL_STORAGE
-                    );
-                } else {
-                    saveToExtenalStorage();
-                }
+                saveToExtenalStorage();
             }
         });
 
@@ -101,32 +84,27 @@ public class MainActivity extends AppCompatActivity {
                 if (!isExternalStorageReadable())
                     return;     // 외부메모리를 사용하지 못하면 끝냄
 
-                String[] PERMISSIONS_STORAGE = {
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                };
-
-                if (ContextCompat.checkSelfPermission(MainActivity.this,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(
-                            MainActivity.this,
-                            PERMISSIONS_STORAGE,
-                            REQUEST_LOADFROM_EXTERNAL_STORAGE
-                    );
-                } else {
-                    loadFromExternalStorage();
-                }
+                loadFromExternalStorage();
             }
         });
     }
+
+    private final String internalFileName="internalFile.txt";
 
     private void saveToInternalStorage() {
         String data = input.getText().toString();
 
         try {
+            /* 구현 방법 1 */
+//            File file = new File(getFilesDir(),internalFileName);
+//            FileOutputStream fos = new FileOutputStream(file,true);
+
+
+            /* 구현 방법 2 */
             FileOutputStream fos = openFileOutput
-                                        ("myfile.txt", // 파일명 지정
+                                        (internalFileName, // 파일명 지정
                                         Context.MODE_APPEND);// 저장모드
+
             PrintWriter out = new PrintWriter(fos);
             out.println(data);
             out.close();
@@ -139,7 +117,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadFromIntenalStorage() {
         try {
-            FileInputStream fis = openFileInput("myfile.txt");//파일명
+            /* 구현 방법 1 */
+            File file = new File(getFilesDir(),internalFileName);
+            FileInputStream fis = new FileInputStream(file);
+
+            /* 구현 방법 2 */
+//            FileInputStream fis = openFileInput(internalFileName);//파일명
+
             BufferedReader buffer = new BufferedReader
                     (new InputStreamReader(fis));
             String str = buffer.readLine(); // 파일에서 한줄을 읽어옴
@@ -203,34 +187,13 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (grantResults.length > 0
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            switch (requestCode) {
-                case REQUEST_SAVETO_EXTERNAL_STORAGE:
-                    saveToExtenalStorage();
-                    break;
-                case REQUEST_LOADFROM_EXTERNAL_STORAGE:
-                    loadFromExternalStorage();
-                    break;
-            }
-
-        } else {
-            Toast.makeText(getApplicationContext(),"접근 권한이 필요합니다",Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void saveToExtenalStorage() {
         String data = input.getText().toString();
         Log.i(TAG, getLocalClassName() + ":file save start");
         try {
             //  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/를 사용할 경우
-            File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-
-            // 공유 디렉토리 (sdcard/Download) 사용할 경우
-//            File path = Environment.getExternalStoragePublicDirectory
-//                    (Environment.DIRECTORY_DOWNLOADS);
+            File path = getExternalFilesDir(null);
 
             File f = new File(path, "external.txt"); // 경로, 파일명
             FileWriter write = new FileWriter(f, true);
@@ -248,11 +211,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadFromExternalStorage(){
         try {
             //  앱 전용 저장소 (sdcard/Android/data/com.example.kwanwoo.filetest/files/를 사용할 경우
-            File path = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
-
-            // 공유 디렉토리 (sdcard/Download) 사용할 경우
-//            File path = Environment.getExternalStoragePublicDirectory
-//                    (Environment.DIRECTORY_DOWNLOADS);
+            File path = getExternalFilesDir(null);
 
             File f = new File(path, "external.txt");
             StringBuffer data = new StringBuffer();
