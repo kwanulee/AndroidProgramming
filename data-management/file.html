@@ -316,7 +316,7 @@ pre[class*="language-"] {
 <li>앱이 외부저장소의 공용 공간에 있는 파일을 엑세스하기 위해서 읽기 및 쓰기 액세스 권한(<strong>READ_EXTERNAL_STORAGE</strong> 및 <strong>WRITE_EXTERNAL_STORAGE</strong>)을 선언해야 했습니다.<br></li>
 </ul>
 
-<p><img src="figure/external-storage-before-q.png" alt=""></p></li>
+<p><img src="figure/external-storage-before-q.png" width=400></p></li>
 <li><p><strong>Android 10 (API 수준 29)</strong> 부터 Android에서 사용하는 외부 저장소는 공용공간이 사진 및 동영상, 음악, 다운로드 구조로 분리되어 관리되는 <strong><a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위 지정 저장소(Scoped Storage)</a></strong>를 기본으로 합니다.</p>
 
 <ul>
@@ -324,9 +324,10 @@ pre[class*="language-"] {
 <li>각 공용 공간은 MediaStore를 통해서만 읽고 쓸 수 있고, 해당 타입에 맞는 파일만 저장할 수 있습니다. (다운로드 공간은 타입 제한 없음)</li>
 <li>추가 권한 없이도 각 공용 공간에 파일을 생성하고, 자신이 생성한 파일을 읽을 수 있습니다.  (다운로드 공간 접근을 위한 권한은 필요 없음)</li>
 <li>다른 앱에서 생성한 파일에 접근할 때는 <strong>READ_EXTERNAL_STORAGE</strong> 또는 <strong>WRITE_EXTERNAL_STORAGE</strong> (<strong>Android 11(API 수준 30)</strong> 부터는 <strong>WRITE_EXTERNAL_STORAGE</strong> 권한은 더 이상 의미 없음)
-권한 필요. 
-<img src="figure/external-storage-from-q.png" alt=""></li>
-</ul></li>
+권한 필요. </li>
+</ul>
+
+<p><img src="figure/external-storage-from-q.png" width=400></p></li>
 </ul>
 
 <h3 id="toc_4">1.2 예제 프로젝트</h3>
@@ -476,7 +477,7 @@ private void saveToInternalStorage() {
 <ul>
 <li><p><strong>Android Studio</strong>의 좌측 하단에 있는 <strong>Device File Explorer</strong> 탭을 열어 해당 파일이 생성되었는 지 확인 가능합니다.</p>
 
-<p><img src="figure/device-file-explorer.png"></p></li>
+<p><img src="figure/device-file-explorer.png" width=400></p></li>
 </ul></li>
 </ul></li>
 <li><p>OpenFileInput 사용 예제</p>
@@ -640,7 +641,7 @@ private void saveToInternalStorage() {
 </ul></li>
 <li><p>포함시킬 파일은 <strong>res/raw</strong>에 복사해 둔다</p>
 
-<p><img src="figure/raw-resource.png"></p></li>
+<p><img src="figure/raw-resource.png" width=400></p></li>
 <li><p>리소스의 파일을 읽을 때는 <a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> 클래스의 <a href="https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)">openRawResource</a> 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.</p>
 
 <div><pre><code class="language-java">    InputStream openRawResource (int id)</code></pre></div>
@@ -801,7 +802,7 @@ private void requestStoragePermission() {
 <ul>
 <li><p>앱의 권한 설정은 <strong>설정&gt;애플리케이션&gt;</strong>[해당 앱]<strong>&gt;권한</strong>에서 언제든지 변경할 수 있음</p>
 
-<p><img width= 200 src="figure/permission-change.png"></p></li>
+<p><img width= 150 src="figure/permission-change.png"></p></li>
 </ul>
 
 <p><img src="images/permissionreq.png" width=200 style="top:150px; right:100px; position:absolute;"></p>

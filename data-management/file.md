@@ -41,7 +41,7 @@
 	- 앱이 외부저장소의 개별 앱 공간에 있는 파일을 액세스 하는 경우에는 별도의 권한이 필요하지 않습니다.
 	- 앱이 외부저장소의 공용 공간에 있는 파일을 엑세스하기 위해서 읽기 및 쓰기 액세스 권한(**READ\_EXTERNAL\_STORAGE** 및 **WRITE\_EXTERNAL\_STORAGE**)을 선언해야 했습니다.   
 
-	![](figure/external-storage-before-q.png)
+	<img src="figure/external-storage-before-q.png" width=400>
 
 -  **Android 10 (API 수준 29)** 부터 Android에서 사용하는 외부 저장소는 공용공간이 사진 및 동영상, 음악, 다운로드 구조로 분리되어 관리되는 **[범위 지정 저장소(Scoped Storage)](https://developer.android.com/training/data-storage?hl=ko#scoped-storage)**를 기본으로 합니다.
 	- 개별 앱 공간은 이전과 같이 추가 권한 없이 접근이 가능합니다.
@@ -49,7 +49,8 @@
 	- 추가 권한 없이도 각 공용 공간에 파일을 생성하고, 자신이 생성한 파일을 읽을 수 있습니다.  (다운로드 공간 접근을 위한 권한은 필요 없음)
 	- 다른 앱에서 생성한 파일에 접근할 때는 **READ\_EXTERNAL\_STORAGE** 또는 **WRITE\_EXTERNAL\_STORAGE** (**Android 11(API 수준 30)** 부터는 **WRITE\_EXTERNAL\_STORAGE** 권한은 더 이상 의미 없음)
 권한 필요. 
-	![](figure/external-storage-from-q.png)
+
+	<img src="figure/external-storage-from-q.png" width=400>
 
 ### 1.2 예제 프로젝트
 - **앱별 저장소 안드로이드 예제 프로젝트 Github 주소**
@@ -155,7 +156,7 @@
 	- "myfile.txt"는 디바이스의 **data/data/com.example.kwanwoo.filetest/files/** 에 위치
 		- **Android Studio**의 좌측 하단에 있는 **Device File Explorer** 탭을 열어 해당 파일이 생성되었는 지 확인 가능합니다.
 	
-			<img src="figure/device-file-explorer.png">
+			<img src="figure/device-file-explorer.png" width=400>
 	
 
 
@@ -279,7 +280,7 @@
     - ( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )
 * 포함시킬 파일은 **res/raw**에 복사해 둔다
 	
-	<img src="figure/raw-resource.png">
+	<img src="figure/raw-resource.png" width=400>
 
 * 리소스의 파일을 읽을 때는 [Resources](https://developer.android.com/reference/android/content/res/Resources.html) 클래스의 [openRawResource](https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)) 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.
 
@@ -410,7 +411,7 @@
 			
 - 앱의 권한 설정은 **설정>애플리케이션>**[해당 앱]**>권한**에서 언제든지 변경할 수 있음
 					
-	<img width= 200 src="figure/permission-change.png">
+	<img width= 150 src="figure/permission-change.png">
 	
 	
 
