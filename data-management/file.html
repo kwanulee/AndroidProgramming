@@ -257,63 +257,167 @@ pre[class*="language-"] {
 
 <ul>
 <li>Android 기기의 파일에 자료를 저장하고 읽는 방법을 이해한다.</li>
+<li>앱별 저장소에 파일을 저장하고 읽는 방법을 이해한다.</li>
+<li>공유 저장소에 미디어 파일을 저장하고 읽는 방법을 이해한다.</li>
 </ul>
 
 <h2 id="toc_2">1. 개요</h2>
 
 <ul>
 <li>Linux 파일 시스템과 java.io의 입출력 스트림에 대한 이해 필수입니다.</li>
-<li><p>모든 Android 기기에는 <q><strong>내부</strong></q> 및 <q><strong>외부</strong></q> 저장소의 두 가지 파일 저장소 영역이 있습니다.</p>
-
-<table>
-<thead>
-<tr>
-<th>내부 저장소</th>
-<th>외부 저장소</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>내장 메모리</td>
-<td>이동식 저장장치 (SD 카드)</td>
-</tr>
-<tr>
-<td>항상 사용 가능</td>
-<td>외부 저장소의 마운트 여부에 따라 사용 가능</td>
-</tr>
-<tr>
-<td>기본적으로 자신의 앱에서만 액세스 할 수 있음</td>
-<td>모든 사람이 읽을 수 있음</td>
-</tr>
-<tr>
-<td>사용자가 앱을 삭제하면 시스템이 내장 저장소에서 앱의 모든 파일을 제거함</td>
-<td>사용자가 앱을 삭제하면 getExternalFilesDir()의 디렉터리에 저장한 앱 파일에 한해서 시스템이 제거함</td>
-</tr>
-<tr>
-<td>사용자와 다른 앱이 앱의 파일에 직접 액세스하는 것을 원치 않을 때 적합</td>
-<td>다음 경우에 적합 <ul> <li>액세스 제한이 필요치 않은 파일 <li>다른 앱과 공유하기를 원하는 파일 <li>사용자가 컴퓨터에서 액세스 할 수 있도록 허용하는 파일 </ul></td>
-</tr>
-</tbody>
-</table></li>
-<li><p><strong>FileTest 안드로이드 프로젝트 Github 주소</strong></p>
+<li><p>모든 Android 기기에는 용도에 따라 <q><strong>앱별 저장소</strong></q> 와 <q><strong>공유 저장소</strong></q>의 두 가지 영역으로 구분되고, 실제 저장소 위치는 <strong>내부 저장소</strong>와 <strong>외부 저장소</strong>로 구분됩니다.</p>
 
 <ul>
-<li><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest</a> 
-## 2. 내부 저장소의 파일 입출력
-안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.</li>
+<li><p><strong>앱별 저장소</strong></p>
+
+<ul>
+<li>앱 전용으로 사용되는 파일을 저장하는 저장소</li>
+<li>항상 사용가능하고 앱 삭제시 저장소 내의 파일이 같이 삭제됨 </li>
+<li>저장 위치: 내부 혹은 외부</li>
+<li>액세스 방법
+
+<ul>
+<li>내부 저장소 파일:  <strong>getFilesDir()</strong> 또는 <strong>getCacheDir()</strong>로 액세스</li>
+<li>외부 저장소 파일: <strong>getExternalFilesDir()</strong> 또는 <strong>getExternalCacheDir()</strong>로 액세스</li>
+</ul></li>
+</ul></li>
+<li><p><strong>공유 저장소</strong></p>
+
+<ul>
+<li>공유 가능한 미디어 (이미지, 오디오 파일, 동영상), 문서 및 기타 파일을 저장하는 저장소</li>
+<li>외부 저장소의 마운트 여부에 따라 사용 가능하고, 앱 삭제 후에도 관련 파일은 삭제되지 않음</li>
+<li> 저장 위치: 외부</li>
+<li>액세스 방법
+
+<ul>
+<li>미디어 파일: <strong>MediaStore API</strong>로 액세스</li>
+<li>문서 및 기타 파일: <strong>저장소 액세스 프레임워크</strong></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
+
+<!--
+        - 접근 권한 (**미디어 파일**에 만 해당됨, 문서 및 기타 파일은 권한 필요없음)
+            - **Android 11 (API 수준 30)  이상**에서 *다른 앱의 미디어 파일에 액세스* 할 때 **READ\_EXTERNAL\_STORAGE** 권한 필요
+            - **Android 10 (API 수준 29)**에서 *다른 앱의 파일에 액세스* 할 때 **READ\_EXTERNAL\_STORAGE** 또는 **WRITE\_EXTERNAL\_STORAGE** 권한 필요
+            - **Android 9 (API 수준 28) 이하**에서 모든 파일에 액세스할 때,  **READ\_EXTERNAL\_STORAGE** 또는 **WRITE\_EXTERNAL\_STORAGE** 권한이 필요 
+-->
+
+<hr>
+
+<h3 id="toc_3">1.1 외부 저장소 사용 권한 및 액세스 권한</h3>
+
+<ul>
+<li><p><strong>Android 10 (API 수준 29)</strong> 이전 버전의 Android에서 사용하는 외부 저장소는 개별 앱 공간과 공용 공간으로 크게 나뉘어져 있었습니다.</p>
+
+<ul>
+<li>앱이 외부저장소의 개별 앱 공간에 있는 파일을 액세스 하는 경우에는 별도의 권한이 필요하지 않습니다.</li>
+<li>앱이 외부저장소의 공용 공간에 있는 파일을 엑세스하기 위해서 읽기 및 쓰기 액세스 권한(<strong>READ_EXTERNAL_STORAGE</strong> 및 <strong>WRITE_EXTERNAL_STORAGE</strong>)을 선언해야 했습니다.<br></li>
+</ul>
+
+<p><img src="figure/external-storage-before-q.png" alt=""></p></li>
+<li><p><strong>Android 10 (API 수준 29)</strong> 부터 Android에서 사용하는 외부 저장소는 공용공간이 사진 및 동영상, 음악, 다운로드 구조로 분리되어 관리되는 <strong><a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위 지정 저장소(Scoped Storage)</a></strong>를 기본으로 합니다.</p>
+
+<ul>
+<li>개별 앱 공간은 이전과 같이 추가 권한 없이 접근이 가능합니다.</li>
+<li>각 공용 공간은 MediaStore를 통해서만 읽고 쓸 수 있고, 해당 타입에 맞는 파일만 저장할 수 있습니다. (다운로드 공간은 타입 제한 없음)</li>
+<li>추가 권한 없이도 각 공용 공간에 파일을 생성하고, 자신이 생성한 파일을 읽을 수 있습니다.  (다운로드 공간 접근을 위한 권한은 필요 없음)</li>
+<li>다른 앱에서 생성한 파일에 접근할 때는 <strong>READ_EXTERNAL_STORAGE</strong> 또는 <strong>WRITE_EXTERNAL_STORAGE</strong> (<strong>Android 11(API 수준 30)</strong> 부터는 <strong>WRITE_EXTERNAL_STORAGE</strong> 권한은 더 이상 의미 없음)
+권한 필요. 
+<img src="figure/external-storage-from-q.png" alt=""></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_4">1.2 예제 프로젝트</h3>
+
+<ul>
+<li><strong>앱별 저장소 안드로이드 예제 프로젝트 Github 주소</strong>
+
+<ul>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/FileTest</a> </li>
+</ul></li>
+<li><strong>공유 저장소 안드로이드 예제 프로젝트 Github 주소</strong>
+
+<ul>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MediaStoreTest">https://github.com/kwanulee/AndroidProgramming/tree/master/examples/MediaStoreTest</a> </li>
+</ul></li>
+</ul>
+
+<h2 id="toc_5">2. 앱별 내부 저장소의 파일 입출력</h2>
+
+<p>안드로이드 시스템의 내부 저장소 내에 앱별로 파일을 구성할 수 있는 두 가지 디렉터리가 제공됩니다.</p>
+
+<ul>
+<li>앱의 <strong>영구</strong> 파일 디렉토리
+
+<ul>
+<li>이 디렉토리의 파일은 사용자가 앱을 제거하거나 해당 파일을 직접 삭제하기 전까지는 유지됩니다.</li>
+</ul></li>
+<li>앱의 <strong>캐시</strong>된 파일 디렉토리
+
+<ul>
+<li>민감한 데이터를 일시적으로만 저장해야 하는 경우 내부 저장소 내 앱의 지정된 <strong>캐시 디렉터리</strong>를 사용하여 데이터를 저장해야 합니다. 모든 앱별 저장소의 경우와 마찬가지로 이 디렉터리에 저장된 파일은 사용자가 앱을 제거할 때 삭제되지만 이 디렉터리의 파일은 사용 가능한 캐시공간이 부족한 경우에 더 빨리 삭제될 수 있습니다. </li>
+</ul></li>
+</ul>
+
+<h3 id="toc_6">2.1 내부저장소의 파일 액세스</h3>
+
+<h4 id="toc_7">2.1.1 <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 객체 및 <a href="https://developer.android.com/reference/java/io/File?hl=ko">File</a> 객체를 사용하여 파일  액세스</h4>
+
+<ul>
+<li>내부 저장소 파일 디렉토리의 절대 경로 얻기
+
+<ul>
+<li><strong>영구 파일 디렉토리</strong>:  <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 객체의 <a href="https://developer.android.com/reference/android/content/Context#getFilesDir()">getFilesDir()</a> 메소드
+
+<ul>
+<li> 영구 파일의 위치는 <strong>/data/data/패키지명/files</strong> 디렉토리</li>
+</ul></li>
+<li><strong>캐시 파일 디렉토리</strong>:  <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 객체의 <a href="https://developer.android.com/reference/android/content/Context#getCachesDir()">getCacheDir()</a> 메소드
+
+<ul>
+<li>캐시 파일의 위치는 <strong>/data/data/패키지명/caches</strong> 디렉토리</li>
+</ul></li>
+</ul></li>
+<li><p>영구 파일 목록 보기</p>
+
+<ul>
+<li><p><a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 객체의 <a href="https://developer.android.com/reference/android/content/Context#fileList()">fileList()</a> 메소드</p>
+
+<div><pre><code class="language-java">Array&lt;String&gt; files = context.fileList();</code></pre></div></li>
+</ul></li>
+<li><p>영구 파일에 접근을 위한  <a href="https://developer.android.com/reference/java/io/File?hl=ko">File</a> 객체 생성 예</p>
+
+<div><pre><code class="language-java">File file = new File(context.getFilesDir(), filename);</code></pre></div></li>
+<li><p>캐시 파일에 접근을 위한  <a href="https://developer.android.com/reference/java/io/File?hl=ko">File</a> 객체 생성 예</p>
+
+<div><pre><code class="language-java">File file = new File(context.getCachesDir(), filename);</code></pre></div></li>
+<li><p>파일 삭제</p>
+
+<ul>
+<li><p>파일을 표시하는 File 객체의 delete() 메서드</p>
+
+<div><pre><code class="language-java">cacheFile.delete();</code></pre></div></li>
+<li><p>앱 컨텍스트의 deleteFile() 메서드.: 파일 이름을 전달합니다.</p>
+
+<div><pre><code class="language-java">context.deleteFile(cacheFileName);</code></pre></div></li>
+</ul></li>
+</ul>
+
+<h4 id="toc_8">2.1.2 스트림을 사용하여 영구 파일 액세스</h4>
+
+<ul>
+<li><p>안드로이드에서 자바의 모든 입출력 기능을 다 사용할 수 는 없고, 보안상의 제약으로 인해 <a href="https://developer.android.com/reference/android/content/Context.html">Context</a> 클래스에서 보안이 적용된 파일 관리 메서드를 별도로 제공하며, 이를 이용하여 파일을 Open한다.</p>
 
 <div><pre><code class="language-java">FileOutputStream openFileOutput (String name, int mode)
 FileInputStream openFileInput (String name)</code></pre></div>
 
 <ul>
-<li><p>name</p>
+<li>name
 
 <ul>
 <li>파일의 이름으로 경로를 표시하는 ‘/’ 문자가 들어가면 에러</li>
-<li>파일의 위치는 <strong>/data/data/패키지명/files</strong> 디렉토리로 지정</li>
 </ul></li>
 <li><p>mode</p>
 
@@ -336,16 +440,18 @@ FileInputStream openFileInput (String name)</code></pre></div>
 </tr>
 </tbody>
 </table></li>
+</ul></li>
 </ul>
 
 <hr>
 
-<h3 id="toc_3">2.1 OpenFileOuput</h3>
+<ul>
+<li><p>OpenFileOuput 사용 예제</p>
 
 <div><pre><code class="language-java">package com.example.kwanwoo.filetest;
 ... 생략 ...
 
-    private void saveToInternalStorage() {
+private void saveToInternalStorage() {
         String data = input.getText().toString();
 
         try {
@@ -360,9 +466,9 @@ FileInputStream openFileInput (String name)</code></pre></div>
         } catch (Exception e) {
             result.setText(&quot;Exception: internal file writing&quot;);
         }
-    }</code></pre></div>
+}</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L121-L136</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L92-L116">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L92-L116</a></p>
 
 <ul>
 <li><p><q>myfile.txt</q>는 디바이스의 <strong>data/data/com.example.kwanwoo.filetest/files/</strong> 에 위치</p>
@@ -372,110 +478,75 @@ FileInputStream openFileInput (String name)</code></pre></div>
 
 <p><img src="figure/device-file-explorer.png"></p></li>
 </ul></li>
-</ul>
+</ul></li>
+<li><p>OpenFileInput 사용 예제</p>
 
-<h3 id="toc_4">2.2 OpenFileInput</h3>
+<div><pre><code class="language-java">private void loadFromIntenalStorage() {
+    try {
+        FileInputStream fis = openFileInput(&quot;myfile.txt&quot;);//파일명
+        BufferedReader buffer = new BufferedReader
+                (new InputStreamReader(fis));
+        String str = buffer.readLine(); // 파일에서 한줄을 읽어옴
 
-<div><pre><code class="language-java">    private void loadFromIntenalStorage() {
-        try {
-            FileInputStream fis = openFileInput(&quot;myfile.txt&quot;);//파일명
-            BufferedReader buffer = new BufferedReader
-                    (new InputStreamReader(fis));
-            String str = buffer.readLine(); // 파일에서 한줄을 읽어옴
-
-            // 파일에서 읽은 데이터를 저장하기 위해서 만든 변수
-            StringBuffer data = new StringBuffer();
-            while (str != null) {
-                data.append(str + &quot;\n&quot;);
-                str = buffer.readLine();
-            }
-            buffer.close();
-            result.setText(data);
-        } catch (FileNotFoundException e) {
-            result.setText(&quot;File Not Found&quot;);
-        } catch (Exception e) {
-            result.setText(&quot;Exception: internal file reading&quot;);
+        // 파일에서 읽은 데이터를 저장하기 위해서 만든 변수
+        StringBuffer data = new StringBuffer();
+        while (str != null) {
+            data.append(str + &quot;\n&quot;);
+            str = buffer.readLine();
         }
-    }</code></pre></div>
+        buffer.close();
+        result.setText(data);
+    } catch (FileNotFoundException e) {
+        result.setText(&quot;File Not Found&quot;);
+    } catch (Exception e) {
+        result.setText(&quot;Exception: internal file reading&quot;);
+    }
+}</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L138-L158</a></p>
-
-<h2 id="toc_5">3. res/raw 폴더 파일 이용하기</h2>
-
-<ul>
-<li>대용량의 읽기 전용 데이터 파일은 리소스에 포함시켜 두는 것이 좋다.
-
-<ul>
-<li>( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )</li>
-</ul></li>
-<li><p>포함시킬 파일은 <strong>res/raw</strong>에 복사해 둔다</p>
-
-<p><img src="figure/raw-resource.png"></p></li>
-<li><p>리소스의 파일을 읽을 때는 <a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> 클래스의 <a href="https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)">openRawResource</a> 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.</p>
-
-<div><pre><code class="language-java">    InputStream openRawResource (int id)</code></pre></div>
-
-<ul>
-<li>모든 file resource는 접미사(확장자)를 제외하고 유일한 이름을 가져야 한다.</li>
-<li>res/raw에 file1.txt 와 file1.dat가 동시에 존재하면 안됨</li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L118-L144">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L118-L144</a></p></li>
 </ul>
 
-<div><pre><code class="language-java">    private void loadFromRawResource() {
-        try {
-            InputStream is = getResources().openRawResource(R.raw.description);
-            BufferedReader buffer = new BufferedReader
-                    (new InputStreamReader(is));
+<h2 id="toc_9">3. 앱별 외부 저장소 사용하기</h2>
 
-            String str = buffer.readLine(); // 파일에서 한줄을 읽어옴
+<ul>
+<li>앱별 파일을 저장하는 데 내부 저장소 공간이 충분하지 않으면 대신 외부 저장소를 사용할 수 있슴</li>
+<li><p>안드로이드 시스템의 외부 저장소 내에 앱별로 파일을 구성할 수 있는 두 가지 디렉터리가 제공됩니다.</p>
 
-            // 파일에서 읽은 데이터를 저장하기 위해서 만든 변수
-            StringBuffer data = new StringBuffer();
-
-            while (str != null) {
-                data.append(str + &quot;\n&quot;);
-                str = buffer.readLine();
-            }
-            buffer.close();
-            result.setText(data);
-        } catch (Exception e) {
-            result.setText(&quot;Exception: raw resource file reading&quot;);
-        }
-    }</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180">https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L160-L180</a></p></li>
+<ul>
+<li>앱의 영구 파일 디렉토리</li>
+<li>앱의 캐시된 파일 디렉토리</li>
+</ul></li>
+<li><p><strong>Android 4.4. (API 수준 19) 이상</strong>에서는 앱별 외부 저장소를 접근하기 위한 권한은 필요하지 않음</p></li>
+<li><p>앱별 외부 저장소에 저장된 파일은 앱을 제거할 때 삭제 됨</p></li>
 </ul>
 
-<h2 id="toc_6">4. 외부 저장소 사용하기</h2>
-
-<ol>
-<li>외부 저장소 접근 권한 설정</li>
-<li>외부 저장소 상태 확인</li>
-<li>앱 실행 시 접근 권한 확인 및 요청</li>
-<li>외부 저장소 사용
+<h3 id="toc_10">3.1 외부 저장소 사용 권한</h3>
 
 <ul>
-<li>다른 앱과 공유되는 파일 입출력</li>
-<li>앱 전용 파일 입출력</li>
+<li>자신의 앱에서 앱별 외부 저장소를 접근하는 경우
+
+<ul>
+<li><strong>Android 4.4 (API 수준 19) 이상</strong>을 실행하는 기기에서 권한은 필요하지 않음</li>
 </ul></li>
-</ol>
-
-<h3 id="toc_7">4.1 외부 저장소의 접근 권한 설정</h3>
+<li>다른 앱에서 앱별 외부 저장소의 접근하는 경우
 
 <ul>
-<li>외부 저장소의 파일을 읽거나 쓰러면 Manifest 파일에서 <strong>READ_EXTERNAL_STORAGE</strong> 또는 <strong>WRITE_EXTERNAL_STORAGE</strong> 권한을 요청해야 합니다.
+<li><strong>Android 9 (API 수준 28) 이하</strong>를 실행하는 기기에서 적절한 권한이 필요함</li>
+<li><strong>Android 10 (API 수준 29) 이상</strong>을 타겟팅하는 앱의 경우
 
 <ul>
-<li> 파일을 읽고 쓰려면 읽기 액세스 권한도 암시적으로 요청하는 <strong>WRITE_EXTERNAL_STORAGE</strong> 권한만 요청하면 됩니다. </li>
+<li><a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위 지정 저장소</a>를 사용 설정하면 다른 앱에 속한 앱별 디렉토리에 접근 불가</li>
+<li> <a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위 지정 저장소</a>를 사용 설정을 해제하면 적절한 권한이 있는 경우에 다른 앱에 속한 앱별 디렉토리에 접근 가능<br></li>
+</ul></li>
+<li><strong>Android 11 (API 수준 30) 이상</strong>을 타겟팅하는 앱의 경우
+
+<ul>
+<li><a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위 지정 저장소</a>만 사용 가능하므로, 다른 앱에 속한 앱별 디렉토리에 접근 불가</li>
+</ul></li>
 </ul></li>
 </ul>
 
-<div><pre><code class="language-markup">&lt;manifest ...&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
-&lt;/manifest&gt;</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/AndroidManifest.xml#L4</a></p>
-
-<h3 id="toc_8">4.2 외부 저장소의 상태 확인</h3>
+<h3 id="toc_11">3.2 외부 저장소의 상태 확인</h3>
 
 <ul>
 <li><p>외부 저장소를 사용하기 전에 <em>사용 가능성</em> 검사</p>
@@ -502,93 +573,22 @@ FileInputStream openFileInput (String name)</code></pre></div>
             return true;
         }
         return false;
-    }</code></pre></div></li>
-</ul>
-
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L182-L191</a></p>
-
-<h3 id="toc_9">4.3 앱 실행 시 접근 권한 확인 및 요청</h3>
-
-<ul>
-<li><p><strong>Android 6.0 (API level 23)</strong> 이상부터는앱 실행 중에 사용하려는 권한(permission)을 반드시 요청 (참고자료: <a href="https://developer.android.com/training/permissions/requesting.html">런타임에 권한 요청</a>)</p>
-
-<ol>
-<li><p>여러분의 앱에 위험 권한이 필요한 경우, 여러분은 해당 권한이 요구되는 작업을 실행할 때마다 이 <strong>권한의 보유 여부를 확인</strong>해야 합니다.</p>
-
-<ul>
-<li>권한 보유 여부를 확인하려면 <a href="https://developer.android.com/reference/android/support/v4/content/ContextCompat.html#checkSelfPermission(android.content.Context,%20java.lang.String)">ContextCompat.checkSelfPermission()</a> 메서드를 호출합니다. </li>
-</ul></li>
-<li><p>여러분의 앱에 필요한 권한이 아직 없는 경우, 앱은 <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.html#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int)">ActivityCompat.requestPermissions()</a> 메서드를 호출하여 <strong>적절한 권한을 요청</strong>해야 합니다.  </p>
-
-<ul>
-<li><p>static void ActivityCompat.<strong>requestPermissions</strong> (Activity <em>activity</em>, 
-    String[] <em>permissions</em>, 
-    int <em>requestCode</em>)</p>
-
-<ul>
-<li><em>activity</em>: 접근권한을 필요로하는 앱의 액티비티</li>
-<li><em>permissions</em>: 요청할 권한의 String 배열. null이어서는 안됨</li>
-<li><p><em>requestCode</em>: 사용자 정의 int 상수로서, <strong>onRequestPermissionsResult(int <em>requestCode</em>, String[] permissions, int[] grantResults)</strong>에 전달될 결과와 매칭하기 위해서 사용됨 .  </p>
-
-<div><pre><code class="language-java">// 사용자 정의 상수 선언
-final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
-... 생략 ...
-
-    String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-    if (ContextCompat.checkSelfPermission(MainActivity.this,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) { //권한이 없는 경우
-        ActivityCompat.requestPermissions(
-                MainActivity.this,
-                PERMISSIONS_STORAGE,
-                REQUEST_SAVETO_EXTERNAL_STORAGE
-        );
-    } else {  // 권한이 이미 허가된 경우
-        saveToExtenalStorage();
-   }</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L78-L93">https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L78-L93</a></p></li>
-</ul></li>
-</ul>
-
-<ul>
-<li><p>ActivityCompat.<strong>requestPermissions()</strong> 메서드가 호출되면 다음과 같은 대화상자가 나타나서, 앱 사용자는 권한의 승인/거부를 앱 실행 중에 결정할 수 있습니다.</p>
-
-<p><img width= 200 src="figure/permission-accept.png"></p></li>
-</ul></li>
-<li><p>사용자가 응답하면, 시스템은 앱의 <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback.html#onRequestPermissionsResult(int,%20java.lang.String%5B%5D,%20int%5B%5D)">onRequestPermissionsResult()</a> 메서드를 호출하여 사용자 응답에 전달합니다. </p>
-
-<ul>
-<li>권한이 부여되었는지 여부를 확인하려면 여러분의 앱이 이 메서드를 재정의해야 합니다. </li>
-<li>이 콜백에는 여러분이 <strong>requestPermissions()</strong>에 전달한 것과 동일한 요청 코드가 전달됩니다. 예를 들어, 앱이 <strong>REQUEST_SAVETO_EXTERNAL_STORAGE</strong> 요청 코드가 <strong>requestPermissions()</strong>를 통해 요청된 경우, 다음과 같은 콜백 메서드를 가질 수 있습니다.</li>
-</ul>
-
-<div><pre><code class="language-java">public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-    if (grantResults.length &gt; 0
-            &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) { // permission was granted
-        switch (requestCode) {
-            case REQUEST_SAVETO_EXTERNAL_STORAGE:
-                saveToExtenalStorage();
-                break;
-             ...
-        }
-    } else { // permission was denied
-        Toast.makeText(getApplicationContext(),&quot;접근 권한이 필요합니다&quot;,Toast.LENGTH_SHORT).show();
     }
-}
-</code></pre></div></li>
-</ol></li>
-<li><p>앱의 권한 설정은 <strong>설정&gt;애플리케이션&gt;</strong>[해당 앱]<strong>&gt;권한</strong>에서 언제든지 변경할 수 있음</p>
 
-<p><img width= 200 src="figure/permission-change.png"></p></li>
+     public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            result.setText(&quot;외부메모리 읽기만 가능&quot;);
+            return true;
+        }
+        return false;
+     }</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L169-L188">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L169-L188</a></p></li>
 </ul>
 
-<p><img src="images/permissionreq.png" width=200 style="top:150px; right:100px; position:absolute;"></p>
-
-<h3 id="toc_10">4.4 외부 저장소 사용</h3>
+<h3 id="toc_12">3.3 외부 저장소 사용</h3>
 
 <ul>
 <li><p>외부 저장소의 앱 전용(private) 저장소 디렉토리 접근하기</p>
@@ -630,56 +630,643 @@ final int REQUEST_SAVETO_EXTERNAL_STORAGE = 1;
 </ul></li>
 </ul>
 
-<h4 id="toc_11">4.4.1 다른 앱과 공유되는 파일 입출력 (API 28이하에서만 동작)</h4>
+<h2 id="toc_13">4. res/raw 폴더 파일 이용하기</h2>
 
 <ul>
-<li><p>공유 디렉토리 (Music, Pictures, Ringtones) 접근하기</p>
+<li>대용량의 읽기 전용 데이터 파일은 리소스에 포함시켜 두는 것이 좋다.
 
 <ul>
-<li><p><a href="https://developer.android.com/reference/android/os/Environment.html#getExternalStoragePublicDirectory(java.lang.String)">static File Environment.getExternalStoragePublicDirectory(String type)</a></p>
-
-<ul>
-<li>Type
-
-<ul>
-<li>DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, or DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, DIRECTORY_DOCUMENTS 등</li>
+<li>( ex: 게임의 지도 맵 데이터, 우편 번호부, 영한사전 데이터 등 )</li>
 </ul></li>
-<li>반환값: 외부저장소의 루트 디렉토리의 지정된 타입의 서브 디렉토리 (예,sdcard/Download)</li>
-<li><p>[주의] <strong>This method was deprecated in API level 29.</strong></p>
+<li><p>포함시킬 파일은 <strong>res/raw</strong>에 복사해 둔다</p>
+
+<p><img src="figure/raw-resource.png"></p></li>
+<li><p>리소스의 파일을 읽을 때는 <a href="https://developer.android.com/reference/android/content/res/Resources.html">Resources</a> 클래스의 <a href="https://developer.android.com/reference/android/content/res/Resources.html#openRawResource(int)">openRawResource</a> 메서드를 사용하며, id로는 확장자를 뺀 파일명을 부여한다.</p>
+
+<div><pre><code class="language-java">    InputStream openRawResource (int id)</code></pre></div>
 
 <ul>
-<li><p>이 메소드를 이용하기 위해서는 두가지 방법이 있습니다.</p>
+<li>모든 file resource는 접미사(확장자)를 제외하고 유일한 이름을 가져야 한다.</li>
+<li>res/raw에 file1.txt 와 file1.dat가 동시에 존재하면 안됨</li>
+</ul>
 
-<ol>
-<li><strong>build.gradle (Module)</strong> 파일의 <strong>targetSdkVersion</strong> 값을 28로 설정</li>
-<li><p>Manifest 파일에 다음과 같이 application 태그 속성을 추가하면 된다.</p>
+<div><pre><code class="language-java">    private void loadFromRawResource() {
+        try {
+            InputStream is = getResources().openRawResource(R.raw.description);
+            BufferedReader buffer = new BufferedReader
+                    (new InputStreamReader(is));
 
-<div><pre><code class="language-markup">&lt;manifest ... &gt;
-    &lt;!-- This attribute is &quot;false&quot; by default on apps targeting Android Q. --&gt;
-    &lt;application android:requestLegacyExternalStorage=&quot;true&quot; ... &gt;
-     ...
-    &lt;/application&gt;
-&lt;/manifest&gt;  </code></pre></div></li>
-</ol></li>
+            String str = buffer.readLine(); // 파일에서 한줄을 읽어옴
+
+            // 파일에서 읽은 데이터를 저장하기 위해서 만든 변수
+            StringBuffer data = new StringBuffer();
+
+            while (str != null) {
+                data.append(str + &quot;\n&quot;);
+                str = buffer.readLine();
+            }
+            buffer.close();
+            result.setText(data);
+        } catch (Exception e) {
+            result.setText(&quot;Exception: raw resource file reading&quot;);
+        }
+    }</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L146-L166">https://github.com/kwanulee/Android/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L146-L166</a></p></li>
+</ul>
+
+<h2 id="toc_14">5. 공유 저장소의 미디어 파일에 액세스</h2>
+
+<ul>
+<li>다른 앱에서 액세스할 수 있고, 사용자가 앱을 제거하더라도 유지되어야 하는 사용자 데이터는 공유 저장소에 보관되어야 합니다.
+
+<ul>
+<li>참고: 앱 내에서만 사용되는 미디어 파일은 외부 저장소 내 앱별 디렉토리에 저장하는 것이 좋음. </li>
 </ul></li>
+<li>Android는 공유 가능한 다음 데이터 유형을 저장하고 이 데이터에 액세스하는 API를 제공합니다.
+
+<ul>
+<li><strong>미디어 콘텐츠</strong>: 앱은 플랫폼의 <strong>MediaStore API</strong>를 사용하여 사진, 오디오, 비디오 콘텐츠에 액세스할 수 있습니다.</li>
+<li><strong>문서 및 기타 파일</strong>:  앱은 플랫폼의 <strong>저장소 액세스 프레임워크</strong>를 사용하여 PDF 문서와 EPUB 형식을 사용하는 도서 등의 파일에 액세스할 수 있습니다.
+
+<ul>
+<li>문서 및 기타 파일 접근에 대한 자세한 내용은 <a href="https://developer.android.com/training/data-storage/shared/documents-files">https://developer.android.com/training/data-storage/shared/documents-files</a> 참조 </li>
 </ul></li>
-<li><p>예제 코드       </p>
-
-<div><pre><code class="language-java">    // 공유 디렉토리 (sdcard/Download) 사용할 경우
-    File path = Environment.getExternalStoragePublicDirectory
-                           (Environment.DIRECTORY_DOWNLOADS);
-    File f = new File(path, &quot;external.txt&quot;);      // 경로, 파일명
-    FileWriter write = new FileWriter(f, true);   // 지정된 파일에 문자 스트림 쓰기
-
-    PrintWriter out = new PrintWriter(write);     // formatted 출력 스트림
-    out.println(data);
-    out.close();</code></pre></div>
-
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L231-L241">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/FileTest/app/src/main/java/com/example/kwanwoo/filetest/MainActivity.java#L228-L241</a></p></li>
 </ul></li>
 </ul>
 
-<hr>
+<h3 id="toc_15">5.1 저장소 권한</h3>
+
+<ul>
+<li><p><strong>Android 9(API 수준 28) 이하</strong>를 실행하는 기기에서는 (공유) 외부 저장소를 사용하기 위해서 관련 권한을 요청해야 합니다. 다음과 같이 앱 매니페스트 파일의 권한 선언에 android:maxSdkVersion 속성을 추가하여 이 조건을 적용할 수 있습니다.</p>
+
+<div><pre><code class="language-markup">&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;
+             android:maxSdkVersion=&quot;28&quot; /&gt;</code></pre></div></li>
+<li><p><strong>Android 10(API 수준 29) 이상</strong>를 실행하는 기기에서 <a href="https://developer.android.com/training/data-storage?hl=ko#scoped-storage">범위지정 저장소</a>를 사용하는 경우에는, 불필요하게 권한을 요청할 필요가 없습니다.</p>
+
+<ul>
+<li>자신의 앱이 미디어 컬렉션에 추가 한 파일을 접근할 때는 특별한 권한이 필요없음</li>
+<li>다른 앱이 미디어 컬렉션에 추가한 파일을 접근할 때는 <strong>READ_EXTERNAL_STORAGE</strong> 권한을 요청해야 함<br></li>
+</ul></li>
+<li><p>권한 요청 절차</p>
+
+<ol>
+<li>앱의 매니페스트 파일에서 <strong>READ_EXTERNAL_STORAGE</strong> 권한 선언.</li>
+<li>앱 실행 시 접근 권한 확인 및 요청</li>
+</ol></li>
+</ul>
+
+<h4 id="toc_16">5.1.1 권한 선언</h4>
+
+<ul>
+<li><p>다른 앱이 미디어 컬렉션에 추가한 파일을 접근할려면 Manifest 파일에서 <strong>READ_EXTERNAL_STORAGE</strong> 권한을 선언</p>
+
+<div><pre><code class="language-markup">&lt;manifest ...&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot;/&gt;
+&lt;/manifest&gt;</code></pre></div>
+
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MediaStoreTest/app/src/main/AndroidManifest.xml#L4">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MediaStoreTest/app/src/main/AndroidManifest.xml#L4</a></p></li>
+</ul>
+
+<h4 id="toc_17">5.1.2 앱 실행 시 접근 권한 확인 및 요청</h4>
+
+<ol>
+<li><p><strong>권한의 보유 여부를 확인</strong>해야 합니다.</p>
+
+<ul>
+<li>권한 보유 여부를 확인하려면 <a href="https://developer.android.com/reference/android/support/v4/content/ContextCompat.html#checkSelfPermission(android.content.Context,%20java.lang.String)">ContextCompat.checkSelfPermission()</a> 메서드를 호출합니다. </li>
+</ul>
+
+<div><pre><code class="language-java">private boolean haveStoragePermission() {
+    return ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+        == PackageManager.PERMISSION_GRANTED;
+}</code></pre></div></li>
+<li><p>앱에 필요한 권한이 아직 없는 경우, <strong>필요한 권한을 요청</strong>합니다.</p>
+
+<ul>
+<li><p>앱은 <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.html#requestPermissions(android.app.Activity,%20java.lang.String%5B%5D,%20int)">ActivityCompat.requestPermissions()</a> 메서드를 호출하여 <strong>적절한 권한을 요청</strong>해야 합니다.     </p>
+
+<ul>
+<li>static void ActivityCompat.<strong>requestPermissions</strong> (Activity <em>activity</em>, 
+    String[] <em>permissions</em>, 
+    int <em>requestCode</em>)
+
+<ul>
+<li><em>activity</em>: 접근권한을 필요로하는 앱의 액티비티</li>
+<li><em>permissions</em>: 요청할 권한의 String 배열. null이어서는 안됨</li>
+<li><em>requestCode</em>: 사용자 정의 int 상수로서, <strong>onRequestPermissionsResult(int <em>requestCode</em>, String[] permissions, int[] grantResults)</strong>에 전달될 결과와 매칭하기 위해서 사용됨 .</li>
+</ul></li>
+</ul>
+
+<div><pre><code class="language-java">private final int READ_EXTERNAL_STORAGE_REQUEST = 1;
+
+private void requestStoragePermission() {
+    String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+    };
+
+    ActivityCompat.requestPermissions(
+                MainActivity.this,
+                PERMISSIONS_STORAGE,
+                READ_EXTERNAL_STORAGE_REQUEST
+        );
+}</code></pre></div></li>
+<li><p>ActivityCompat.requestPermissions() 메서드가 호출되면 다음과 같은 대화상자가 나타나서, 앱 사용자는 권한의 승인/거부를 앱 실행 중에 결정할 수 있습니다.</p>
+
+<p><img width= 200 src="figure/permission-accept.png"></p></li>
+</ul></li>
+<li><p>사용자가 응답하면, 시스템은 앱의 <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.OnRequestPermissionsResultCallback.html#onRequestPermissionsResult(int,%20java.lang.String%5B%5D,%20int%5B%5D)">onRequestPermissionsResult()</a> 메서드를 호출하여 사용자 응답에 전달합니다. </p>
+
+<ul>
+<li>권한이 부여되었는지 여부를 확인하려면 여러분의 앱이 이 메서드를 재정의해야 합니다. </li>
+<li><p>이 콜백에는 여러분이 <strong>requestPermissions()</strong>에 전달한 것과 동일한 요청 코드가 전달됩니다. 예를 들어, 앱이 <strong>READ_EXTERNAL_STORAGE_REQUEST</strong> 요청 코드가 <strong>requestPermissions()</strong>를 통해 요청된 경우, 다음과 같은 콜백 메서드를 가질 수 있습니다.</p>
+
+<div><pre><code class="language-java">public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    if (grantResults.length &gt; 0
+            &amp;&amp; grantResults[0] == PackageManager.PERMISSION_GRANTED) { // permission was granted
+        switch (requestCode) {
+            case READ_EXTERNAL_STORAGE_REQUEST:
+                getImagesFromMediaStore();
+                break;
+        }
+    } else { // permission was denied
+        Toast.makeText(getApplicationContext(),&quot;접근 권한이 필요합니다&quot;,Toast.LENGTH_SHORT).show();
+    }
+}
+</code></pre></div></li>
+</ul></li>
+</ol>
+
+<ul>
+<li><p>앱의 권한 설정은 <strong>설정&gt;애플리케이션&gt;</strong>[해당 앱]<strong>&gt;권한</strong>에서 언제든지 변경할 수 있음</p>
+
+<p><img width= 200 src="figure/permission-change.png"></p></li>
+</ul>
+
+<p><img src="images/permissionreq.png" width=200 style="top:150px; right:100px; position:absolute;"></p>
+
+<h3 id="toc_18">5.2 미디어 컬렉션</h3>
+
+<ul>
+<li><p>시스템은 자동으로 외부 저장소의 볼륨을 스캔하여, 다음과 같이 미디어 파일을 잘 정의된 <strong>미디어 컬렉션</strong>에 추가합니다.</p>
+
+<table>
+<thead>
+<tr>
+<th>미디어 파일</th>
+<th>저장 디렉토리</th>
+<th>미디어 컬렉션</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>이미지</td>
+<td>DCIM/ 및 Pictures/ 디렉터리</td>
+<td><strong>MediaStore.Images</strong> 테이블</td>
+</tr>
+<tr>
+<td>동영상</td>
+<td>DCIM/, Movies/ 및 Pictures/ 디렉터리</td>
+<td><strong>MediaStore.Video</strong> 테이블</td>
+</tr>
+<tr>
+<td>오디오</td>
+<td>Alarms/, Audiobooks/, Music/, Notifications/, Podcasts/ 및 Ringtones/ 디렉터리</td>
+<td><strong>MediaStore.Audio</strong> 테이블</td>
+</tr>
+<tr>
+<td>다운로드 파일</td>
+<td>Download/ 디렉토리</td>
+<td>Android 10(API 수준 29) 이상을 실행하는 기기에서는 이러한 파일이 <strong>MediaStore.Downloads</strong> 테이블에 저장</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>[참고] 미디어 저장소에는 <strong>MediaStore.Files</strong>라는 컬렉션도 포함되어 있습니다. 컬렉션의 콘텐츠는 앱이 Android 10 이상을 타겟팅하는 앱에서 사용 가능한 범위 지정 저장소를 사용하는지 여부에 따라 달라집니다.
+
+<ul>
+<li>범위 지정 저장소를 사용 설정하면 컬렉션에는 앱에서 생성한 사진, 동영상 및 오디오 파일만 표시됩니다.</li>
+<li>범위 지정 저장소를 사용할 수 없거나 사용하고 있지 않다면 컬렉션에는 모든 유형의 미디어 파일이 표시됩니다.</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_19">5.3 미디어 컬렉션 쿼리</h3>
+
+<h4 id="toc_20">5.3.1 query() 메소드</h4>
+
+<ul>
+<li><p>미디어 컬렉션으로부터  특정 조건을 만족하는 미디어를 찾으려면 다음과 같이 앱 컨텍스트에서 검색한 ContentResolver 객체의 <a href="https://developer.android.com/reference/android/content/ContentResolver#query(android.net.Uri,%20java.lang.String%5B%5D,%20java.lang.String,%20java.lang.String%5B%5D,%20java.lang.String)">query()</a> 메소드 사용 </p>
+
+<div><pre><code class="language-java">public final Cursor query (Uri uri, 
+                String[] projection, 
+                String selection, 
+                String[] selectionArgs, 
+                String sortOrder)</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>Parameters</th>
+<th>설명</th>
+<th>null 여부</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>uri</strong></td>
+<td>검색할 미디어 컬렉션의 URI (<em>content:// scheme</em>형식).</td>
+<td>X</td>
+</tr>
+<tr>
+<td><strong>projection</strong></td>
+<td>반환할 미디어 테이블의 컬럼 리스트</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>selection</strong></td>
+<td>반환할 미디어 테이블의 레코드를 거르는 필터식 문자열, (SQL WHERE 절 형식, 단 WHERE는 제거)</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>selectionArgs</strong></td>
+<td><strong>selection</strong>에 포함된 <strong>?</strong>에 대체될 문자열 리스트</td>
+<td>O</td>
+</tr>
+<tr>
+<td><strong>sortOrder</strong></td>
+<td>반환할 레코드의 정렬 순서 (SQL ORDER BY 형식, 단 ORDER BY는 제거)</td>
+<td>O</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="figure/projection.png" width=500></p>
+
+<ul>
+<li><p>query() 메소드 사용 예제</p>
+
+<ul>
+<li><p>이미지 컬렉션 테이블로부터 모든 이미지 검색 (검색 결과셋 데이터는 이미지 컬렉션 테이블의 모든 컬럼을 포함한 테이블)</p>
+
+<div><pre><code class="language-java">Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+Cursor cursor = getApplicationContext().getContentResolver().query(
+                uri,
+                null,
+                null,
+                null,
+                null
+ );</code></pre></div></li>
+<li><p>이미지 컬렉션 테이블로부터 MIME_TYPE 컬럼 값이 <q>image/jpeg</q>인 모든 이미지 검색 (검색 결과셋 데이터는_ID, DISPLAY_NAME, OWNER_PACKAGE_NAME 컬럼으로 구성된 테이블)</p>
+
+<div><pre><code class="language-java">    Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+    String[] projection = new String[] {
+        MediaStore.Images.Media._ID,
+        MediaStore.Images.Media.DISPLAY_NAME,
+        MediaStore.Images.Media.OWNER_PACKAGE_NAME
+    };
+    String selection = MediaStore.Images.Media.DISPLAY_NAME + &quot; = ?&quot;;
+    String[] selectionArgs = new String[] { &quot;image/jpeg&quot; };
+
+    Cursor cursor = getApplicationContext().getContentResolver().query(
+            uri,
+            projection,
+            selection,
+            selectionArgs,
+            null
+    );</code></pre></div></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h4 id="toc_21">5.3.2 <strong>Cursor</strong> 객체를 통한 쿼리 결과 접근</h4>
+
+<ul>
+<li><p>쿼리 결과는 결과셋 자체가 리턴되지 않으며 결과셋 테이블 위치를 가리키는 커서(Cursor)로 리턴된다.</p>
+
+<ul>
+<li>커서가 처음 가리키는 위치는 결과셋 테이블의 첫번째 레코드 이전을 가리키므로, 결과셋으로부터 값을 얻기 위해서는 반드시 <strong>moveToFirst</strong>나 <strong>moveToNext</strong> 메소드를 호출해서 커서의 위치를 이동시켜야 한다.</li>
+<li><p>커서가 가리키는 결과셋 레코드로부터 컬럼의 값을 얻기 위해서는 컬럼의 타입에 따라서 <strong>getLong</strong>, <strong>getString</strong>, <strong>getDouble</strong> 등의 메소드를 이용한다.
+<img src="figure/query-result.png" width=500></p>
+
+<ul>
+<li>커서의 메소드 목록</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>메서드</th>
+<th>설명</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>close</td>
+<td>결과셋을 닫는다.</td>
+</tr>
+<tr>
+<td>getColumnCount</td>
+<td>컬럼의 개수를 구한다</td>
+</tr>
+<tr>
+<td><strong>getColumnIndex</strong></td>
+<td>이름으로부터 컬럼 번호를 구한다.</td>
+</tr>
+<tr>
+<td>getColumnName</td>
+<td>번호로부터 컬럼 이름을 구한다.</td>
+</tr>
+<tr>
+<td>getCount</td>
+<td>결과셋의 레코드 개수를 구한다.</td>
+</tr>
+<tr>
+<td><strong>getLong</strong></td>
+<td>컬럼값을 Long형 정수로 구하며 인수로 컬럼 번호를 전달한다.</td>
+</tr>
+<tr>
+<td>getDouble</td>
+<td>컬럼값을 실수로 구한다.</td>
+</tr>
+<tr>
+<td><strong>getString</strong></td>
+<td>컬럼값을 문자열로 구한다.</td>
+</tr>
+<tr>
+<td>moveToFirst</td>
+<td>첫 레코드 위치로 이동하며, 결과셋이 비어있을 시 false를 리턴한다.</td>
+</tr>
+<tr>
+<td>moveToLast</td>
+<td>마지막 레코드 위치로 이동하며, 결과셋이 비어있을 시 false를 리턴한다.</td>
+</tr>
+<tr>
+<td><strong>moveToNext</strong></td>
+<td>다음 레코드 위치로 이동하며, 마지막 레코드이면 false를 리턴한다.</td>
+</tr>
+<tr>
+<td>moveToPrevious</td>
+<td>이전 레코드로 이동하며, 첫 레코드이면 false를 리턴한다.</td>
+</tr>
+<tr>
+<td>moveToPosition</td>
+<td>임의의 위치로 이동한다.</td>
+</tr>
+</tbody>
+</table></li>
+</ul></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-java">    private void getImagesFromMediaStore() {
+        ... 
+        Cursor cursor = getApplicationContext().getContentResolver().query(
+                uri,
+                projection,
+                selection,
+                selectionArgs,
+                null
+        );
+        StringBuffer data = new StringBuffer();
+        int idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID);
+        int nameColumn = cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME);
+        int ownerColumn = cursor.getColumnIndex(MediaStore.Images.Media.OWNER_PACKAGE_NAME);
+        while (cursor.moveToNext()) {
+            long id = cursor.getLong(idColumn);
+            String name = cursor.getString(nameColumn);
+            long owner = cursor.getLong(ownerColumn);
+            data.append(id +&quot; &quot;+name+&quot; [&quot;+owner+&quot;]\n&quot;);
+        }
+        result.setText(data);
+
+    }       </code></pre></div></li>
+</ul>
+
+<h4 id="toc_22">5.3.3 SimpleCursorAdapter 통한 쿼리 결과 출력</h4>
+
+<ul>
+<li><p><a href="https://developer.android.com/reference/android/widget/SimpleCursorAdapter.html">SimpleCursorAdapter</a>를 이용하여 간편하게 리스트 뷰(어댑터 뷰)에 query() 결과를 출력</p>
+
+<div><pre><code class="language-java">SimpleCursorAdapter (Context context,   
+      int layout,     // 어댑터 뷰 항목 표현을 위한 레이아웃  
+      Cursor c,       // 쿼리 결과를 가리키는 커서  
+      String[] from,  // 쿼리 결과에서 표시할 테이블 열들  
+      int[] to,       // 테이블 열의 값을 출력할 뷰 ID  
+      int flags)      // 보통은 0  </code></pre></div></li>
+<li><p>예제</p>
+
+<div><pre><code class="language-java">    ListView listView = findViewById(R.id.listview);
+
+    SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                                        getApplicationContext(),
+                                        R.layout.item,
+                                        cursor,
+                                        new String[] {
+                                                MediaStore.Images.Media._ID,
+                                                MediaStore.Images.Media.DISPLAY_NAME,
+                                                MediaStore.Images.Media.OWNER_PACKAGE_NAME
+                                        },
+                                        new int[] {
+                                                R.id.item_id,
+                                                R.id.item_name,
+                                                R.id.item_owner
+                                        },
+                                        0
+                                    );
+
+    listView.setAdapter(adapter);</code></pre></div>
+
+<ul>
+<li>item.xml for SimpleCursorAdapter</li>
+</ul>
+
+<div><pre><code class="language-markup">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:orientation=&quot;horizontal&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:padding=&quot;5dp&quot;&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/item_id&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:padding=&quot;5dp&quot;
+        android:gravity=&quot;center&quot;
+        /&gt;
+    &lt;TextView
+        android:id=&quot;@+id/item_name&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:padding=&quot;5dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:gravity=&quot;center&quot;
+        /&gt;
+    &lt;TextView
+        android:id=&quot;@+id/item_owner&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:padding=&quot;5dp&quot;
+        android:layout_weight=&quot;1&quot;
+        android:gravity=&quot;center&quot;
+        /&gt;
+&lt;/LinearLayout&gt;</code></pre></div></li>
+</ul>
+
+<h3 id="toc_23">5.4 미디어 컬렉션에 항목 추가</h3>
+
+<ul>
+<li><p>기존 컬렉션에 미디어 항목을 추가하는 경우 다음과 유사한 코드를 작성하면 됩니다.</p>
+
+<div><pre><code class="language-java">// Add a specific media item.
+ContentResolver resolver = getApplicationContext()
+        .getContentResolver();
+
+// Find all image files on the primary external storage device.
+// On API &lt;= 28, use VOLUME_EXTERNAL instead.
+Uri imageCollection = MediaStore.Images.Media.getContentUri(
+        MediaStore.VOLUME_EXTERNAL_PRIMARY);
+
+// Publish a new picture.
+ContentValues newImageDetails = new ContentValues();
+newImageDetails.put(MediaStore.Images.Media.DISPLAY_NAME,
+        &quot;My Image.jpg&quot;);
+
+// Keeps a handle to the new image&#39;s URI in case we need to modify it
+// later.
+Uri myFavoriteSongUri = resolver
+        .insert(imageCollection, newSongDetails);</code></pre></div></li>
+<li><p>앱이 미디어 파일에 쓰기 작업을 하는 것과 같이 많은 시간이 소요되는 작업을 수행한다면, 작업 처리 동안에 앱이 독점적으로 파일을 엑세스 할 필요가 있습니다. </p>
+
+<ul>
+<li>Android 10 이상을 실행하는 기기에서는 앱이 <strong>IS_PENDING</strong> 플래그 값을 <strong>1</strong>로 설정하여 작업 중인 파일에 대한 독점 액세스 권한을 얻을 수 있습니다. </li>
+<li><strong>IS_PENDING</strong>  값을 다시 <strong>0</strong>으로 변경할 때까지 이 앱에서만 파일을 볼 수 있습니다.</li>
+</ul></li>
+<li><p>예제: 기존 이미지 파일을 복사하여 미디어 컬렉션에 추가</p>
+
+<div><pre><code class="language-java">public void addCopiedImageToMediaStore() {
+        ContentResolver resolver = getApplicationContext()
+                .getContentResolver();
+        Uri imageCollection = MediaStore.Images.Media.getContentUri(
+                MediaStore.VOLUME_EXTERNAL_PRIMARY);
+
+        // 미디어 컬렉션에 추가할 이미지 이름 및 소유자 정보를 UI에서 획득
+        String imgName = mName.getText().toString();
+        String imgOwner = mOwner.getText().toString();
+
+        ContentValues newImageDetails = new ContentValues();
+        newImageDetails.put(MediaStore.Images.Media.DISPLAY_NAME, imgName);
+        newImageDetails.put(MediaStore.Images.Media.OWNER_PACKAGE_NAME,imgOwner);
+        // 작업 중인 파일에 대한 독점적인 권한 설정
+        newImageDetails.put(MediaStore.Images.Media.IS_PENDING, 1);
+
+        // 이미지 컬렉션에 이미지 항목 추가
+        Uri newImageUri = resolver.insert(imageCollection, newImageDetails);
+
+        try {
+                // 추가할 이미지 항목에 대한 출력 스트림 획득        
+            OutputStream out = resolver.openOutputStream(newImageUri);
+            // 복사할 이미지 항목에 대한 입력 스트림 획득
+            InputStream in = resolver.openInputStream(
+                    ContentUris.withAppendedId(
+                            imageCollection,                        // image collection uri
+                            Long.valueOf(mId.getText().toString())) // 복사할 image id
+            );
+
+            int size = in.available();          // 복사할 이미지 데이터 크기
+            byte[] bytes = new byte[size];      // 복사할 이미지 데이터의 저장 버퍼 생성
+            in.read(bytes);                 // 이미지 데이터를 입력 스트림에서 읽어 버퍼에 저장
+            out.write(bytes);               // 버퍼 내용을 출력 스트림에 쓰기
+
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        newImageDetails.clear();
+        // 해당 파일에 대한 독점적인 권한 해제
+        newImageDetails.put(MediaStore.Images.Media.IS_PENDING, 0);
+        resolver.update(newImageUri, newImageDetails, null, null);
+
+    }</code></pre></div></li>
+</ul>
+
+<h3 id="toc_24">5.5 미디어 컬렉션의 항목 업데이트</h3>
+
+<ul>
+<li><p><strong>앱이 소유한 미디어 파일의 업데이트</strong>는 특별한 권한 없이 아래와 같은 방법으로 진행된다.</p>
+
+<div><pre><code class="language-java">    ContentResolver resolver = getApplicationContext()
+            .getContentResolver();
+
+    Uri imageCollection = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+    long imageId; // 업데이트할 이미지 항목의 MediaStore.Images.Media._ID
+
+    Uri imageUri = ContentUris.withAppendedId(
+            imageCollection,
+            imageId);
+
+    String newImageName; // 업데이트할 이미지 항목의 이름
+    ContentValues updatedImgDetails = new ContentValues();
+    updatedImgDetails.put(MediaStore.Images.Media.DISPLAY_NAME,
+            newImageName);
+
+    // 이미지 항목의 업데이트        
+    int numImagesUpdated = resolver.update( imageUri, updatedImgDetails, null, null);</code></pre></div></li>
+<li><p><strong>다른 앱이 소유한 미디어 파일의 업데이트</strong>는 앱이 <strong>범위 지정 저장소</strong>를 사용하는 경우에, 원칙적으로 <a href="https://developer.android.com/reference/android/app/RecoverableSecurityException">RecoverableSecurityException</a>이 발생되면서 거부된다.</p>
+
+<ul>
+<li>하지만, 플랫폼에서 발생한 <a href="https://developer.android.com/reference/android/app/RecoverableSecurityException">RecoverableSecurityException</a>을 포착하여 파일 수정을 위한 <strong>사용자 동의</strong>를 받게 되면 파일 수정이 가능해 진다.</li>
+<li><p>다음 코드 스니펫에서는 특정 항목에 대한 쓰기 권한을 앱에 부여하도록 요청하는 방법을 예시한다.</p>
+
+<div><pre><code class="language-java">try {
+    // 이미지 항목의 업데이트        
+       int numImagesUpdated = resolver.update( imageUri, updatedImgDetails, null, null);
+} catch (SecurityException securityException) {
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.Q) {
+        RecoverableSecurityException recoverableSecurityException;
+        if (securityException instanceof RecoverableSecurityException) {
+            recoverableSecurityException =
+                    (RecoverableSecurityException)securityException;
+        } else {
+            throw new RuntimeException(
+                    securityException.getMessage(), securityException);
+        }
+        IntentSender intentSender =recoverableSecurityException.getUserAction()
+                .getActionIntent().getIntentSender();
+        startIntentSenderForResult(intentSender, image-request-code,
+                null, 0, 0, 0, null);
+    } else {
+        throw new RuntimeException(
+                securityException.getMessage(), securityException);
+    }
+}</code></pre></div></li>
+<li><p>앱이 생성하지 않은 미디어 파일을 수정해야 할 때마다 이 프로세스를 완료합니다.</p></li>
+</ul></li>
+</ul>
+
+<h3 id="toc_25">5.6 미디어 컬렉션의 항목 삭제</h3>
+
+<ul>
+<li><p>미디어 저장소에서 앱에 더 이상 필요하지 않은 항목을 삭제하려면 다음 코드 스니펫과 비슷한 로직을 사용합니다.</p>
+
+<div><pre><code class="language-java">ContentResolver resolver = getApplicationContext().getContentResolver();
+Uri imageCollection = MediaStore.Images.Media.getContentUri(
+            MediaStore.VOLUME_EXTERNAL_PRIMARY);
+Uri imageUri = ContentUris.withAppendedId(
+            imageCollection,
+            imageId
+            );
+int numImagesRemoved = resolver.delete(imageUri, null, null);</code></pre></div></li>
+<li><p><strong>범위 지정 저장소</strong>를 사용하는 경우에는 미디어 항목 업데이트에서 설명한 대로, 앱이 삭제하려는 각 파일의 RecoverableSecurityException을 포착해야 합니다.</p></li>
+</ul>
 
 
 
