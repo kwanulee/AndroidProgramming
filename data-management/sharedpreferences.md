@@ -1,5 +1,5 @@
 
-[**목차**: 데이터 저장 및 관리1](https://kwanulee.github.io/AndroidProgramming/#8-데이터-저장-및-관리-1)
+[**목차**: 설정 및 파일](https://kwanulee.github.io/AndroidProgramming/#8)
 
 # 설정 (Preferences)
 
