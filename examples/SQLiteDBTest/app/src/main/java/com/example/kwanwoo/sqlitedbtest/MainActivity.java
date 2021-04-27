@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   viewAllToTextView();
-                viewAllToListView();
+                viewAllToTextView();
+             //   viewAllToListView();
 
             }
         });
@@ -120,34 +120,37 @@ public class MainActivity extends AppCompatActivity {
         EditText name = (EditText)findViewById(R.id.edit_name);
         EditText phone = (EditText)findViewById(R.id.edit_phone);
 
-        long nOfRows = mDbHelper.updateUserByMethod(_id.getText().toString(),
-                name.getText().toString(),
-                phone.getText().toString());
-        if (nOfRows >0)
-            Toast.makeText(this,"Record Updated", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this,"No Record Updated", Toast.LENGTH_SHORT).show();
+        mDbHelper.updateUserBySQL(_id.getText().toString(),name.getText().toString(),phone.getText().toString());
+//        long nOfRows = mDbHelper.updateUserByMethod(_id.getText().toString(),
+//                name.getText().toString(),
+//                phone.getText().toString());
+//        if (nOfRows >0)
+//            Toast.makeText(this,"Record Updated", Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(this,"No Record Updated", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteRecord() {
         EditText _id = (EditText)findViewById(R.id._id);
 
-        long nOfRows = mDbHelper.deleteUserByMethod(_id.getText().toString());
-        if (nOfRows >0)
-            Toast.makeText(this,"Record Deleted", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this,"No Record Deleted", Toast.LENGTH_SHORT).show();
+        mDbHelper.deleteUserBySQL(_id.getText().toString());
+//        long nOfRows = mDbHelper.deleteUserByMethod(_id.getText().toString());
+//        if (nOfRows >0)
+//            Toast.makeText(this,"Record Deleted", Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(this,"No Record Deleted", Toast.LENGTH_SHORT).show();
     }
 
     private void insertRecord() {
         EditText name = (EditText)findViewById(R.id.edit_name);
         EditText phone = (EditText)findViewById(R.id.edit_phone);
 
-        long nOfRows = mDbHelper.insertUserByMethod(name.getText().toString(),phone.getText().toString());
-        if (nOfRows >0)
-            Toast.makeText(this,nOfRows+" Record Inserted", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this,"No Record Inserted", Toast.LENGTH_SHORT).show();
+        mDbHelper.insertUserBySQL(name.getText().toString(),phone.getText().toString());
+//        long nOfRows = mDbHelper.insertUserByMethod(name.getText().toString(),phone.getText().toString());
+//        if (nOfRows >0)
+//            Toast.makeText(this,nOfRows+" Record Inserted", Toast.LENGTH_SHORT).show();
+//        else
+//            Toast.makeText(this,"No Record Inserted", Toast.LENGTH_SHORT).show();
     }
 }
 
