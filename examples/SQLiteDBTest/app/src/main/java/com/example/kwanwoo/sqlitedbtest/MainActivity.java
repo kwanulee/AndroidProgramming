@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 insertRecord();
-                viewAllToListView();
+                viewAllToTextView();
+//                viewAllToListView();
             }
         });
 
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 deleteRecord();
-                viewAllToListView();
+                viewAllToTextView();
+//                viewAllToListView();
             }
         });
 
@@ -58,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 updateRecord();
-                viewAllToListView();
+                viewAllToTextView();
+//                viewAllToListView();
             }
         });
 
@@ -71,7 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        viewAllToListView();
+        viewAllToTextView();
+//        viewAllToListView();
     }
 
     private void viewAllToTextView() {
