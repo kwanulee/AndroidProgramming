@@ -13,6 +13,7 @@ public class MediaItem {
     final static int AUDIO=3;
     final static int VIDEO=4;
     final static int IMAGE=5;
+    final static int SHARED=7;
 
     int source;
     String name;

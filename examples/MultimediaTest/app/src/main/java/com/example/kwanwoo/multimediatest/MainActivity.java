@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_PICK = 0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_VIDEO_CAPTURE = 2;
-    final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 3;
+    static final int REQUEST_RECORD_AUDIO_FOR_MULTIMEDIA = 3;
 
     private ListView mListView;
     private int mSelectedPosition;
@@ -64,8 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
         mMediaPlayer = new MediaPlayer();
 
-        checkDangerousPermissions();
-        initListView();
+        if (haveRecordAudioPermission())
+            initListView();
+        else
+            requestRecordAudioPermission();
 
         voiceRecBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -101,34 +103,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean haveRecordAudioPermission() {
+        return ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED;
+    }
 
-    private void checkDangerousPermissions() {
+
+    private void requestRecordAudioPermission() {
         String[] permissions = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.RECORD_AUDIO
         };
-
-        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-        for (int i = 0; i < permissions.length; i++) {
-            permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
-            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
-                break;
-            }
-        }
-
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA);
-
-        }
-
+        ActivityCompat.requestPermissions(
+                this,
+                permissions,
+                REQUEST_RECORD_AUDIO_FOR_MULTIMEDIA);
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) { // permission was granted
             switch (requestCode) {
-                case REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA:
+                case REQUEST_RECORD_AUDIO_FOR_MULTIMEDIA:
                     initListView();
                     break;
             }
@@ -188,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                             case MediaItem.SDCARD:
                                 uri = Uri.parse("file://" + getExternalFilesDir(Environment.DIRECTORY_MOVIES).getPath() + "/" + item.name);
                                 break;
+                            case MediaItem.SHARED:
+
                         }
 
                         intent.putExtra("video_uri", uri.toString());
