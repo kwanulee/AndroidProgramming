@@ -14,7 +14,7 @@ div.polaroid {
 	- 참고문서: https://developer.android.com/guide/topics/providers/calendar-provider?hl=ko
 - 예제 프로젝트 링크
 	- https://github.com/kwanulee/AndroidProgramming/tree/master/examples/CalendarProviderTest 
-	- 프로젝트 다운로드를 위해 이 [링크](https://github.com/kwanulee/AndroidProgramming/releases/download/untagged-939c8993fd5f2939a526/CalendarProviderTest.zip)를 클릭하세요.
+
 	 
 ## 1. 개요
 
