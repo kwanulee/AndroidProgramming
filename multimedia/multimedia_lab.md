@@ -12,7 +12,7 @@ div.polaroid {
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/AndroidProgramming"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -92,9 +92,11 @@ div.polaroid {
 * 위 음악파일을 앱전용 외부저장소의 Music 폴더에 저장한 후에 이 음악 파일을 재생하는 코드를 작성해 보세요
 * [참조코드]     
 	- raw 폴더 리소스 재생
- 		+ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L165-L166
+ 		+ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277
 	- 앱전용 외부저장소 파일 재생
- 		+ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L172-L173
+ 		+ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L167-L169
+
+ 		+ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290
 
 	    
 * 앱전용 외부저장소의 Music 폴더에 파일을 복사하는 방법 
@@ -109,7 +111,12 @@ div.polaroid {
 * 위 동영상 파일을  앱 전용 외부저장소의 Movies 폴더에 저장한 후에 이 파일을 재생하는 코드를 작성해 보세요
 
 * [참조코드]  
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L182-L194
+	- 재생할 동영상 파일의 Uri 획득 
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L176-L192
+
+	- VideoView 활용
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/res/layout/activity_video.xml
 
 ## 3. 카메라 앱의 사진 저장하기 
 * 사진찍기 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 사진을 앱 전용 외부저장소의 Pictures 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.
@@ -118,9 +125,9 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 	<img src="images/multimedia-lab2.png" width="200">
 	
 * [참조코드]  
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385
  
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L412-L416
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L409-L417
 
 ## 4. 카메라 앱의 동영상 저장하기 
 * 동영상 촬영 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 동영상을 앱전용 외부저장소의 Movies 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.
@@ -129,6 +136,6 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 
 * [참조코드]  
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407  
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404  
 
  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java

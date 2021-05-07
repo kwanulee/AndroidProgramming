@@ -263,7 +263,7 @@ div.polaroid {
 <h2 id="toc_1">0. MainActivity의 화면</h2>
 
 <div><pre><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/AndroidProgramming&quot;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
     android:layout_width=&quot;match_parent&quot;
     android:layout_height=&quot;match_parent&quot;
@@ -351,12 +351,13 @@ div.polaroid {
 <li>raw 폴더 리소스 재생
 
 <ul>
-<li><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L165-L166">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L165-L166</a></li>
+<li><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277</a></li>
 </ul></li>
-<li>앱전용 외부저장소 파일 재생
+<li><p>앱전용 외부저장소 파일 재생</p>
 
 <ul>
-<li><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L172-L173">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L172-L173</a></li>
+<li><p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L167-L169">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L167-L169</a></p></li>
+<li><p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290</a></p></li>
 </ul></li>
 </ul></li>
 <li><p>앱전용 외부저장소의 Music 폴더에 파일을 복사하는 방법 </p>
@@ -378,8 +379,15 @@ div.polaroid {
 <li><a href="https://github.com/kwanu70/AndroidExamples/tree/master/musics/twice.mp4">https://github.com/kwanu70/AndroidExamples/tree/master/musics/twice.mp4</a></li>
 </ul></li>
 <li><p>위 동영상 파일을  앱 전용 외부저장소의 Movies 폴더에 저장한 후에 이 파일을 재생하는 코드를 작성해 보세요</p></li>
-<li><p>[참조코드]<br>
-<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L182-L194">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L182-L194</a></p></li>
+<li><p>[참조코드]  </p>
+
+<ul>
+<li><p>재생할 동영상 파일의 Uri 획득 
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L176-L192">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L176-L192</a></p></li>
+<li><p>VideoView 활용
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java</a>
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/res/layout/activity_video.xml">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/res/layout/activity_video.xml</a></p></li>
+</ul></li>
 </ul>
 
 <h2 id="toc_4">3. 카메라 앱의 사진 저장하기</h2>
@@ -390,9 +398,9 @@ div.polaroid {
 
 <p><img src="images/multimedia-lab2.png" width="200"></p></li>
 <li><p>[참조코드]<br>
-<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388</a></p>
+<a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385</a></p>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L412-L416">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L412-L416</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L409-L417">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L409-L417</a></p></li>
 </ul>
 
 <h2 id="toc_5">4. 카메라 앱의 동영상 저장하기</h2>
@@ -402,7 +410,7 @@ div.polaroid {
 <li><p>저장된 동영상 파일이 해당 폴더에 제대로 있는지도 확인해 보세요</p></li>
 <li><p>[참조코드]  </p>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407</a>  </p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404</a>  </p>
 
 <p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/VideoActivity.java</a></p></li>
 </ul>

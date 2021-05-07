@@ -303,7 +303,7 @@ pre[class*="language-"] {
 <div><pre><code class="language-java">    MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1);
     mediaPlayer.start(); // no need to call prepare(); create() does that for you</code></pre></div>
 
-<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L277-L280">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L277-L280</a></p></li>
+<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277</a></p></li>
 </ul>
 
 <hr>
@@ -350,7 +350,7 @@ mediaPlayer.setDataSource(getApplicationContext(), myUri);
 mMediaPlayer.prepare();
 mediaPlayer.start();</code></pre></div>
 
-<p>예제 프로젝트 코드: <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L293">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L293</a></p></li>
+<p>예제 프로젝트 코드: <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290</a></p></li>
 </ul>
 
 <hr>
@@ -407,7 +407,7 @@ mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
 });
 mediaPlayer.prepareAsync();</code></pre></div>
 
-<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L295-L311">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L295-L311</a></p></li>
+<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L292-L308">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L292-L308</a></p></li>
 </ul>
 
 <hr>
@@ -484,7 +484,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
             mSelectedPosition = position;
         }</code></pre></div>
 
-<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L179">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L179</a></p></li>
+<p>예제 프로젝트 코드:  <a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L143-L175">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L143-L175</a></p></li>
 </ul>
 
 <p><a name="2"></a></p>
@@ -537,7 +537,6 @@ mediaPlayer.prepareAsync();</code></pre></div>
 
 <div><pre><code class="language-markup">&lt;manifest ... &gt;
     &lt;uses-permission android:name=&quot;android.permission.RECORD_AUDIO&quot; /&gt;
-    &lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
 &lt;/manifest&gt;</code></pre></div></li>
 <li><p>오디오 녹음 절차</p>
 
@@ -558,7 +557,8 @@ mediaPlayer.prepareAsync();</code></pre></div>
 <li><p>앱 시작시에 앱에서 필요한 권한 보유여부를 검사하고 없으면 요청한다.</p>
 
 <ul>
-<li><p>다음 checkDangerousPermissions() 메소드는 <strong>앱의 매인 액티비티의 onCreate() 함수에서 호출</strong>하여, 앱 시작시에 필요한 권한(외부저장소 파일 접근 및 오디오 기록)을 얻도록 하기 위한 코드를 정의하고 있다.</p>
+<li><strong>haveRecordPermissions()</strong> 메소드는 앱이 <strong>RECORD_AUDIO</strong>권한을 허용하는 지를 검사한다.</li>
+<li><p><strong>requestRecordAudioPermission()</strong> 메소드는 <strong>RECORD_AUDIO</strong>권한을 요청한다.</p>
 
 <div><pre><code class="language-java">    protected void onCreate(Bundle savedInstanceState) {
         //...
@@ -634,7 +634,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
            }
    }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L329">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L329</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L310-L326">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L310-L326</a></p>
 
 <div><pre><code class="language-java">    private void stopAudioRec()  {
 
@@ -653,7 +653,7 @@ mediaPlayer.prepareAsync();</code></pre></div>
 
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L331-L341">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L331-L341</a></p>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L328-L338">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L328-L338</a></p>
 
 <p><a name="4"></a></p>
 
@@ -720,7 +720,7 @@ If (takePictureIntent.resolveActivity(getPackageManager()) != null) {
         Toast.makeText(getApplicationContext(), ＂file null＂, Toast.LENGTH_SHORT).show();
 }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385</a></p></li>
 </ul>
 
 <h3 id="toc_23">4.3 카메라 앱으로 찍은 사진 결과 처리</h3>
@@ -739,7 +739,7 @@ If (takePictureIntent.resolveActivity(getPackageManager()) != null) {
     }
 }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L421-L426">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L421-L426</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L418-L428">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L418-L428</a></p></li>
 </ul>
 
 <h3 id="toc_24">4.4 카메라 앱으로 촬영한 동영상 저장하기</h3>
@@ -773,7 +773,7 @@ private void dispatchTakeVideoIntent() {
           }
 }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404</a></p></li>
 </ol>
 
 <h3 id="toc_25">4.5 카메라 앱으로 촬영한 결과를 처리하기</h3>
@@ -794,7 +794,7 @@ private void dispatchTakeVideoIntent() {
         }
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L431-L436">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L431-L436</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L428-L434">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L428-L434</a></p></li>
 </ul>
 
 <p><a name="5"> </a></p>
@@ -817,7 +817,7 @@ private void dispatchTakeVideoIntent() {
 }
 </code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L361-L368">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L361-L368</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L358-L365">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L358-L365</a></p></li>
 </ul>
 
 <h3 id="toc_28">5.2 Photo/Gallery 앱으로 사진 선택한 결과 저장하기</h3>
@@ -860,7 +860,7 @@ private void dispatchTakeVideoIntent() {
         } catch (IOException e) {}
     }</code></pre></div>
 
-<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L439-L449">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L439-L449</a></p></li>
+<p><a href="https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L436-L446">https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L436-L446</a></p></li>
 </ul></li>
 </ul>
 
