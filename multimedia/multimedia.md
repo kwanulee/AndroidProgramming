@@ -33,7 +33,7 @@
 	    mediaPlayer.start(); // no need to call prepare(); create() does that for you
 	```
 	
-	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L277-L280
+	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L274-L277
 
 ---
 ### 1.3 로컬에서 사용 가능한 URI 기반 재생 방법
@@ -61,20 +61,14 @@
 		Uri image_Uri = Uri.parse("file:///storage/emulated/0/Pictures/camera_image.jpg");
 		```
     - static Uri.fromFile(File file) - file로부터 Uri 객체 생성
+    	- 앱별 외부저장소의 Pictures 하위의 camera\_image.jpg 파일의 Uri 객체를 얻는 예제
     
 		```java
 		Uri image_Uri = Uri.fromFile(
-						new File(Environment.getExternalStorageDirectory().getPath()+
-								"/Pictures/camera_imge.jpg")));
+						new File(getExternalFilesDir(Environment.DIRECTORY_PICTURE).getPath()+ 
+								"/"+
+								"camera_image.jpg")));
 		```
-
-- 단말 외부 저장소 파일을 사용하는 경우에는 접근 권한(**android.permission.READ\_EXTERNAL\_STORAGE**) 필요
-    
-	```xml
-	<manifest ... >
-		<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	</manifest>
-	```
 
 - 사용방법 
 
@@ -87,7 +81,7 @@
 	mediaPlayer.start();
    ```
 
-	예제 프로젝트 코드: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L282-L293
+	예제 프로젝트 코드: https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L279-L290
 
 
 ---	
@@ -141,7 +135,7 @@
 	```
 
 	
-	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L295-L311
+	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L292-L308
 
 
 ---
@@ -191,7 +185,7 @@
 			}
 	```
 
-	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L147-L179
+	예제 프로젝트 코드:  https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L143-L175
 
 
 
@@ -234,7 +228,6 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 	```xml
 	<manifest ... >
 	    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-	    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	</manifest>
 	```
 * 오디오 녹음 절차
@@ -250,37 +243,37 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 
 ### 3.2 권한 검사 및 요청
 - 앱 시작시에 앱에서 필요한 권한 보유여부를 검사하고 없으면 요청한다.
-	- 다음 checkDangerousPermissions() 메소드는 **앱의 매인 액티비티의 onCreate() 함수에서 호출**하여, 앱 시작시에 필요한 권한(외부저장소 파일 접근 및 오디오 기록)을 얻도록 하기 위한 코드를 정의하고 있다.
+	- **haveRecordPermissions()** 메소드는 앱이 **RECORD\_AUDIO**권한을 허용하는 지를 검사한다.
+	- **requestRecordAudioPermission()** 메소드는 **RECORD\_AUDIO**권한을 요청한다.
 	 
 		```java
 			protected void onCreate(Bundle savedInstanceState) {
 				//...
-				checkDangerousPermissions();
+				if (haveRecordAudioPermission())
+					initListView();
+				else
+					requestRecordAudioPermission();
 			}
 			
-		    // onCreate() 메소드에서 앱 시작시 호출
-		    private void checkDangerousPermissions() {
-		        String[] permissions = {
-		                Manifest.permission.READ_EXTERNAL_STORAGE,
-		*               Manifest.permission.WRITE_EXTERNAL_STORAGE, // 외부 저장소에 파일을 저장할 때 필요
-		*               Manifest.permission.RECORD_AUDIO
-		        };
-		
-		        int permissionCheck = PackageManager.PERMISSION_GRANTED;
-		        for (int i = 0; i < permissions.length; i++) {
-		*           permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
-		            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
-		                break;
-		            }
-		        }
-		
-		        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-		*          ActivityCompat.requestPermissions(this, permissions, 1);
-		        }
-		    }
-		```
+    		private boolean haveRecordAudioPermission() {
+        		return ContextCompat.checkSelfPermission(this,Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED;
+    		}
 
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L105-L125
+    		private void requestRecordAudioPermission() {
+        		String[] permissions = {
+                	Manifest.permission.RECORD_AUDIO
+        		};
+        		ActivityCompat.requestPermissions(
+                	this,
+                	permissions,
+                	REQUEST_RECORD_AUDIO_FOR_MULTIMEDIA);
+    		}
+		```
+		
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L67-L70
+	
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L106-L120
 
 
 ### 3.3 오디오 녹음 시작
@@ -321,7 +314,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
    }
 ```
 
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L313-L329
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L310-L326
 
 
 ```java
@@ -343,7 +336,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
     }
 ```
 
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L331-L341
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L328-L338
 
 
 <a name="4"></a>
@@ -408,7 +401,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 
 
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L370-L388
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385
 
 
 ### 4.3 카메라 앱으로 찍은 사진 결과 처리
@@ -427,7 +420,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 	}
 	```
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L421-L426
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L418-L428
 
 ### 4.4 카메라 앱으로 촬영한 동영상 저장하기
 1.  동영상 캡처 작업 요청을 위한  인텐트를 생성
@@ -461,7 +454,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 	}
 	```
 	
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L390-L407
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L387-L404
 
 
 ### 4.5 카메라 앱으로 촬영한 결과를 처리하기
@@ -482,7 +475,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 	    }
 	```
 	
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L431-L436
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L428-L434
 
 <a name="5"> </a>
 ## 5. Photo/Gallery 앱으로 선택한 사진 저장하기
@@ -504,7 +497,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 
 	```
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L361-L368
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L358-L365
 
 ###5.2 Photo/Gallery 앱으로 사진 선택한 결과 저장하기
 
@@ -547,6 +540,6 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 		    }
 		```
 		
-		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L439-L449
+		https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L436-L446
 
 
