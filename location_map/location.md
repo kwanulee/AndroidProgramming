@@ -1,3 +1,6 @@
+
+[**목차**: 위치 기반 서비스 및 지도](https://kwanulee.github.io/AndroidProgramming/#12)
+
 # 위치 기반 서비스
 
 ---
@@ -31,7 +34,7 @@
 		```java
 		dependencies {
 		      ...
-		      implementation 'com.google.android.gms:play-services-location:17.0.0'
+		      implementation 'com.google.android.gms:play-services-location:18.0.0'
 		}
 		```
     3. 툴바에서 "Sync Project with Graddle File" 또는 "Sync Now" 클릭
@@ -191,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
 	
 	```
 
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L123-L173
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L121-L170
 
 
 <a name="4"> </a>
@@ -289,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
 
 ```
 
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L175-L208
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L172-L204
 
 ---
 <a name="4.2.1"> </a>
@@ -421,8 +424,8 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationServ
 
     }
 ```
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L91-L97
-https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L215-L233
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L89-L95
+https://github.com/kwanulee/AndroidProgramming/blob/master/examples/LocationService/app/src/main/java/com/kwanwoo/android/locationservice/MainActivity.java#L211-L229
 
 ---
 ### 5.3 주소 이름으로부터 위치 얻기 예제
@@ -443,3 +446,7 @@ try {
     return;
 }
 ```
+
+---
+
+[**다음 학습**: Google 지도](map.html)
