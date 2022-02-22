@@ -19,13 +19,13 @@ div.polaroid {
 
 1. [**Android Studio** 시작화면]에서 **New Project** 선택
 	<div class="polaroid">
-		<img src="./figure/start-android/as-start.jpg">
+		<img src="./figure/start-android/as-start.JPG">
 	</div>
 2. [**Select a Project Template**] 화면에서 생성할  앱의  화면 템플릿을 선택
 	- **Empty Activity**을 선택함
 
 	<div class="polaroid">
-		<img src="figure/start-android/as-template.jpg">
+		<img src="figure/start-android/as-template.JPG">
 	</div>
 3. [**Configure Your Project**] 화면에서 아래 정보 입력후 [**Finish**] 클릭
 	- **Name**: *HelloAndroid* 입력 (안드로이드 앱 프로젝트 이름)
@@ -35,13 +35,13 @@ div.polaroid {
 	-  **Minimum SDK** 선택: 생성한 안드로이드 앱 프로젝트가 실행되는 타겟 디바이스의 최소 SDK 버전 번호로서, 낮을 수록 많은 종류의 타겟 디바이스에서 실행가능하고, 높을수록 최신의 기능을 활용할 수 있음.
 
 	<div class="polaroid">
-		<img src="figure/start-android/as-new-project.jpg">
+		<img src="figure/start-android/as-new-project.JPG">
 	</div>
 
 4. *HelloAndroid* 프로젝트 생성 및 빌드 후의 화면
 
 	<div class="polaroid">
-		<img src="figure/start-android/as-build-finished.jpg">
+		<img src="figure/start-android/as-build-finished.JPG">
 	</div>
 
 ## <a name="create-avd"></a> 2. **에뮬레이터 (Android Virtual Device, AVD)** 만들기
