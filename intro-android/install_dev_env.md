@@ -33,11 +33,11 @@ div.polaroid2 {
 	<br>
 	</div>
 	* Windows 운영체제
-		- 32비트인 경우: Windows x86 다운로드
-		- 64비트인 경우: Windows X64 다운로드
-	* MAC 운영체제: Mac OS X 다운로드
+		- 32비트인 경우: jdk-8u321-windows-i586.exe 다운로드
+		- 64비트인 경우: jdk-8u321-windows-x64.exe 다운로드
+	* MAC 운영체제: jdk-88321-macosx-x64.dmg 다운로드
 3. 다운로드한 설치파일을 더블클릭하여 설치 진행
-	
+
 4. **Windows** 운영체제 경우에는 환경변수 업데이트
 	* [**시작**] - [**제어판**] - [**시스템 및 보안**] - [**시스템**] - [**고급 시스템 설정**] - [**환경 변수**] 클릭하여 **환경 변수** 설정창 오픈
 	* *시스템 변수(S)*의 **PATH**를 찾아 선택 후 **편집**을 눌러, JDK가 설치된 디렉토리의 bin 하위 디렉토리의 경로를 추가. (가령, JDK 가 설치된 디렉토리가 “C:\Program Files\Java\jdk1.8.0\_241” 이라면 “C:\Program Files\Java\jdk1.8.0\_241\bin” 경로를 추가
@@ -57,19 +57,17 @@ div.polaroid2 {
 	[https://developer.android.com/studio/](https://developer.android.com/studio/)
 
 	<div class="polaroid">
-		<img src="figure/android_studio.PNG">
+	 <img src="figure/android_studio.png">
 	</div>
 
 2. 사용약관 동의 후에 Android Studio 다운로드
 
 	<div class="polaroid">
-		<img src="figure/agreement.JPG">
+		<img src="figure/agreement.png">
 	</div>
 
 3. 다운로드한 파일을 더블클릭하여 설치마법사의 안내에 따라 설치
-	- 2021년 2월 현재, Android Studio 최신버전은 **4.1.1**
-	- 다음 화면 캡처는 **3.5.3** 버전의 설치과정이나, 최신버전의 설치과정과 유사함.
-	
+
 	<div class="polaroid2">
 	 	<img src="figure/as-setup1.PNG">
 	</div>
@@ -112,9 +110,9 @@ div.polaroid2 {
   </div>
   </div>
     <div class="polaroid2">
-    <img src="figure/as-setup14.PNG">
+    <img src="figure/as-setup14.png">
   </div>
-  
+
 
 
 ## <a name="sdk_tools_plaforms"></a>3. SDK Manager를 이용하여 최신 SDK 도구와 플랫폼을 설치
@@ -123,9 +121,9 @@ div.polaroid2 {
 
 	다음 두 가지 방법 중 하나를 이용하여 SDK Manger를 실행시킨다.
 
-	- Android Studio 시작 화면 하단의 [**Configure**] 클릭 후, 메뉴에서 [**SDK Manager**] 선택
+	- Android Studio 시작 화면 하단의 [**More Actions**] 클릭 후, 메뉴에서 [**SDK Manager**] 선택
 	  <div class="polaroid2">
-			<img src="figure/android_studio_main.png">
+			<img src="figure/android_studio_main.PNG">
 		</div>
 
 	- Android Studio 프로젝트 화면에서 [*SDK Manger 아이콘*] 클릭
@@ -137,25 +135,25 @@ div.polaroid2 {
 
   - **SDK Platforms** 탭에서 필요한 SDK 플랫폼 설치
     <div class="polaroid">
-      <img src="figure/sdk_manager_platforms1.PNG">
+      <img src="figure/sdk_manager_platforms1.png">
     </div>
 
     - *Show Package Details* 체크박스를 클릭하면, 각 SDK 플랫폼 패키지에 포함되어 있는 SDK 플랫폼, 소스, 시스템 이미지들을 자세히 볼 수 있슴.
 
-        <div class="polaroid">
-        <img src="figure/sdk_manager_platforms2.PNG">
-        </div>
+      <div class="polaroid">
+          <img src="figure/sdk_manager_platforms2.png">
+      </div>
 
     - 이 중에서  **Android SDK 플랫폼 버전**과 하나 이상의 **시스템 이미지**를 선택한 후, **OK** 버튼 클릭
 
-  		 <div class="polaroid">
+  		<div class="polaroid">
   			<img src="figure/sdk_manager_platforms3.png">
-  		 </div>
+  		</div>
 
   - </a>**SDK Tools** 탭에서 필요한 SDK 도구 설치
 
 		<div class="polaroid">
-			<img src="figure/sdk_manager_tools.jpg">
+			<img src="figure/sdk_manager_tools.png">
 		</div>
 
 		- 기본 SDK 도구
