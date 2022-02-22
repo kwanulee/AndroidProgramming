@@ -87,9 +87,10 @@ div.polaroid {
 | **N**ougat | Android 7.0| 2016년 9월| 24-25|
 | **O**reo | Android 8.0| 2017년 8월| 26-27|
 | **P**ie | Android 9.0| 2018년 8월| 28|
-| **Q** | Android 10 | 2019년 9월| 29|
-| **R**|  Android 11 | 2020년 9월 | 30 |
-| **S**|  Android 12 (preview) | 2021년 2월 | 31 |
+| **Q**uince Tart | Android 10 | 2019년 9월| 29|
+| **R**ed Velvet Cake|  Android 11 | 2020년 9월 | 30 |
+| **S**now Cone|  Android 12 | 2021년 10월 | 31 |
+| **T**iramisu|  Android 13 | 2022년 2월 | 31 |
 
 ### 2.2 안드로이드 플랫폼 아키텍처 [[2](https://developer.android.com/guide/platform/)]
 - Linux 기반의 오픈 소스 소프트웨어 스택 
