@@ -49,13 +49,13 @@ div.polaroid {
 1. Device Manager 실행시키기
 	- 안드로이드 스튜디오 프로젝트 화면의 툴바에서 **Device Manager 아이콘** 클릭
 	<div class="polaroid">
-		<img src="figure/avd/start-avd.jpg">
+		<img src="figure/avd/start-avd.JPG">
 	</div>
 
 2. [**Virtual Physical**] 화면에서 [**+ Create Device**] 버튼 클릭
 
 	<div class="polaroid">
-		<img src="figure/avd/create-device.jpg">
+		<img src="figure/avd/create-device.JPG">
 	</div>
 
 
@@ -69,12 +69,12 @@ div.polaroid {
 	- 아래 화면은 *x86 Images* 탭에서 **Android 12.0 (Google APIs)**의  시스템 이미지를 선택한 상태
 
 	 <div class="polaroid">
-		<img src="figure/avd/system-image.jpg">
+		<img src="figure/avd/system-image.JPG">
 	</div>
 
 5. [**Android Virtual Device (AVD)**] 화면에서 기본 설정값을 유지한 채  [**Finish**] 버튼 클릭
 	 <div class="polaroid">
-		<img src="./figure/avd/finish-avd.jpg">
+		<img src="./figure/avd/finish-avd.JPG">
 	</div>
 	- [**AVD Name**]: 새롭게 만들 에뮬레이터의 이름을 알기 쉽게 작명
 	- [**Show Advanced Settings**] 버튼을 눌러 **Camera**나 **SD card** 설정을 변경할 수 있음.
@@ -82,7 +82,7 @@ div.polaroid {
 6. 에뮬레이터 생성 결과
 
 	<div class="polaroid">
-		<img src="figure/avd/avd-result.jpg">
+		<img src="figure/avd/avd-result.JPG">
 	</div>
 	- [**+ Create Device**] 버튼을 클릭하여 에뮬레이터를 추가로 만들 수 있음
 
@@ -101,7 +101,7 @@ div.polaroid {
 	- 툴바의 실행 아이콘 클릭
   - 실행결과
 		<div class="polaroid">
-			<img src="figure/avd/start-run.PNG">
+			<img src="figure/avd/start-run.png">
 		</div>
 
 <a name="run-by-real-device"></a>
