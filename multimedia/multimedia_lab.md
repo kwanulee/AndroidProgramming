@@ -127,7 +127,7 @@ https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTe
 * [참조코드]  
 https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L367-L385
  
-	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L409-L417
+	https://github.com/kwanulee/AndroidProgramming/blob/master/examples/MultimediaTest/app/src/main/java/com/example/kwanwoo/multimediatest/MainActivity.java#L418-L428
 
 ## 4. 카메라 앱의 동영상 저장하기 
 * 동영상 촬영 버튼을 누르면, 카메라 앱을 실행시키고, 카메라 앱에서 찍은 동영상을 앱전용 외부저장소의 Movies 폴더에 저장하고, 저장된 파일을 다시 읽어서 화면에 표시해 보세요.
